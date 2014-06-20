@@ -1,0 +1,25 @@
+body {
+    background-color: #049;
+}
+.navbar-default {
+    background-color: #FFF;
+    border-color: rgba(231, 231, 231, 0.05);
+}
+
+.iron-headline {
+    background-color: red;
+}
+
+.main {
+    margin-top:80px;
+    text-align: center;
+    font-family: "Helvetica Neue", Arial, Tahoma, Verdana, sans-serif;
+    color:white;
+}
+
+.kale {
+    font-size: 7em;
+}
+.kale small {
+    font
+}
