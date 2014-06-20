@@ -6,9 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link href="github_pages/bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Iron page styling -->
     <link href="github_pages/iron.css" rel="stylesheet">
     <link rel="shortcut icon" href="github_pages/favicon.ico">
-
+    <link href='http://fonts.googleapis.com/css?family=Questrial|Alegreya+Sans+SC:400,900|Bilbo|Abel' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Alegreya+Sans+SC:400,900|Alegreya+Sans' rel='stylesheet' type='text/css'>
   </head>
   <body>
     <div class="navbar navbar-default navbar-static-top">
@@ -30,6 +33,7 @@
           </ul> -->
           <ul class="nav navbar-nav navbar-right">
             <li><a target="_blank" href="http://rust-iron.cloudapp.net/">Docs</a></li>
+            <li><a href="#" id="indocs">In window Docs</a></li>
             <li><a href="#about">About</a></li>
           </ul>
         </div><!--/.nav-collapse -->
@@ -37,20 +41,33 @@
     </div>
     
     <div class="container">
-      <div class="row main">
+      <div class="row main" id="main">
         <div class="col-xs-4">
-          <h1 class="kale">iron</h1>
-          <h1>extensible web framework for rust</h1>
         </div>
         <div class="col-xs-4">
+          <h1 class="kale">iron</h1>
+          <p class="subkale">extensible web</p>
+          <p class="subkale">framework for rust</p>
         </div>
         <div class="col-xs-4">
         </div>
       </div>
+
+      <div id="docs">
+        <iframe src="http://www.google.com/"></iframe>
+      </div>
     </div>
+
 
     <!-- Load JS here for greater good =============================-->
     <script src="github_pages/bower_components/jquery/dist/jquery.min.js"></script>
     <script src="github_pages/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+      $("#indocs").on("click", function() {
+        $("#main").fadeToggle("slow",function(){
+          $("#docs").fadeToggle();
+        });
+      });
+    </script>
   </body>
 </html>
