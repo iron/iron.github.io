@@ -1,4 +1,14 @@
 *DS_Store
+
+# Dev build tools
+gulpfile.js
+package.json
+node_modules/
+learnless.html
+github_pages/iron.html
+github_pages/less/
+
+# Bootstrap 
 github_pages/bower_components/bootstrap/less/*
 github_pages/bower_components/bootstrap/grunt/*
 github_pages/bower_components/bootstrap/docs/*
