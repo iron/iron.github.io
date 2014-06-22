@@ -1,5 +1,9 @@
-/* Dev */
-/* /Dev */
+html {
+  height: 100%;
+}
+body {
+  height: 100%;
+}
 .colorone {
   background-color: #bbbbbb;
 }
@@ -15,10 +19,7 @@
 .colorfive {
   background-color: #000000;
 }
-html {
-  height: 100%;
-}
-body {
+.tall {
   height: 100%;
 }
 .content-box {
@@ -34,7 +35,7 @@ body {
 .iron-jumbo {
   text-align: center;
   min-height: 100%;
-  margin-top: 35%;
+  margin-top: 20%;
 }
 .iron-jumbo h1 {
   font-size: 7em;
