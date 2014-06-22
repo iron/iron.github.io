@@ -1,0 +1,47 @@
+/* Dev */
+/* /Dev */
+.colorone {
+  background-color: #bbbbbb;
+}
+.colortwo {
+  background-color: #888888;
+}
+.colorthree {
+  background-color: #555555;
+}
+.colorfour {
+  background-color: #222222;
+}
+.colorfive {
+  background-color: #000000;
+}
+html {
+  height: 100%;
+}
+body {
+  height: 100%;
+}
+.content-box {
+  min-height: 500px;
+}
+.iron-nav-logo {
+  font-family: 'Alegreya Sans SC', "Helvetica Neue", Arial, Tahoma, Verdana, sans-serif;
+}
+.navbar-default {
+  background-color: #FFF;
+  border-color: rgba(231, 231, 231, 0.05);
+}
+.iron-jumbo {
+  text-align: center;
+  min-height: 100%;
+  margin-top: 35%;
+}
+.iron-jumbo h1 {
+  font-size: 7em;
+  font-family: 'Alegreya Sans SC', "Helvetica Neue", Arial, Tahoma, Verdana, sans-serif;
+  font-weight: 400;
+}
+.iron-jumbo p {
+  font-size: 1.5em;
+  /*font-family: 'Alegreya Sans', "Helvetica Neue", Arial, Tahoma, Verdana, sans-serif;*/
+}
