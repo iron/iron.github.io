@@ -14,7 +14,7 @@ body {
   background: #FAFAFA;
 }
 .content-box {
-  padding: 80px;
+  padding: 1em;
   border-top: 1px solid #DFDFDF;
 }
 .content-box div {
@@ -28,6 +28,11 @@ body {
 .content-box p {
   font-size: 1.5em;
   margin: 0 0 15px;
+}
+@media (min-width: 768px) {
+  .content-box {
+    padding: 7em;
+  }
 }
 .navbar-default {
   background-color: #FFF;
