@@ -18,12 +18,14 @@
       <div class="container">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <img src="github_pages/favicon.ico"> 
+            <!-- <span class="icon-bar"></span>
             <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
+            <span class="icon-bar"></span> -->
           </button>
           <a class="navbar-brand" href="#">
-            <img src="github_pages/favicon.ico">
+            <img src="github_pages/favicon.ico" class='hidden-xs'> 
+            <span>iron</span>
           </a>
         </div>
         <div class="collapse navbar-collapse">
@@ -33,7 +35,6 @@
           </ul> -->
           <ul class="nav navbar-nav navbar-right">
             <li><a target="_blank" href="http://rust-iron.cloudapp.net/">Docs</a></li>
-            <!-- <li><a href="#" id="indocs">In window Docs</a></li> -->
             <!-- <li><a href="#about">About</a></li> -->
           </ul>
         </div><!--/.nav-collapse -->
@@ -43,25 +44,174 @@
     <div class="container tall">
       <div class="row tall" id="main">
         <div class="col-md-4 col-md-offset-4 iron-jumbo">
-          <h1>iron</h1>
+          <h1>IRON</h1>
           <p>extensible web framework for rust</p>
         </div>
       </div>
     </div>
 
-    <div class="container">
-      <div class="row">
-        <div class="content-box colorone">
-          This
+    <div class="container tall content-container">
+      <div class="row tall">
+        
+        <div class="content-box">
+          <h2 id="introduction">Introduction</h2>
+          <p>Iron is a fast and flexible middleware-oriented framework that provides a small
+          but robust foundation for creating complex applications and RESTful APIs. No
+          middleware are bundled with Iron - instead, everything is drag-and-drop,
+          allowing for ridiculously modular setups.</p>
         </div>
-        <div class="content-box colortwo">
-          This
+
+        <div class="content-box">
+          <h2 id="rust">What is Rust?</h2>
+          <p><a href="http://www.rust-lang.org">Rust</a> is a systems programming language that runs blazingly fast, prevents almost all crashes, and eliminates data races. It provides guarenteed memory safety and complete control over the lifecycle of memory.</p>
         </div>
-        <div class="content-box colorthree">
-          This
+
+        <div class="content-box">
+          <h2 id="installation">Installation</h2>
+          <p>Iron tracks Rust nightly, which you can install <a target="_blank" href="http://www.rust-lang.org/">here</a>.</p>
+          <p>To quickly get started creating Iron applications, you should use
+          <a target="_blank" href="https://github.com/iron/core">Iron-Core</a>, which bundles several common
+          middleware, including Routing, Body Parsing, and Logging.</p>
         </div>
-        <div class="content-box colorfour">
-          This
+
+        <div class="content-box">
+          <h2 id="iron-new-">Iron::new()</h2>
+          <p>Iron applications are thin wrappers around a middleware dispatcher which,
+          usually, runs requests through registered middleware in a stack-like order.
+          Iron provides an expressive base upon which you can build complex middleware
+          but remains extremely lightweight by not bundling any middleware.</p>
+          <p>Middleware is registered using <code>Iron::link</code>.</p>
+          <p>Such is Hello World:</p>
+
+<pre><code class="lang-rust">  
+    extern crate iron;
+    use std::io::net::ip::Ipv4Addr;
+    use iron::{Iron, Request, Response, ServerT, Alloy};
+    use iron::middleware::{Status, Continue};
+
+    fn hello_world(_: &amp;mut Request, res: &amp;mut Response, _: &amp;mut Alloy) -&gt; Status {
+        res.write(b&quot;Hello World!&quot;);
+        Continue
+    }
+
+    fn main() {
+      let mut server: ServerT = Iron::new();
+      server.link(hello_world);
+      server.listen(Ipv4Addr(127, 0, 0, 1), 3000);
+    }
+</code></pre>
+        </div> <!-- /content-box -->
+
+        <div class="content-box">
+          <h3 id="middleware">Middleware</h3>
+          <p>In Iron, any middleware must implement the Middleware trait, which is defined
+          like so:</p>
+<pre><code>pub trait Middleware {
+    fn enter(&amp;mut self, _: &amp;mut Request, _: &amp;mut Response, _: &amp;mut Alloy) -&gt; Status;
+    fn exit(&amp;mut self, _: &amp;mut Request, _: &amp;mut Response, _: &amp;mut Alloy) -&gt; Status;
+}
+</code></pre>
+          <p>The <code>enter</code> method of any middleware gets called when a request is going down
+          the middleware stack, and the <code>exit</code> method is called when a request is making
+          its way back up either because it hit an unwinding middleware or made it
+          through the entire stack.</p>
+          <p>Both <code>enter</code> and <code>exit</code> are optional and have default no-op implementations.</p>
+          <p>There is a convenience implementation of Middleware for all functions with the
+          same signature as <code>enter</code> or <code>exit</code> sans <code>self</code> which will simply register
+          that function to be called as the <code>enter</code> callback. This is extremely useful
+          for rapidly creating simple, single-direction middleware. Multidirectional
+          middleware will still need to implement the Middleware trait.</p>
+          <p>Here is an example that integrates both:</p>
+          
+<pre><code class="lang-rust">
+    #[deriving(Clone)]
+    struct ResponseTime { entry: u64 };
+
+    impl Middleware for ResponseTime {
+        fn enter(&amp;mut self, _: &amp;mut Request, _: &amp;mut Response, _: &amp;mut Alloy) -&gt; Status {
+            self.entry = time::now(); Continue
+        }
+        fn exit(&amp;mut self, _: &amp;mut Request, _: &amp;mut Response, _: &amp;mut Alloy) -&gt; Status {
+            println!(&quot;Response took: {} ms&quot;, time::now() - self.entry);
+        }
+    }
+
+    fn hello_world(_: &amp;mut Request, res: &amp;mut Response, _: &amp;mut Alloy) -&gt; Status {
+        res.write(b&quot;Hello World!&quot;);
+        Continue
+    }
+
+    fn main() {
+        let mut server: ServerT = Iron::new();
+        server.link(ResponseTime { entry: 0u });
+        server.link(hello_world);
+    }
+</code></pre>
+        </div>  <!-- /content-box -->
+
+        <div class="content-box">
+          <h3 id="request-response">Request + Response</h3>
+          <p>Request and Response are aliases for Request and ResponseWriter from rust-http.</p>
+          <p>Request contains all of the request information, and Response is a <code>Writer</code>
+          which represents the body of the response that will be sent to the client.</p>
+          <p>Iron provides several utility methods on Request and Response implemented as
+          mixin traits that can be found in the <code>Iron::mixin</code> module.</p>
+        </div>  <!-- /content-box -->
+
+        <div class="content-box">
+          <h3 id="alloy">Alloy</h3>
+          <p>Alloy is an extremely flexible data store that is a wrapper around AnyMap, a
+          general data structure written by Chris Morgan. Alloy is a map <em>keyed by
+          types</em>, which allows your Middleware to store and expose arbitrary information
+          to other middleware and controllers.</p>
+          <p>For instance, BodyParser exposes a Parsed object which contains a Json object
+          that represents the parsed body. For instance:</p>
+<pre><code class="lang-rust">
+    fn echo(_: &amp;mut Request, res: &amp;mut Response, alloy: &amp;mut Alloy) {
+        let Parsed(body) = alloy.find::&lt;Parsed&gt;().unwrap();
+        res.write(body.as_bytes());
+    }
+
+    fn main() {
+        let mut server: ServerT = Iron::new();
+        server.link(BodyParser::new());
+        server.link(echo);
+    }
+</code></pre>
+        </div>  <!-- /content-box -->
+
+        <div class="content-box">  
+          <h3 id="mixins">Mixins</h3>
+          <p>To provide additional APIs for the Request and Response objects, Iron utilizes
+          Mixin traits which add additional methods to Request and Response. To get
+          access to these methods you must bring their associated traits into scope by
+          <code>use</code>ing them.</p>
+          <p>Iron comes bundles with a few mixins for Request and Response for extremely
+          common methods that are comparatively annoying to work with otherwise, such as
+          getting the uri of the request or serving files with the correct MIME type.</p>
+        </div>  <!-- /content-box -->
+
+        <div class="content-box">
+          <h3 id="chains">Chains</h3>
+          <p>Chains are the internal representation of the middleware stack in Iron. The
+          default furnace behaves just as you would expect - it stores middleware as a
+          stack and unwinds the stack after all middleware have been run. However, Iron
+          is built to work with any implementation of the Chain trait, which can be
+          used to implement custom middleware dispatching for your Iron instance.</p>
+          <p>Most applications will be fine with the default Chain.</p>
+        </div>  <!-- /content-box -->
+
+        <div class="content-box">
+          <h3 id="core">Core</h3>
+          <ul class="core-list">
+            <li><a target="_blank" href="https://github.com/iron/bodyparser">bodyparser</a></li>
+            <li><a target="_blank" href="https://github.com/iron/logger">logger</a></li>
+            <li><a target="_blank" href="https://github.com/iron/mount">mount</a></li>
+            <li><a target="_blank" href="https://github.com/iron/router">router</a></li>
+            <li><a target="_blank" href="https://github.com/iron/filter">filter</a></li>
+            <li><a target="_blank" href="https://github.com/iron/staticfile">staticfile</a></li>
+            <li><a target="_blank" href="https://github.com/iron/urlencoded">urlencoded</a></li>
+          </ul>
         </div>
       </div>
     </div>

@@ -4,29 +4,30 @@ html {
 body {
   height: 100%;
 }
-.colorone {
-  background-color: #bbbbbb;
-}
-.colortwo {
-  background-color: #888888;
-}
-.colorthree {
-  background-color: #555555;
-}
-.colorfour {
-  background-color: #222222;
-}
-.colorfive {
-  background-color: #000000;
+.navbar-brand {
+  font-family: 'Alegreya Sans SC', "Helvetica Neue", Arial, Tahoma, Verdana, sans-serif;
 }
 .tall {
   height: 100%;
 }
-.content-box {
-  min-height: 500px;
+.content-container div:nth-of-type(even) {
+  background: #FAFAFA;
 }
-.iron-nav-logo {
-  font-family: 'Alegreya Sans SC', "Helvetica Neue", Arial, Tahoma, Verdana, sans-serif;
+.content-box {
+  padding: 80px;
+  border-top: 1px solid #DFDFDF;
+}
+.content-box div {
+  margin: 0px;
+}
+.content-box h1,
+.content-box h2,
+.content-box h3 {
+  font-size: 3.25em;
+}
+.content-box p {
+  font-size: 1.5em;
+  margin: 0 0 15px;
 }
 .navbar-default {
   background-color: #FFF;
@@ -34,7 +35,6 @@ body {
 }
 .iron-jumbo {
   text-align: center;
-  min-height: 100%;
   margin-top: 20%;
 }
 .iron-jumbo h1 {
@@ -45,4 +45,10 @@ body {
 .iron-jumbo p {
   font-size: 1.5em;
   /*font-family: 'Alegreya Sans', "Helvetica Neue", Arial, Tahoma, Verdana, sans-serif;*/
+}
+.core-list {
+  list-style-image: url("../favicon.ico");
+}
+.core-list li {
+  font-size: 1.5em;
 }
