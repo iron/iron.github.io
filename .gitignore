@@ -2,8 +2,11 @@
 github_pages
 
 node_modules
-dist
 .tmp
 .sass-cache
 app/bower_components
 test/bower_components
+highlight
+npm-debug.log
+app
+test
