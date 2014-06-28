@@ -9,8 +9,6 @@ npm-debug.log
 app
 test
 
-github_pages/bower_components/fontawesome/*
-!github_pages/bower_components/fontawesome/highlight.pack.js
-
 github_pages/highlight/*
+!github_pages/highlight/highlight.pack.js
 !github_pages/highlight/styles/solarized_light.css
