@@ -50,10 +50,15 @@ body {
   .down-arrow {
     text-align: center;
   }
-  .example-code{
+  .example-code {
     padding: 2em 7em;
+    max-width: 1063px;
+    margin: 0 auto;
   }
-
+  .nav > .doc-note {
+    margin-top: 15px;
+    display: none;
+  }
 
 .iron-jumbo {
   text-align: center;
