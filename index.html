@@ -6,9 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1">
     <link href="github_pages/bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+    <link href="github_pages/bower_components/fontawesome/css/font-awesome.min.css" rel="stylesheet">
 
     <!-- Iron page styling -->
     <link href="github_pages/css/style.css" rel="stylesheet">
+    <link href="github_pages/highlight/styles/solarized_light.css" rel="stylesheet">
     <link rel="shortcut icon" href="github_pages/favicon.ico">
     <link href='http://fonts.googleapis.com/css?family=Questrial|Alegreya+Sans+SC:400,900|Bilbo|Abel' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Alegreya+Sans+SC:400,900|Alegreya+Sans' rel='stylesheet' type='text/css'>
@@ -47,20 +49,45 @@
       </div>
     </div>
     
-    <div class="container tall">
-      <div class="row tall" id="main">
+    <div class="container">
+      <div class="row" id="main">
         <div class="col-md-4 col-md-offset-4 iron-jumbo">
           <h1>IRON</h1>
           <p>extensible web framework for rust</p>
-          <hr>
+          <br>
           <iframe src="http://ghbtns.com/github-btn.html?user=iron&repo=iron&type=watch&count=true&size=large" allowtransparency="true" frameborder="0" scrolling="0" width="130" height="30"></iframe>
           <iframe src="http://ghbtns.com/github-btn.html?user=iron&repo=iron&type=fork&count=true&size=large" allowtransparency="true" frameborder="0" scrolling="0" width="130" height="30"></iframe>
         </div>
       </div>
     </div>
 
-    <div class="container tall content-container">
-      <div class="row tall">
+    <br><br>
+    <div class="row hidden-xs example-code">
+      <pre><code class="lang-rust">  
+        extern crate iron;
+        use std::io::net::ip::Ipv4Addr;
+        use iron::{Iron, Request, Response, ServerT, Alloy};
+        use iron::middleware::{Status, Continue};
+
+        fn hello_world(_: &amp;mut Request, res: &amp;mut Response, _: &amp;mut Alloy) -&gt; Status {
+            res.write(b&quot;Hello World!&quot;);
+            Continue
+        }
+
+        fn main() {
+          let mut server: ServerT = Iron::new();
+          server.link(hello_world);
+          server.listen(Ipv4Addr(127, 0, 0, 1), 3000);
+        }
+      </code></pre>
+    </div><!-- /row -->
+    <div class="row down-arrow hidden-xs">
+      <i class="fa fa-5x fa-angle-down"></i>
+      <br><br>
+    </div>
+
+    <div class="container content-container">
+      <div class="row">
         
         <div class="content-box">
           <h2 id="introduction">Introduction</h2>
@@ -215,12 +242,12 @@
             Created at Hack Reactor
           </div>
           <div class="col-xs-6 footer-right">
-            Core: reem, zzmp, theptrk, mcreinhard 
+            Core: <a href="https://github.com/reem">reem</a>, <a href="https://github.com/zzmp">zzmp</a>, <a href="https://github.com/theptrk">theptrk</a>, <a href="https://github.com/mcreinhard">mcreinhard</a> 
           </div>
         </div>
 
         <div class="footer-xs visible-xs"> 
-          Core: reem, zzmp, theptrk, mcreinhard <br>
+          Core: <a href="https://github.com/reem">reem</a>, <a href="https://github.com/zzmp">zzmp</a>, <a href="https://github.com/theptrk">theptrk</a>, <a href="https://github.com/mcreinhard">mcreinhard</a>  <br>
           Created at Hack Reactor 
         </div>
       </div>
@@ -230,5 +257,8 @@
     <!-- Load JS here for greater good =============================-->
     <script src="github_pages/bower_components/jquery/dist/jquery.min.js"></script>
     <script src="github_pages/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+    <script src="github_pages/highlight/highlight.pack.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
   </body>
 </html>

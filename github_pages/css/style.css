@@ -7,49 +7,57 @@ body {
 .navbar-brand {
   font-family: 'Alegreya Sans SC', "Helvetica Neue", Arial, Tahoma, Verdana, sans-serif;
 }
-.tall {
-  height: 100%;
-}
-.content-container div:nth-of-type(even) {
-  background: #FAFAFA;
-}
-.content-box {
-  padding: 1em;
-  border-top: 1px solid #DFDFDF;
-}
-.content-box div {
-  margin: 0px;
-}
-.content-box h1,
-.content-box h2,
-.content-box h3 {
-  font-size: 3.25em;
-}
-.content-box p {
-  font-size: 1.5em;
-  margin: 0 0 15px;
-}
-@media (min-width: 768px) {
+/*content*/
+  .content-container div:nth-of-type(even) {
+    background: #FAFAFA;
+  }
   .content-box {
-    padding: 7em;
+    padding: 1em;
+    border-bottom: 1px solid #DFDFDF;
   }
-}
-@media (max-width: 768px) {
-  .content-box > h2,
-  h3 {
-    font-size: 2em;
+  .content-box div {
+    margin: 0px;
   }
-  .content-box > p {
-    font-size: 1.2em;
+  .content-box h1,
+  .content-box h2,
+  .content-box h3 {
+    font-size: 3.25em;
   }
-}
-.navbar-default {
-  background-color: #FFF;
-  border-color: rgba(231, 231, 231, 0.05);
-}
+  .content-box p {
+    font-size: 1.5em;
+    margin: 0 0 15px;
+  }
+  @media (min-width: 768px) {
+    .content-box {
+      padding: 7em;
+    }
+  }
+  @media (max-width: 768px) {
+    .content-box > h2,
+    h3 {
+      font-size: 2em;
+    }
+    .content-box > p {
+      font-size: 1.2em;
+    }
+  }
+
+/* first glance */
+  .navbar-default {
+    background-color: #FFF;
+    border-color: rgba(231, 231, 231, 0.05);
+  }
+  .down-arrow {
+    text-align: center;
+  }
+  .example-code{
+    padding: 2em 7em;
+  }
+
+
 .iron-jumbo {
   text-align: center;
-  margin-top: 20%;
+  margin-top: 100px;
 }
 .iron-jumbo h1 {
   font-size: 7em;
