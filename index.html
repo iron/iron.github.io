@@ -61,23 +61,22 @@
 
     <br><br>
     <div class="row hidden-xs example-code">
-      <pre><code class="lang-rust">  
-        extern crate iron;
-        use std::io::net::ip::Ipv4Addr;
-        use iron::{Iron, Request, Response, ServerT, Alloy};
-        use iron::middleware::{Status, Continue};
+<pre><code class="lang-rust">  
+extern crate iron;
+use std::io::net::ip::Ipv4Addr;
+use iron::{Iron, Server, Chain, Request, Response, Alloy, Status, Continue};
 
-        fn hello_world(_: &amp;mut Request, res: &amp;mut Response, _: &amp;mut Alloy) -&gt; Status {
-            res.write(b&quot;Hello World!&quot;);
-            Continue
-        }
+fn hello_world(_: &amp;mut Request, res: &amp;mut Response, _: &amp;mut Alloy) -&gt; Status {
+    res.write(b&quot;Hello World!&quot;);
+    Continue
+}
 
-        fn main() {
-          let mut server: ServerT = Iron::new();
-          server.link(hello_world);
-          server.listen(Ipv4Addr(127, 0, 0, 1), 3000);
-        }
-      </code></pre>
+fn main() {
+  let mut server: Server = Iron::new();
+  server.chain.link(hello_world);
+  server.listen(Ipv4Addr(127, 0, 0, 1), 3000);
+}
+</code></pre>
     </div><!-- /row -->
     <div class="row down-arrow hidden-xs">
       <i class="fa fa-5x fa-angle-down"></i>
@@ -89,15 +88,10 @@
         
         <div class="content-box">
           <h2 id="introduction">Introduction</h2>
-          <p>Iron is a fast and flexible middleware-oriented framework that provides a small
-          but robust foundation for creating complex applications and RESTful APIs. No
+          <p>Iron is a fast and flexible middleware-oriented server framework that provides a
+          small but robust foundation for creating complex applications and RESTful APIs. No
           middleware are bundled with Iron - instead, everything is drag-and-drop,
           allowing for ridiculously modular setups.</p>
-        </div>
-
-        <div class="content-box">
-          <h2 id="rust">What is Rust?</h2>
-          <p><a href="http://www.rust-lang.org">Rust</a> is a systems programming language that runs blazingly fast, prevents almost all crashes, and eliminates data races. It features pattern matching, closures, type inference, zero-cost abstractions, guaranteed memory safety and optional garbage collection. </p>
         </div>
 
         <div class="content-box">
@@ -105,7 +99,7 @@
           <p>Iron tracks Rust nightly, which you can install <a target="_blank" href="http://www.rust-lang.org/">here</a>.</p>
           <p>To quickly get started creating Iron applications, you should use
           <a target="_blank" href="https://github.com/iron/core">Iron-Core</a>, which bundles several common
-          middleware, including Routing, Body Parsing, and Logging.</p>
+          middleware, including Routing, Body Parsing, Cookies, and Logging.</p>
         </div>
 
         <div class="content-box">
@@ -114,113 +108,96 @@
           usually, runs requests through registered middleware in a stack-like order.
           Iron provides an expressive base upon which you can build complex middleware
           but remains extremely lightweight by not bundling any middleware.</p>
-          <p>Middleware is registered using <code>Iron::link</code>.</p>
-          <p>Such is Hello World:</p>
-
-<pre><code class="lang-rust">  
-    extern crate iron;
-    use std::io::net::ip::Ipv4Addr;
-    use iron::{Iron, Request, Response, ServerT, Alloy};
-    use iron::middleware::{Status, Continue};
-
-    fn hello_world(_: &amp;mut Request, res: &amp;mut Response, _: &amp;mut Alloy) -&gt; Status {
-        res.write(b&quot;Hello World!&quot;);
-        Continue
-    }
-
-    fn main() {
-      let mut server: ServerT = Iron::new();
-      server.link(hello_world);
-      server.listen(Ipv4Addr(127, 0, 0, 1), 3000);
-    }
-</code></pre>
+          <p>Middleware is registered using <code>iron.chain.link</code>.</p>
         </div> <!-- /content-box -->
 
         <div class="content-box">
           <h2 id="middleware">Middleware</h2>
-          <p>In Iron, any middleware must implement the Middleware trait, which is defined
-          like so:</p>
-<pre><code>pub trait Middleware {
+          <p>In Iron, any middleware must implement the <code>Middleware</code> trait, defined as:</p>
+<pre><code>
+pub trait Middleware {
     fn enter(&amp;mut self, _: &amp;mut Request, _: &amp;mut Response, _: &amp;mut Alloy) -&gt; Status;
     fn exit(&amp;mut self, _: &amp;mut Request, _: &amp;mut Response, _: &amp;mut Alloy) -&gt; Status;
 }
 </code></pre>
           <p>The <code>enter</code> method of any middleware gets called when a request is going down
-          the middleware stack, and the <code>exit</code> method is called when a request is making
-          its way back up either because it hit an unwinding middleware or made it
+          the middleware stack. The <code>exit</code> method is called when a request is making
+          its way back up, either because it hit an unwinding middleware or because it made it
           through the entire stack.</p>
           <p>Both <code>enter</code> and <code>exit</code> are optional and have default no-op implementations.</p>
-          <p>There is a convenience implementation of Middleware for all functions with the
-          same signature as <code>enter</code> or <code>exit</code> sans <code>self</code> which will simply register
-          that function to be called as the <code>enter</code> callback. This is extremely useful
-          for rapidly creating simple, single-direction middleware. Multidirectional
-          middleware will still need to implement the Middleware trait.</p>
+          <p>For convenience, there is a wrapper implementation of Middleware, <code>FromFn</code>, for all functions
+          with the same signature as <code>enter</code> or <code>exit</code> sans <code>self</code>,
+          which will simply register that function to be called as the <code>enter</code> callback.
+          This is extremely useful for rapidly creating simple, single-direction middleware.
+          Multidirectional middleware will still need to implement the Middleware trait.</p>
           <p>Here is an example that integrates both:</p>
           
 <pre><code class="lang-rust">
-    #[deriving(Clone)]
-    struct ResponseTime { entry: u64 };
+#[deriving(Clone)]
+struct ResponseTime { entry: u64 };
 
-    impl Middleware for ResponseTime {
-        fn enter(&amp;mut self, _: &amp;mut Request, _: &amp;mut Response, _: &amp;mut Alloy) -&gt; Status {
-            self.entry = time::now(); Continue
-        }
-        fn exit(&amp;mut self, _: &amp;mut Request, _: &amp;mut Response, _: &amp;mut Alloy) -&gt; Status {
-            println!(&quot;Response took: {} ms&quot;, time::now() - self.entry);
-        }
+impl Middleware for ResponseTime {
+    fn enter(&amp;mut self, _: &amp;mut Request, _: &amp;mut Response, _: &amp;mut Alloy) -&gt; Status {
+        self.entry = time::now(); Continue
     }
+    fn exit(&amp;mut self, _: &amp;mut Request, _: &amp;mut Response, _: &amp;mut Alloy) -&gt; Status {
+        println!(&quot;Response took: {} ms&quot;, time::now() - self.entry);
+    }
+}
 
-    fn hello_world(_: &amp;mut Request, res: &amp;mut Response, _: &amp;mut Alloy) -&gt; Status {
-        res.write(b&quot;Hello World!&quot;);
-        Continue
-    }
+fn hello_world(_: &amp;mut Request, res: &amp;mut Response, _: &amp;mut Alloy) -&gt; Status {
+    res.write(b&quot;Hello World!&quot;);
+    Continue
+}
 
-    fn main() {
-        let mut server: ServerT = Iron::new();
-        server.link(ResponseTime { entry: 0u });
-        server.link(hello_world);
-    }
+fn main() {
+    let mut server: ServerT = Iron::new();
+    server.chain.link(ResponseTime { entry: 0u });
+    server.chain.link(FromFn::new(hello_world));
+}
 </code></pre>
         </div>  <!-- /content-box -->
 
         <div class="content-box">
           <h2 id="request-response">Request + Response</h2>
-          <p>Request and Response are aliases for Request and ResponseWriter from rust-http.</p>
-          <p>Request contains all of the request information, and Response is a <code>Writer</code>
-          which represents the body of the response that will be sent to the client.</p>
-          <p>Iron provides several utility methods on Request and Response implemented as
+          <p><code>Request</code> and <code>Response</code> are aliases for the
+          <code>Request</code> and <code>ResponseWriter</code> from rust-http.</p>
+          <p><code>Request</code> contains all of the request information, and <code>Response</code>
+          is a <code>Writer</code> which represents the body of the response that will be sent to the client.</p>
+          <p>Iron provides several utility methods on <code>Request</code> and <code>Response</code> implemented as
           mixin traits that can be found in the <code>Iron::mixin</code> module.</p>
         </div>  <!-- /content-box -->
 
         <div class="content-box">
           <h2 id="alloy">Alloy</h2>
-          <p>Alloy is an extremely flexible data store that is a wrapper around AnyMap, a
-          general data structure written by Chris Morgan. Alloy is a map <em>keyed by
-          types</em>, which allows your Middleware to store and expose arbitrary information
+          <p><code>Alloy</code> is an extremely flexible data store. It is a wrapper around <code>AnyMap</code>, a
+          general data structure written by Chris Morgan. <code>Alloy</code> is a map <em>keyed by
+          types</em>, which allows your <code>Middleware</code> to store and expose arbitrary information
           to other middleware and controllers.</p>
-          <p>For instance, BodyParser exposes a Parsed object which contains a Json object
+          <p>For instance, <code>BodyParser</code> exposes a <code>Parsed</code> object which contains a Json object
           that represents the parsed body. For instance:</p>
 <pre><code class="lang-rust">
-    fn echo(_: &amp;mut Request, res: &amp;mut Response, alloy: &amp;mut Alloy) {
-        let Parsed(body) = alloy.find::&lt;Parsed&gt;().unwrap();
-        res.write(body.as_bytes());
-    }
+fn echo(_: &amp;mut Request, res: &amp;mut Response, alloy: &amp;mut Alloy) -&gt; Status {
+    let Parsed(body) = alloy.find::&lt;Parsed&gt;().unwrap();
+    res.write(body.as_bytes());
+    Continue
+}
 
-    fn main() {
-        let mut server: ServerT = Iron::new();
-        server.link(BodyParser::new());
-        server.link(echo);
-    }
+fn main() {
+    let mut server: ServerT = Iron::new();
+    server.chain.link(BodyParser::new());
+    server.chain.link(FromFn::new(echo));
+}
 </code></pre>
         </div>  <!-- /content-box -->
 
         <div class="content-box">  
           <h2 id="mixins">Mixins</h2>
-          <p>To provide additional APIs for the Request and Response objects, Iron utilizes
-          Mixin traits which add additional methods to Request and Response. To get
-          access to these methods you must bring their associated traits into scope by
+          <p>To provide additional APIs for the <code>Request</code> and <code>Response</code> objects,
+          Iron utilizes mixin traits which add additional methods to the </code>Request</p> and <code>Response</code>.
+          To get access to these methods you must bring their associated traits into scope by
           <code>use</code>ing them.</p>
-          <p>Iron comes bundles with a few mixins for Request and Response for extremely
+          <p>Iron comes bundles with a few mixins for <code>Request</code> and <code>Response</code> for extremely
           common methods that are comparatively annoying to work with otherwise, such as
           getting the uri of the request or serving files with the correct MIME type.</p>
         </div>  <!-- /content-box -->
@@ -228,11 +205,11 @@
         <div class="content-box">
           <h2 id="chains">Chains</h2>
           <p>Chains are the internal representation of the middleware stack in Iron. The
-          default furnace behaves just as you would expect - it stores middleware as a
+          default chain behaves just as you would expect - it stores middleware as a
           stack and unwinds the stack after all middleware have been run. However, Iron
-          is built to work with any implementation of the Chain trait, which can be
+          is built to work with any implementation of the <code>Chain</code> trait, which can be
           used to implement custom middleware dispatching for your Iron instance.</p>
-          <p>Most applications will be fine with the default Chain.</p>
+          <p>Most applications will be fine with the default chain.</p>
         </div>  
 
         <div class="footer hidden-xs"> 
