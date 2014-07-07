@@ -64,7 +64,7 @@
 <pre><code class="lang-rust">  
 extern crate iron;
 use std::io::net::ip::Ipv4Addr;
-use iron::{Iron, Server, Chain, Request, Response, Alloy, Status, Continue};
+use iron::{Iron, Server, Chain, Request, Response, Alloy, Status, Continue, FromFn};
 
 fn hello_world(_: &amp;mut Request, res: &amp;mut Response, _: &amp;mut Alloy) -&gt; Status {
     res.write(b&quot;Hello World!&quot;);
@@ -73,7 +73,7 @@ fn hello_world(_: &amp;mut Request, res: &amp;mut Response, _: &amp;mut Alloy) -
 
 fn main() {
   let mut server: Server = Iron::new();
-  server.chain.link(hello_world);
+  server.chain.link(FromFn::new(hello_world));
   server.listen(Ipv4Addr(127, 0, 0, 1), 3000);
 }
 </code></pre>
