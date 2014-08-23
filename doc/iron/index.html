@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <meta name="description" content="API documentation for the Rust `iron` crate.">
+    <meta name="keywords" content="rust, rustlang, rust-lang, iron">
+
+    <title>iron - Rust</title>
+
+    <link rel="stylesheet" type="text/css" href="../main.css">
+
+    <link rel="shortcut icon" href="https://avatars0.githubusercontent.com/u/7853871?s=256">
+    <link href='http://fonts.googleapis.com/css?family=Questrial|Alegreya+Sans+SC:400,900|Bilbo|Abel' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Alegreya+Sans+SC:400,900|Alegreya+Sans' rel='stylesheet' type='text/css'>
+
+
+</head>
+<body class="rustdoc">
+    <!--[if lte IE 8]>
+    <div class="warning">
+        This old browser is unsupported and will most likely display funky
+        things.
+    </div>
+    <![endif]-->
+
+    <div style="float: right;">
+    <a style="font-size: 2em; font-family: 'Alegreya Sans SC', 'Helvetica Neue', Arial, Tahoma, Verdana, sans-serif; font-weight: 400; margin: 0;" href="http://ironframework.io/">
+        IRON
+    </a>
+</div>
+
+
+
+    <section class="sidebar">
+        <a href='../iron/index.html'><img src='https://avatars0.githubusercontent.com/u/7853871?s=128' alt='' width='100'></a>
+        <p class='location'></p>
+    </section>
+
+    <nav class="sub">
+        <form class="search-form js-only">
+            <div class="search-container">
+                <input class="search-input" name="search"
+                       autocomplete="off"
+                       placeholder="Click or press 'S' to search, '?' for more options..."
+                       type="search">
+            </div>
+        </form>
+    </nav>
+
+    <section id='main' class="content mod">
+<h1 class='fqn'><div class='in-band'>Crate <a class='mod' href=''>iron</a><wbr></div><div class='out-of-band'><a href='stability.html'>[stability]</a> <span id='render-detail'>
+            <a id="collapse-all" href="#">[-]
+            </a>&nbsp;<a id="expand-all" href="#">[+]</a>
+        </span><a id='src-0' href='../src/iron/src/lib.rs.html#1-85'>[src]</a></div></h1>
+<div class='docblock'><p>The main crate for the Iron library.</p>
+
+<p>Iron is a high level web framework built in and for Rust.</p>
+
+<p>Iron does not come bundled with any middleware - instead, Iron
+provides a robust and efficient framework for creating and
+plugging in middleware.</p>
+
+<p>Obligatory example:</p>
+<pre class='rust '>
+<span class='attribute'>#[<span class='ident'>deriving</span>(<span class='ident'>Clone</span>)]</span>
+<span class='kw'>struct</span> <span class='ident'>ResponseTime</span> {
+    <span class='ident'>entry_time</span>: <span class='ident'>u64</span>
+}
+
+<span class='kw'>impl</span> <span class='ident'>ResponseTime</span> { <span class='kw'>fn</span> <span class='ident'>new</span>() <span class='op'>-&gt;</span> <span class='ident'>ResponseTime</span> { <span class='ident'>ResponseTime</span> { <span class='ident'>entry_time</span>: <span class='number'>0u64</span> } } }
+
+<span class='kw'>impl</span> <span class='ident'>Middleware</span> <span class='kw'>for</span> <span class='ident'>ResponseTime</span> {
+    <span class='kw'>fn</span> <span class='ident'>enter</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>_req</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>Request</span>, <span class='ident'>_res</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>Response</span>) <span class='op'>-&gt;</span> <span class='ident'>Status</span> {
+        <span class='self'>self</span>.<span class='ident'>entry_time</span> <span class='op'>=</span> <span class='ident'>precise_time_ns</span>();
+        <span class='ident'>Continue</span>
+    }
+
+    <span class='kw'>fn</span> <span class='ident'>exit</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>_req</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>Request</span>, <span class='ident'>_res</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>Response</span>) <span class='op'>-&gt;</span> <span class='ident'>Status</span> {
+        <span class='kw'>let</span> <span class='ident'>delta</span> <span class='op'>=</span> <span class='ident'>precise_time_ns</span>() <span class='op'>-</span> <span class='self'>self</span>.<span class='ident'>entry_time</span>;
+        <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;Request took: {} ms&quot;</span>, (<span class='ident'>delta</span> <span class='kw'>as</span> <span class='ident'>f64</span>) <span class='op'>/</span> <span class='number'>1000000.0</span>);
+        <span class='ident'>Continue</span>
+    }
+}
+
+<span class='comment'>// ...</span>
+<span class='ident'>server</span>.<span class='ident'>chain</span>.<span class='ident'>link</span>(<span class='ident'>ResponseTime</span>::<span class='ident'>new</span>());
+<span class='comment'>// ...</span>
+</pre>
+</div><h2 id='reexports' class='section-header'><a href="#reexports">Reexports</a></h2>
+<table><tr><td><code>pub use middleware::{<a class='type' href='../iron/type.Status.html' title='iron::Status'>Continue</a>, <a class='type' href='../iron/type.Status.html' title='iron::Status'>Unwind</a>, <a class='type' href='../iron/type.Status.html' title='iron::Status'>Error</a>};</code></td></tr></table><h2 id='structs' class='section-header'><a href="#structs">Structs</a></h2>
+<table>
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='struct' href='struct.FromFn.html'
+                               title='iron::FromFn'>FromFn</a></td>
+                        <td class='docblock short'><p>Wrapper struct which allows bare functions to be used as <code>Middleware</code>.</p>
+</td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='struct' href='struct.Iron.html'
+                               title='iron::Iron'>Iron</a></td>
+                        <td class='docblock short'><p>The primary entrance point to <code>Iron</code>, a <code>struct</code> to instantiate a new server.</p>
+</td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='struct' href='struct.Request.html'
+                               title='iron::Request'>Request</a></td>
+                        <td class='docblock short'><p>The <code>Request</code> given to all <code>Middleware</code>.</p>
+</td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='struct' href='struct.Response.html'
+                               title='iron::Response'>Response</a></td>
+                        <td class='docblock short'><p>The response representation given to <code>Middleware</code></p>
+</td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='struct' href='struct.StackChain.html'
+                               title='iron::StackChain'>StackChain</a></td>
+                        <td class='docblock short'><p>The default <code>Chain</code> used by <code>Iron</code>.
+<code>StackChain</code> runs each <code>Request</code> through all <code>Middleware</code> in its stack.</p>
+</td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='struct' href='struct.TypeMap.html'
+                               title='iron::TypeMap'>TypeMap</a></td>
+                        <td class='docblock short'><p>A map keyed by types.</p>
+</td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='struct' href='struct.Url.html'
+                               title='iron::Url'>Url</a></td>
+                        <td class='docblock short'><p>HTTP/HTTPS URL type for Iron.</p>
+</td>
+                    </tr>
+                </table><h2 id='enums' class='section-header'><a href="#enums">Enums</a></h2>
+<table>
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='type' href='type.Status.html'
+                               title='iron::Status'>Status</a></td>
+                        <td class='docblock short'><p>The Status returned by <code>Middleware&#39;s</code> <code>enter</code> and <code>exit</code> methods. This indicates
+to the <code>Chain</code> whether this is a terminal <code>Middleware</code> or whether to continue
+passing the <code>Request</code> and <code>Response</code> down the <code>Chain&#39;s</code> stack.</p>
+</td>
+                    </tr>
+                </table><h2 id='traits' class='section-header'><a href="#traits">Traits</a></h2>
+<table>
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='trait' href='trait.Chain.html'
+                               title='iron::Chain'>Chain</a></td>
+                        <td class='docblock short'><p><code>Chains</code> are the backbone of <code>Iron</code>. They coordinate <code>Middleware</code>
+to ensure they are resolved and called in the right order.</p>
+</td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='trait' href='trait.Middleware.html'
+                               title='iron::Middleware'>Middleware</a></td>
+                        <td class='docblock short'><p>All middleware should implement <code>Middleware</code>, which allows it to be <code>linked</code>
+to a <code>Chain</code> so that it will be called for each incoming request.</p>
+</td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='trait' href='trait.Plugin.html'
+                               title='iron::Plugin'>Plugin</a></td>
+                        <td class='docblock short'><p>An interface for plugins that cache values between calls.</p>
+</td>
+                    </tr>
+                </table><h2 id='types' class='section-header'><a href="#types">Type Definitions</a></h2>
+<table>
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='type' href='type.Server.html'
+                               title='iron::Server'>Server</a></td>
+                        <td class='docblock short'><p>The &quot;default server&quot;, using a <code>StackChain</code>.</p>
+</td>
+                    </tr>
+                </table></section>
+    <section id='search' class="content hidden"></section>
+
+    <section class="footer"></section>
+
+    <div id="help" class="hidden">
+        <div class="shortcuts">
+            <h1>Keyboard shortcuts</h1>
+            <dl>
+                <dt>?</dt>
+                <dd>Show this help dialog</dd>
+                <dt>S</dt>
+                <dd>Focus the search field</dd>
+                <dt>&larrb;</dt>
+                <dd>Move up in search results</dd>
+                <dt>&rarrb;</dt>
+                <dd>Move down in search results</dd>
+                <dt>&#9166;</dt>
+                <dd>Go to active search result</dd>
+            </dl>
+        </div>
+        <div class="infos">
+            <h1>Search tricks</h1>
+            <p>
+                Prefix searches with a type followed by a colon (e.g.
+                <code>fn:</code>) to restrict the search to a given type.
+            </p>
+            <p>
+                Accepted types are: <code>fn</code>, <code>mod</code>,
+                <code>struct</code>, <code>enum</code>,
+                <code>trait</code>, <code>typedef</code> (or
+                <code>tdef</code>).
+            </p>
+        </div>
+    </div>
+
+    <section class="content footer">
+    <div style="text-align: right;">
+        <a style="color: #428bca;" href="https://github.com/reem">@reem</a>
+        <a style="color: #428bca;" href="https://github.com/zzmp">@zzmp</a>
+        <a style="color: #428bca;" href="https://github.com/theptrk">@theptrk</a>
+        <a style="color: #428bca;" href="https://github.com/mcreinhard">@mcreinhard</a>
+    </div>
+</section>
+
+
+
+    <script>
+        window.rootPath = "../";
+        window.currentCrate = "iron";
+        window.playgroundUrl = "";
+    </script>
+    <script src="../jquery.js"></script>
+    <script src="../main.js"></script>
+    
+    <script async src="../search-index.js"></script>
+</body>
+</html>

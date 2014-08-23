@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <meta name="description" content="API documentation for the Rust `Middleware` trait in crate `iron`.">
+    <meta name="keywords" content="rust, rustlang, rust-lang, Middleware">
+
+    <title>iron::Middleware - Rust</title>
+
+    <link rel="stylesheet" type="text/css" href="../main.css">
+
+    <link rel="shortcut icon" href="https://avatars0.githubusercontent.com/u/7853871?s=256">
+    <link href='http://fonts.googleapis.com/css?family=Questrial|Alegreya+Sans+SC:400,900|Bilbo|Abel' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Alegreya+Sans+SC:400,900|Alegreya+Sans' rel='stylesheet' type='text/css'>
+
+
+</head>
+<body class="rustdoc">
+    <!--[if lte IE 8]>
+    <div class="warning">
+        This old browser is unsupported and will most likely display funky
+        things.
+    </div>
+    <![endif]-->
+
+    <div style="float: right;">
+    <a style="font-size: 2em; font-family: 'Alegreya Sans SC', 'Helvetica Neue', Arial, Tahoma, Verdana, sans-serif; font-weight: 400; margin: 0;" href="http://ironframework.io/">
+        IRON
+    </a>
+</div>
+
+
+
+    <section class="sidebar">
+        <a href='../iron/index.html'><img src='https://avatars0.githubusercontent.com/u/7853871?s=128' alt='' width='100'></a>
+        <p class='location'><a href='index.html'>iron</a></p><div class='block struct'><h2>Structs</h2><a class='struct ' href='struct.FromFn.html'>FromFn</a><a class='struct ' href='struct.Iron.html'>Iron</a><a class='struct ' href='struct.Request.html'>Request</a><a class='struct ' href='struct.Response.html'>Response</a><a class='struct ' href='struct.StackChain.html'>StackChain</a><a class='struct ' href='struct.TypeMap.html'>TypeMap</a><a class='struct ' href='struct.Url.html'>Url</a></div><div class='block trait'><h2>Traits</h2><a class='trait ' href='trait.Chain.html'>Chain</a><a class='trait current' href='trait.Middleware.html'>Middleware</a><a class='trait ' href='trait.Plugin.html'>Plugin</a></div>
+    </section>
+
+    <nav class="sub">
+        <form class="search-form js-only">
+            <div class="search-container">
+                <input class="search-input" name="search"
+                       autocomplete="off"
+                       placeholder="Click or press 'S' to search, '?' for more options..."
+                       type="search">
+            </div>
+        </form>
+    </nav>
+
+    <section id='main' class="content trait">
+<h1 class='fqn'><div class='in-band'>Trait <a href='index.html'>iron</a>::<wbr><a class='trait' href=''>Middleware</a><wbr></div><div class='out-of-band'><span id='render-detail'>
+            <a id="collapse-all" href="#">[-]
+            </a>&nbsp;<a id="expand-all" href="#">[+]</a>
+        </span><a id='src-885' href='../src/iron/src/middleware.rs.html#64-110'>[src]</a></div></h1>
+<pre class='rust trait'>pub trait Middleware: <a class='trait' href='http://doc.rust-lang.org/master/core/kinds/trait.Send.html' title='core::kinds::Send'>Send</a> + <a class='trait' href='http://doc.rust-lang.org/master/core/clone/trait.Clone.html' title='core::clone::Clone'>Clone</a> {
+    fn <a href='#method.enter' class='fnname'>enter</a>(&amp;mut self, _: &amp;mut <a class='struct' href='../iron/struct.Request.html' title='iron::Request'>Request</a>, _: &amp;mut <a class='struct' href='../iron/struct.Response.html' title='iron::Response'>Response</a>) -&gt; <a class='type' href='../iron/type.Status.html' title='iron::Status'>Status</a> { ... }
+    fn <a href='#method.exit' class='fnname'>exit</a>(&amp;mut self, _: &amp;mut <a class='struct' href='../iron/struct.Request.html' title='iron::Request'>Request</a>, _: &amp;mut <a class='struct' href='../iron/struct.Response.html' title='iron::Response'>Response</a>) -&gt; <a class='type' href='../iron/type.Status.html' title='iron::Status'>Status</a> { ... }
+    fn <a href='#method.on_error' class='fnname'>on_error</a>(&amp;mut self, _: &amp;mut <a class='struct' href='../iron/struct.Request.html' title='iron::Request'>Request</a>, _: &amp;mut <a class='struct' href='../iron/struct.Response.html' title='iron::Response'>Response</a>, _: &amp;mut <a class='trait' href='http://doc.rust-lang.org/master/core/fmt/trait.Show.html' title='core::fmt::Show'>Show</a>) { ... }
+}</pre><div class='docblock'><p>All middleware should implement <code>Middleware</code>, which allows it to be <code>linked</code>
+to a <code>Chain</code> so that it will be called for each incoming request.</p>
+
+<p>There are two sorts of data associated with <code>Middleware</code>, data internal
+to the <code>Middleware</code> and data that the <code>Middleware</code> would like to expose to
+other <code>Middleware</code> further down the stack or to terminal controllers.</p>
+
+<p>Internal data should be stored on the <code>struct</code> that implements <code>Middleware</code>
+itself. All <code>Middleware</code> are cloned for each client request, so the object
+initially linked to the <code>Iron</code> instance will be provided as <code>&amp;mut self</code> to
+enter for every request.</p>
+
+<p>Data stored on a <code>Middleware</code> instance does <em>not</em> persist
+between requests and is <em>not</em> shared between different, concurrent, requests.
+The same is true for data stored on <code>Request::extensions</code>. Should you need to persist
+data between requests, you should use an <code>Arc</code> within your <code>Middleware</code>.</p>
+
+<p>External data should be stored in <code>Request::extensions</code>,
+a key value store from a type to an instance of that type. This means
+that each <code>Middleware</code> can have a unique type that it stores in the <code>AnyMap</code>.
+This can either be an instance of that <code>Middleware</code> or some other type. Since
+the same <code>Request</code> is passed to all further <code>Middleware</code> in the <code>Chain</code>, this
+scheme allows you to expose data or functionality to future <code>Middleware</code>.</p>
+</div>
+            <h2 id='provided-methods'>Provided Methods</h2>
+            <div class='methods'>
+        <h3 id='method.enter' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.enter' class='fnname'>enter</a>(&amp;mut self, _: &amp;mut <a class='struct' href='../iron/struct.Request.html' title='iron::Request'>Request</a>, _: &amp;mut <a class='struct' href='../iron/struct.Response.html' title='iron::Response'>Response</a>) -&gt; <a class='type' href='../iron/type.Status.html' title='iron::Status'>Status</a></code></h3><div class='docblock'><p><code>enter</code> is called for each <code>Middleware</code> in a <code>Chain</code> as a client request
+comes down the stack. <code>Middleware</code> have their <code>enter</code> methods called in the order
+in which they were added to the stack, that is, FIFO. If <code>Middleware</code> need to pass data
+between them they should do so using <code>Request::extensions</code>.</p>
+
+<p>Returning <code>Unwind</code> from this handler will cause the <code>Chain</code> to stop
+going down its stack and start bubbling back up through <code>Middleware</code>
+and calling <code>exit</code> on them.</p>
+
+<p>Returning <code>Error</code> from this handler will also cause &quot;bubbling up&quot; but
+will call <code>Middleware&#39;s</code> <code>on_error</code> handler instead of their <code>exit</code>
+handler.</p>
+</div><h3 id='method.exit' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.exit' class='fnname'>exit</a>(&amp;mut self, _: &amp;mut <a class='struct' href='../iron/struct.Request.html' title='iron::Request'>Request</a>, _: &amp;mut <a class='struct' href='../iron/struct.Response.html' title='iron::Response'>Response</a>) -&gt; <a class='type' href='../iron/type.Status.html' title='iron::Status'>Status</a></code></h3><div class='docblock'><p><code>exit</code> is called for each <code>Middleware</code> in a <code>Chain</code> that has had its <code>enter</code>
+method called for this client request. A <code>Middleware&#39;s</code> <code>exit</code> method will be called
+as the stack is unwound in FILO order - i.e, <code>Middleware</code> have their <code>exit</code>
+methods called in opposite order from which <code>enter</code> was called.</p>
+
+<p>While this method must return a <code>Status</code>, most <code>Chains</code> will ignore
+this method&#39;s return value.</p>
+</div><h3 id='method.on_error' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.on_error' class='fnname'>on_error</a>(&amp;mut self, _: &amp;mut <a class='struct' href='../iron/struct.Request.html' title='iron::Request'>Request</a>, _: &amp;mut <a class='struct' href='../iron/struct.Response.html' title='iron::Response'>Response</a>, _: &amp;mut <a class='trait' href='http://doc.rust-lang.org/master/core/fmt/trait.Show.html' title='core::fmt::Show'>Show</a>)</code></h3><div class='docblock'><p><code>on_error</code> is called for each <code>Middleware</code> in a <code>Chain</code> that has had its <code>enter</code>
+method called for this client request if an <code>Error</code> is returned downstream.</p>
+
+<p>If an Error occurs, <code>Middleware&#39;s</code> <code>on_error</code> methods will be called
+as the stack is unwound in FILO order in the same was as <code>exit</code> would
+be called on a successful request.</p>
+</div></div>
+        <h2 id='implementors'>Implementors</h2>
+        <ul class='item-list' id='implementors-list'>
+    <li><a class='stability Unmarked' title='No stability level'></a><code>impl <a class='trait' href='../iron/trait.Middleware.html' title='iron::Middleware'>Middleware</a> for <a class='struct' href='http://doc.rust-lang.org/alloc/boxed/struct.Box.html' title='alloc::boxed::Box'>Box</a>&lt;<a class='trait' href='../iron/trait.Chain.html' title='iron::Chain'>Chain</a> + <a class='trait' href='http://doc.rust-lang.org/master/core/kinds/trait.Send.html' title='core::kinds::Send'>Send</a>&gt;</code></li>
+<li><a class='stability Unmarked' title='No stability level'></a><code>impl <a class='trait' href='../iron/trait.Middleware.html' title='iron::Middleware'>Middleware</a> for <a class='struct' href='../iron/struct.FromFn.html' title='iron::FromFn'>FromFn</a></code></li>
+</ul><script type="text/javascript" async
+                              src="../implementors/iron/trait.Middleware.js">
+                      </script></section>
+    <section id='search' class="content hidden"></section>
+
+    <section class="footer"></section>
+
+    <div id="help" class="hidden">
+        <div class="shortcuts">
+            <h1>Keyboard shortcuts</h1>
+            <dl>
+                <dt>?</dt>
+                <dd>Show this help dialog</dd>
+                <dt>S</dt>
+                <dd>Focus the search field</dd>
+                <dt>&larrb;</dt>
+                <dd>Move up in search results</dd>
+                <dt>&rarrb;</dt>
+                <dd>Move down in search results</dd>
+                <dt>&#9166;</dt>
+                <dd>Go to active search result</dd>
+            </dl>
+        </div>
+        <div class="infos">
+            <h1>Search tricks</h1>
+            <p>
+                Prefix searches with a type followed by a colon (e.g.
+                <code>fn:</code>) to restrict the search to a given type.
+            </p>
+            <p>
+                Accepted types are: <code>fn</code>, <code>mod</code>,
+                <code>struct</code>, <code>enum</code>,
+                <code>trait</code>, <code>typedef</code> (or
+                <code>tdef</code>).
+            </p>
+        </div>
+    </div>
+
+    <section class="content footer">
+    <div style="text-align: right;">
+        <a style="color: #428bca;" href="https://github.com/reem">@reem</a>
+        <a style="color: #428bca;" href="https://github.com/zzmp">@zzmp</a>
+        <a style="color: #428bca;" href="https://github.com/theptrk">@theptrk</a>
+        <a style="color: #428bca;" href="https://github.com/mcreinhard">@mcreinhard</a>
+    </div>
+</section>
+
+
+
+    <script>
+        window.rootPath = "../";
+        window.currentCrate = "iron";
+        window.playgroundUrl = "";
+    </script>
+    <script src="../jquery.js"></script>
+    <script src="../main.js"></script>
+    
+    <script async src="../search-index.js"></script>
+</body>
+</html>
