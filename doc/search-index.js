@@ -1,5 +1,7 @@
 var searchIndex = {};
+searchIndex['urlencoded'] = {"items":[[0,"","urlencoded","URL Encoded Plugin for Iron."],[1,"UrlEncodedQuery","","Plugin for `Request` that extracts URL encoded data from the URL query string."],[1,"UrlEncodedBody","","Plugin for `Request` that extracts URL encoded data from the request body."],[4,"QueryMap","","Hashmap mapping strings to vectors of strings."],[10,"eval","","",0],[10,"eval","","",1]],"paths":[[1,"UrlEncodedQuery"],[1,"UrlEncodedBody"]]};
 searchIndex['staticfile'] = {"items":[[0,"","staticfile","Static file-serving middleware."],[1,"Static","","The static file-serving `Middleware`."],[10,"clone","","",0],[10,"new","","Create a new instance of `Static` with a given root path.",0],[10,"favicon","","Create a favicon server from the given filepath.",0],[10,"enter","","",0]],"paths":[[1,"Static"]]};
+
 searchIndex['mount'] = {"items":[[0,"","mount","`Mount` provides mounting middleware for the Iron framework."],[1,"Mount","","`Mount` is a simple mounting middleware."],[1,"OriginalUrl","","Exposes the original, unmodified path to be stored in `Request::extensions`."]],"paths":[]};
 
 searchIndex['lib'] = {"items":[[0,"","lib","`Mount` provides mounting middleware for the Iron framework."],[1,"Mount","","`Mount` is a simple mounting middleware."],[1,"OriginalUrl","","Exposes the original, unmodified path to be stored in `Request::extensions`."]],"paths":[]};
