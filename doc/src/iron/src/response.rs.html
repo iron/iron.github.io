@@ -179,6 +179,31 @@
 <span id='128'>128</span>
 <span id='129'>129</span>
 <span id='130'>130</span>
+<span id='131'>131</span>
+<span id='132'>132</span>
+<span id='133'>133</span>
+<span id='134'>134</span>
+<span id='135'>135</span>
+<span id='136'>136</span>
+<span id='137'>137</span>
+<span id='138'>138</span>
+<span id='139'>139</span>
+<span id='140'>140</span>
+<span id='141'>141</span>
+<span id='142'>142</span>
+<span id='143'>143</span>
+<span id='144'>144</span>
+<span id='145'>145</span>
+<span id='146'>146</span>
+<span id='147'>147</span>
+<span id='148'>148</span>
+<span id='149'>149</span>
+<span id='150'>150</span>
+<span id='151'>151</span>
+<span id='152'>152</span>
+<span id='153'>153</span>
+<span id='154'>154</span>
+<span id='155'>155</span>
 </pre><pre class='rust '>
 <span class='doccomment'>//! Iron&#39;s HTTP Response representation and associated methods.</span>
 
@@ -187,8 +212,8 @@
 
 <span class='kw'>use</span> <span class='ident'>typemap</span>::<span class='ident'>TypeMap</span>;
 <span class='kw'>use</span> <span class='ident'>plugin</span>::<span class='ident'>Extensible</span>;
-<span class='kw'>use</span> <span class='ident'>http</span>::<span class='ident'>status</span>::{<span class='ident'>Status</span>, <span class='ident'>InternalServerError</span>, <span class='ident'>NotFound</span>};
-<span class='kw'>use</span> <span class='ident'>http</span>::<span class='ident'>status</span>::<span class='prelude-val'>Ok</span> <span class='kw'>as</span> <span class='ident'>OkStatus</span>;
+<span class='kw'>use</span> <span class='ident'>super</span>::<span class='ident'>status</span>;
+<span class='kw'>use</span> <span class='ident'>super</span>::<span class='ident'>status</span>::<span class='ident'>Status</span>;
 <span class='kw'>use</span> <span class='ident'>http</span>::<span class='ident'>headers</span>::<span class='ident'>response</span>::<span class='ident'>HeaderCollection</span>;
 <span class='kw'>use</span> <span class='ident'>http</span>::<span class='ident'>headers</span>::<span class='ident'>content_type</span>::<span class='ident'>MediaType</span>;
 
@@ -218,12 +243,33 @@
 }
 
 <span class='kw'>impl</span> <span class='ident'>Response</span> {
-    <span class='doccomment'>/// Construct a Response from an HttpResponse reference</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>from_http</span>(<span class='ident'>http_res</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>HttpResponse</span>) <span class='op'>-&gt;</span> <span class='ident'>Response</span> {
+    <span class='doccomment'>/// Construct a blank Response</span>
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>new</span>() <span class='op'>-&gt;</span> <span class='ident'>Response</span> {
         <span class='ident'>Response</span> {
-            <span class='ident'>headers</span>: <span class='ident'>http_res</span>.<span class='ident'>headers</span>.<span class='ident'>clone</span>(),
+            <span class='ident'>headers</span>: <span class='kw'>box</span> <span class='ident'>HeaderCollection</span>::<span class='ident'>new</span>(),
             <span class='ident'>status</span>: <span class='prelude-val'>None</span>, <span class='comment'>// Start with no response code.</span>
             <span class='ident'>body</span>: <span class='prelude-val'>None</span>, <span class='comment'>// Start with no body.</span>
+            <span class='ident'>extensions</span>: <span class='ident'>TypeMap</span>::<span class='ident'>new</span>()
+        }
+    }
+
+    <span class='doccomment'>/// Create a new response with the status.</span>
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>status</span>(<span class='ident'>status</span>: <span class='ident'>status</span>::<span class='ident'>Status</span>) <span class='op'>-&gt;</span> <span class='ident'>Response</span> {
+        <span class='ident'>Response</span> {
+            <span class='ident'>body</span>: <span class='prelude-val'>None</span>,
+            <span class='ident'>headers</span>: <span class='kw'>box</span> <span class='ident'>HeaderCollection</span>::<span class='ident'>new</span>(),
+            <span class='ident'>status</span>: <span class='prelude-val'>Some</span>(<span class='ident'>status</span>),
+            <span class='ident'>extensions</span>: <span class='ident'>TypeMap</span>::<span class='ident'>new</span>()
+        }
+    }
+
+
+    <span class='doccomment'>/// Create a new response with the specified body and status.</span>
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>with</span><span class='op'>&lt;</span><span class='ident'>B</span>: <span class='ident'>BytesContainer</span><span class='op'>&gt;</span>(<span class='ident'>status</span>: <span class='ident'>status</span>::<span class='ident'>Status</span>, <span class='ident'>body</span>: <span class='ident'>B</span>) <span class='op'>-&gt;</span> <span class='ident'>Response</span> {
+        <span class='ident'>Response</span> {
+            <span class='ident'>body</span>: <span class='prelude-val'>Some</span>(<span class='kw'>box</span> <span class='ident'>MemReader</span>::<span class='ident'>new</span>(<span class='ident'>body</span>.<span class='ident'>container_as_bytes</span>().<span class='ident'>to_vec</span>()) <span class='kw'>as</span> <span class='ident'>Box</span><span class='op'>&lt;</span><span class='ident'>Reader</span><span class='op'>&gt;</span>),
+            <span class='ident'>headers</span>: <span class='kw'>box</span> <span class='ident'>HeaderCollection</span>::<span class='ident'>new</span>(),
+            <span class='ident'>status</span>: <span class='prelude-val'>Some</span>(<span class='ident'>status</span>),
             <span class='ident'>extensions</span>: <span class='ident'>TypeMap</span>::<span class='ident'>new</span>()
         }
     }
@@ -248,7 +294,7 @@
         <span class='kw'>let</span> <span class='ident'>file</span> <span class='op'>=</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>File</span>::<span class='ident'>open</span>(<span class='ident'>path</span>));
         <span class='self'>self</span>.<span class='ident'>headers</span>.<span class='ident'>content_type</span> <span class='op'>=</span> <span class='ident'>path</span>.<span class='ident'>extension_str</span>().<span class='ident'>and_then</span>(<span class='ident'>get_content_type</span>);
         <span class='self'>self</span>.<span class='ident'>body</span> <span class='op'>=</span> <span class='prelude-val'>Some</span>(<span class='kw'>box</span> <span class='ident'>file</span> <span class='kw'>as</span> <span class='ident'>Box</span><span class='op'>&lt;</span><span class='ident'>Reader</span><span class='op'>&gt;</span>);
-        <span class='self'>self</span>.<span class='ident'>status</span> <span class='op'>=</span> <span class='prelude-val'>Some</span>(<span class='ident'>OkStatus</span>);
+        <span class='self'>self</span>.<span class='ident'>status</span> <span class='op'>=</span> <span class='prelude-val'>Some</span>(<span class='ident'>status</span>::<span class='prelude-val'>Ok</span>);
         <span class='prelude-val'>Ok</span>(())
     }
 
@@ -262,13 +308,17 @@
         <span class='ident'>http_res</span>.<span class='ident'>headers</span> <span class='op'>=</span> <span class='self'>self</span>.<span class='ident'>headers</span>.<span class='ident'>clone</span>();
 
         <span class='comment'>// Default to a 404 if no response code was set</span>
-        <span class='ident'>http_res</span>.<span class='ident'>status</span> <span class='op'>=</span> <span class='self'>self</span>.<span class='ident'>status</span>.<span class='ident'>clone</span>().<span class='ident'>unwrap_or</span>(<span class='ident'>NotFound</span>);
+        <span class='ident'>http_res</span>.<span class='ident'>status</span> <span class='op'>=</span> <span class='self'>self</span>.<span class='ident'>status</span>.<span class='ident'>clone</span>().<span class='ident'>unwrap_or</span>(<span class='ident'>status</span>::<span class='ident'>NotFound</span>);
 
         <span class='comment'>// Read the body into the http_res body</span>
         <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>body</span> <span class='op'>=</span> <span class='self'>self</span>.<span class='ident'>body</span>.<span class='ident'>unwrap_or_else</span>(<span class='op'>||</span> <span class='kw'>box</span> <span class='ident'>MemReader</span>::<span class='ident'>new</span>(<span class='macro'>vec</span><span class='macro'>!</span>[]) <span class='kw'>as</span> <span class='ident'>Box</span><span class='op'>&lt;</span><span class='ident'>Reader</span><span class='op'>&gt;</span>);
         <span class='kw'>let</span> _ <span class='op'>=</span> <span class='kw'>match</span> <span class='ident'>body</span>.<span class='ident'>read_to_end</span>() {
             <span class='prelude-val'>Ok</span>(<span class='ident'>body_content</span>) <span class='op'>=&gt;</span> {
-                <span class='kw'>let</span> <span class='ident'>plain_txt</span>: <span class='ident'>MediaType</span> <span class='op'>=</span> <span class='ident'>get_content_type</span>(<span class='string'>&quot;txt&quot;</span>).<span class='ident'>unwrap</span>();
+                <span class='kw'>let</span> <span class='ident'>plain_txt</span> <span class='op'>=</span> <span class='ident'>MediaType</span> {
+                    <span class='ident'>type_</span>: <span class='string'>&quot;text&quot;</span>.<span class='ident'>to_string</span>(),
+                    <span class='ident'>subtype</span>: <span class='string'>&quot;plain&quot;</span>.<span class='ident'>to_string</span>(),
+                    <span class='ident'>parameters</span>: <span class='macro'>vec</span><span class='macro'>!</span>[]
+                };
 
                 <span class='comment'>// Set content length and type</span>
                 <span class='ident'>http_res</span>.<span class='ident'>headers</span>.<span class='ident'>content_length</span> <span class='op'>=</span>
@@ -283,7 +333,7 @@
         <span class='comment'>// Catch errors from reading + writing</span>
         }.<span class='ident'>map_err</span>(<span class='op'>|</span><span class='ident'>e</span><span class='op'>|</span> {
             <span class='macro'>error</span><span class='macro'>!</span>(<span class='string'>&quot;Error reading/writing body: {}&quot;</span>, <span class='ident'>e</span>);
-            <span class='ident'>http_res</span>.<span class='ident'>status</span> <span class='op'>=</span> <span class='ident'>InternalServerError</span>;
+            <span class='ident'>http_res</span>.<span class='ident'>status</span> <span class='op'>=</span> <span class='ident'>status</span>::<span class='ident'>InternalServerError</span>;
             <span class='kw'>let</span> _ <span class='op'>=</span> <span class='ident'>http_res</span>.<span class='ident'>write</span>(<span class='string'>b&quot;Internal Server Error&quot;</span>)
                 <span class='comment'>// Something is really, really wrong.</span>
                 .<span class='ident'>map_err</span>(<span class='op'>|</span><span class='ident'>e</span><span class='op'>|</span> <span class='macro'>error</span><span class='macro'>!</span>(<span class='string'>&quot;Error writing error message: {}&quot;</span>, <span class='ident'>e</span>));

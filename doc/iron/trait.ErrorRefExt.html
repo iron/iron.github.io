@@ -4,10 +4,10 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="API stability overview for the Rust `iron` crate.">
-    <meta name="keywords" content="rust, rustlang, rust-lang">
+    <meta name="description" content="API documentation for the Rust `ErrorRefExt` trait in crate `iron`.">
+    <meta name="keywords" content="rust, rustlang, rust-lang, ErrorRefExt">
 
-    <title>iron - Stability dashboard</title>
+    <title>iron::ErrorRefExt - Rust</title>
 
     <link rel="stylesheet" type="text/css" href="../main.css">
 
@@ -35,7 +35,7 @@
 
     <section class="sidebar">
         <a href='../iron/index.html'><img src='https://avatars0.githubusercontent.com/u/7853871?s=128' alt='' width='100'></a>
-        <p class='location'></p>
+        <p class='location'><a href='index.html'>iron</a></p><div class='block mod'><h2>Modules</h2><a class='mod ' href='method/index.html'>method</a><a class='mod ' href='status/index.html'>status</a></div><div class='block struct'><h2>Structs</h2><a class='struct ' href='struct.ChainBuilder.html'>ChainBuilder</a><a class='struct ' href='struct.Iron.html'>Iron</a><a class='struct ' href='struct.Request.html'>Request</a><a class='struct ' href='struct.Response.html'>Response</a><a class='struct ' href='struct.TypeMap.html'>TypeMap</a><a class='struct ' href='struct.Url.html'>Url</a></div><div class='block trait'><h2>Traits</h2><a class='trait ' href='trait.AfterMiddleware.html'>AfterMiddleware</a><a class='trait ' href='trait.AroundMiddleware.html'>AroundMiddleware</a><a class='trait ' href='trait.BeforeMiddleware.html'>BeforeMiddleware</a><a class='trait ' href='trait.Chain.html'>Chain</a><a class='trait ' href='trait.Error.html'>Error</a><a class='trait current' href='trait.ErrorRefExt.html'>ErrorRefExt</a><a class='trait ' href='trait.Handler.html'>Handler</a><a class='trait ' href='trait.Plugin.html'>Plugin</a></div>
     </section>
 
     <nav class="sub">
@@ -49,19 +49,23 @@
         </form>
     </nav>
 
-    <section id='main' class="content mod"><h1 class='fqn'>Stability dashboard: crate <a class='mod' href='index.html'>iron</a></h1>
-This dashboard summarizes the stability levels for all of the public modules of
-the crate, according to the total number of items at each level in the module and
-its children (percentages total for iron):
-<blockquote>
-<a class='stability Stable'></a> stable (0%),<br/>
-<a class='stability Unstable'></a> unstable (0%),<br/>
-<a class='stability Experimental'></a> experimental (0%),<br/>
-<a class='stability Deprecated'></a> deprecated (0%),<br/>
-<a class='stability Unmarked'></a> unmarked (100%)
-</blockquote>
-The counts do not include methods or trait
-implementations that are visible only through a re-exported type.<table><tr><td><a href='index.html'>iron</a></td><td class='summary-column'><span class='summary Stable' style='width: 0.0000%; display: inline-block'>&nbsp</span><span class='summary Unstable' style='width: 0.0000%; display: inline-block'>&nbsp</span><span class='summary Experimental' style='width: 0.0000%; display: inline-block'>&nbsp</span><span class='summary Deprecated' style='width: 0.0000%; display: inline-block'>&nbsp</span><span class='summary Unmarked' style='width: 100.0000%; display: inline-block'>&nbsp</span></td></tr><tr><td><a href='method/index.html'>iron::method</a></td><td class='summary-column'><span class='summary Stable' style='width: 0.0000%; display: inline-block'>&nbsp</span><span class='summary Unstable' style='width: 0.0000%; display: inline-block'>&nbsp</span><span class='summary Experimental' style='width: 0.0000%; display: inline-block'>&nbsp</span><span class='summary Deprecated' style='width: 0.0000%; display: inline-block'>&nbsp</span><span class='summary Unmarked' style='width: 100.0000%; display: inline-block'>&nbsp</span></td></tr><tr><td><a href='status/index.html'>iron::status</a></td><td class='summary-column'><span class='summary Stable' style='width: 0.0000%; display: inline-block'>&nbsp</span><span class='summary Unstable' style='width: 0.0000%; display: inline-block'>&nbsp</span><span class='summary Experimental' style='width: 0.0000%; display: inline-block'>&nbsp</span><span class='summary Deprecated' style='width: 0.0000%; display: inline-block'>&nbsp</span><span class='summary Unmarked' style='width: 100.0000%; display: inline-block'>&nbsp</span></td></tr></table></section>
+    <section id='main' class="content trait">
+<h1 class='fqn'><div class='in-band'>Trait <a href='index.html'>iron</a>::<wbr><a class='trait' href=''>ErrorRefExt</a><wbr></div><div class='out-of-band'><span id='render-detail'>
+            <a id="collapse-all" href="#">[-]
+            </a>&nbsp;<a id="expand-all" href="#">[+]</a>
+        </span></div></h1>
+<pre class='rust trait'>pub trait ErrorRefExt&lt;'a&gt; {
+    fn <a href='#tymethod.is' class='fnname'>is</a>&lt;O: 'static&gt;(self) -&gt; <a href='http://doc.rust-lang.org/master/std/primitive.bool.html'>bool</a>;
+    fn <a href='#tymethod.downcast' class='fnname'>downcast</a>&lt;O: 'static + <a class='trait' href='../iron/trait.Error.html' title='iron::Error'>Error</a>&gt;(self) -&gt; <a class='type' href='http://doc.rust-lang.org/master/core/option/type.Option.html' title='core::option::Option'>Option</a>&lt;&amp;'a O&gt;;
+}</pre>
+            <h2 id='required-methods'>Required Methods</h2>
+            <div class='methods'>
+        <h3 id='tymethod.is' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#tymethod.is' class='fnname'>is</a>&lt;O: 'static&gt;(self) -&gt; <a href='http://doc.rust-lang.org/master/std/primitive.bool.html'>bool</a></code></h3><h3 id='tymethod.downcast' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#tymethod.downcast' class='fnname'>downcast</a>&lt;O: 'static + <a class='trait' href='../iron/trait.Error.html' title='iron::Error'>Error</a>&gt;(self) -&gt; <a class='type' href='http://doc.rust-lang.org/master/core/option/type.Option.html' title='core::option::Option'>Option</a>&lt;&amp;'a O&gt;</code></h3></div>
+        <h2 id='implementors'>Implementors</h2>
+        <ul class='item-list' id='implementors-list'>
+    </ul><script type="text/javascript" async
+                              src="../implementors/error/trait.ErrorRefExt.js">
+                      </script></section>
     <section id='search' class="content hidden"></section>
 
     <section class="footer"></section>

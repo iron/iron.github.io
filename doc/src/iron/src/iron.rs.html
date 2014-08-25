@@ -154,85 +154,76 @@
 <span id='103'>103</span>
 <span id='104'>104</span>
 <span id='105'>105</span>
-<span id='106'>106</span>
 </pre><pre class='rust '>
 <span class='doccomment'>//! Exposes the `Iron` type, the main entrance point of the</span>
 <span class='doccomment'>//! `Iron` library.</span>
 
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>io</span>::<span class='ident'>net</span>::<span class='ident'>ip</span>::{<span class='ident'>SocketAddr</span>, <span class='ident'>IpAddr</span>};
-<span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>cell</span>::<span class='ident'>RefCell</span>;
+<span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>sync</span>::<span class='ident'>Arc</span>;
 
 <span class='kw'>use</span> <span class='ident'>http</span>::<span class='ident'>server</span> <span class='kw'>as</span> <span class='ident'>http</span>;
-<span class='kw'>use</span> <span class='ident'>super</span>::<span class='ident'>chain</span>::<span class='ident'>Chain</span>;
-<span class='kw'>use</span> <span class='ident'>super</span>::<span class='ident'>chain</span>::<span class='ident'>stackchain</span>::<span class='ident'>StackChain</span>;
+<span class='kw'>use</span> <span class='ident'>super</span>::{<span class='ident'>Request</span>, <span class='ident'>Handler</span>};
+<span class='kw'>use</span> <span class='ident'>super</span>::<span class='ident'>status</span>;
 
-<span class='kw'>use</span> <span class='ident'>super</span>::<span class='ident'>response</span>::{<span class='ident'>HttpResponse</span>, <span class='ident'>Response</span>};
-<span class='kw'>use</span> <span class='ident'>super</span>::<span class='ident'>request</span>::{<span class='ident'>HttpRequest</span>, <span class='ident'>Request</span>};
-
-<span class='doccomment'>/// The &quot;default server&quot;, using a `StackChain`.</span>
-<span class='kw'>pub</span> <span class='kw'>type</span> <span class='ident'>Server</span> <span class='op'>=</span> <span class='ident'>Iron</span><span class='op'>&lt;</span><span class='ident'>StackChain</span><span class='op'>&gt;</span>;
+<span class='kw'>use</span> <span class='ident'>super</span>::<span class='ident'>response</span>::<span class='ident'>HttpResponse</span>;
+<span class='kw'>use</span> <span class='ident'>super</span>::<span class='ident'>request</span>::<span class='ident'>HttpRequest</span>;
 
 <span class='doccomment'>/// The primary entrance point to `Iron`, a `struct` to instantiate a new server.</span>
 <span class='doccomment'>///</span>
-<span class='doccomment'>/// The server can be made with a specific `Chain` (using `from_chain`)</span>
-<span class='doccomment'>/// or with a new `Chain` (using `new`). `Iron` is used to manage the server</span>
-<span class='doccomment'>/// processes:</span>
-<span class='doccomment'>/// `Iron.chain.link` is used to add new `Middleware`, and</span>
-<span class='doccomment'>/// `Iron.listen` is used to kick off a server process.</span>
-<span class='doccomment'>///</span>
-<span class='doccomment'>/// `Iron` contains the `Chain` which holds the `Middleware` necessary to run a server.</span>
-<span class='doccomment'>/// `Iron` is the main interface to adding `Middleware`, and has `Chain` as a</span>
-<span class='doccomment'>/// public field (for the sake of extensibility).</span>
-<span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>Iron</span><span class='op'>&lt;</span><span class='ident'>C</span><span class='op'>&gt;</span> {
-    <span class='doccomment'>/// Add `Middleware` to the `Iron&#39;s` `chain` so that requests</span>
-    <span class='doccomment'>/// are passed through those `Middleware`.</span>
-    <span class='doccomment'>/// `Middleware` is added to the chain with with `chain.link`.</span>
-    <span class='kw'>pub</span> <span class='ident'>chain</span>: <span class='ident'>C</span>,
+<span class='doccomment'>/// `Iron` contains the `Handler` which takes a `Request` and produces a</span>
+<span class='doccomment'>/// `Response`.</span>
+<span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>Iron</span><span class='op'>&lt;</span><span class='ident'>H</span><span class='op'>&gt;</span> {
+    <span class='doccomment'>/// Iron contains a `Handler`, which it uses to create responses for client</span>
+    <span class='doccomment'>/// requests.</span>
+    <span class='kw'>pub</span> <span class='ident'>handler</span>: <span class='ident'>H</span>,
 }
 
 <span class='comment'>// The struct which actually listens and serves requests.</span>
-<span class='comment'>//</span>
-<span class='comment'>// IronListener holds its chain behind a RefCell to avoid a</span>
-<span class='comment'>// second clone in the implementation of .serve_forever().</span>
-<span class='attribute'>#[<span class='ident'>deriving</span>(<span class='ident'>Clone</span>)]</span>
-<span class='kw'>struct</span> <span class='ident'>IronListener</span><span class='op'>&lt;</span><span class='ident'>C</span><span class='op'>&gt;</span> {
-    <span class='ident'>chain</span>: <span class='ident'>RefCell</span><span class='op'>&lt;</span><span class='ident'>C</span><span class='op'>&gt;</span>,
+<span class='kw'>struct</span> <span class='ident'>IronListener</span><span class='op'>&lt;</span><span class='ident'>H</span><span class='op'>&gt;</span> {
+    <span class='ident'>handler</span>: <span class='ident'>Arc</span><span class='op'>&lt;</span><span class='ident'>H</span><span class='op'>&gt;</span>,
     <span class='ident'>ip</span>: <span class='ident'>IpAddr</span>,
     <span class='ident'>port</span>: <span class='ident'>u16</span>
 }
 
-<span class='kw'>impl</span><span class='op'>&lt;</span><span class='ident'>C</span>: <span class='ident'>Chain</span><span class='op'>&gt;</span> <span class='ident'>Iron</span><span class='op'>&lt;</span><span class='ident'>C</span><span class='op'>&gt;</span> {
-    <span class='doccomment'>/// Kick off the server process.</span>
-    <span class='doccomment'>///</span>
-    <span class='doccomment'>/// Call this once to begin listening for requests on the server.</span>
-    <span class='doccomment'>/// This is a blocking operation, and is the final op that should be called</span>
-    <span class='doccomment'>/// on the `Iron` instance. Once `listen` is called, requests will be</span>
-    <span class='doccomment'>/// handled as defined through the `Iron&#39;s` `chain&#39;s` `Middleware`.</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>listen</span>(<span class='self'>self</span>, <span class='ident'>ip</span>: <span class='ident'>IpAddr</span>, <span class='ident'>port</span>: <span class='ident'>u16</span>) {
-        <span class='kw'>use</span> <span class='ident'>http</span>::<span class='ident'>server</span>::<span class='ident'>Server</span>;
-
+<span class='kw'>impl</span><span class='op'>&lt;</span><span class='ident'>H</span>: <span class='ident'>Send</span> <span class='op'>+</span> <span class='ident'>Sync</span><span class='op'>&gt;</span> <span class='ident'>Clone</span> <span class='kw'>for</span> <span class='ident'>IronListener</span><span class='op'>&lt;</span><span class='ident'>H</span><span class='op'>&gt;</span> {
+    <span class='kw'>fn</span> <span class='ident'>clone</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>IronListener</span><span class='op'>&lt;</span><span class='ident'>H</span><span class='op'>&gt;</span> {
         <span class='ident'>IronListener</span> {
-            <span class='ident'>chain</span>: <span class='ident'>RefCell</span>::<span class='ident'>new</span>(<span class='self'>self</span>.<span class='ident'>chain</span>),
-            <span class='ident'>ip</span>: <span class='ident'>ip</span>,
-            <span class='ident'>port</span>: <span class='ident'>port</span>
-        }.<span class='ident'>serve_forever</span>();
-    }
-
-    <span class='doccomment'>/// Instantiate a new instance of `Iron`.</span>
-    <span class='doccomment'>///</span>
-    <span class='doccomment'>/// This will create a new `Iron`, the base unit of the server.</span>
-    <span class='doccomment'>///</span>
-    <span class='doccomment'>/// Custom chains can be used by explicitly specifying the type as</span>
-    <span class='doccomment'>/// in: `let customServer: Iron&lt;CustomChain&gt; = Iron::new();`</span>
-    <span class='attribute'>#[<span class='ident'>inline</span>]</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>new</span>() <span class='op'>-&gt;</span> <span class='ident'>Iron</span><span class='op'>&lt;</span><span class='ident'>C</span><span class='op'>&gt;</span> {
-        <span class='ident'>Iron</span> {
-            <span class='ident'>chain</span>: <span class='ident'>Chain</span>::<span class='ident'>new</span>(),
+            <span class='comment'>// Just increment the Arc&#39;s reference count.</span>
+            <span class='ident'>handler</span>: <span class='self'>self</span>.<span class='ident'>handler</span>.<span class='ident'>clone</span>(),
+            <span class='ident'>ip</span>: <span class='self'>self</span>.<span class='ident'>ip</span>.<span class='ident'>clone</span>(),
+            <span class='ident'>port</span>: <span class='self'>self</span>.<span class='ident'>port</span>.<span class='ident'>clone</span>()
         }
     }
 }
 
-<span class='kw'>impl</span><span class='op'>&lt;</span><span class='ident'>C</span>: <span class='ident'>Chain</span><span class='op'>&gt;</span> <span class='ident'>http</span>::<span class='ident'>Server</span> <span class='kw'>for</span> <span class='ident'>IronListener</span><span class='op'>&lt;</span><span class='ident'>C</span><span class='op'>&gt;</span> {
+<span class='kw'>impl</span><span class='op'>&lt;</span><span class='ident'>H</span>: <span class='ident'>Handler</span><span class='op'>&gt;</span> <span class='ident'>Iron</span><span class='op'>&lt;</span><span class='ident'>H</span><span class='op'>&gt;</span> {
+    <span class='doccomment'>/// Kick off the server process.</span>
+    <span class='doccomment'>///</span>
+    <span class='doccomment'>/// Call this once to begin listening for requests on the server.</span>
+    <span class='doccomment'>/// This consumes the Iron instance, but does the listening on</span>
+    <span class='doccomment'>/// another task, so is not blocking.</span>
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>listen</span>(<span class='self'>self</span>, <span class='ident'>ip</span>: <span class='ident'>IpAddr</span>, <span class='ident'>port</span>: <span class='ident'>u16</span>) {
+        <span class='kw'>use</span> <span class='ident'>http</span>::<span class='ident'>server</span>::<span class='ident'>Server</span>;
+
+        <span class='ident'>spawn</span>(<span class='kw'>proc</span>() {
+            <span class='ident'>IronListener</span> {
+                <span class='ident'>handler</span>: <span class='ident'>Arc</span>::<span class='ident'>new</span>(<span class='self'>self</span>.<span class='ident'>handler</span>),
+                <span class='ident'>ip</span>: <span class='ident'>ip</span>,
+                <span class='ident'>port</span>: <span class='ident'>port</span>
+            }.<span class='ident'>serve_forever</span>();
+        });
+    }
+
+    <span class='doccomment'>/// Instantiate a new instance of `Iron`.</span>
+    <span class='doccomment'>///</span>
+    <span class='doccomment'>/// This will create a new `Iron`, the base unit of the server, using the</span>
+    <span class='doccomment'>/// passed in `Handler`.</span>
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>new</span>(<span class='ident'>handler</span>: <span class='ident'>H</span>) <span class='op'>-&gt;</span> <span class='ident'>Iron</span><span class='op'>&lt;</span><span class='ident'>H</span><span class='op'>&gt;</span> {
+        <span class='ident'>Iron</span> { <span class='ident'>handler</span>: <span class='ident'>handler</span> }
+    }
+}
+
+<span class='kw'>impl</span><span class='op'>&lt;</span><span class='ident'>H</span>: <span class='ident'>Handler</span><span class='op'>&gt;</span> <span class='ident'>http</span>::<span class='ident'>Server</span> <span class='kw'>for</span> <span class='ident'>IronListener</span><span class='op'>&lt;</span><span class='ident'>H</span><span class='op'>&gt;</span> {
     <span class='kw'>fn</span> <span class='ident'>get_config</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>http</span>::<span class='ident'>Config</span> {
         <span class='ident'>http</span>::<span class='ident'>Config</span> {
             <span class='ident'>bind_address</span>: <span class='ident'>SocketAddr</span> {
@@ -243,23 +234,30 @@
     }
 
     <span class='kw'>fn</span> <span class='ident'>handle_request</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>http_req</span>: <span class='ident'>HttpRequest</span>, <span class='ident'>http_res</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>HttpResponse</span>) {
-        <span class='comment'>// Create wrapper Request and Response</span>
+        <span class='comment'>// Create `Request` wrapper.</span>
         <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>req</span> <span class='op'>=</span> <span class='kw'>match</span> <span class='ident'>Request</span>::<span class='ident'>from_http</span>(<span class='ident'>http_req</span>) {
             <span class='prelude-val'>Ok</span>(<span class='ident'>req</span>) <span class='op'>=&gt;</span> <span class='ident'>req</span>,
             <span class='prelude-val'>Err</span>(<span class='ident'>e</span>) <span class='op'>=&gt;</span> {
                 <span class='macro'>error</span><span class='macro'>!</span>(<span class='string'>&quot;Error getting request: {}&quot;</span>, <span class='ident'>e</span>);
-                <span class='ident'>http_res</span>.<span class='ident'>status</span> <span class='op'>=</span> ::<span class='ident'>http</span>::<span class='ident'>status</span>::<span class='ident'>InternalServerError</span>;
+                <span class='ident'>http_res</span>.<span class='ident'>status</span> <span class='op'>=</span> <span class='ident'>status</span>::<span class='ident'>InternalServerError</span>;
                 <span class='kw'>let</span> _ <span class='op'>=</span> <span class='ident'>http_res</span>.<span class='ident'>write</span>(<span class='string'>b&quot;Internal Server Error&quot;</span>);
                 <span class='kw'>return</span>;
             }
         };
-        <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>res</span> <span class='op'>=</span> <span class='ident'>Response</span>::<span class='ident'>from_http</span>(<span class='ident'>http_res</span>);
 
         <span class='comment'>// Dispatch the request</span>
-        <span class='kw'>let</span> _ <span class='op'>=</span> <span class='self'>self</span>.<span class='ident'>chain</span>.<span class='ident'>borrow_mut</span>().<span class='ident'>dispatch</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>req</span>, <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>res</span>);
+        <span class='kw'>let</span> <span class='ident'>res</span> <span class='op'>=</span> <span class='self'>self</span>.<span class='ident'>handler</span>.<span class='ident'>call</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>req</span>);
 
-        <span class='comment'>// Write the response back to http_res</span>
-        <span class='ident'>res</span>.<span class='ident'>write_back</span>(<span class='ident'>http_res</span>);
+        <span class='kw'>match</span> <span class='ident'>res</span> {
+            <span class='comment'>// Write the response back to http_res</span>
+            <span class='prelude-val'>Ok</span>(<span class='ident'>res</span>) <span class='op'>=&gt;</span> <span class='ident'>res</span>.<span class='ident'>write_back</span>(<span class='ident'>http_res</span>),
+            <span class='prelude-val'>Err</span>(<span class='ident'>e</span>) <span class='op'>=&gt;</span> {
+                <span class='comment'>// There is no Response, so create one.</span>
+                <span class='macro'>error</span><span class='macro'>!</span>(<span class='string'>&quot;Error handling:\n{}\nError was: {}&quot;</span>, <span class='ident'>req</span>, <span class='ident'>e</span>);
+                <span class='ident'>http_res</span>.<span class='ident'>status</span> <span class='op'>=</span> <span class='ident'>status</span>::<span class='ident'>InternalServerError</span>;
+                <span class='kw'>let</span> _ <span class='op'>=</span> <span class='ident'>http_res</span>.<span class='ident'>write</span>(<span class='string'>b&quot;Internal Server Error&quot;</span>);
+            }
+        }
     }
 }
 </pre>
