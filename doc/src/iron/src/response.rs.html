@@ -199,11 +199,6 @@
 <span id='148'>148</span>
 <span id='149'>149</span>
 <span id='150'>150</span>
-<span id='151'>151</span>
-<span id='152'>152</span>
-<span id='153'>153</span>
-<span id='154'>154</span>
-<span id='155'>155</span>
 </pre><pre class='rust '>
 <span class='doccomment'>//! Iron&#39;s HTTP Response representation and associated methods.</span>
 
@@ -274,28 +269,23 @@
         }
     }
 
+    <span class='doccomment'>/// Create a response from a file on disk.</span>
+    <span class='doccomment'>///</span>
+    <span class='doccomment'>/// The status code is set to 200 OK and the content type is autodetected based on</span>
+    <span class='doccomment'>/// the file extension.</span>
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>from_file</span>(<span class='ident'>path</span>: <span class='kw-2'>&amp;</span><span class='ident'>Path</span>) <span class='op'>-&gt;</span> <span class='ident'>IoResult</span><span class='op'>&lt;</span><span class='ident'>Response</span><span class='op'>&gt;</span> {
+        <span class='kw'>let</span> <span class='ident'>file</span> <span class='op'>=</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>File</span>::<span class='ident'>open</span>(<span class='ident'>path</span>));
+        <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>response</span> <span class='op'>=</span> <span class='ident'>Response</span>::<span class='ident'>new</span>();
+        <span class='ident'>response</span>.<span class='ident'>status</span> <span class='op'>=</span> <span class='prelude-val'>Some</span>(<span class='ident'>status</span>::<span class='prelude-val'>Ok</span>);
+        <span class='ident'>response</span>.<span class='ident'>body</span> <span class='op'>=</span> <span class='prelude-val'>Some</span>(<span class='kw'>box</span> <span class='ident'>file</span> <span class='kw'>as</span> <span class='ident'>Box</span><span class='op'>&lt;</span><span class='ident'>Reader</span> <span class='op'>+</span> <span class='ident'>Send</span><span class='op'>&gt;</span>);
+        <span class='ident'>response</span>.<span class='ident'>headers</span>.<span class='ident'>content_type</span> <span class='op'>=</span> <span class='ident'>path</span>.<span class='ident'>extension_str</span>().<span class='ident'>and_then</span>(<span class='ident'>get_content_type</span>);
+        <span class='prelude-val'>Ok</span>(<span class='ident'>response</span>)
+    }
+
     <span class='doccomment'>/// Write the `Status` and data to the `Response`.</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>serve</span><span class='op'>&lt;</span><span class='ident'>S</span>: <span class='ident'>BytesContainer</span><span class='op'>&gt;</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>status</span>: <span class='ident'>Status</span>, <span class='ident'>body</span>: <span class='ident'>S</span>) {
         <span class='self'>self</span>.<span class='ident'>status</span> <span class='op'>=</span> <span class='prelude-val'>Some</span>(<span class='ident'>status</span>);
         <span class='self'>self</span>.<span class='ident'>body</span> <span class='op'>=</span> <span class='prelude-val'>Some</span>(<span class='kw'>box</span> <span class='ident'>MemReader</span>::<span class='ident'>new</span>(<span class='ident'>body</span>.<span class='ident'>container_as_bytes</span>().<span class='ident'>to_vec</span>()) <span class='kw'>as</span> <span class='ident'>Box</span><span class='op'>&lt;</span><span class='ident'>Reader</span> <span class='op'>+</span> <span class='ident'>Send</span><span class='op'>&gt;</span>);
-    }
-
-    <span class='doccomment'>/// Serve the file located at `path`.</span>
-    <span class='doccomment'>///</span>
-    <span class='doccomment'>/// This usually means a request has been handled, and `Middleware`</span>
-    <span class='doccomment'>/// may want to `Unwind` after a file is served. If the status should be</span>
-    <span class='doccomment'>/// anything other than `200`, `Middleware` must set it, including in</span>
-    <span class='doccomment'>/// the case of an `Err`.</span>
-    <span class='doccomment'>///</span>
-    <span class='doccomment'>/// `serve_file` will error if the file does not exist, the process</span>
-    <span class='doccomment'>/// does not have correct permissions, or it has other issues in reading</span>
-    <span class='doccomment'>/// from the file. `Middleware` should handle this gracefully.</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>serve_file</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>path</span>: <span class='kw-2'>&amp;</span><span class='ident'>Path</span>) <span class='op'>-&gt;</span> <span class='ident'>IoResult</span><span class='op'>&lt;</span>()<span class='op'>&gt;</span> {
-        <span class='kw'>let</span> <span class='ident'>file</span> <span class='op'>=</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>File</span>::<span class='ident'>open</span>(<span class='ident'>path</span>));
-        <span class='self'>self</span>.<span class='ident'>headers</span>.<span class='ident'>content_type</span> <span class='op'>=</span> <span class='ident'>path</span>.<span class='ident'>extension_str</span>().<span class='ident'>and_then</span>(<span class='ident'>get_content_type</span>);
-        <span class='self'>self</span>.<span class='ident'>body</span> <span class='op'>=</span> <span class='prelude-val'>Some</span>(<span class='kw'>box</span> <span class='ident'>file</span> <span class='kw'>as</span> <span class='ident'>Box</span><span class='op'>&lt;</span><span class='ident'>Reader</span> <span class='op'>+</span> <span class='ident'>Send</span><span class='op'>&gt;</span>);
-        <span class='self'>self</span>.<span class='ident'>status</span> <span class='op'>=</span> <span class='prelude-val'>Some</span>(<span class='ident'>status</span>::<span class='prelude-val'>Ok</span>);
-        <span class='prelude-val'>Ok</span>(())
     }
 
     <span class='comment'>// `write_back` is used to put all the data added to `self`</span>
