@@ -193,12 +193,6 @@
 <span id='142'>142</span>
 <span id='143'>143</span>
 <span id='144'>144</span>
-<span id='145'>145</span>
-<span id='146'>146</span>
-<span id='147'>147</span>
-<span id='148'>148</span>
-<span id='149'>149</span>
-<span id='150'>150</span>
 </pre><pre class='rust '>
 <span class='doccomment'>//! Iron&#39;s HTTP Response representation and associated methods.</span>
 
@@ -280,12 +274,6 @@
         <span class='ident'>response</span>.<span class='ident'>body</span> <span class='op'>=</span> <span class='prelude-val'>Some</span>(<span class='kw'>box</span> <span class='ident'>file</span> <span class='kw'>as</span> <span class='ident'>Box</span><span class='op'>&lt;</span><span class='ident'>Reader</span> <span class='op'>+</span> <span class='ident'>Send</span><span class='op'>&gt;</span>);
         <span class='ident'>response</span>.<span class='ident'>headers</span>.<span class='ident'>content_type</span> <span class='op'>=</span> <span class='ident'>path</span>.<span class='ident'>extension_str</span>().<span class='ident'>and_then</span>(<span class='ident'>get_content_type</span>);
         <span class='prelude-val'>Ok</span>(<span class='ident'>response</span>)
-    }
-
-    <span class='doccomment'>/// Write the `Status` and data to the `Response`.</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>serve</span><span class='op'>&lt;</span><span class='ident'>S</span>: <span class='ident'>BytesContainer</span><span class='op'>&gt;</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>status</span>: <span class='ident'>Status</span>, <span class='ident'>body</span>: <span class='ident'>S</span>) {
-        <span class='self'>self</span>.<span class='ident'>status</span> <span class='op'>=</span> <span class='prelude-val'>Some</span>(<span class='ident'>status</span>);
-        <span class='self'>self</span>.<span class='ident'>body</span> <span class='op'>=</span> <span class='prelude-val'>Some</span>(<span class='kw'>box</span> <span class='ident'>MemReader</span>::<span class='ident'>new</span>(<span class='ident'>body</span>.<span class='ident'>container_as_bytes</span>().<span class='ident'>to_vec</span>()) <span class='kw'>as</span> <span class='ident'>Box</span><span class='op'>&lt;</span><span class='ident'>Reader</span> <span class='op'>+</span> <span class='ident'>Send</span><span class='op'>&gt;</span>);
     }
 
     <span class='comment'>// `write_back` is used to put all the data added to `self`</span>
