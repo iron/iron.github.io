@@ -227,7 +227,7 @@
     <span class='kw'>pub</span> <span class='ident'>body</span>: <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>Box</span><span class='op'>&lt;</span><span class='ident'>Reader</span> <span class='op'>+</span> <span class='ident'>Send</span><span class='op'>&gt;&gt;</span>,
 
     <span class='doccomment'>/// The headers of the response.</span>
-    <span class='kw'>pub</span> <span class='ident'>headers</span>: <span class='ident'>Box</span><span class='op'>&lt;</span><span class='ident'>HeaderCollection</span><span class='op'>&gt;</span>,
+    <span class='kw'>pub</span> <span class='ident'>headers</span>: <span class='ident'>HeaderCollection</span>,
 
     <span class='doccomment'>/// The response status-code.</span>
     <span class='kw'>pub</span> <span class='ident'>status</span>: <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>Status</span><span class='op'>&gt;</span>,
@@ -241,7 +241,7 @@
     <span class='doccomment'>/// Construct a blank Response</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>new</span>() <span class='op'>-&gt;</span> <span class='ident'>Response</span> {
         <span class='ident'>Response</span> {
-            <span class='ident'>headers</span>: <span class='kw'>box</span> <span class='ident'>HeaderCollection</span>::<span class='ident'>new</span>(),
+            <span class='ident'>headers</span>: <span class='ident'>HeaderCollection</span>::<span class='ident'>new</span>(),
             <span class='ident'>status</span>: <span class='prelude-val'>None</span>, <span class='comment'>// Start with no response code.</span>
             <span class='ident'>body</span>: <span class='prelude-val'>None</span>, <span class='comment'>// Start with no body.</span>
             <span class='ident'>extensions</span>: <span class='ident'>TypeMap</span>::<span class='ident'>new</span>()
@@ -252,7 +252,7 @@
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>status</span>(<span class='ident'>status</span>: <span class='ident'>status</span>::<span class='ident'>Status</span>) <span class='op'>-&gt;</span> <span class='ident'>Response</span> {
         <span class='ident'>Response</span> {
             <span class='ident'>body</span>: <span class='prelude-val'>None</span>,
-            <span class='ident'>headers</span>: <span class='kw'>box</span> <span class='ident'>HeaderCollection</span>::<span class='ident'>new</span>(),
+            <span class='ident'>headers</span>: <span class='ident'>HeaderCollection</span>::<span class='ident'>new</span>(),
             <span class='ident'>status</span>: <span class='prelude-val'>Some</span>(<span class='ident'>status</span>),
             <span class='ident'>extensions</span>: <span class='ident'>TypeMap</span>::<span class='ident'>new</span>()
         }
@@ -263,7 +263,7 @@
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>with</span><span class='op'>&lt;</span><span class='ident'>B</span>: <span class='ident'>BytesContainer</span><span class='op'>&gt;</span>(<span class='ident'>status</span>: <span class='ident'>status</span>::<span class='ident'>Status</span>, <span class='ident'>body</span>: <span class='ident'>B</span>) <span class='op'>-&gt;</span> <span class='ident'>Response</span> {
         <span class='ident'>Response</span> {
             <span class='ident'>body</span>: <span class='prelude-val'>Some</span>(<span class='kw'>box</span> <span class='ident'>MemReader</span>::<span class='ident'>new</span>(<span class='ident'>body</span>.<span class='ident'>container_as_bytes</span>().<span class='ident'>to_vec</span>()) <span class='kw'>as</span> <span class='ident'>Box</span><span class='op'>&lt;</span><span class='ident'>Reader</span> <span class='op'>+</span> <span class='ident'>Send</span><span class='op'>&gt;</span>),
-            <span class='ident'>headers</span>: <span class='kw'>box</span> <span class='ident'>HeaderCollection</span>::<span class='ident'>new</span>(),
+            <span class='ident'>headers</span>: <span class='ident'>HeaderCollection</span>::<span class='ident'>new</span>(),
             <span class='ident'>status</span>: <span class='prelude-val'>Some</span>(<span class='ident'>status</span>),
             <span class='ident'>extensions</span>: <span class='ident'>TypeMap</span>::<span class='ident'>new</span>()
         }

@@ -35,7 +35,7 @@
 
     <section class="sidebar">
         <a href='../iron/index.html'><img src='https://avatars0.githubusercontent.com/u/7853871?s=128' alt='' width='100'></a>
-        <p class='location'><a href='index.html'>iron</a></p><div class='block mod'><h2>Modules</h2><a class='mod ' href='method/index.html'>method</a><a class='mod ' href='status/index.html'>status</a></div><div class='block struct'><h2>Structs</h2><a class='struct ' href='struct.ChainBuilder.html'>ChainBuilder</a><a class='struct ' href='struct.Iron.html'>Iron</a><a class='struct current' href='struct.Request.html'>Request</a><a class='struct ' href='struct.Response.html'>Response</a><a class='struct ' href='struct.TypeMap.html'>TypeMap</a><a class='struct ' href='struct.Url.html'>Url</a></div><div class='block trait'><h2>Traits</h2><a class='trait ' href='trait.AfterMiddleware.html'>AfterMiddleware</a><a class='trait ' href='trait.AroundMiddleware.html'>AroundMiddleware</a><a class='trait ' href='trait.BeforeMiddleware.html'>BeforeMiddleware</a><a class='trait ' href='trait.Chain.html'>Chain</a><a class='trait ' href='trait.Error.html'>Error</a><a class='trait ' href='trait.ErrorRefExt.html'>ErrorRefExt</a><a class='trait ' href='trait.Handler.html'>Handler</a><a class='trait ' href='trait.Plugin.html'>Plugin</a></div>
+        <p class='location'><a href='index.html'>iron</a></p><div class='block mod'><h2>Modules</h2><a class='mod ' href='headers/index.html'>headers</a><a class='mod ' href='method/index.html'>method</a><a class='mod ' href='status/index.html'>status</a></div><div class='block struct'><h2>Structs</h2><a class='struct ' href='struct.ChainBuilder.html'>ChainBuilder</a><a class='struct ' href='struct.Iron.html'>Iron</a><a class='struct current' href='struct.Request.html'>Request</a><a class='struct ' href='struct.Response.html'>Response</a><a class='struct ' href='struct.TypeMap.html'>TypeMap</a><a class='struct ' href='struct.Url.html'>Url</a></div><div class='block trait'><h2>Traits</h2><a class='trait ' href='trait.AfterMiddleware.html'>AfterMiddleware</a><a class='trait ' href='trait.AroundMiddleware.html'>AroundMiddleware</a><a class='trait ' href='trait.BeforeMiddleware.html'>BeforeMiddleware</a><a class='trait ' href='trait.Chain.html'>Chain</a><a class='trait ' href='trait.Error.html'>Error</a><a class='trait ' href='trait.ErrorRefExt.html'>ErrorRefExt</a><a class='trait ' href='trait.Handler.html'>Handler</a><a class='trait ' href='trait.Plugin.html'>Plugin</a></div>
     </section>
 
     <nav class="sub">
@@ -53,11 +53,11 @@
 <h1 class='fqn'><div class='in-band'>Struct <a href='index.html'>iron</a>::<wbr><a class='struct' href=''>Request</a><wbr></div><div class='out-of-band'><span id='render-detail'>
             <a id="collapse-all" href="#">[-]
             </a>&nbsp;<a id="expand-all" href="#">[+]</a>
-        </span><a id='src-988' href='../src/iron/src/request/mod.rs.html#23-41'>[src]</a></div></h1>
+        </span><a id='src-989' href='../src/iron/src/request/mod.rs.html#23-41'>[src]</a></div></h1>
 <pre class='rust struct'>pub struct Request {
     pub url: <a class='struct' href='../iron/struct.Url.html' title='iron::Url'>Url</a>,
     pub remote_addr: <a class='type' href='http://doc.rust-lang.org/master/core/option/type.Option.html' title='core::option::Option'>Option</a>&lt;<a class='struct' href='http://doc.rust-lang.org/master/std/io/net/ip/struct.SocketAddr.html' title='std::io::net::ip::SocketAddr'>SocketAddr</a>&gt;,
-    pub headers: <a class='struct' href='http://doc.rust-lang.org/alloc/boxed/struct.Box.html' title='alloc::boxed::Box'>Box</a>&lt;<a class='struct' href='http://www.rust-ci.org/chris-morgan/rust-http/doc/http/headers/request/struct.HeaderCollection.html' title='http::headers::request::HeaderCollection'>HeaderCollection</a>&gt;,
+    pub headers: <a class='struct' href='../iron/headers/request/struct.HeaderCollection.html' title='iron::headers::request::HeaderCollection'>HeaderCollection</a>,
     pub body: <a class='struct' href='http://doc.rust-lang.org/master/collections/string/struct.String.html' title='collections::string::String'>String</a>,
     pub method: <a class='type' href='../iron/method/type.Method.html' title='iron::method::Method'>Method</a>,
     pub extensions: <a class='struct' href='../iron/struct.TypeMap.html' title='iron::TypeMap'>TypeMap</a>,
