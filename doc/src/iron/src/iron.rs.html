@@ -162,11 +162,11 @@
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>sync</span>::<span class='ident'>Arc</span>;
 
 <span class='kw'>use</span> <span class='ident'>http</span>::<span class='ident'>server</span> <span class='kw'>as</span> <span class='ident'>http</span>;
-<span class='kw'>use</span> <span class='ident'>super</span>::{<span class='ident'>Request</span>, <span class='ident'>Handler</span>};
-<span class='kw'>use</span> <span class='ident'>super</span>::<span class='ident'>status</span>;
+<span class='kw'>use</span> {<span class='ident'>Request</span>, <span class='ident'>Handler</span>};
+<span class='kw'>use</span> <span class='ident'>status</span>;
 
-<span class='kw'>use</span> <span class='ident'>super</span>::<span class='ident'>response</span>::<span class='ident'>HttpResponse</span>;
-<span class='kw'>use</span> <span class='ident'>super</span>::<span class='ident'>request</span>::<span class='ident'>HttpRequest</span>;
+<span class='kw'>use</span> <span class='ident'>response</span>::<span class='ident'>HttpResponse</span>;
+<span class='kw'>use</span> <span class='ident'>request</span>::<span class='ident'>HttpRequest</span>;
 
 <span class='doccomment'>/// The primary entrance point to `Iron`, a `struct` to instantiate a new server.</span>
 <span class='doccomment'>///</span>
