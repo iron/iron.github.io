@@ -68,18 +68,17 @@ extern crate http;
 extern crate iron;
 
 use std::io::net::ip::Ipv4Addr;
-use iron::{Iron, Chain, Alloy, Request, Response, Server, Status, Unwind, FromFn};
+use iron::{status, Iron, Request, Response, IronResult};
 
-fn hello_world(_req: &amp;mut Request, res: &amp;mut Response, _alloy: &amp;mut Alloy) -&gt; Status {
-    let _ = res.serve(::http::status::Ok, "Hello, world!");
-    Unwind
+fn hello_world(_: &mut Request) -> IronResult<Response> {
+    Ok(Response::with(status::Ok, "Hello, world"))
 }
 
-fn main() {
-    let mut server: Server = Iron::new();
-    server.chain.link(FromFn::new(hello_world));
-    server.listen(Ipv4Addr(127, 0, 0, 1), 3000);
+fn main(){
+    Iron::new(hello_world).listen(Ipv4Addr(127, 0, 0, 1), 3000);
+    println!("On 3000");
 }
+
 </code></pre>
     </div><!-- /row -->
     <div class="container-fluid">
