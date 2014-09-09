@@ -123,6 +123,7 @@
 <span id='72'>72</span>
 <span id='73'>73</span>
 <span id='74'>74</span>
+<span id='75'>75</span>
 </pre><pre class='rust '>
 <span class='attribute'>#<span class='op'>!</span>[<span class='ident'>doc</span>(<span class='ident'>html_logo_url</span> <span class='op'>=</span> <span class='string'>&quot;https://avatars0.githubusercontent.com/u/7853871?s=128&quot;</span>, <span class='ident'>html_favicon_url</span> <span class='op'>=</span> <span class='string'>&quot;https://avatars0.githubusercontent.com/u/7853871?s=256&quot;</span>, <span class='ident'>html_root_url</span> <span class='op'>=</span> <span class='string'>&quot;http://ironframework.io/core/iron&quot;</span>)]</span>
 <span class='attribute'>#<span class='op'>!</span>[<span class='ident'>crate_name</span> <span class='op'>=</span> <span class='string'>&quot;iron&quot;</span>]</span>
@@ -132,7 +133,7 @@
 <span class='attribute'>#<span class='op'>!</span>[<span class='ident'>deny</span>(<span class='ident'>missing_doc</span>)]</span>
 <span class='attribute'>#<span class='op'>!</span>[<span class='ident'>deny</span>(<span class='ident'>warnings</span>)]</span>
 
-<span class='attribute'>#<span class='op'>!</span>[<span class='ident'>feature</span>(<span class='ident'>macro_rules</span>, <span class='ident'>phase</span>, <span class='ident'>globs</span>)]</span>
+<span class='attribute'>#<span class='op'>!</span>[<span class='ident'>feature</span>(<span class='ident'>macro_rules</span>, <span class='ident'>phase</span>, <span class='ident'>globs</span>, <span class='ident'>unboxed_closures</span>)]</span>
 <span class='doccomment'>//! The main crate for the Iron library.</span>
 <span class='doccomment'>//!</span>
 <span class='doccomment'>//! Iron is a high level web framework built in and for Rust.</span>
@@ -161,6 +162,7 @@
 <span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>plugin</span>;
 <span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>error</span>;
 <span class='kw'>extern</span> <span class='kw'>crate</span> <span class='string'>&quot;url&quot;</span> <span class='kw'>as</span> <span class='ident'>rust_url</span>;
+<span class='kw'>extern</span> <span class='kw'>crate</span> <span class='string'>&quot;replace-map&quot;</span> <span class='kw'>as</span> <span class='ident'>rmap</span>;
 
 <span class='comment'>// Request + Response</span>
 <span class='kw'>pub</span> <span class='kw'>use</span> <span class='ident'>request</span>::{<span class='ident'>Request</span>, <span class='ident'>Url</span>};

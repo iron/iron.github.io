@@ -193,11 +193,24 @@
 <span id='142'>142</span>
 <span id='143'>143</span>
 <span id='144'>144</span>
+<span id='145'>145</span>
+<span id='146'>146</span>
+<span id='147'>147</span>
+<span id='148'>148</span>
+<span id='149'>149</span>
+<span id='150'>150</span>
+<span id='151'>151</span>
+<span id='152'>152</span>
+<span id='153'>153</span>
+<span id='154'>154</span>
+<span id='155'>155</span>
+<span id='156'>156</span>
 </pre><pre class='rust '>
 <span class='doccomment'>//! Iron&#39;s HTTP Response representation and associated methods.</span>
 
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>io</span>::{<span class='ident'>IoResult</span>, <span class='ident'>File</span>, <span class='ident'>MemReader</span>};
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>path</span>::<span class='ident'>BytesContainer</span>;
+<span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>fmt</span>::{<span class='ident'>Show</span>, <span class='ident'>Formatter</span>, <span class='ident'>FormatError</span>};
 
 <span class='kw'>use</span> <span class='ident'>typemap</span>::<span class='ident'>TypeMap</span>;
 <span class='kw'>use</span> <span class='ident'>plugin</span>::<span class='ident'>Extensible</span>;
@@ -316,6 +329,17 @@
                 <span class='comment'>// Something is really, really wrong.</span>
                 .<span class='ident'>map_err</span>(<span class='op'>|</span><span class='ident'>e</span><span class='op'>|</span> <span class='macro'>error</span><span class='macro'>!</span>(<span class='string'>&quot;Error writing error message: {}&quot;</span>, <span class='ident'>e</span>));
         });
+    }
+}
+
+<span class='kw'>impl</span> <span class='ident'>Show</span> <span class='kw'>for</span> <span class='ident'>Response</span> {
+    <span class='kw'>fn</span> <span class='ident'>fmt</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>f</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>Formatter</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>(), <span class='ident'>FormatError</span><span class='op'>&gt;</span> {
+        <span class='macro'>try</span><span class='macro'>!</span>(<span class='macro'>writeln</span><span class='macro'>!</span>(<span class='ident'>f</span>, <span class='string'>&quot;Response {{&quot;</span>));
+
+        <span class='macro'>try</span><span class='macro'>!</span>(<span class='macro'>writeln</span><span class='macro'>!</span>(<span class='ident'>f</span>, <span class='string'>&quot;    status: {}&quot;</span>, <span class='self'>self</span>.<span class='ident'>status</span>));
+
+        <span class='macro'>try</span><span class='macro'>!</span>(<span class='macro'>write</span><span class='macro'>!</span>(<span class='ident'>f</span>, <span class='string'>&quot;}}&quot;</span>));
+        <span class='prelude-val'>Ok</span>(())
     }
 }
 
