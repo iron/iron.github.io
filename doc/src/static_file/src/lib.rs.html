@@ -260,7 +260,7 @@
                     <span class='kw'>return</span> <span class='prelude-val'>Ok</span>(<span class='ident'>response</span>);
                 },
                 <span class='prelude-val'>Err</span>(<span class='ident'>err</span>) <span class='op'>=&gt;</span> {
-                    <span class='kw'>return</span> <span class='prelude-val'>Err</span>(<span class='kw'>box</span> <span class='ident'>FileError</span>(<span class='ident'>err</span>) <span class='kw'>as</span> <span class='ident'>Box</span><span class='op'>&lt;</span><span class='ident'>Error</span> <span class='op'>+</span> <span class='ident'>Send</span><span class='op'>&gt;</span>);
+                    <span class='kw'>return</span> <span class='prelude-val'>Err</span>(<span class='ident'>FileError</span>(<span class='ident'>err</span>).<span class='ident'>abstract</span>());
                 }
             }
         }
@@ -283,7 +283,7 @@
                             <span class='kw'>return</span> <span class='prelude-val'>Ok</span>(<span class='ident'>response</span>);
                         },
                         <span class='prelude-val'>Err</span>(<span class='ident'>err</span>) <span class='op'>=&gt;</span> {
-                            <span class='kw'>return</span> <span class='prelude-val'>Err</span>(<span class='kw'>box</span> <span class='ident'>FileError</span>(<span class='ident'>err</span>) <span class='kw'>as</span> <span class='ident'>Box</span><span class='op'>&lt;</span><span class='ident'>Error</span> <span class='op'>+</span> <span class='ident'>Send</span><span class='op'>&gt;</span>);
+                            <span class='kw'>return</span> <span class='prelude-val'>Err</span>(<span class='ident'>FileError</span>(<span class='ident'>err</span>).<span class='ident'>abstract</span>());
                         }
                     }
                 },
@@ -305,7 +305,7 @@
         }
 
         <span class='comment'>// If no file is found, return an appropriate error.</span>
-        <span class='prelude-val'>Err</span>(<span class='kw'>box</span> <span class='ident'>NoFile</span> <span class='kw'>as</span> <span class='ident'>Box</span><span class='op'>&lt;</span><span class='ident'>Error</span> <span class='op'>+</span> <span class='ident'>Send</span><span class='op'>&gt;</span>)
+        <span class='prelude-val'>Err</span>(<span class='ident'>NoFile</span>.<span class='ident'>abstract</span>())
     }
 }
 </pre>
