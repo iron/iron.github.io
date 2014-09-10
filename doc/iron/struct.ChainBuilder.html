@@ -53,7 +53,7 @@
 <h1 class='fqn'><div class='in-band'>Struct <a href='index.html'>iron</a>::<wbr><a class='struct' href=''>ChainBuilder</a><wbr></div><div class='out-of-band'><span id='render-detail'>
             <a id="collapse-all" href="#">[-]
             </a>&nbsp;<a id="expand-all" href="#">[+]</a>
-        </span><a id='src-3266' href='../src/iron/src/middleware.rs.html#195-199'>[src]</a></div></h1>
+        </span><a id='src-3264' href='../src/iron/src/middleware.rs.html#194-198'>[src]</a></div></h1>
 <pre class='rust struct'>pub struct ChainBuilder {
     // some fields omitted
 }</pre><div class='docblock'><p>The default Chain used in Iron.</p>
@@ -70,7 +70,7 @@ frameworks.</p>
 <h4 id='method.link_after' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.link_after' class='fnname'>link_after</a>&lt;A&gt;(&amp;mut self, after: A)</code></h4>
 <h4 id='method.around' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.around' class='fnname'>around</a>&lt;A&gt;(&amp;mut self, around: A)</code></h4>
 </div><h3 class='impl'><a class='stability Unmarked' title='No stability level'></a><code>impl <a class='trait' href='../iron/trait.Handler.html' title='iron::Handler'>Handler</a> for <a class='struct' href='../iron/struct.ChainBuilder.html' title='iron::ChainBuilder'>ChainBuilder</a></code></h3><div class='impl-methods'><h4 id='method.call' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.call' class='fnname'>call</a>(&amp;self, req: &amp;mut <a class='struct' href='../iron/struct.Request.html' title='iron::Request'>Request</a>) -&gt; <a class='type' href='../iron/type.IronResult.html' title='iron::IronResult'>IronResult</a>&lt;<a class='struct' href='../iron/struct.Response.html' title='iron::Response'>Response</a>&gt;</code></h4>
-<h4 id='method.catch' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.catch' class='fnname'>catch</a>(&amp;self, req: &amp;mut <a class='struct' href='../iron/struct.Request.html' title='iron::Request'>Request</a>, err: <a class='struct' href='http://doc.rust-lang.org/alloc/boxed/struct.Box.html' title='alloc::boxed::Box'>Box</a>&lt;<a class='trait' href='../iron/trait.Error.html' title='iron::Error'>Error</a>&gt;) -&gt; <a href='http://doc.rust-lang.org/master/std/primitive.tuple.html'>(<a class='struct' href='../iron/struct.Response.html' title='iron::Response'>Response</a>, <a class='type' href='../iron/type.IronResult.html' title='iron::IronResult'>IronResult</a>&lt;<a href='http://doc.rust-lang.org/master/std/primitive.unit.html'>()</a>&gt;)</a></code></h4>
+<h4 id='method.catch' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.catch' class='fnname'>catch</a>(&amp;self, req: &amp;mut <a class='struct' href='../iron/struct.Request.html' title='iron::Request'>Request</a>, err: <a class='type' href='../iron/type.IronError.html' title='iron::IronError'>IronError</a>) -&gt; <a href='http://doc.rust-lang.org/master/std/primitive.tuple.html'>(<a class='struct' href='../iron/struct.Response.html' title='iron::Response'>Response</a>, <a class='type' href='../iron/type.IronResult.html' title='iron::IronResult'>IronResult</a>&lt;<a href='http://doc.rust-lang.org/master/std/primitive.unit.html'>()</a>&gt;)</a></code></h4>
 </div></section>
     <section id='search' class="content hidden"></section>
 
