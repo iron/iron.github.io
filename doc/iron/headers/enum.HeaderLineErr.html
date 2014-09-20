@@ -4,10 +4,10 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="API documentation for the Rust `header_enum_from_stream` fn in crate `iron`.">
-    <meta name="keywords" content="rust, rustlang, rust-lang, header_enum_from_stream">
+    <meta name="description" content="API documentation for the Rust `HeaderLineErr` enum in crate `iron`.">
+    <meta name="keywords" content="rust, rustlang, rust-lang, HeaderLineErr">
 
-    <title>iron::headers::header_enum_from_stream - Rust</title>
+    <title>iron::headers::HeaderLineErr - Rust</title>
 
     <link rel="stylesheet" type="text/css" href="../../main.css">
 
@@ -35,7 +35,7 @@
 
     <section class="sidebar">
         <a href='../../iron/index.html'><img src='https://avatars0.githubusercontent.com/u/7853871?s=128' alt='' width='100'></a>
-        <p class='location'><a href='../index.html'>iron</a>::<wbr><a href='index.html'>headers</a></p><div class='block mod'><h2>Modules</h2><a class='mod ' href='accept_ranges/index.html'>accept_ranges</a><a class='mod ' href='connection/index.html'>connection</a><a class='mod ' href='content_type/index.html'>content_type</a><a class='mod ' href='etag/index.html'>etag</a><a class='mod ' href='host/index.html'>host</a><a class='mod ' href='request/index.html'>request</a><a class='mod ' href='response/index.html'>response</a><a class='mod ' href='serialization_utils/index.html'>serialization_utils</a><a class='mod ' href='test_utils/index.html'>test_utils</a><a class='mod ' href='transfer_encoding/index.html'>transfer_encoding</a></div><div class='block struct'><h2>Structs</h2><a class='struct ' href='struct.HeaderValueByteIterator.html'>HeaderValueByteIterator</a></div><div class='block enum'><h2>Enums</h2><a class='enum ' href='enum.ConsumeCommaLWSResult.html'>ConsumeCommaLWSResult</a><a class='enum ' href='enum.HeaderLineErr.html'>HeaderLineErr</a></div><div class='block trait'><h2>Traits</h2><a class='trait ' href='trait.CommaListHeaderConvertible.html'>CommaListHeaderConvertible</a><a class='trait ' href='trait.HeaderConvertible.html'>HeaderConvertible</a><a class='trait ' href='trait.HeaderEnum.html'>HeaderEnum</a></div><div class='block fn'><h2>Functions</h2><a class='fn current' href='fn.header_enum_from_stream.html'>header_enum_from_stream</a></div>
+        <p class='location'><a href='../index.html'>iron</a>::<wbr><a href='index.html'>headers</a></p><div class='block mod'><h2>Modules</h2><a class='mod ' href='accept_ranges/index.html'>accept_ranges</a><a class='mod ' href='connection/index.html'>connection</a><a class='mod ' href='content_type/index.html'>content_type</a><a class='mod ' href='etag/index.html'>etag</a><a class='mod ' href='host/index.html'>host</a><a class='mod ' href='request/index.html'>request</a><a class='mod ' href='response/index.html'>response</a><a class='mod ' href='serialization_utils/index.html'>serialization_utils</a><a class='mod ' href='test_utils/index.html'>test_utils</a><a class='mod ' href='transfer_encoding/index.html'>transfer_encoding</a></div><div class='block struct'><h2>Structs</h2><a class='struct ' href='struct.HeaderValueByteIterator.html'>HeaderValueByteIterator</a></div><div class='block enum'><h2>Enums</h2><a class='enum ' href='enum.ConsumeCommaLWSResult.html'>ConsumeCommaLWSResult</a><a class='enum current' href='enum.HeaderLineErr.html'>HeaderLineErr</a></div><div class='block trait'><h2>Traits</h2><a class='trait ' href='trait.CommaListHeaderConvertible.html'>CommaListHeaderConvertible</a><a class='trait ' href='trait.HeaderConvertible.html'>HeaderConvertible</a><a class='trait ' href='trait.HeaderEnum.html'>HeaderEnum</a></div><div class='block fn'><h2>Functions</h2><a class='fn ' href='fn.header_enum_from_stream.html'>header_enum_from_stream</a></div>
     </section>
 
     <nav class="sub">
@@ -49,13 +49,18 @@
         </form>
     </nav>
 
-    <section id='main' class="content fn">
-<h1 class='fqn'><div class='in-band'>Function <a href='../index.html'>iron</a>::<wbr><a href='index.html'>headers</a>::<wbr><a class='fn' href=''>header_enum_from_stream</a><wbr></div><div class='out-of-band'><span id='render-detail'>
+    <section id='main' class="content enum">
+<h1 class='fqn'><div class='in-band'>Enum <a href='../index.html'>iron</a>::<wbr><a href='index.html'>headers</a>::<wbr><a class='enum' href=''>HeaderLineErr</a><wbr></div><div class='out-of-band'><span id='render-detail'>
             <a id="collapse-all" href="#">[-]
             </a>&nbsp;<a id="expand-all" href="#">[+]</a>
-        </span><a id='src-14576' href='http://www.rust-ci.org/chris-morgan/rust-http/doc/http/headers/fn.header_enum_from_stream.html?gotosrc=14576'>[src]</a></div></h1>
-<pre class='rust fn'>pub fn header_enum_from_stream&lt;R: <a class='trait' href='http://doc.rust-lang.org/master/std/io/trait.Reader.html' title='std::io::Reader'>Reader</a>, E: <a class='trait' href='../../iron/headers/trait.HeaderEnum.html' title='iron::headers::HeaderEnum'>HeaderEnum</a>&gt;(reader: &amp;mut R) -&gt; <a href='http://doc.rust-lang.org/master/std/primitive.tuple.html'>(<a class='enum' href='http://doc.rust-lang.org/master/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;E, <a class='enum' href='../../iron/headers/enum.HeaderLineErr.html' title='iron::headers::HeaderLineErr'>HeaderLineErr</a>&gt;, <a class='enum' href='http://doc.rust-lang.org/master/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a href='http://doc.rust-lang.org/master/std/primitive.u8.html'>u8</a>&gt;)</a></pre><div class='docblock'><p>Shifted out of being a default method to fix an ICE (not yet reported, TODO)</p>
-</div></section>
+        </span><a id='src-10024' href='http://www.rust-ci.org/chris-morgan/rust-http/doc/http/headers/enum.HeaderLineErr.html?gotosrc=10024'>[src]</a></div></h1>
+<pre class='rust enum'>pub enum HeaderLineErr {
+    EndOfFile,
+    EndOfHeaders,
+    MalformedHeaderValue,
+    MalformedHeaderSyntax,
+}</pre><h2 class='variants'>Variants</h2>
+<table><tr><td id='variant.EndOfFile'><a class='stability Unmarked' title='No stability level'></a><code>EndOfFile</code></td><td></td></tr><tr><td id='variant.EndOfHeaders'><a class='stability Unmarked' title='No stability level'></a><code>EndOfHeaders</code></td><td></td></tr><tr><td id='variant.MalformedHeaderValue'><a class='stability Unmarked' title='No stability level'></a><code>MalformedHeaderValue</code></td><td></td></tr><tr><td id='variant.MalformedHeaderSyntax'><a class='stability Unmarked' title='No stability level'></a><code>MalformedHeaderSyntax</code></td><td></td></tr></table></section>
     <section id='search' class="content hidden"></section>
 
     <section class="footer"></section>
