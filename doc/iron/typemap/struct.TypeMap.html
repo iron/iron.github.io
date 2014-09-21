@@ -7,9 +7,9 @@
     <meta name="description" content="API documentation for the Rust `TypeMap` struct in crate `iron`.">
     <meta name="keywords" content="rust, rustlang, rust-lang, TypeMap">
 
-    <title>iron::TypeMap - Rust</title>
+    <title>iron::typemap::TypeMap - Rust</title>
 
-    <link rel="stylesheet" type="text/css" href="../main.css">
+    <link rel="stylesheet" type="text/css" href="../../main.css">
 
     <link rel="shortcut icon" href="https://avatars0.githubusercontent.com/u/7853871?s=256">
     <link href='http://fonts.googleapis.com/css?family=Questrial|Alegreya+Sans+SC:400,900|Bilbo|Abel' rel='stylesheet' type='text/css'>
@@ -34,8 +34,8 @@
 
 
     <section class="sidebar">
-        <a href='../iron/index.html'><img src='https://avatars0.githubusercontent.com/u/7853871?s=128' alt='' width='100'></a>
-        <p class='location'><a href='index.html'>iron</a></p><div class='block mod'><h2>Modules</h2><a class='mod ' href='headers/index.html'>headers</a><a class='mod ' href='method/index.html'>method</a><a class='mod ' href='status/index.html'>status</a><a class='mod ' href='typemap/index.html'>typemap</a></div><div class='block struct'><h2>Structs</h2><a class='struct ' href='struct.ChainBuilder.html'>ChainBuilder</a><a class='struct ' href='struct.Iron.html'>Iron</a><a class='struct ' href='struct.Request.html'>Request</a><a class='struct ' href='struct.Response.html'>Response</a><a class='struct current' href='struct.TypeMap.html'>TypeMap</a><a class='struct ' href='struct.Url.html'>Url</a></div><div class='block trait'><h2>Traits</h2><a class='trait ' href='trait.AfterMiddleware.html'>AfterMiddleware</a><a class='trait ' href='trait.AroundMiddleware.html'>AroundMiddleware</a><a class='trait ' href='trait.BeforeMiddleware.html'>BeforeMiddleware</a><a class='trait ' href='trait.Chain.html'>Chain</a><a class='trait ' href='trait.Error.html'>Error</a><a class='trait ' href='trait.ErrorRefExt.html'>ErrorRefExt</a><a class='trait ' href='trait.Handler.html'>Handler</a><a class='trait ' href='trait.Plugin.html'>Plugin</a></div>
+        <a href='../../iron/index.html'><img src='https://avatars0.githubusercontent.com/u/7853871?s=128' alt='' width='100'></a>
+        <p class='location'><a href='../index.html'>iron</a>::<wbr><a href='index.html'>typemap</a></p><div class='block struct'><h2>Structs</h2><a class='struct current' href='struct.TypeMap.html'>TypeMap</a></div><div class='block trait'><h2>Traits</h2><a class='trait ' href='trait.Assoc.html'>Assoc</a></div>
     </section>
 
     <nav class="sub">
@@ -50,7 +50,7 @@
     </nav>
 
     <section id='main' class="content struct">
-<h1 class='fqn'><div class='in-band'>Struct <a href='index.html'>iron</a>::<wbr><a class='struct' href=''>TypeMap</a><wbr></div><div class='out-of-band'><span id='render-detail'>
+<h1 class='fqn'><div class='in-band'>Struct <a href='../index.html'>iron</a>::<wbr><a href='index.html'>typemap</a>::<wbr><a class='struct' href=''>TypeMap</a><wbr></div><div class='out-of-band'><span id='render-detail'>
             <a id="collapse-all" href="#">[-]
             </a>&nbsp;<a id="expand-all" href="#">[+]</a>
         </span></div></h1>
@@ -60,17 +60,17 @@
 
 <p>Can contain one value of any type for each key type, as defined
 by the Assoc trait.</p>
-</div><h2 id='methods'>Methods</h2><h3 class='impl'><a class='stability Unmarked' title='No stability level'></a><code>impl <a class='struct' href='../iron/struct.TypeMap.html' title='iron::TypeMap'>TypeMap</a></code></h3><div class='impl-methods'><h4 id='method.new' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.new' class='fnname'>new</a>() -&gt; <a class='struct' href='../iron/struct.TypeMap.html' title='iron::TypeMap'>TypeMap</a></code></h4>
+</div><h2 id='methods'>Methods</h2><h3 class='impl'><a class='stability Unmarked' title='No stability level'></a><code>impl <a class='struct' href='../../iron/struct.TypeMap.html' title='iron::TypeMap'>TypeMap</a></code></h3><div class='impl-methods'><h4 id='method.new' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.new' class='fnname'>new</a>() -&gt; <a class='struct' href='../../iron/struct.TypeMap.html' title='iron::TypeMap'>TypeMap</a></code></h4>
 <div class='docblock'><p>Create a new, empty TypeMap.</p>
-</div><h4 id='method.insert' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.insert' class='fnname'>insert</a>&lt;K: <a class='trait' href='../iron/typemap/trait.Assoc.html' title='iron::typemap::Assoc'>Assoc</a>&lt;V&gt;, V&gt;(&amp;mut self, val: V) -&gt; <a href='http://doc.rust-lang.org/master/std/primitive.bool.html'>bool</a></code></h4>
+</div><h4 id='method.insert' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.insert' class='fnname'>insert</a>&lt;K: <a class='trait' href='../../iron/typemap/trait.Assoc.html' title='iron::typemap::Assoc'>Assoc</a>&lt;V&gt;, V&gt;(&amp;mut self, val: V) -&gt; <a href='http://doc.rust-lang.org/master/std/primitive.bool.html'>bool</a></code></h4>
 <div class='docblock'><p>Insert a value into the map with a specified key type.</p>
-</div><h4 id='method.find' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.find' class='fnname'>find</a>&lt;K: <a class='trait' href='../iron/typemap/trait.Assoc.html' title='iron::typemap::Assoc'>Assoc</a>&lt;V&gt;, V&gt;(&amp;self) -&gt; <a class='enum' href='http://doc.rust-lang.org/master/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;&amp;V&gt;</code></h4>
+</div><h4 id='method.find' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.find' class='fnname'>find</a>&lt;K: <a class='trait' href='../../iron/typemap/trait.Assoc.html' title='iron::typemap::Assoc'>Assoc</a>&lt;V&gt;, V&gt;(&amp;self) -&gt; <a class='enum' href='http://doc.rust-lang.org/master/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;&amp;V&gt;</code></h4>
 <div class='docblock'><p>Find a value in the map and get a reference to it.</p>
-</div><h4 id='method.find_mut' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.find_mut' class='fnname'>find_mut</a>&lt;K: <a class='trait' href='../iron/typemap/trait.Assoc.html' title='iron::typemap::Assoc'>Assoc</a>&lt;V&gt;, V&gt;(&amp;mut self) -&gt; <a class='enum' href='http://doc.rust-lang.org/master/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;&amp;mut V&gt;</code></h4>
+</div><h4 id='method.find_mut' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.find_mut' class='fnname'>find_mut</a>&lt;K: <a class='trait' href='../../iron/typemap/trait.Assoc.html' title='iron::typemap::Assoc'>Assoc</a>&lt;V&gt;, V&gt;(&amp;mut self) -&gt; <a class='enum' href='http://doc.rust-lang.org/master/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;&amp;mut V&gt;</code></h4>
 <div class='docblock'><p>Find a value in the map and get a mutable reference to it.</p>
-</div><h4 id='method.contains' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.contains' class='fnname'>contains</a>&lt;K: <a class='trait' href='../iron/typemap/trait.Assoc.html' title='iron::typemap::Assoc'>Assoc</a>&lt;V&gt;, V&gt;(&amp;self) -&gt; <a href='http://doc.rust-lang.org/master/std/primitive.bool.html'>bool</a></code></h4>
+</div><h4 id='method.contains' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.contains' class='fnname'>contains</a>&lt;K: <a class='trait' href='../../iron/typemap/trait.Assoc.html' title='iron::typemap::Assoc'>Assoc</a>&lt;V&gt;, V&gt;(&amp;self) -&gt; <a href='http://doc.rust-lang.org/master/std/primitive.bool.html'>bool</a></code></h4>
 <div class='docblock'><p>Check if a key has an associated value stored in the map.</p>
-</div><h4 id='method.remove' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.remove' class='fnname'>remove</a>&lt;K: <a class='trait' href='../iron/typemap/trait.Assoc.html' title='iron::typemap::Assoc'>Assoc</a>&lt;V&gt;, V&gt;(&amp;mut self) -&gt; <a href='http://doc.rust-lang.org/master/std/primitive.bool.html'>bool</a></code></h4>
+</div><h4 id='method.remove' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.remove' class='fnname'>remove</a>&lt;K: <a class='trait' href='../../iron/typemap/trait.Assoc.html' title='iron::typemap::Assoc'>Assoc</a>&lt;V&gt;, V&gt;(&amp;mut self) -&gt; <a href='http://doc.rust-lang.org/master/std/primitive.bool.html'>bool</a></code></h4>
 <div class='docblock'><p>Remove a value from the map.</p>
 
 <p>Returns <code>true</code> if a value was removed.</p>
@@ -78,9 +78,9 @@ by the Assoc trait.</p>
 <div class='docblock'><p>Read the underlying HashMap</p>
 </div><h4 id='method.data_mut' class='method'><a class='stability Unmarked' title='No stability level'></a><code>unsafe fn <a href='#method.data_mut' class='fnname'>data_mut</a>(&amp;mut self) -&gt; &amp;mut <a class='struct' href='http://doc.rust-lang.org/master/std/collections/hashmap/map/struct.HashMap.html' title='std::collections::hashmap::map::HashMap'>HashMap</a>&lt;<a class='struct' href='http://doc.rust-lang.org/master/core/intrinsics/struct.TypeId.html' title='core::intrinsics::TypeId'>TypeId</a>, <a class='struct' href='http://doc.rust-lang.org/alloc/boxed/struct.Box.html' title='alloc::boxed::Box'>Box</a>&lt;<a class='trait' href='http://doc.rust-lang.org/master/core/any/trait.Any.html' title='core::any::Any'>Any</a>&gt;, <a class='struct' href='http://doc.rust-lang.org/master/std/hash/struct.RandomSipHasher.html' title='std::hash::RandomSipHasher'>RandomSipHasher</a>&gt;</code></h4>
 <div class='docblock'><p>Get a mutable reference to the underlying HashMap</p>
-</div></div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><a class='stability Unmarked' title='No stability level'></a><code>impl <a class='trait' href='http://doc.rust-lang.org/master/core/collections/trait.Collection.html' title='core::collections::Collection'>Collection</a> for <a class='struct' href='../iron/struct.TypeMap.html' title='iron::TypeMap'>TypeMap</a></code></h3><div class='impl-methods'><h4 id='method.len' class='method'><a class='stability Experimental' title='Experimental'></a><code>fn <a href='#method.len' class='fnname'>len</a>(&amp;self) -&gt; <a href='http://doc.rust-lang.org/master/std/primitive.uint.html'>uint</a></code></h4>
+</div></div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><a class='stability Unmarked' title='No stability level'></a><code>impl <a class='trait' href='http://doc.rust-lang.org/master/core/collections/trait.Collection.html' title='core::collections::Collection'>Collection</a> for <a class='struct' href='../../iron/struct.TypeMap.html' title='iron::TypeMap'>TypeMap</a></code></h3><div class='impl-methods'><h4 id='method.len' class='method'><a class='stability Experimental' title='Experimental'></a><code>fn <a href='#method.len' class='fnname'>len</a>(&amp;self) -&gt; <a href='http://doc.rust-lang.org/master/std/primitive.uint.html'>uint</a></code></h4>
 <h4 id='method.is_empty' class='method'><a class='stability Experimental' title='Experimental'></a><code>fn <a href='#method.is_empty' class='fnname'>is_empty</a>(&amp;self) -&gt; <a href='http://doc.rust-lang.org/master/std/primitive.bool.html'>bool</a></code></h4>
-</div><h3 class='impl'><a class='stability Unmarked' title='No stability level'></a><code>impl <a class='trait' href='http://doc.rust-lang.org/master/collections/trait.Mutable.html' title='collections::Mutable'>Mutable</a> for <a class='struct' href='../iron/struct.TypeMap.html' title='iron::TypeMap'>TypeMap</a></code></h3><div class='impl-methods'><h4 id='method.clear' class='method'><a class='stability Experimental' title='Experimental'></a><code>fn <a href='#method.clear' class='fnname'>clear</a>(&amp;mut self)</code></h4>
+</div><h3 class='impl'><a class='stability Unmarked' title='No stability level'></a><code>impl <a class='trait' href='http://doc.rust-lang.org/master/collections/trait.Mutable.html' title='collections::Mutable'>Mutable</a> for <a class='struct' href='../../iron/struct.TypeMap.html' title='iron::TypeMap'>TypeMap</a></code></h3><div class='impl-methods'><h4 id='method.clear' class='method'><a class='stability Experimental' title='Experimental'></a><code>fn <a href='#method.clear' class='fnname'>clear</a>(&amp;mut self)</code></h4>
 </div></section>
     <section id='search' class="content hidden"></section>
 
@@ -129,13 +129,13 @@ by the Assoc trait.</p>
 
 
     <script>
-        window.rootPath = "../";
+        window.rootPath = "../../";
         window.currentCrate = "iron";
         window.playgroundUrl = "";
     </script>
-    <script src="../jquery.js"></script>
-    <script src="../main.js"></script>
+    <script src="../../jquery.js"></script>
+    <script src="../../main.js"></script>
     
-    <script async src="../search-index.js"></script>
+    <script async src="../../search-index.js"></script>
 </body>
 </html>

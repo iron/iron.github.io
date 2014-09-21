@@ -4,12 +4,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="API documentation for the Rust `IronResult` type in crate `iron`.">
-    <meta name="keywords" content="rust, rustlang, rust-lang, IronResult">
+    <meta name="description" content="API documentation for the Rust `typemap` mod in crate `iron`.">
+    <meta name="keywords" content="rust, rustlang, rust-lang, typemap">
 
-    <title>iron::IronResult - Rust</title>
+    <title>iron::typemap - Rust</title>
 
-    <link rel="stylesheet" type="text/css" href="../main.css">
+    <link rel="stylesheet" type="text/css" href="../../main.css">
 
     <link rel="shortcut icon" href="https://avatars0.githubusercontent.com/u/7853871?s=256">
     <link href='http://fonts.googleapis.com/css?family=Questrial|Alegreya+Sans+SC:400,900|Bilbo|Abel' rel='stylesheet' type='text/css'>
@@ -34,8 +34,8 @@
 
 
     <section class="sidebar">
-        <a href='../iron/index.html'><img src='https://avatars0.githubusercontent.com/u/7853871?s=128' alt='' width='100'></a>
-        <p class='location'><a href='index.html'>iron</a></p><div class='block mod'><h2>Modules</h2><a class='mod ' href='headers/index.html'>headers</a><a class='mod ' href='method/index.html'>method</a><a class='mod ' href='status/index.html'>status</a><a class='mod ' href='typemap/index.html'>typemap</a></div><div class='block struct'><h2>Structs</h2><a class='struct ' href='struct.ChainBuilder.html'>ChainBuilder</a><a class='struct ' href='struct.Iron.html'>Iron</a><a class='struct ' href='struct.Request.html'>Request</a><a class='struct ' href='struct.Response.html'>Response</a><a class='struct ' href='struct.TypeMap.html'>TypeMap</a><a class='struct ' href='struct.Url.html'>Url</a></div><div class='block trait'><h2>Traits</h2><a class='trait ' href='trait.AfterMiddleware.html'>AfterMiddleware</a><a class='trait ' href='trait.AroundMiddleware.html'>AroundMiddleware</a><a class='trait ' href='trait.BeforeMiddleware.html'>BeforeMiddleware</a><a class='trait ' href='trait.Chain.html'>Chain</a><a class='trait ' href='trait.Error.html'>Error</a><a class='trait ' href='trait.ErrorRefExt.html'>ErrorRefExt</a><a class='trait ' href='trait.Handler.html'>Handler</a><a class='trait ' href='trait.Plugin.html'>Plugin</a></div>
+        <a href='../../iron/index.html'><img src='https://avatars0.githubusercontent.com/u/7853871?s=128' alt='' width='100'></a>
+        <p class='location'><a href='../index.html'>iron</a></p><div class='block mod'><h2>Modules</h2><a class='mod ' href='../headers/index.html'>headers</a><a class='mod ' href='../method/index.html'>method</a><a class='mod ' href='../status/index.html'>status</a><a class='mod current' href='../typemap/index.html'>typemap</a></div><div class='block struct'><h2>Structs</h2><a class='struct ' href='../struct.ChainBuilder.html'>ChainBuilder</a><a class='struct ' href='../struct.Iron.html'>Iron</a><a class='struct ' href='../struct.Request.html'>Request</a><a class='struct ' href='../struct.Response.html'>Response</a><a class='struct ' href='../struct.TypeMap.html'>TypeMap</a><a class='struct ' href='../struct.Url.html'>Url</a></div><div class='block trait'><h2>Traits</h2><a class='trait ' href='../trait.AfterMiddleware.html'>AfterMiddleware</a><a class='trait ' href='../trait.AroundMiddleware.html'>AroundMiddleware</a><a class='trait ' href='../trait.BeforeMiddleware.html'>BeforeMiddleware</a><a class='trait ' href='../trait.Chain.html'>Chain</a><a class='trait ' href='../trait.Error.html'>Error</a><a class='trait ' href='../trait.ErrorRefExt.html'>ErrorRefExt</a><a class='trait ' href='../trait.Handler.html'>Handler</a><a class='trait ' href='../trait.Plugin.html'>Plugin</a></div>
     </section>
 
     <nav class="sub">
@@ -49,12 +49,29 @@
         </form>
     </nav>
 
-    <section id='main' class="content type">
-<h1 class='fqn'><div class='in-band'><a href='index.html'>iron</a>::<wbr><a class='type' href=''>IronResult</a><wbr></div><div class='out-of-band'><span id='render-detail'>
+    <section id='main' class="content mod">
+<h1 class='fqn'><div class='in-band'>Module <a href='../index.html'>iron</a>::<wbr><a class='mod' href=''>typemap</a><wbr></div><div class='out-of-band'><span id='render-detail'>
             <a id="collapse-all" href="#">[-]
             </a>&nbsp;<a id="expand-all" href="#">[+]</a>
-        </span><a id='src-38' href='../src/iron/src/lib.rs.html#70'>[src]</a></div></h1>
-<pre class='rust typedef'>type IronResult&lt;T&gt; = <a class='enum' href='http://doc.rust-lang.org/master/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;T, <a class='type' href='../iron/type.IronError.html' title='iron::IronError'>IronError</a>&gt;;</pre></section>
+        </span><a id='src-47' href='../../src/iron/src/lib.rs.html#73-75'>[src]</a></div></h1>
+<div class='docblock'><p>typemap crate re-exports</p>
+</div><h2 id='structs' class='section-header'><a href="#structs">Structs</a></h2>
+<table>
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='struct' href='struct.TypeMap.html'
+                               title='iron::typemap::TypeMap'>TypeMap</a></td>
+                        <td class='docblock short'><p>A map keyed by types.</p>
+</td>
+                    </tr>
+                </table><h2 id='traits' class='section-header'><a href="#traits">Traits</a></h2>
+<table>
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='trait' href='trait.Assoc.html'
+                               title='iron::typemap::Assoc'>Assoc</a></td>
+                        <td class='docblock short'><p>This trait defines the relationship between keys and values in a TypeMap.</p>
+</td>
+                    </tr>
+                </table></section>
     <section id='search' class="content hidden"></section>
 
     <section class="footer"></section>
@@ -102,13 +119,13 @@
 
 
     <script>
-        window.rootPath = "../";
+        window.rootPath = "../../";
         window.currentCrate = "iron";
         window.playgroundUrl = "";
     </script>
-    <script src="../jquery.js"></script>
-    <script src="../main.js"></script>
+    <script src="../../jquery.js"></script>
+    <script src="../../main.js"></script>
     
-    <script async src="../search-index.js"></script>
+    <script async src="../../search-index.js"></script>
 </body>
 </html>
