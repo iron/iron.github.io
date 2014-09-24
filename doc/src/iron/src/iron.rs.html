@@ -154,6 +154,8 @@
 <span id='103'>103</span>
 <span id='104'>104</span>
 <span id='105'>105</span>
+<span id='106'>106</span>
+<span id='107'>107</span>
 </pre><pre class='rust '>
 <span class='doccomment'>//! Exposes the `Iron` type, the main entrance point of the</span>
 <span class='doccomment'>//! `Iron` library.</span>
@@ -246,7 +248,9 @@
         };
 
         <span class='comment'>// Dispatch the request</span>
-        <span class='kw'>let</span> <span class='ident'>res</span> <span class='op'>=</span> <span class='self'>self</span>.<span class='ident'>handler</span>.<span class='ident'>call</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>req</span>);
+        <span class='kw'>let</span> <span class='ident'>res</span> <span class='op'>=</span> <span class='self'>self</span>.<span class='ident'>handler</span>.<span class='ident'>call</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>req</span>).<span class='ident'>map_err</span>(<span class='op'>|</span><span class='ident'>e</span><span class='op'>|</span> {
+            <span class='self'>self</span>.<span class='ident'>handler</span>.<span class='ident'>catch</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>req</span>, <span class='ident'>e</span>)
+        });
 
         <span class='kw'>match</span> <span class='ident'>res</span> {
             <span class='comment'>// Write the response back to http_res</span>
