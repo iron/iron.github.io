@@ -50,12 +50,12 @@
     </nav>
 
     <section id='main' class="content trait">
-<h1 class='fqn'><div class='in-band'>Trait <a href='index.html'>iron</a>::<wbr><a class='trait' href=''>AroundMiddleware</a><wbr></div><div class='out-of-band'><span id='render-detail'>
+<h1 class='fqn'><span class='in-band'>Trait <a href='index.html'>iron</a>::<wbr><a class='trait' href=''>AroundMiddleware</a><wbr></span><span class='out-of-band'><span id='render-detail'>
             <a id="collapse-all" href="#">[-]
             </a>&nbsp;<a id="expand-all" href="#">[+]</a>
-        </span><a id='src-2992' href='../src/iron/src/middleware.rs.html#150-159'>[src]</a></div></h1>
+        </span><a id='src-2992' href='../src/iron/src/middleware.rs.html#150-159'>[src]</a></span></h1>
 <pre class='rust trait'>pub trait AroundMiddleware {
-    fn <a href='#tymethod.around' class='fnname'>around</a>&lt;H&gt;(self, handler: H) -&gt; <a class='struct' href='http://doc.rust-lang.org/alloc/boxed/struct.Box.html' title='alloc::boxed::Box'>Box</a>&lt;<a class='trait' href='../iron/trait.Handler.html' title='iron::Handler'>Handler</a> + <a class='trait' href='http://doc.rust-lang.org/master/core/kinds/trait.Send.html' title='core::kinds::Send'>Send</a> + <a class='trait' href='http://doc.rust-lang.org/master/core/kinds/trait.Sync.html' title='core::kinds::Sync'>Sync</a>&gt;;
+    fn <a href='#tymethod.around' class='fnname'>around</a>&lt;H&gt;(self, handler: H) -&gt; <a class='struct' href='http://doc.rust-lang.org/alloc/boxed/struct.Box.html' title='alloc::boxed::Box'>Box</a>&lt;<a class='trait' href='../iron/trait.Handler.html' title='iron::Handler'>Handler</a> + <a class='trait' href='http://doc.rust-lang.org/master/core/kinds/trait.Send.html' title='core::kinds::Send'>Send</a> + <a class='trait' href='http://doc.rust-lang.org/master/core/kinds/trait.Sync.html' title='core::kinds::Sync'>Sync</a>&gt; where H: <a class='trait' href='../iron/trait.Handler.html' title='iron::Handler'>Handler</a>;
 }</pre><div class='docblock'><p>AroundMiddleware are used to wrap and replace the <code>Handler</code> in a <code>Chain</code>.</p>
 
 <p>AroundMiddleware produce <code>Handler</code>s through their <code>around</code> method, which is
@@ -64,7 +64,7 @@ called once on insertion into a Chain or can be called manually outside of a
 </div>
             <h2 id='required-methods'>Required Methods</h2>
             <div class='methods'>
-        <h3 id='tymethod.around' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#tymethod.around' class='fnname'>around</a>&lt;H&gt;(self, handler: H) -&gt; <a class='struct' href='http://doc.rust-lang.org/alloc/boxed/struct.Box.html' title='alloc::boxed::Box'>Box</a>&lt;<a class='trait' href='../iron/trait.Handler.html' title='iron::Handler'>Handler</a> + <a class='trait' href='http://doc.rust-lang.org/master/core/kinds/trait.Send.html' title='core::kinds::Send'>Send</a> + <a class='trait' href='http://doc.rust-lang.org/master/core/kinds/trait.Sync.html' title='core::kinds::Sync'>Sync</a>&gt;</code></h3><div class='docblock'><p>Produce a <code>Handler</code> from this <code>AroundMiddleware</code> given another <code>Handler</code>.</p>
+        <h3 id='tymethod.around' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#tymethod.around' class='fnname'>around</a>&lt;H&gt;(self, handler: H) -&gt; <a class='struct' href='http://doc.rust-lang.org/alloc/boxed/struct.Box.html' title='alloc::boxed::Box'>Box</a>&lt;<a class='trait' href='../iron/trait.Handler.html' title='iron::Handler'>Handler</a> + <a class='trait' href='http://doc.rust-lang.org/master/core/kinds/trait.Send.html' title='core::kinds::Send'>Send</a> + <a class='trait' href='http://doc.rust-lang.org/master/core/kinds/trait.Sync.html' title='core::kinds::Sync'>Sync</a>&gt; where H: <a class='trait' href='../iron/trait.Handler.html' title='iron::Handler'>Handler</a></code></h3><div class='docblock'><p>Produce a <code>Handler</code> from this <code>AroundMiddleware</code> given another <code>Handler</code>.</p>
 
 <p>Usually this means wrapping the handler and editing the <code>Request</code> on the
 way in and the <code>Response</code> on the way out.</p>

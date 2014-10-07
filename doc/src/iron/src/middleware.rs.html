@@ -665,7 +665,7 @@
     <span class='kw'>fn</span> <span class='ident'>around</span><span class='op'>&lt;</span><span class='ident'>A</span><span class='op'>&gt;</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>around</span>: <span class='ident'>A</span>) <span class='kw'>where</span> <span class='ident'>A</span>: <span class='ident'>AroundMiddleware</span> {
         <span class='kw'>use</span> <span class='ident'>rmap</span>::<span class='ident'>replace_map</span>;
         <span class='ident'>replace_map</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>.<span class='ident'>handler</span>,
-                    <span class='op'>|</span>: <span class='ident'>o</span>: <span class='ident'>Box</span><span class='op'>&lt;</span><span class='ident'>Handler</span> <span class='op'>+</span> <span class='ident'>Send</span> <span class='op'>+</span> <span class='ident'>Sync</span><span class='op'>&gt;</span><span class='op'>|</span> { <span class='ident'>around</span>.<span class='ident'>around</span>(<span class='ident'>o</span>) });
+                    <span class='kw'>move</span> <span class='op'>|</span>: <span class='ident'>o</span>: <span class='ident'>Box</span><span class='op'>&lt;</span><span class='ident'>Handler</span> <span class='op'>+</span> <span class='ident'>Send</span> <span class='op'>+</span> <span class='ident'>Sync</span><span class='op'>&gt;</span><span class='op'>|</span> { <span class='ident'>around</span>.<span class='ident'>around</span>(<span class='ident'>o</span>) });
     }
 }
 
