@@ -54,7 +54,7 @@
             <a id="collapse-all" href="#">[-]
             </a>&nbsp;<a id="expand-all" href="#">[+]</a>
         </span><a id='src-15062' href='http://www.rust-ci.org/chris-morgan/rust-http/doc/http/headers/struct.HeaderValueByteIterator.html?gotosrc=15062'>[src]</a></span></h1>
-<pre class='rust struct'>pub struct HeaderValueByteIterator&lt;'a, R&gt; {
+<pre class='rust struct'>pub struct HeaderValueByteIterator&lt;'a, R: 'a&gt; {
     pub reader: &amp;'a mut R,
     pub next_byte: <a class='enum' href='http://doc.rust-lang.org/master/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a href='http://doc.rust-lang.org/master/std/primitive.u8.html'>u8</a>&gt;,
     pub at_start: <a href='http://doc.rust-lang.org/master/std/primitive.bool.html'>bool</a>,

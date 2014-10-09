@@ -54,29 +54,29 @@
             <a id="collapse-all" href="#">[-]
             </a>&nbsp;<a id="expand-all" href="#">[+]</a>
         </span></span></h1>
-<pre class='rust trait'>pub trait Plugin&lt;R: <a class='trait' href='http://doc.rust-lang.org/master/core/clone/trait.Clone.html' title='core::clone::Clone'>Clone</a>&gt;: Extensible {
-    fn <a href='#tymethod.get' class='fnname'>get</a>&lt;P: PluginFor&lt;Self, R&gt;&gt;(&amp;'a mut self) -&gt; <a class='enum' href='http://doc.rust-lang.org/master/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;R&gt; { ... }
-    fn <a href='#tymethod.get_ref' class='fnname'>get_ref</a>&lt;P: PluginFor&lt;Self, R&gt;&gt;(&amp;'a mut self) -&gt; <a class='enum' href='http://doc.rust-lang.org/master/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;&amp;'a R&gt; { ... }
-    fn <a href='#tymethod.get_mut' class='fnname'>get_mut</a>&lt;P: PluginFor&lt;Self, R&gt;&gt;(&amp;'a mut self) -&gt; <a class='enum' href='http://doc.rust-lang.org/master/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;&amp;'a mut R&gt; { ... }
+<pre class='rust trait'>pub trait Plugin&lt;R: <a class='trait' href='http://doc.rust-lang.org/master/core/clone/trait.Clone.html' title='core::clone::Clone'>Clone</a> + 'static&gt;: Extensible {
+    fn <a href='#tymethod.get' class='fnname'>get</a>&lt;P: PluginFor&lt;Self, R&gt; + 'static&gt;(&amp;'a mut self) -&gt; <a class='enum' href='http://doc.rust-lang.org/master/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;R&gt; { ... }
+    fn <a href='#tymethod.get_ref' class='fnname'>get_ref</a>&lt;P: PluginFor&lt;Self, R&gt; + 'static&gt;(&amp;'a mut self) -&gt; <a class='enum' href='http://doc.rust-lang.org/master/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;&amp;'a R&gt; { ... }
+    fn <a href='#tymethod.get_mut' class='fnname'>get_mut</a>&lt;P: PluginFor&lt;Self, R&gt; + 'static&gt;(&amp;'a mut self) -&gt; <a class='enum' href='http://doc.rust-lang.org/master/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;&amp;'a mut R&gt; { ... }
 }</pre><div class='docblock'><p>An interface for plugins that cache values between calls.</p>
 
 <p><code>R</code> is the type of the plugin&#39;s return value, which must be cloneable.</p>
 </div>
             <h2 id='provided-methods'>Provided Methods</h2>
             <div class='methods'>
-        <h3 id='tymethod.get' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#tymethod.get' class='fnname'>get</a>&lt;P: PluginFor&lt;Self, R&gt;&gt;(&amp;'a mut self) -&gt; <a class='enum' href='http://doc.rust-lang.org/master/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;R&gt;</code></h3><div class='docblock'><p>Return a copy of the plugin&#39;s produced value.</p>
+        <h3 id='tymethod.get' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#tymethod.get' class='fnname'>get</a>&lt;P: PluginFor&lt;Self, R&gt; + 'static&gt;(&amp;'a mut self) -&gt; <a class='enum' href='http://doc.rust-lang.org/master/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;R&gt;</code></h3><div class='docblock'><p>Return a copy of the plugin&#39;s produced value.</p>
 
 <p>The plugin will be created if it doesn&#39;t exist already.
 If plugin creation fails, <code>None</code> is returned.</p>
 
 <p><code>P</code> is the plugin type, and <code>R</code> is the plugin&#39;s return type.</p>
-</div><h3 id='tymethod.get_ref' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#tymethod.get_ref' class='fnname'>get_ref</a>&lt;P: PluginFor&lt;Self, R&gt;&gt;(&amp;'a mut self) -&gt; <a class='enum' href='http://doc.rust-lang.org/master/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;&amp;'a R&gt;</code></h3><div class='docblock'><p>Return a reference to the plugin&#39;s produced value.</p>
+</div><h3 id='tymethod.get_ref' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#tymethod.get_ref' class='fnname'>get_ref</a>&lt;P: PluginFor&lt;Self, R&gt; + 'static&gt;(&amp;'a mut self) -&gt; <a class='enum' href='http://doc.rust-lang.org/master/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;&amp;'a R&gt;</code></h3><div class='docblock'><p>Return a reference to the plugin&#39;s produced value.</p>
 
 <p>The plugin will be created if it doesn&#39;t exist already.
 If plugin creation fails, <code>None</code> is returned.</p>
 
 <p><code>P</code> is the plugin type, and <code>R</code> is the plugin&#39;s return type.</p>
-</div><h3 id='tymethod.get_mut' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#tymethod.get_mut' class='fnname'>get_mut</a>&lt;P: PluginFor&lt;Self, R&gt;&gt;(&amp;'a mut self) -&gt; <a class='enum' href='http://doc.rust-lang.org/master/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;&amp;'a mut R&gt;</code></h3><div class='docblock'><p>Return a mutable reference to the plugin&#39;s produced value.</p>
+</div><h3 id='tymethod.get_mut' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#tymethod.get_mut' class='fnname'>get_mut</a>&lt;P: PluginFor&lt;Self, R&gt; + 'static&gt;(&amp;'a mut self) -&gt; <a class='enum' href='http://doc.rust-lang.org/master/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;&amp;'a mut R&gt;</code></h3><div class='docblock'><p>Return a mutable reference to the plugin&#39;s produced value.</p>
 
 <p>The plugin will be created if it doesn&#39;t exist already.
 If plugin creation fails, <code>None</code> is returned.</p>
