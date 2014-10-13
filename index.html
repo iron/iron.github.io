@@ -69,7 +69,7 @@ extern crate iron;
 use std::io::net::ip::Ipv4Addr;
 use iron::{status, Iron, Request, Response, IronResult};
 
-fn hello_world(_: &mut Request) -> IronResult<Response> {
+fn hello_world(_: &amp;mut Request) -> IronResult&lt;Response&gt; {
     Ok(Response::with(status::Ok, "Hello, world"))
 }
 
