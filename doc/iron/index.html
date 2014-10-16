@@ -53,7 +53,7 @@
 <h1 class='fqn'><span class='in-band'>Crate <a class='mod' href=''>iron</a><wbr></span><span class='out-of-band'><a href='stability.html'>[stability]</a> <span id='render-detail'>
             <a id="collapse-all" href="#">[-]
             </a>&nbsp;<a id="expand-all" href="#">[+]</a>
-        </span><a id='src-0' href='../src/iron/src/lib.rs.html#1-81'>[src]</a></span></h1>
+        </span><a id='src-0' href='../src/iron/src/lib.rs.html#1-83'>[src]</a></span></h1>
 <div class='docblock'><p>The main crate for the Iron library.</p>
 
 <p>Iron is a high level web framework built in and for Rust.</p>
@@ -69,7 +69,8 @@ for creating and plugging in middleware.</p>
 
 <span class='ident'>Iron</span>::<span class='ident'>new</span>(<span class='ident'>hello_world</span>).<span class='ident'>listen</span>(<span class='ident'>Ipv4Addr</span>(<span class='number'>127</span>, <span class='number'>0</span>, <span class='number'>0</span>, <span class='number'>1</span>), <span class='number'>3000</span>);
 </pre>
-</div><h2 id='modules' class='section-header'><a href="#modules">Modules</a></h2>
+</div><h2 id='reexports' class='section-header'><a href="#reexports">Reexports</a></h2>
+<table><tr><td><code>pub use middleware::{<a class='trait' href='../iron/middleware/trait.BeforeMiddleware.html' title='iron::middleware::BeforeMiddleware'>BeforeMiddleware</a>, <a class='trait' href='../iron/middleware/trait.AfterMiddleware.html' title='iron::middleware::AfterMiddleware'>AfterMiddleware</a>, <a class='trait' href='../iron/middleware/trait.AroundMiddleware.html' title='iron::middleware::AroundMiddleware'>AroundMiddleware</a>, <a class='trait' href='../iron/middleware/trait.Handler.html' title='iron::middleware::Handler'>Handler</a>, <a class='trait' href='../iron/middleware/trait.Chain.html' title='iron::middleware::Chain'>Chain</a>, <a class='struct' href='../iron/middleware/struct.ChainBuilder.html' title='iron::middleware::ChainBuilder'>ChainBuilder</a>};</code></td></tr></table><h2 id='modules' class='section-header'><a href="#modules">Modules</a></h2>
 <table>
                     <tr>
                         <td><a class='stability Unmarked' title='No stability level'></a><a class='mod' href='headers/index.html'
@@ -85,6 +86,13 @@ for creating and plugging in middleware.</p>
                     </tr>
                 
                     <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='mod' href='middleware/index.html'
+                               title='iron::middleware'>middleware</a></td>
+                        <td class='docblock short'><p>Iron&#39;s Middleware and Handler System</p>
+</td>
+                    </tr>
+                
+                    <tr>
                         <td><a class='stability Unmarked' title='No stability level'></a><a class='mod' href='status/index.html'
                                title='iron::status'>status</a></td>
                         <td class='docblock short'></td>
@@ -93,18 +101,11 @@ for creating and plugging in middleware.</p>
                     <tr>
                         <td><a class='stability Unmarked' title='No stability level'></a><a class='mod' href='typemap/index.html'
                                title='iron::typemap'>typemap</a></td>
-                        <td class='docblock short'><p>typemap crate re-exports</p>
+                        <td class='docblock short'><p>Re-exports from the TypeMap crate.</p>
 </td>
                     </tr>
                 </table><h2 id='structs' class='section-header'><a href="#structs">Structs</a></h2>
 <table>
-                    <tr>
-                        <td><a class='stability Unmarked' title='No stability level'></a><a class='struct' href='struct.ChainBuilder.html'
-                               title='iron::ChainBuilder'>ChainBuilder</a></td>
-                        <td class='docblock short'><p>The default Chain used in Iron.</p>
-</td>
-                    </tr>
-                
                     <tr>
                         <td><a class='stability Unmarked' title='No stability level'></a><a class='struct' href='struct.Iron.html'
                                title='iron::Iron'>Iron</a></td>
@@ -142,35 +143,6 @@ for creating and plugging in middleware.</p>
                 </table><h2 id='traits' class='section-header'><a href="#traits">Traits</a></h2>
 <table>
                     <tr>
-                        <td><a class='stability Unmarked' title='No stability level'></a><a class='trait' href='trait.AfterMiddleware.html'
-                               title='iron::AfterMiddleware'>AfterMiddleware</a></td>
-                        <td class='docblock short'><p><code>AfterMiddleware</code> are fired after a <code>Handler</code> is called inside of a Chain.</p>
-</td>
-                    </tr>
-                
-                    <tr>
-                        <td><a class='stability Unmarked' title='No stability level'></a><a class='trait' href='trait.AroundMiddleware.html'
-                               title='iron::AroundMiddleware'>AroundMiddleware</a></td>
-                        <td class='docblock short'><p>AroundMiddleware are used to wrap and replace the <code>Handler</code> in a <code>Chain</code>.</p>
-</td>
-                    </tr>
-                
-                    <tr>
-                        <td><a class='stability Unmarked' title='No stability level'></a><a class='trait' href='trait.BeforeMiddleware.html'
-                               title='iron::BeforeMiddleware'>BeforeMiddleware</a></td>
-                        <td class='docblock short'><p><code>BeforeMiddleware</code> are fired before a <code>Handler</code> is called inside of a Chain.</p>
-</td>
-                    </tr>
-                
-                    <tr>
-                        <td><a class='stability Unmarked' title='No stability level'></a><a class='trait' href='trait.Chain.html'
-                               title='iron::Chain'>Chain</a></td>
-                        <td class='docblock short'><p>Chain&#39;s hold <code>BeforeMiddleware</code>, a <code>Handler</code>, and <code>AfterMiddleware</code> and are responsible
-for correctly dispatching a <code>Request</code> through them.</p>
-</td>
-                    </tr>
-                
-                    <tr>
                         <td><a class='stability Unmarked' title='No stability level'></a><a class='trait' href='trait.Error.html'
                                title='iron::Error'>Error</a></td>
                         <td class='docblock short'></td>
@@ -180,13 +152,6 @@ for correctly dispatching a <code>Request</code> through them.</p>
                         <td><a class='stability Unmarked' title='No stability level'></a><a class='trait' href='trait.ErrorRefExt.html'
                                title='iron::ErrorRefExt'>ErrorRefExt</a></td>
                         <td class='docblock short'></td>
-                    </tr>
-                
-                    <tr>
-                        <td><a class='stability Unmarked' title='No stability level'></a><a class='trait' href='trait.Handler.html'
-                               title='iron::Handler'>Handler</a></td>
-                        <td class='docblock short'><p><code>Handler</code>s are responsible for handling requests by creating Responses from Requests.</p>
-</td>
                     </tr>
                 
                     <tr>
