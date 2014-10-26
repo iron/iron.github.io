@@ -35,7 +35,7 @@
 
     <section class="sidebar">
         
-        <p class='location'><a href='index.html'>static_file</a></p><div class='block struct'><h2>Structs</h2><a class='struct ' href='struct.FileError.html'>FileError</a><a class='struct current' href='struct.Static.html'>Static</a></div>
+        <p class='location'><a href='index.html'>static_file</a></p><div class='block struct'><h2>Structs</h2><a class='struct current' href='struct.Static.html'>Static</a><a class='struct ' href='struct.StaticWithCache.html'>StaticWithCache</a></div>
     </section>
 
     <nav class="sub">
@@ -53,9 +53,9 @@
 <h1 class='fqn'><span class='in-band'>Struct <a href='index.html'>static_file</a>::<wbr><a class='struct' href=''>Static</a><wbr></span><span class='out-of-band'><span id='render-detail'>
             <a id="collapse-all" href="#">[-]
             </a>&nbsp;<a id="expand-all" href="#">[+]</a>
-        </span><a id='src-20' href='../src/static_file/src/lib.rs.html#37-39'>[src]</a></span></h1>
+        </span><a id='src-474' href='../src/static_file/src/static_handler.rs.html#21-24'>[src]</a></span></h1>
 <pre class='rust struct'>pub struct Static {
-    // some fields omitted
+    pub root_path: <a class='struct' href='http://doc.rust-lang.org/nightly/std/path/posix/struct.Path.html' title='std::path::posix::Path'>Path</a>,
 }</pre><div class='docblock'><p>The static file-serving <code>Handler</code>.</p>
 
 <p>This handler serves files from a single filesystem path, which may be absolute or relative.
@@ -69,7 +69,9 @@ the handler will attempt to serve that instead.</p>
 <p>If the path doesn&#39;t match any real object in the filesystem, the handler will return
 a Response with <code>status::NotFound</code>. If an IO error occurs whilst attempting to serve
 a file, <code>FileError(IoError)</code> will be returned.</p>
-</div><h2 id='methods'>Methods</h2><h3 class='impl'><a class='stability Unmarked' title='No stability level'></a><code>impl <a class='struct' href='../static_file/struct.Static.html' title='static_file::Static'>Static</a></code></h3><div class='impl-methods'><h4 id='method.new' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.new' class='fnname'>new</a>(root_path: <a class='struct' href='http://doc.rust-lang.org/nightly/std/path/posix/struct.Path.html' title='std::path::posix::Path'>Path</a>) -&gt; <a class='struct' href='../static_file/struct.Static.html' title='static_file::Static'>Static</a></code></h4>
+</div><h2 class='fields'>Fields</h2>
+<table><tr><td id='structfield.root_path'><a class='stability Unmarked' title='No stability level'></a><code>root_path</code></td><td><div class='docblock'><p>The path this handler is serving files from.</p>
+</div></td></tr></table><h2 id='methods'>Methods</h2><h3 class='impl'><a class='stability Unmarked' title='No stability level'></a><code>impl <a class='struct' href='../static_file/struct.Static.html' title='static_file::Static'>Static</a></code></h3><div class='impl-methods'><h4 id='method.new' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.new' class='fnname'>new</a>(root_path: <a class='struct' href='http://doc.rust-lang.org/nightly/std/path/posix/struct.Path.html' title='std::path::posix::Path'>Path</a>) -&gt; <a class='struct' href='../static_file/struct.Static.html' title='static_file::Static'>Static</a></code></h4>
 <div class='docblock'><p>Create a new instance of <code>Static</code> with a given root path.</p>
 
 <p>If <code>Path::new(&quot;&quot;)</code> is given, files will be served from the current directory.</p>
