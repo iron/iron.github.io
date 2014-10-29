@@ -4,12 +4,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="API documentation for the Rust `IronError` type in crate `iron`.">
-    <meta name="keywords" content="rust, rustlang, rust-lang, IronError">
+    <meta name="description" content="API documentation for the Rust `errors` mod in crate `iron`.">
+    <meta name="keywords" content="rust, rustlang, rust-lang, errors">
 
-    <title>iron::IronError - Rust</title>
+    <title>iron::errors - Rust</title>
 
-    <link rel="stylesheet" type="text/css" href="../main.css">
+    <link rel="stylesheet" type="text/css" href="../../main.css">
 
     <link rel="shortcut icon" href="https://avatars0.githubusercontent.com/u/7853871?s=256">
     <link href='http://fonts.googleapis.com/css?family=Questrial|Alegreya+Sans+SC:400,900|Bilbo|Abel' rel='stylesheet' type='text/css'>
@@ -34,8 +34,8 @@
 
 
     <section class="sidebar">
-        <a href='../iron/index.html'><img src='https://avatars0.githubusercontent.com/u/7853871?s=128' alt='' width='100'></a>
-        <p class='location'><a href='index.html'>iron</a></p><div class='block mod'><h2>Modules</h2><a class='mod ' href='errors/index.html'>errors</a><a class='mod ' href='headers/index.html'>headers</a><a class='mod ' href='method/index.html'>method</a><a class='mod ' href='middleware/index.html'>middleware</a><a class='mod ' href='status/index.html'>status</a><a class='mod ' href='typemap/index.html'>typemap</a></div><div class='block struct'><h2>Structs</h2><a class='struct ' href='struct.Iron.html'>Iron</a><a class='struct ' href='struct.Request.html'>Request</a><a class='struct ' href='struct.Response.html'>Response</a><a class='struct ' href='struct.TypeMap.html'>TypeMap</a><a class='struct ' href='struct.Url.html'>Url</a></div><div class='block trait'><h2>Traits</h2><a class='trait ' href='trait.Error.html'>Error</a><a class='trait ' href='trait.ErrorRefExt.html'>ErrorRefExt</a><a class='trait ' href='trait.Plugin.html'>Plugin</a></div>
+        <a href='../../iron/index.html'><img src='https://avatars0.githubusercontent.com/u/7853871?s=128' alt='' width='100'></a>
+        <p class='location'><a href='../index.html'>iron</a></p><div class='block mod'><h2>Modules</h2><a class='mod current' href='../errors/index.html'>errors</a><a class='mod ' href='../headers/index.html'>headers</a><a class='mod ' href='../method/index.html'>method</a><a class='mod ' href='../middleware/index.html'>middleware</a><a class='mod ' href='../status/index.html'>status</a><a class='mod ' href='../typemap/index.html'>typemap</a></div><div class='block struct'><h2>Structs</h2><a class='struct ' href='../struct.Iron.html'>Iron</a><a class='struct ' href='../struct.Request.html'>Request</a><a class='struct ' href='../struct.Response.html'>Response</a><a class='struct ' href='../struct.TypeMap.html'>TypeMap</a><a class='struct ' href='../struct.Url.html'>Url</a></div><div class='block trait'><h2>Traits</h2><a class='trait ' href='../trait.Error.html'>Error</a><a class='trait ' href='../trait.ErrorRefExt.html'>ErrorRefExt</a><a class='trait ' href='../trait.Plugin.html'>Plugin</a></div>
     </section>
 
     <nav class="sub">
@@ -49,12 +49,23 @@
         </form>
     </nav>
 
-    <section id='main' class="content type">
-<h1 class='fqn'><span class='in-band'><a href='index.html'>iron</a>::<wbr><a class='type' href=''>IronError</a><wbr></span><span class='out-of-band'><span id='render-detail'>
+    <section id='main' class="content mod">
+<h1 class='fqn'><span class='in-band'>Module <a href='../index.html'>iron</a>::<wbr><a class='mod' href=''>errors</a><wbr></span><span class='out-of-band'><span id='render-detail'>
             <a id="collapse-all" href="#">[-]
             </a>&nbsp;<a id="expand-all" href="#">[+]</a>
-        </span><a id='src-32' href='../src/iron/src/lib.rs.html#69'>[src]</a></span></h1>
-<pre class='rust typedef'>type IronError = <a class='struct' href='http://doc.rust-lang.org/nightly/alloc/boxed/struct.Box.html' title='alloc::boxed::Box'>Box</a>&lt;<a class='trait' href='../iron/trait.Error.html' title='iron::Error'>Error</a>&gt;;</pre></section>
+        </span><a id='src-1246' href='../../src/iron/src/errors.rs.html#1-33'>[src]</a></span></h1>
+<div class='docblock'><p>Some common error types for use within Iron and in downstream middleware.</p>
+</div><h2 id='structs' class='section-header'><a href="#structs">Structs</a></h2>
+<table>
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='struct' href='struct.FileError.html'
+                               title='iron::errors::FileError'>FileError</a></td>
+                        <td class='docblock short'><p>The standard Error implementation used to wrap IoErrors
+that occur when reading or writing files or otherwise
+interacting with the file system.</p>
+</td>
+                    </tr>
+                </table></section>
     <section id='search' class="content hidden"></section>
 
     <section class="footer"></section>
@@ -102,13 +113,13 @@
 
 
     <script>
-        window.rootPath = "../";
+        window.rootPath = "../../";
         window.currentCrate = "iron";
         window.playgroundUrl = "";
     </script>
-    <script src="../jquery.js"></script>
-    <script src="../main.js"></script>
+    <script src="../../jquery.js"></script>
+    <script src="../../main.js"></script>
     
-    <script async src="../search-index.js"></script>
+    <script async src="../../search-index.js"></script>
 </body>
 </html>
