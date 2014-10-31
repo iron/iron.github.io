@@ -168,7 +168,7 @@
 <span id='117'>117</span>
 <span id='118'>118</span>
 </pre><pre class='rust '>
-<span class='kw'>use</span> <span class='ident'>iron</span>::{<span class='ident'>Handler</span>, <span class='ident'>Response</span>, <span class='ident'>Request</span>, <span class='ident'>IronResult</span>, <span class='ident'>Url</span>, <span class='ident'>Error</span>};
+<span class='kw'>use</span> <span class='ident'>iron</span>::{<span class='ident'>Handler</span>, <span class='ident'>Response</span>, <span class='ident'>Request</span>, <span class='ident'>IronResult</span>, <span class='ident'>IronError</span>, <span class='ident'>Url</span>, <span class='ident'>Error</span>};
 <span class='kw'>use</span> <span class='ident'>typemap</span>::<span class='ident'>Assoc</span>;
 <span class='kw'>use</span> <span class='ident'>trie</span>::<span class='ident'>Trie</span>;
 
@@ -250,7 +250,7 @@
             <span class='comment'>// Search the Trie for the nearest most specific match.</span>
             <span class='kw'>match</span> <span class='self'>self</span>.<span class='ident'>inner</span>.<span class='ident'>find_ancestor</span>(<span class='ident'>key</span>) {
                 <span class='prelude-val'>Some</span>(<span class='ident'>matched</span>) <span class='op'>=&gt;</span> <span class='ident'>matched</span>,
-                <span class='prelude-val'>None</span> <span class='op'>=&gt;</span> <span class='kw'>return</span> <span class='prelude-val'>Err</span>(<span class='ident'>NoMatch</span>.<span class='ident'>erase</span>())
+                <span class='prelude-val'>None</span> <span class='op'>=&gt;</span> <span class='kw'>return</span> <span class='prelude-val'>Err</span>(<span class='kw'>box</span> <span class='ident'>NoMatch</span> <span class='kw'>as</span> <span class='ident'>IronError</span>)
             }
         };
 
@@ -273,7 +273,7 @@
         <span class='comment'>// Reverse the URL munging, for future middleware.</span>
         <span class='ident'>req</span>.<span class='ident'>url</span> <span class='op'>=</span> <span class='kw'>match</span> <span class='ident'>req</span>.<span class='ident'>extensions</span>.<span class='ident'>find</span>::<span class='op'>&lt;</span><span class='ident'>OriginalUrl</span>, <span class='ident'>Url</span><span class='op'>&gt;</span>() {
             <span class='prelude-val'>Some</span>(<span class='ident'>original</span>) <span class='op'>=&gt;</span> <span class='ident'>original</span>.<span class='ident'>clone</span>(),
-            <span class='prelude-val'>None</span> <span class='op'>=&gt;</span> <span class='macro'>fail</span><span class='macro'>!</span>(<span class='string'>&quot;OriginalUrl unexpectedly removed from req.extensions.&quot;</span>)
+            <span class='prelude-val'>None</span> <span class='op'>=&gt;</span> <span class='macro'>panic</span><span class='macro'>!</span>(<span class='string'>&quot;OriginalUrl unexpectedly removed from req.extensions.&quot;</span>)
         };
 
         <span class='comment'>// If this mount middleware is the outermost mount middleware,</span>
