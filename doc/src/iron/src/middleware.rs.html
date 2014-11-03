@@ -427,6 +427,8 @@
 <span id='376'>376</span>
 <span id='377'>377</span>
 <span id='378'>378</span>
+<span id='379'>379</span>
+<span id='380'>380</span>
 </pre><pre class='rust '>
 <span class='doccomment'>//! Iron&#39;s Middleware and Handler System</span>
 <span class='doccomment'>//!</span>
@@ -585,7 +587,7 @@
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// This is called only once, when an `AroundMiddleware` is added to a `Chain`</span>
     <span class='doccomment'>/// using `Chain::around`, it is passed the `Chain`&#39;s current `Handler`.</span>
-    <span class='kw'>fn</span> <span class='ident'>around</span><span class='op'>&lt;</span><span class='ident'>H</span><span class='op'>&gt;</span>(<span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>handler</span>: <span class='ident'>H</span>) <span class='op'>-&gt;</span> <span class='ident'>Box</span><span class='op'>&lt;</span><span class='ident'>Handler</span> <span class='op'>+</span> <span class='ident'>Send</span> <span class='op'>+</span> <span class='ident'>Sync</span><span class='op'>&gt;</span> <span class='kw'>where</span> <span class='ident'>H</span>: <span class='ident'>Handler</span>;
+    <span class='kw'>fn</span> <span class='ident'>around</span>(<span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>handler</span>: <span class='ident'>Box</span><span class='op'>&lt;</span><span class='ident'>Handler</span> <span class='op'>+</span> <span class='ident'>Send</span> <span class='op'>+</span> <span class='ident'>Sync</span><span class='op'>&gt;</span>) <span class='op'>-&gt;</span> <span class='ident'>Box</span><span class='op'>&lt;</span><span class='ident'>Handler</span> <span class='op'>+</span> <span class='ident'>Send</span> <span class='op'>+</span> <span class='ident'>Sync</span><span class='op'>&gt;</span>;
 }
 
 <span class='doccomment'>/// Chain&#39;s hold `BeforeMiddleware`, a `Handler`, and `AfterMiddleware` and are responsible</span>
@@ -624,7 +626,9 @@
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>ChainBuilder</span> {
     <span class='ident'>befores</span>: <span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>Box</span><span class='op'>&lt;</span><span class='ident'>BeforeMiddleware</span> <span class='op'>+</span> <span class='ident'>Send</span> <span class='op'>+</span> <span class='ident'>Sync</span><span class='op'>&gt;&gt;</span>,
     <span class='ident'>afters</span>: <span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>Box</span><span class='op'>&lt;</span><span class='ident'>AfterMiddleware</span> <span class='op'>+</span> <span class='ident'>Send</span> <span class='op'>+</span> <span class='ident'>Sync</span><span class='op'>&gt;&gt;</span>,
-    <span class='ident'>handler</span>: <span class='ident'>Box</span><span class='op'>&lt;</span><span class='ident'>Handler</span> <span class='op'>+</span> <span class='ident'>Send</span> <span class='op'>+</span> <span class='ident'>Sync</span><span class='op'>&gt;</span>
+
+    <span class='comment'>// Internal invariant: this is always Some</span>
+    <span class='ident'>handler</span>: <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>Box</span><span class='op'>&lt;</span><span class='ident'>Handler</span> <span class='op'>+</span> <span class='ident'>Send</span> <span class='op'>+</span> <span class='ident'>Sync</span><span class='op'>&gt;&gt;</span>
 }
 
 <span class='kw'>impl</span> <span class='ident'>ChainBuilder</span> {
@@ -633,7 +637,7 @@
         <span class='ident'>ChainBuilder</span> {
             <span class='ident'>befores</span>: <span class='macro'>vec</span><span class='macro'>!</span>[],
             <span class='ident'>afters</span>: <span class='macro'>vec</span><span class='macro'>!</span>[],
-            <span class='ident'>handler</span>: <span class='kw'>box</span> <span class='ident'>handler</span> <span class='kw'>as</span> <span class='ident'>Box</span><span class='op'>&lt;</span><span class='ident'>Handler</span> <span class='op'>+</span> <span class='ident'>Send</span> <span class='op'>+</span> <span class='ident'>Sync</span><span class='op'>&gt;</span>
+            <span class='ident'>handler</span>: <span class='prelude-val'>Some</span>(<span class='kw'>box</span> <span class='ident'>handler</span> <span class='kw'>as</span> <span class='ident'>Box</span><span class='op'>&lt;</span><span class='ident'>Handler</span> <span class='op'>+</span> <span class='ident'>Send</span> <span class='op'>+</span> <span class='ident'>Sync</span><span class='op'>&gt;</span>)
         }
     }
 }
@@ -643,7 +647,7 @@
         <span class='ident'>ChainBuilder</span> {
             <span class='ident'>befores</span>: <span class='macro'>vec</span><span class='macro'>!</span>[],
             <span class='ident'>afters</span>: <span class='macro'>vec</span><span class='macro'>!</span>[],
-            <span class='ident'>handler</span>: <span class='kw'>box</span> <span class='ident'>handler</span> <span class='kw'>as</span> <span class='ident'>Box</span><span class='op'>&lt;</span><span class='ident'>Handler</span> <span class='op'>+</span> <span class='ident'>Send</span> <span class='op'>+</span> <span class='ident'>Sync</span><span class='op'>&gt;</span>
+            <span class='ident'>handler</span>: <span class='prelude-val'>Some</span>(<span class='kw'>box</span> <span class='ident'>handler</span> <span class='kw'>as</span> <span class='ident'>Box</span><span class='op'>&lt;</span><span class='ident'>Handler</span> <span class='op'>+</span> <span class='ident'>Send</span> <span class='op'>+</span> <span class='ident'>Sync</span><span class='op'>&gt;</span>)
         }
     }
 
@@ -663,9 +667,9 @@
     }
 
     <span class='kw'>fn</span> <span class='ident'>around</span><span class='op'>&lt;</span><span class='ident'>A</span><span class='op'>&gt;</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>around</span>: <span class='ident'>A</span>) <span class='kw'>where</span> <span class='ident'>A</span>: <span class='ident'>AroundMiddleware</span> {
-        <span class='kw'>use</span> <span class='ident'>rmap</span>::<span class='ident'>replace_map</span>;
-        <span class='ident'>replace_map</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>.<span class='ident'>handler</span>,
-                    <span class='kw'>move</span> <span class='op'>|</span>: <span class='ident'>o</span>: <span class='ident'>Box</span><span class='op'>&lt;</span><span class='ident'>Handler</span> <span class='op'>+</span> <span class='ident'>Send</span> <span class='op'>+</span> <span class='ident'>Sync</span><span class='op'>&gt;</span><span class='op'>|</span> { <span class='ident'>around</span>.<span class='ident'>around</span>(<span class='ident'>o</span>) });
+        <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>handler</span> <span class='op'>=</span> <span class='self'>self</span>.<span class='ident'>handler</span>.<span class='ident'>take</span>().<span class='ident'>unwrap</span>();
+        <span class='ident'>handler</span> <span class='op'>=</span> <span class='ident'>around</span>.<span class='ident'>around</span>(<span class='ident'>handler</span>);
+        <span class='self'>self</span>.<span class='ident'>handler</span> <span class='op'>=</span> <span class='prelude-val'>Some</span>(<span class='ident'>handler</span>);
     }
 }
 
@@ -674,11 +678,11 @@
         <span class='kw'>let</span> <span class='ident'>before_result</span> <span class='op'>=</span> <span class='ident'>helpers</span>::<span class='ident'>run_befores</span>(<span class='ident'>req</span>, <span class='self'>self</span>.<span class='ident'>befores</span>.<span class='ident'>as_slice</span>(), <span class='prelude-val'>None</span>);
 
         <span class='kw'>let</span> (<span class='ident'>res</span>, <span class='ident'>err</span>) <span class='op'>=</span> <span class='kw'>match</span> <span class='ident'>before_result</span> {
-            <span class='prelude-val'>Ok</span>(()) <span class='op'>=&gt;</span> <span class='kw'>match</span> <span class='self'>self</span>.<span class='ident'>handler</span>.<span class='ident'>call</span>(<span class='ident'>req</span>) {
+            <span class='prelude-val'>Ok</span>(()) <span class='op'>=&gt;</span> <span class='kw'>match</span> <span class='self'>self</span>.<span class='ident'>handler</span>.<span class='ident'>as_ref</span>().<span class='ident'>unwrap</span>().<span class='ident'>call</span>(<span class='ident'>req</span>) {
                 <span class='prelude-val'>Ok</span>(<span class='ident'>res</span>) <span class='op'>=&gt;</span> (<span class='ident'>res</span>, <span class='prelude-val'>None</span>),
-                <span class='prelude-val'>Err</span>(<span class='ident'>e</span>) <span class='op'>=&gt;</span> <span class='ident'>helpers</span>::<span class='ident'>run_handler_catch</span>(<span class='ident'>req</span>, <span class='ident'>e</span>, <span class='kw-2'>&amp;</span><span class='self'>self</span>.<span class='ident'>handler</span>)
+                <span class='prelude-val'>Err</span>(<span class='ident'>e</span>) <span class='op'>=&gt;</span> <span class='ident'>helpers</span>::<span class='ident'>run_handler_catch</span>(<span class='ident'>req</span>, <span class='ident'>e</span>, <span class='self'>self</span>.<span class='ident'>handler</span>.<span class='ident'>as_ref</span>().<span class='ident'>unwrap</span>())
             },
-            <span class='prelude-val'>Err</span>(<span class='ident'>e</span>) <span class='op'>=&gt;</span> <span class='ident'>helpers</span>::<span class='ident'>run_handler_catch</span>(<span class='ident'>req</span>, <span class='ident'>e</span>, <span class='kw-2'>&amp;</span><span class='self'>self</span>.<span class='ident'>handler</span>)
+            <span class='prelude-val'>Err</span>(<span class='ident'>e</span>) <span class='op'>=&gt;</span> <span class='ident'>helpers</span>::<span class='ident'>run_handler_catch</span>(<span class='ident'>req</span>, <span class='ident'>e</span>, <span class='self'>self</span>.<span class='ident'>handler</span>.<span class='ident'>as_ref</span>().<span class='ident'>unwrap</span>())
         };
 
         <span class='ident'>helpers</span>::<span class='ident'>run_afters</span>(<span class='ident'>req</span>, <span class='ident'>res</span>, <span class='ident'>err</span>, <span class='self'>self</span>.<span class='ident'>afters</span>.<span class='ident'>as_slice</span>())
@@ -688,11 +692,11 @@
         <span class='kw'>let</span> <span class='ident'>before_result</span> <span class='op'>=</span> <span class='ident'>helpers</span>::<span class='ident'>run_befores</span>(<span class='ident'>req</span>, <span class='self'>self</span>.<span class='ident'>befores</span>.<span class='ident'>as_slice</span>(), <span class='prelude-val'>Some</span>(<span class='ident'>err</span>));
 
         <span class='kw'>let</span> (<span class='ident'>res</span>, <span class='ident'>err</span>) <span class='op'>=</span> <span class='kw'>match</span> <span class='ident'>before_result</span> {
-            <span class='prelude-val'>Ok</span>(()) <span class='op'>=&gt;</span> <span class='kw'>match</span> <span class='self'>self</span>.<span class='ident'>handler</span>.<span class='ident'>call</span>(<span class='ident'>req</span>) {
+            <span class='prelude-val'>Ok</span>(()) <span class='op'>=&gt;</span> <span class='kw'>match</span> <span class='self'>self</span>.<span class='ident'>handler</span>.<span class='ident'>as_ref</span>().<span class='ident'>unwrap</span>().<span class='ident'>call</span>(<span class='ident'>req</span>) {
                 <span class='prelude-val'>Ok</span>(<span class='ident'>res</span>) <span class='op'>=&gt;</span> (<span class='ident'>res</span>, <span class='prelude-val'>None</span>),
-                <span class='prelude-val'>Err</span>(<span class='ident'>e</span>) <span class='op'>=&gt;</span> <span class='ident'>helpers</span>::<span class='ident'>run_handler_catch</span>(<span class='ident'>req</span>, <span class='ident'>e</span>, <span class='kw-2'>&amp;</span><span class='self'>self</span>.<span class='ident'>handler</span>)
+                <span class='prelude-val'>Err</span>(<span class='ident'>e</span>) <span class='op'>=&gt;</span> <span class='ident'>helpers</span>::<span class='ident'>run_handler_catch</span>(<span class='ident'>req</span>, <span class='ident'>e</span>, <span class='self'>self</span>.<span class='ident'>handler</span>.<span class='ident'>as_ref</span>().<span class='ident'>unwrap</span>())
             },
-            <span class='prelude-val'>Err</span>(<span class='ident'>e</span>) <span class='op'>=&gt;</span> <span class='ident'>helpers</span>::<span class='ident'>run_handler_catch</span>(<span class='ident'>req</span>, <span class='ident'>e</span>, <span class='kw-2'>&amp;</span><span class='self'>self</span>.<span class='ident'>handler</span>)
+            <span class='prelude-val'>Err</span>(<span class='ident'>e</span>) <span class='op'>=&gt;</span> <span class='ident'>helpers</span>::<span class='ident'>run_handler_catch</span>(<span class='ident'>req</span>, <span class='ident'>e</span>, <span class='self'>self</span>.<span class='ident'>handler</span>.<span class='ident'>as_ref</span>().<span class='ident'>unwrap</span>())
         };
 
         <span class='kw'>match</span> <span class='ident'>helpers</span>::<span class='ident'>run_afters</span>(<span class='ident'>req</span>, <span class='ident'>res</span>, <span class='ident'>err</span>, <span class='self'>self</span>.<span class='ident'>afters</span>.<span class='ident'>as_slice</span>()) {
