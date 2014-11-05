@@ -53,7 +53,7 @@
 <h1 class='fqn'><span class='in-band'>Struct <a href='index.html'>iron</a>::<wbr><a class='struct' href=''>Iron</a><wbr></span><span class='out-of-band'><span id='render-detail'>
             <a id="collapse-all" href="#">[-]
             </a>&nbsp;<a id="expand-all" href="#">[+]</a>
-        </span><a id='src-4500' href='../src/iron/src/iron.rs.html#18-22'>[src]</a></span></h1>
+        </span><a id='src-4501' href='../src/iron/src/iron.rs.html#16-20'>[src]</a></span></h1>
 <pre class='rust struct'>pub struct Iron&lt;H&gt; {
     pub handler: H,
 }</pre><div class='docblock'><p>The primary entrance point to <code>Iron</code>, a <code>struct</code> to instantiate a new server.</p>
@@ -69,6 +69,10 @@ requests.</p>
 <p>Call this once to begin listening for requests on the server.
 This consumes the Iron instance, but does the listening on
 another task, so is not blocking.</p>
+
+<p>Defaults to a threadpool of size 100.</p>
+</div><h4 id='method.listen_with' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.listen_with' class='fnname'>listen_with</a>(self, ip: <a class='enum' href='http://doc.rust-lang.org/nightly/std/io/net/ip/enum.IpAddr.html' title='std::io::net::ip::IpAddr'>IpAddr</a>, port: <a href='http://doc.rust-lang.org/nightly/std/primitive.u16.html'>u16</a>, threads: <a href='http://doc.rust-lang.org/nightly/std/primitive.uint.html'>uint</a>)</code></h4>
+<div class='docblock'><p>Kick off the server process with X threads.</p>
 </div><h4 id='method.new' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.new' class='fnname'>new</a>(handler: H) -&gt; <a class='struct' href='../iron/struct.Iron.html' title='iron::Iron'>Iron</a>&lt;H&gt;</code></h4>
 <div class='docblock'><p>Instantiate a new instance of <code>Iron</code>.</p>
 
