@@ -53,7 +53,7 @@
 <h1 class='fqn'><span class='in-band'>Crate <a class='mod' href=''>iron</a><wbr></span><span class='out-of-band'><a href='stability.html'>[stability]</a> <span id='render-detail'>
             <a id="collapse-all" href="#">[-]
             </a>&nbsp;<a id="expand-all" href="#">[+]</a>
-        </span><a id='src-0' href='../src/iron/src/lib.rs.html#1-91'>[src]</a></span></h1>
+        </span><a id='src-0' href='../src/iron/src/lib.rs.html#1-92'>[src]</a></span></h1>
 <div class='docblock'><p>The main crate for the Iron library.</p>
 
 <p>Iron is a high level web framework built in and for Rust.</p>
@@ -64,7 +64,7 @@ for creating and plugging in middleware.</p>
 <p>Obligatory Hello World:</p>
 <pre class='rust '>
 <span class='kw'>fn</span> <span class='ident'>hello_world</span>(<span class='ident'>req</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>Request</span>) <span class='op'>-&gt;</span> <span class='ident'>IronResult</span><span class='op'>&lt;</span><span class='ident'>Response</span><span class='op'>&gt;</span> {
-  <span class='ident'>Response</span>::<span class='ident'>with</span>(<span class='ident'>status</span>::<span class='prelude-val'>Ok</span>, <span class='string'>&quot;Hello World!&quot;</span>)
+  <span class='ident'>Response</span>::<span class='ident'>new</span>().<span class='ident'>set</span>(<span class='ident'>Status</span>(<span class='ident'>status</span>::<span class='prelude-val'>Ok</span>)).<span class='ident'>set</span>(<span class='ident'>Body</span>(<span class='string'>&quot;Hello World!&quot;</span>))
 }
 
 <span class='ident'>Iron</span>::<span class='ident'>new</span>(<span class='ident'>hello_world</span>).<span class='ident'>listen</span>(<span class='ident'>Ipv4Addr</span>(<span class='number'>127</span>, <span class='number'>0</span>, <span class='number'>0</span>, <span class='number'>1</span>), <span class='number'>3000</span>);
