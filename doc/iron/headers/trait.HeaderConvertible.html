@@ -53,7 +53,7 @@
 <h1 class='fqn'><span class='in-band'>Trait <a href='../index.html'>iron</a>::<wbr><a href='index.html'>headers</a>::<wbr><a class='trait' href=''>HeaderConvertible</a><wbr></span><span class='out-of-band'><span id='render-detail'>
             <a id="collapse-all" href="#">[-]
             </a>&nbsp;<a id="expand-all" href="#">[+]</a>
-        </span><a id='src-16478' href='http://www.rust-ci.org/chris-morgan/rust-http/doc/http/headers/trait.HeaderConvertible.html?gotosrc=16478'>[src]</a></span></h1>
+        </span><a id='src-16472' href='http://www.rust-ci.org/chris-morgan/rust-http/doc/http/headers/trait.HeaderConvertible.html?gotosrc=16472'>[src]</a></span></h1>
 <pre class='rust trait'>pub trait HeaderConvertible: <a class='trait' href='http://doc.rust-lang.org/nightly/core/cmp/trait.PartialEq.html' title='core::cmp::PartialEq'>PartialEq</a> + <a class='trait' href='http://doc.rust-lang.org/nightly/core/clone/trait.Clone.html' title='core::clone::Clone'>Clone</a> {
     fn <a href='#tymethod.from_stream' class='fnname'>from_stream</a>&lt;R: <a class='trait' href='http://doc.rust-lang.org/nightly/std/io/trait.Reader.html' title='std::io::Reader'>Reader</a>&gt;(reader: &amp;mut <a class='struct' href='../../iron/headers/struct.HeaderValueByteIterator.html' title='iron::headers::HeaderValueByteIterator'>HeaderValueByteIterator</a>&lt;R&gt;) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;Self&gt;;
     fn <a href='#tymethod.http_value' class='fnname'>http_value</a>(&amp;self) -&gt; <a class='struct' href='http://doc.rust-lang.org/nightly/collections/string/struct.String.html' title='collections::string::String'>String</a>;
@@ -102,7 +102,7 @@ enough, but there may be more efficient ways to do it in certain cases.</p>
 <li><a class='stability Unmarked' title='No stability level'></a><code>impl <a class='trait' href='../../iron/headers/trait.HeaderConvertible.html' title='iron::headers::HeaderConvertible'>HeaderConvertible</a> for <a href='http://doc.rust-lang.org/nightly/std/primitive.uint.html'>uint</a></code></li>
 <li><a class='stability Unmarked' title='No stability level'></a><code>impl <a class='trait' href='../../iron/headers/trait.HeaderConvertible.html' title='iron::headers::HeaderConvertible'>HeaderConvertible</a> for Url</code></li>
 <li><a class='stability Unmarked' title='No stability level'></a><code>impl <a class='trait' href='../../iron/headers/trait.HeaderConvertible.html' title='iron::headers::HeaderConvertible'>HeaderConvertible</a> for <a class='enum' href='../../iron/method/enum.Method.html' title='iron::method::Method'>Method</a></code></li>
-<li><a class='stability Unmarked' title='No stability level'></a><code>impl <a class='trait' href='../../iron/headers/trait.HeaderConvertible.html' title='iron::headers::HeaderConvertible'>HeaderConvertible</a> for <a class='struct' href='http://doc.rust-lang.org/nightly/time/struct.Tm.html' title='time::Tm'>Tm</a></code></li>
+<li><a class='stability Unmarked' title='No stability level'></a><code>impl <a class='trait' href='../../iron/headers/trait.HeaderConvertible.html' title='iron::headers::HeaderConvertible'>HeaderConvertible</a> for Tm</code></li>
 </ul><script type="text/javascript" async
                               src="../../implementors/http/headers/trait.HeaderConvertible.js">
                       </script></section>
