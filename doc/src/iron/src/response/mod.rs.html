@@ -254,7 +254,7 @@
 
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>io</span>::{<span class='kw'>mod</span>, <span class='ident'>File</span>, <span class='ident'>MemReader</span>};
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>path</span>::<span class='ident'>BytesContainer</span>;
-<span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>fmt</span>::{<span class='ident'>Show</span>, <span class='ident'>Formatter</span>, <span class='ident'>FormatError</span>};
+<span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>fmt</span>::{<span class='kw'>mod</span>, <span class='ident'>Show</span>};
 
 <span class='kw'>use</span> <span class='ident'>typemap</span>::<span class='ident'>TypeMap</span>;
 <span class='kw'>use</span> <span class='ident'>plugin</span>::<span class='ident'>Extensible</span>;
@@ -421,7 +421,7 @@
 }
 
 <span class='kw'>impl</span> <span class='ident'>Show</span> <span class='kw'>for</span> <span class='ident'>Response</span> {
-    <span class='kw'>fn</span> <span class='ident'>fmt</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>f</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>Formatter</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>(), <span class='ident'>FormatError</span><span class='op'>&gt;</span> {
+    <span class='kw'>fn</span> <span class='ident'>fmt</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>f</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>fmt</span>::<span class='ident'>Formatter</span>) <span class='op'>-&gt;</span> <span class='ident'>fmt</span>::<span class='prelude-ty'>Result</span> {
         <span class='macro'>try</span><span class='macro'>!</span>(<span class='macro'>writeln</span><span class='macro'>!</span>(<span class='ident'>f</span>, <span class='string'>&quot;Response {{&quot;</span>));
 
         <span class='macro'>try</span><span class='macro'>!</span>(<span class='macro'>writeln</span><span class='macro'>!</span>(<span class='ident'>f</span>, <span class='string'>&quot;    status: {}&quot;</span>, <span class='self'>self</span>.<span class='ident'>status</span>));

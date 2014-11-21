@@ -168,7 +168,7 @@
 <span class='doccomment'>//! Iron&#39;s HTTP Request representation and associated methods.</span>
 
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>io</span>::<span class='ident'>net</span>::<span class='ident'>ip</span>::<span class='ident'>SocketAddr</span>;
-<span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>fmt</span>::{<span class='ident'>Show</span>, <span class='ident'>Formatter</span>, <span class='ident'>FormatError</span>};
+<span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>fmt</span>::{<span class='kw'>mod</span>, <span class='ident'>Show</span>};
 
 <span class='kw'>use</span> <span class='ident'>http</span>::<span class='ident'>server</span>::<span class='ident'>request</span>::{<span class='ident'>AbsoluteUri</span>, <span class='ident'>AbsolutePath</span>};
 <span class='kw'>use</span> <span class='ident'>http</span>::<span class='ident'>headers</span>::<span class='ident'>request</span>::<span class='ident'>HeaderCollection</span>;
@@ -208,7 +208,7 @@
 }
 
 <span class='kw'>impl</span> <span class='ident'>Show</span> <span class='kw'>for</span> <span class='ident'>Request</span> {
-    <span class='kw'>fn</span> <span class='ident'>fmt</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>f</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>Formatter</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>(), <span class='ident'>FormatError</span><span class='op'>&gt;</span> {
+    <span class='kw'>fn</span> <span class='ident'>fmt</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>f</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>fmt</span>::<span class='ident'>Formatter</span>) <span class='op'>-&gt;</span> <span class='ident'>fmt</span>::<span class='prelude-ty'>Result</span> {
         <span class='macro'>try</span><span class='macro'>!</span>(<span class='macro'>writeln</span><span class='macro'>!</span>(<span class='ident'>f</span>, <span class='string'>&quot;Request {{&quot;</span>));
 
         <span class='macro'>try</span><span class='macro'>!</span>(<span class='macro'>writeln</span><span class='macro'>!</span>(<span class='ident'>f</span>, <span class='string'>&quot;    url: {}&quot;</span>, <span class='self'>self</span>.<span class='ident'>url</span>));
