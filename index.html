@@ -66,15 +66,16 @@
 <pre><code class="lang-rust">
 extern crate iron;
 
-use std::io::net::ip::Ipv4Addr;
-use iron::{status, Iron, Request, Response, IronResult};
+use iron::prelude::*;
+use iron::status;
+use iron::response::modifiers::{Status, Body};
 
 fn main() {
     fn hello_world(_: &amp;mut Request) -> IronResult&lt;Response&gt; {
-        Ok(Response::with(status::Ok, "Hello, world"))
+        Ok(Response::new().set(Status(status::Ok)).set(Body("Hello World!")))
     }
 
-    Iron::new(hello_world).listen(Ipv4Addr(127, 0, 0, 1), 3000);
+    Iron::new(hello_world).listen("localhost:3000").unwrap();
     println!("On 3000");
 }
 
