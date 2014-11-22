@@ -163,23 +163,24 @@
 <span id='112'>112</span>
 <span id='113'>113</span>
 <span id='114'>114</span>
-<span id='115'>115</span>
 </pre><pre class='rust '>
 <span class='doccomment'>//! Iron&#39;s HTTP Request representation and associated methods.</span>
 
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>io</span>::<span class='ident'>net</span>::<span class='ident'>ip</span>::<span class='ident'>SocketAddr</span>;
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>fmt</span>::{<span class='kw'>mod</span>, <span class='ident'>Show</span>};
 
-<span class='kw'>use</span> <span class='ident'>http</span>::<span class='ident'>server</span>::<span class='ident'>request</span>::{<span class='ident'>AbsoluteUri</span>, <span class='ident'>AbsolutePath</span>};
-<span class='kw'>use</span> <span class='ident'>http</span>::<span class='ident'>headers</span>::<span class='ident'>request</span>::<span class='ident'>HeaderCollection</span>;
-<span class='kw'>use</span> <span class='ident'>http</span>::<span class='ident'>method</span>::<span class='ident'>Method</span>;
+<span class='kw'>use</span> <span class='ident'>hyper</span>::<span class='ident'>uri</span>::<span class='ident'>RequestUri</span>::{<span class='ident'>AbsoluteUri</span>, <span class='ident'>AbsolutePath</span>};
+<span class='kw'>use</span> <span class='ident'>hyper</span>::<span class='ident'>header</span>::<span class='ident'>Headers</span>;
+<span class='kw'>use</span> <span class='ident'>hyper</span>::<span class='ident'>method</span>::<span class='ident'>Method</span>;
 
 <span class='kw'>use</span> <span class='ident'>typemap</span>::<span class='ident'>TypeMap</span>;
 <span class='kw'>use</span> <span class='ident'>plugin</span>::<span class='ident'>Extensible</span>;
 
-<span class='kw'>pub</span> <span class='kw'>use</span> <span class='ident'>http</span>::<span class='ident'>server</span>::<span class='ident'>request</span>::<span class='ident'>Request</span> <span class='kw'>as</span> <span class='ident'>HttpRequest</span>;
+<span class='kw'>pub</span> <span class='kw'>use</span> <span class='ident'>hyper</span>::<span class='ident'>server</span>::<span class='ident'>request</span>::<span class='ident'>Request</span> <span class='kw'>as</span> <span class='ident'>HttpRequest</span>;
 
 <span class='kw'>pub</span> <span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>url</span>::<span class='ident'>Url</span>;
+
+<span class='kw'>use</span> {<span class='ident'>headers</span>};
 
 <span class='kw'>mod</span> <span class='ident'>url</span>;
 
@@ -192,10 +193,10 @@
     <span class='kw'>pub</span> <span class='ident'>url</span>: <span class='ident'>Url</span>,
 
     <span class='doccomment'>/// The originating address of the request.</span>
-    <span class='kw'>pub</span> <span class='ident'>remote_addr</span>: <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>SocketAddr</span><span class='op'>&gt;</span>,
+    <span class='kw'>pub</span> <span class='ident'>remote_addr</span>: <span class='ident'>SocketAddr</span>,
 
     <span class='doccomment'>/// The request headers.</span>
-    <span class='kw'>pub</span> <span class='ident'>headers</span>: <span class='ident'>HeaderCollection</span>,
+    <span class='kw'>pub</span> <span class='ident'>headers</span>: <span class='ident'>Headers</span>,
 
     <span class='doccomment'>/// The request body.</span>
     <span class='kw'>pub</span> <span class='ident'>body</span>: <span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>u8</span><span class='op'>&gt;</span>,
@@ -225,47 +226,44 @@
     <span class='doccomment'>/// Create a request from an HttpRequest.</span>
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// This constructor consumes the HttpRequest.</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>from_http</span>(<span class='ident'>req</span>: <span class='ident'>HttpRequest</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>Request</span>, <span class='ident'>String</span><span class='op'>&gt;</span> {
-        <span class='kw'>match</span> <span class='ident'>req</span>.<span class='ident'>request_uri</span> {
-            <span class='ident'>AbsoluteUri</span>(<span class='ident'>url</span>) <span class='op'>=&gt;</span> {
-                <span class='kw'>let</span> <span class='ident'>url</span> <span class='op'>=</span> <span class='kw'>match</span> <span class='ident'>Url</span>::<span class='ident'>from_generic_url</span>(<span class='ident'>url</span>) {
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>from_http</span>(<span class='kw-2'>mut</span> <span class='ident'>req</span>: <span class='ident'>HttpRequest</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>Request</span>, <span class='ident'>String</span><span class='op'>&gt;</span> {
+        <span class='kw'>let</span> <span class='ident'>url</span> <span class='op'>=</span> <span class='kw'>match</span> <span class='ident'>req</span>.<span class='ident'>uri</span> {
+            <span class='ident'>AbsoluteUri</span>(<span class='kw-2'>ref</span> <span class='ident'>url</span>) <span class='op'>=&gt;</span> {
+                <span class='kw'>match</span> <span class='ident'>Url</span>::<span class='ident'>from_generic_url</span>(<span class='ident'>url</span>.<span class='ident'>clone</span>()) {
                     <span class='prelude-val'>Ok</span>(<span class='ident'>url</span>) <span class='op'>=&gt;</span> <span class='ident'>url</span>,
                     <span class='prelude-val'>Err</span>(<span class='ident'>e</span>) <span class='op'>=&gt;</span> <span class='kw'>return</span> <span class='prelude-val'>Err</span>(<span class='ident'>e</span>)
-                };
-
-                <span class='prelude-val'>Ok</span>(<span class='ident'>Request</span> {
-                    <span class='ident'>url</span>: <span class='ident'>url</span>,
-                    <span class='ident'>remote_addr</span>: <span class='ident'>req</span>.<span class='ident'>remote_addr</span>,
-                    <span class='ident'>headers</span>: <span class='ident'>req</span>.<span class='ident'>headers</span>,
-                    <span class='ident'>body</span>: <span class='ident'>req</span>.<span class='ident'>body</span>,
-                    <span class='ident'>method</span>: <span class='ident'>req</span>.<span class='ident'>method</span>,
-                    <span class='ident'>extensions</span>: <span class='ident'>TypeMap</span>::<span class='ident'>new</span>()
-                })
+                }
             },
-            <span class='ident'>AbsolutePath</span>(<span class='ident'>path</span>) <span class='op'>=&gt;</span> {
+
+            <span class='ident'>AbsolutePath</span>(<span class='kw-2'>ref</span> <span class='ident'>path</span>) <span class='op'>=&gt;</span> {
                 <span class='comment'>// Attempt to prepend the Host header (mandatory in HTTP/1.1)</span>
-                <span class='comment'>// XXX: HTTPS incompatible, update when switching to Teepee.</span>
-                <span class='kw'>let</span> <span class='ident'>url_string</span> <span class='op'>=</span> <span class='kw'>match</span> <span class='ident'>req</span>.<span class='ident'>headers</span>.<span class='ident'>host</span> {
+                <span class='comment'>// FIXME: HTTPS incompatible, update when Hyper gains HTTPS support.</span>
+                <span class='kw'>let</span> <span class='ident'>url_string</span> <span class='op'>=</span> <span class='kw'>match</span> <span class='ident'>req</span>.<span class='ident'>headers</span>.<span class='ident'>get</span>::<span class='op'>&lt;</span><span class='ident'>headers</span>::<span class='ident'>Host</span><span class='op'>&gt;</span>() {
                     <span class='prelude-val'>Some</span>(<span class='kw-2'>ref</span> <span class='ident'>host</span>) <span class='op'>=&gt;</span> <span class='macro'>format</span><span class='macro'>!</span>(<span class='string'>&quot;http://{}{}&quot;</span>, <span class='ident'>host</span>, <span class='ident'>path</span>),
                     <span class='prelude-val'>None</span> <span class='op'>=&gt;</span> <span class='kw'>return</span> <span class='prelude-val'>Err</span>(<span class='string'>&quot;No host specified in request&quot;</span>.<span class='ident'>to_string</span>())
                 };
 
-                <span class='kw'>let</span> <span class='ident'>url</span> <span class='op'>=</span> <span class='kw'>match</span> <span class='ident'>Url</span>::<span class='ident'>parse</span>(<span class='ident'>url_string</span>.<span class='ident'>as_slice</span>()) {
+                <span class='kw'>match</span> <span class='ident'>Url</span>::<span class='ident'>parse</span>(<span class='ident'>url_string</span>.<span class='ident'>as_slice</span>()) {
                     <span class='prelude-val'>Ok</span>(<span class='ident'>url</span>) <span class='op'>=&gt;</span> <span class='ident'>url</span>,
                     <span class='prelude-val'>Err</span>(<span class='ident'>e</span>) <span class='op'>=&gt;</span> <span class='kw'>return</span> <span class='prelude-val'>Err</span>(<span class='macro'>format</span><span class='macro'>!</span>(<span class='string'>&quot;Couldn&#39;t parse requested URL: {}&quot;</span>, <span class='ident'>e</span>))
-                };
-
-                <span class='prelude-val'>Ok</span>(<span class='ident'>Request</span> {
-                    <span class='ident'>url</span>: <span class='ident'>url</span>,
-                    <span class='ident'>remote_addr</span>: <span class='ident'>req</span>.<span class='ident'>remote_addr</span>,
-                    <span class='ident'>headers</span>: <span class='ident'>req</span>.<span class='ident'>headers</span>,
-                    <span class='ident'>body</span>: <span class='ident'>req</span>.<span class='ident'>body</span>,
-                    <span class='ident'>method</span>: <span class='ident'>req</span>.<span class='ident'>method</span>,
-                    <span class='ident'>extensions</span>: <span class='ident'>TypeMap</span>::<span class='ident'>new</span>()
-                })
+                }
             },
-            _ <span class='op'>=&gt;</span> <span class='prelude-val'>Err</span>(<span class='string'>&quot;Unsupported request URI&quot;</span>.<span class='ident'>to_string</span>())
-        }
+            _ <span class='op'>=&gt;</span> <span class='kw'>return</span> <span class='prelude-val'>Err</span>(<span class='string'>&quot;Unsupported request URI&quot;</span>.<span class='ident'>to_string</span>())
+        };
+
+        <span class='kw'>let</span> <span class='ident'>body</span> <span class='op'>=</span> <span class='kw'>match</span> <span class='ident'>req</span>.<span class='ident'>read_to_end</span>() {
+            <span class='prelude-val'>Ok</span>(<span class='ident'>body</span>) <span class='op'>=&gt;</span> <span class='ident'>body</span>,
+            <span class='prelude-val'>Err</span>(<span class='ident'>e</span>) <span class='op'>=&gt;</span> <span class='kw'>return</span> <span class='prelude-val'>Err</span>(<span class='macro'>format</span><span class='macro'>!</span>(<span class='string'>&quot;Couldn&#39;t read request body: {}&quot;</span>, <span class='ident'>e</span>))
+        };
+
+        <span class='prelude-val'>Ok</span>(<span class='ident'>Request</span> {
+            <span class='ident'>url</span>: <span class='ident'>url</span>,
+            <span class='ident'>remote_addr</span>: <span class='ident'>req</span>.<span class='ident'>remote_addr</span>,
+            <span class='ident'>headers</span>: <span class='ident'>req</span>.<span class='ident'>headers</span>,
+            <span class='ident'>body</span>: <span class='ident'>body</span>,
+            <span class='ident'>method</span>: <span class='ident'>req</span>.<span class='ident'>method</span>,
+            <span class='ident'>extensions</span>: <span class='ident'>TypeMap</span>::<span class='ident'>new</span>()
+        })
     }
 }
 

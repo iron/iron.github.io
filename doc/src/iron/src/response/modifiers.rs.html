@@ -199,6 +199,11 @@
 <span id='148'>148</span>
 <span id='149'>149</span>
 <span id='150'>150</span>
+<span id='151'>151</span>
+<span id='152'>152</span>
+<span id='153'>153</span>
+<span id='154'>154</span>
+<span id='155'>155</span>
 </pre><pre class='rust '>
 <span class='doccomment'>//! Defines a series of convenience modifiers for editing Responses</span>
 <span class='doccomment'>//!</span>
@@ -227,23 +232,24 @@
 <span class='doccomment'>//! For more information about the modifier system, see</span>
 <span class='doccomment'>//! [rust-modifier](https://github.com/reem/rust-modifier).</span>
 
-<span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>str</span>::<span class='ident'>StrAllocating</span>;
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>io</span>::{<span class='ident'>File</span>, <span class='ident'>MemReader</span>};
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>path</span>::<span class='ident'>Path</span>;
 
 <span class='kw'>use</span> <span class='ident'>modifier</span>::<span class='ident'>Modifier</span>;
-<span class='kw'>use</span> <span class='ident'>http</span>::<span class='ident'>headers</span>::<span class='ident'>content_type</span>::<span class='ident'>MediaType</span>;
-<span class='kw'>use</span> <span class='ident'>content_type</span>::<span class='ident'>get_content_type</span>;
-<span class='kw'>use</span> {<span class='ident'>status</span>, <span class='ident'>Response</span>, <span class='ident'>Url</span>};
+<span class='comment'>// use content_type::get_content_type;</span>
+
+<span class='kw'>use</span> <span class='ident'>hyper</span>::<span class='ident'>mime</span>::<span class='ident'>Mime</span>;
+
+<span class='kw'>use</span> {<span class='ident'>status</span>, <span class='ident'>headers</span>, <span class='ident'>Response</span>, <span class='ident'>Url</span>};
 
 <span class='doccomment'>/// A response modifier for setting the content-type header.</span>
-<span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>ContentType</span>(<span class='kw'>pub</span> <span class='ident'>MediaType</span>);
+<span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>ContentType</span>(<span class='kw'>pub</span> <span class='ident'>Mime</span>);
 
 <span class='kw'>impl</span> <span class='ident'>ContentType</span> {
-    <span class='doccomment'>/// Create a new ContentType modifier from the parts of a content-type header value.</span>
+    <span class='doccomment'>/// Create a new ContentType modifier from  a content-type header value.</span>
     <span class='attribute'>#[<span class='ident'>inline</span>]</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>new</span><span class='op'>&lt;</span><span class='ident'>S</span>: <span class='ident'>StrAllocating</span>, <span class='ident'>S1</span>: <span class='ident'>StrAllocating</span><span class='op'>&gt;</span>(<span class='ident'>type_</span>: <span class='ident'>S</span>, <span class='ident'>subtype</span>: <span class='ident'>S1</span>) <span class='op'>-&gt;</span> <span class='ident'>ContentType</span> {
-        <span class='ident'>ContentType</span>(<span class='ident'>MediaType</span>::<span class='ident'>new</span>(<span class='ident'>type_</span>.<span class='ident'>into_string</span>(), <span class='ident'>subtype</span>.<span class='ident'>into_string</span>(), <span class='macro'>vec</span><span class='macro'>!</span>[]))
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>new</span>(<span class='ident'>m</span>: <span class='ident'>Mime</span>) <span class='op'>-&gt;</span> <span class='ident'>ContentType</span> {
+        <span class='ident'>ContentType</span>(<span class='ident'>m</span>)
     }
 }
 
@@ -251,7 +257,7 @@
     <span class='attribute'>#[<span class='ident'>inline</span>]</span>
     <span class='kw'>fn</span> <span class='ident'>modify</span>(<span class='self'>self</span>, <span class='ident'>res</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>Response</span>) {
         <span class='kw'>let</span> <span class='ident'>ContentType</span>(<span class='ident'>media</span>) <span class='op'>=</span> <span class='self'>self</span>;
-        <span class='ident'>res</span>.<span class='ident'>headers</span>.<span class='ident'>content_type</span> <span class='op'>=</span> <span class='prelude-val'>Some</span>(<span class='ident'>media</span>);
+        <span class='ident'>res</span>.<span class='ident'>headers</span>.<span class='ident'>set</span>(<span class='ident'>headers</span>::<span class='ident'>ContentType</span>(<span class='ident'>media</span>))
     }
 }
 
@@ -289,7 +295,7 @@
 <span class='kw'>impl</span> <span class='ident'>Bodyable</span> <span class='kw'>for</span> <span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>u8</span><span class='op'>&gt;</span> {
     <span class='attribute'>#[<span class='ident'>inline</span>]</span>
     <span class='kw'>fn</span> <span class='ident'>set_body</span>(<span class='self'>self</span>, <span class='ident'>res</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>Response</span>) {
-        <span class='ident'>res</span>.<span class='ident'>headers</span>.<span class='ident'>content_length</span> <span class='op'>=</span> <span class='prelude-val'>Some</span>(<span class='self'>self</span>.<span class='ident'>len</span>());
+        <span class='ident'>res</span>.<span class='ident'>headers</span>.<span class='ident'>set</span>(<span class='ident'>headers</span>::<span class='ident'>ContentLength</span>(<span class='self'>self</span>.<span class='ident'>len</span>()));
         <span class='ident'>res</span>.<span class='ident'>body</span> <span class='op'>=</span> <span class='prelude-val'>Some</span>(<span class='kw'>box</span> <span class='ident'>MemReader</span>::<span class='ident'>new</span>(<span class='self'>self</span>) <span class='kw'>as</span> <span class='ident'>Box</span><span class='op'>&lt;</span><span class='ident'>Reader</span> <span class='op'>+</span> <span class='ident'>Send</span><span class='op'>&gt;</span>);
     }
 }
@@ -312,7 +318,11 @@
     <span class='attribute'>#[<span class='ident'>inline</span>]</span>
     <span class='kw'>fn</span> <span class='ident'>set_body</span>(<span class='self'>self</span>, <span class='ident'>res</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>Response</span>) {
         <span class='comment'>// Also set the content type.</span>
-        <span class='ident'>res</span>.<span class='ident'>headers</span>.<span class='ident'>content_type</span> <span class='op'>=</span> <span class='self'>self</span>.<span class='ident'>path</span>().<span class='ident'>extension_str</span>().<span class='ident'>and_then</span>(<span class='ident'>get_content_type</span>);
+        <span class='comment'>// self.path().extension_str()</span>
+        <span class='comment'>//     .and_then(get_content_type)</span>
+        <span class='comment'>//     .and_then(|ct| {</span>
+        <span class='comment'>//         res.headers.set(headers::ContentType(ct))</span>
+        <span class='comment'>//     });</span>
         <span class='ident'>res</span>.<span class='ident'>body</span> <span class='op'>=</span> <span class='prelude-val'>Some</span>(<span class='kw'>box</span> <span class='self'>self</span> <span class='kw'>as</span> <span class='ident'>Box</span><span class='op'>&lt;</span><span class='ident'>Reader</span> <span class='op'>+</span> <span class='ident'>Send</span><span class='op'>&gt;</span>);
     }
 }
@@ -346,7 +356,7 @@
 <span class='kw'>impl</span> <span class='ident'>Modifier</span><span class='op'>&lt;</span><span class='ident'>Response</span><span class='op'>&gt;</span> <span class='kw'>for</span> <span class='ident'>Redirect</span> {
     <span class='kw'>fn</span> <span class='ident'>modify</span>(<span class='self'>self</span>, <span class='ident'>res</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>Response</span>) {
         <span class='kw'>let</span> <span class='ident'>Redirect</span>(<span class='ident'>url</span>) <span class='op'>=</span> <span class='self'>self</span>;
-        <span class='ident'>res</span>.<span class='ident'>headers</span>.<span class='ident'>location</span> <span class='op'>=</span> <span class='prelude-val'>Some</span>(<span class='ident'>url</span>.<span class='ident'>into_generic_url</span>());
+        <span class='ident'>res</span>.<span class='ident'>headers</span>.<span class='ident'>set</span>(<span class='ident'>headers</span>::<span class='ident'>Location</span>(<span class='ident'>url</span>.<span class='ident'>to_string</span>()));
     }
 }
 

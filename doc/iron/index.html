@@ -53,7 +53,7 @@
 <h1 class='fqn'><span class='in-band'>Crate <a class='mod' href=''>iron</a><wbr></span><span class='out-of-band'><a href='stability.html'>[stability]</a> <span id='render-detail'>
             <a id="collapse-all" href="#">[-]
             </a>&nbsp;<a id="expand-all" href="#">[+]</a>
-        </span><a id='src-0' href='../src/iron/src/lib.rs.html#1-112'>[src]</a></span></h1>
+        </span><a id='src-0' href='../src/iron/src/lib.rs.html#1-123'>[src]</a></span></h1>
 <div class='docblock'><p>The main crate for the Iron library.</p>
 
 <p>Iron is a high level web framework built in and for Rust.</p>
@@ -80,16 +80,18 @@ for creating and plugging in middleware.</p>
                     </tr>
                 
                     <tr>
-                        <td><a class='stability Unmarked' title='No stability level'></a><a class='mod' href='headers/index.html'
+                        <td><a class='stability Experimental' title='Experimental'></a><a class='mod' href='headers/index.html'
                                title='iron::headers'>headers</a></td>
-                        <td class='docblock short'><p>Types and utilities for working with headers in HTTP requests and responses.</p>
+                        <td class='docblock short'><p>Common Headers
+A Collection of Header implementations for common HTTP Headers.</p>
 </td>
                     </tr>
                 
                     <tr>
                         <td><a class='stability Unmarked' title='No stability level'></a><a class='mod' href='method/index.html'
                                title='iron::method'>method</a></td>
-                        <td class='docblock short'></td>
+                        <td class='docblock short'><p>HTTP Methods</p>
+</td>
                     </tr>
                 
                     <tr>
@@ -97,6 +99,12 @@ for creating and plugging in middleware.</p>
                                title='iron::middleware'>middleware</a></td>
                         <td class='docblock short'><p>Iron&#39;s Middleware and Handler System</p>
 </td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Experimental' title='Experimental'></a><a class='mod' href='mime/index.html'
+                               title='iron::mime'>mime</a></td>
+                        <td class='docblock short'></td>
                     </tr>
                 
                     <tr>
@@ -123,7 +131,8 @@ for creating and plugging in middleware.</p>
                     <tr>
                         <td><a class='stability Unmarked' title='No stability level'></a><a class='mod' href='status/index.html'
                                title='iron::status'>status</a></td>
-                        <td class='docblock short'></td>
+                        <td class='docblock short'><p>Status Codes</p>
+</td>
                     </tr>
                 
                     <tr>
@@ -134,6 +143,13 @@ for creating and plugging in middleware.</p>
                     </tr>
                 </table><h2 id='structs' class='section-header'><a href="#structs">Structs</a></h2>
 <table>
+                    <tr>
+                        <td><a class='stability Experimental' title='Experimental'></a><a class='struct' href='struct.Headers.html'
+                               title='iron::Headers'>Headers</a></td>
+                        <td class='docblock short'><p>A map of header fields on requests and responses.</p>
+</td>
+                    </tr>
+                
                     <tr>
                         <td><a class='stability Unmarked' title='No stability level'></a><a class='struct' href='struct.Iron.html'
                                title='iron::Iron'>Iron</a></td>

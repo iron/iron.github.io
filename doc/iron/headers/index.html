@@ -35,7 +35,7 @@
 
     <section class="sidebar">
         <a href='../../iron/index.html'><img src='https://avatars0.githubusercontent.com/u/7853871?s=128' alt='' width='100'></a>
-        <p class='location'><a href='../index.html'>iron</a></p><div class='block mod'><h2>Modules</h2><a class='mod ' href='../errors/index.html'>errors</a><a class='mod current' href='../headers/index.html'>headers</a><a class='mod ' href='../method/index.html'>method</a><a class='mod ' href='../middleware/index.html'>middleware</a><a class='mod ' href='../modifier/index.html'>modifier</a><a class='mod ' href='../prelude/index.html'>prelude</a><a class='mod ' href='../response/index.html'>response</a><a class='mod ' href='../status/index.html'>status</a><a class='mod ' href='../typemap/index.html'>typemap</a></div><div class='block struct'><h2>Structs</h2><a class='struct ' href='../struct.Iron.html'>Iron</a><a class='struct ' href='../struct.Request.html'>Request</a><a class='struct ' href='../struct.TypeMap.html'>TypeMap</a><a class='struct ' href='../struct.Url.html'>Url</a></div><div class='block trait'><h2>Traits</h2><a class='trait ' href='../trait.Error.html'>Error</a><a class='trait ' href='../trait.ErrorRefExt.html'>ErrorRefExt</a><a class='trait ' href='../trait.Plugin.html'>Plugin</a><a class='trait ' href='../trait.Set.html'>Set</a></div>
+        <p class='location'><a href='../index.html'>iron</a></p><div class='block mod'><h2>Modules</h2><a class='mod ' href='../errors/index.html'>errors</a><a class='mod current' href='../headers/index.html'>headers</a><a class='mod ' href='../method/index.html'>method</a><a class='mod ' href='../middleware/index.html'>middleware</a><a class='mod ' href='../mime/index.html'>mime</a><a class='mod ' href='../modifier/index.html'>modifier</a><a class='mod ' href='../prelude/index.html'>prelude</a><a class='mod ' href='../response/index.html'>response</a><a class='mod ' href='../status/index.html'>status</a><a class='mod ' href='../typemap/index.html'>typemap</a></div><div class='block struct'><h2>Structs</h2><a class='struct ' href='../struct.Headers.html'>Headers</a><a class='struct ' href='../struct.Iron.html'>Iron</a><a class='struct ' href='../struct.Request.html'>Request</a><a class='struct ' href='../struct.TypeMap.html'>TypeMap</a><a class='struct ' href='../struct.Url.html'>Url</a></div><div class='block trait'><h2>Traits</h2><a class='trait ' href='../trait.Error.html'>Error</a><a class='trait ' href='../trait.ErrorRefExt.html'>ErrorRefExt</a><a class='trait ' href='../trait.Plugin.html'>Plugin</a><a class='trait ' href='../trait.Set.html'>Set</a></div>
     </section>
 
     <nav class="sub">
@@ -50,143 +50,222 @@
     </nav>
 
     <section id='main' class="content mod">
-<h1 class='fqn'><span class='in-band'>Module <a href='../index.html'>iron</a>::<wbr><a class='mod' href=''>headers</a><wbr></span><span class='out-of-band'><span id='render-detail'>
+<h1 class='fqn'><span class='in-band'>Module <a href='../index.html'>iron</a>::<wbr><a class='mod' href=''>headers</a><wbr><a class='stability Experimental' title=''>Experimental</a></span><span class='out-of-band'><span id='render-detail'>
             <a id="collapse-all" href="#">[-]
             </a>&nbsp;<a id="expand-all" href="#">[+]</a>
-        </span><a id='src-10075' href='http://www.rust-ci.org/chris-morgan/rust-http/doc/http/headers/index.html?gotosrc=10075'>[src]</a></span></h1>
-<div class='docblock'><p>Types and utilities for working with headers in HTTP requests and responses.</p>
+        </span></span></h1>
+<div class='docblock'><p>Common Headers
+A Collection of Header implementations for common HTTP Headers.</p>
 
-<p>This HTTP system is Special in that it uses lots of strong typing for its header system. All
-known HTTP headers are type checked, rather than being dealt with as strings all the time. Only
-unknown headers are stored in a map in the traditional way.</p>
+<h2 id="mime" class='section-header'><a
+                           href="#mime">Mime</a></h2>
+<p>Several header fields use MIME values for their contents. Keeping with the
+strongly-typed theme, the <a href="http://seanmonstar.github.io/mime.rs">mime</a> crate
+is used, such as <code>ContentType(pub Mime)</code>.</p>
 </div><h2 id='modules' class='section-header'><a href="#modules">Modules</a></h2>
 <table>
                     <tr>
-                        <td><a class='stability Unmarked' title='No stability level'></a><a class='mod' href='accept_ranges/index.html'
-                               title='iron::headers::accept_ranges'>accept_ranges</a></td>
-                        <td class='docblock short'><p>The Accept-Ranges request header, defined in RFC 2616, Section 14.5.</p>
+                        <td><a class='stability Experimental' title='Experimental'></a><a class='mod' href='accept/index.html'
+                               title='iron::headers::accept'>accept</a></td>
+                        <td class='docblock short'><p>Exposes the Accept header.</p>
 </td>
                     </tr>
                 
                     <tr>
-                        <td><a class='stability Unmarked' title='No stability level'></a><a class='mod' href='connection/index.html'
+                        <td><a class='stability Experimental' title='Experimental'></a><a class='mod' href='authorization/index.html'
+                               title='iron::headers::authorization'>authorization</a></td>
+                        <td class='docblock short'><p>Exposes the Authorization header.</p>
+</td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Experimental' title='Experimental'></a><a class='mod' href='connection/index.html'
                                title='iron::headers::connection'>connection</a></td>
-                        <td class='docblock short'><p>The Connection general header, defined in RFC 2616, Section 14.10.</p>
+                        <td class='docblock short'><p>Exposes the Connection header.</p>
 </td>
                     </tr>
                 
                     <tr>
-                        <td><a class='stability Unmarked' title='No stability level'></a><a class='mod' href='content_type/index.html'
+                        <td><a class='stability Experimental' title='Experimental'></a><a class='mod' href='content_length/index.html'
+                               title='iron::headers::content_length'>content_length</a></td>
+                        <td class='docblock short'><p>Exposes the ContentLength header.</p>
+</td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Experimental' title='Experimental'></a><a class='mod' href='content_type/index.html'
                                title='iron::headers::content_type'>content_type</a></td>
-                        <td class='docblock short'><p>The Content-Type entity header, defined in RFC 2616, Section 14.17.</p>
+                        <td class='docblock short'><p>Exposes the ContentType header.</p>
 </td>
                     </tr>
                 
                     <tr>
-                        <td><a class='stability Unmarked' title='No stability level'></a><a class='mod' href='etag/index.html'
-                               title='iron::headers::etag'>etag</a></td>
-                        <td class='docblock short'></td>
+                        <td><a class='stability Experimental' title='Experimental'></a><a class='mod' href='cookie/index.html'
+                               title='iron::headers::cookie'>cookie</a></td>
+                        <td class='docblock short'><p>Exposes the Cookie header.</p>
+</td>
                     </tr>
                 
                     <tr>
-                        <td><a class='stability Unmarked' title='No stability level'></a><a class='mod' href='host/index.html'
+                        <td><a class='stability Experimental' title='Experimental'></a><a class='mod' href='date/index.html'
+                               title='iron::headers::date'>date</a></td>
+                        <td class='docblock short'><p>Exposes the Date header.</p>
+</td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Experimental' title='Experimental'></a><a class='mod' href='host/index.html'
                                title='iron::headers::host'>host</a></td>
-                        <td class='docblock short'><p>The Host request header, defined in RFC 2616, Section 14.23.</p>
+                        <td class='docblock short'><p>Exposes the Host header.</p>
 </td>
                     </tr>
                 
                     <tr>
-                        <td><a class='stability Unmarked' title='No stability level'></a><a class='mod' href='request/index.html'
-                               title='iron::headers::request'>request</a></td>
-                        <td class='docblock short'></td>
-                    </tr>
-                
-                    <tr>
-                        <td><a class='stability Unmarked' title='No stability level'></a><a class='mod' href='response/index.html'
-                               title='iron::headers::response'>response</a></td>
-                        <td class='docblock short'></td>
-                    </tr>
-                
-                    <tr>
-                        <td><a class='stability Unmarked' title='No stability level'></a><a class='mod' href='serialization_utils/index.html'
-                               title='iron::headers::serialization_utils'>serialization_utils</a></td>
-                        <td class='docblock short'><p>Utility functions for assisting with conversion of headers from and to the HTTP text form.</p>
+                        <td><a class='stability Experimental' title='Experimental'></a><a class='mod' href='location/index.html'
+                               title='iron::headers::location'>location</a></td>
+                        <td class='docblock short'><p>Exposes the Location header.</p>
 </td>
                     </tr>
                 
                     <tr>
-                        <td><a class='stability Unmarked' title='No stability level'></a><a class='mod' href='test_utils/index.html'
-                               title='iron::headers::test_utils'>test_utils</a></td>
-                        <td class='docblock short'></td>
+                        <td><a class='stability Experimental' title='Experimental'></a><a class='mod' href='server/index.html'
+                               title='iron::headers::server'>server</a></td>
+                        <td class='docblock short'><p>Exposes the Server header.</p>
+</td>
                     </tr>
                 
                     <tr>
-                        <td><a class='stability Unmarked' title='No stability level'></a><a class='mod' href='transfer_encoding/index.html'
+                        <td><a class='stability Experimental' title='Experimental'></a><a class='mod' href='set_cookie/index.html'
+                               title='iron::headers::set_cookie'>set_cookie</a></td>
+                        <td class='docblock short'><p>Exposes the Set-Cookie header.</p>
+</td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Experimental' title='Experimental'></a><a class='mod' href='transfer_encoding/index.html'
                                title='iron::headers::transfer_encoding'>transfer_encoding</a></td>
-                        <td class='docblock short'><p>The Transfer-Encoding request header, defined in RFC 2616, sections 14.41 and 3.6.</p>
+                        <td class='docblock short'><p>Exposes the TransferEncoding header.</p>
+</td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Experimental' title='Experimental'></a><a class='mod' href='upgrade/index.html'
+                               title='iron::headers::upgrade'>upgrade</a></td>
+                        <td class='docblock short'><p>Exposes the Upgrade header.</p>
+</td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Experimental' title='Experimental'></a><a class='mod' href='user_agent/index.html'
+                               title='iron::headers::user_agent'>user_agent</a></td>
+                        <td class='docblock short'><p>Exposes the UserAgent header.</p>
+</td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Experimental' title='Experimental'></a><a class='mod' href='util/index.html'
+                               title='iron::headers::util'>util</a></td>
+                        <td class='docblock short'><p>Utility functions for Header implementations.</p>
 </td>
                     </tr>
                 </table><h2 id='structs' class='section-header'><a href="#structs">Structs</a></h2>
 <table>
                     <tr>
-                        <td><a class='stability Unmarked' title='No stability level'></a><a class='struct' href='struct.HeaderValueByteIterator.html'
-                               title='iron::headers::HeaderValueByteIterator'>HeaderValueByteIterator</a></td>
-                        <td class='docblock short'><p>An iterator over the bytes of a header value.
-This ensures one cannot read past the end of a header mistakenly and that linear white space is
-handled correctly so that nothing else needs to worry about it. Any linear whitespace (multiple
-spaces outside of a quoted-string) is compacted into a single SP.</p>
-</td>
-                    </tr>
-                </table><h2 id='enums' class='section-header'><a href="#enums">Enums</a></h2>
-<table>
-                    <tr>
-                        <td><a class='stability Unmarked' title='No stability level'></a><a class='enum' href='enum.ConsumeCommaLWSResult.html'
-                               title='iron::headers::ConsumeCommaLWSResult'>ConsumeCommaLWSResult</a></td>
-                        <td class='docblock short'></td>
-                    </tr>
-                
-                    <tr>
-                        <td><a class='stability Unmarked' title='No stability level'></a><a class='enum' href='enum.HeaderLineErr.html'
-                               title='iron::headers::HeaderLineErr'>HeaderLineErr</a></td>
-                        <td class='docblock short'></td>
-                    </tr>
-                </table><h2 id='traits' class='section-header'><a href="#traits">Traits</a></h2>
-<table>
-                    <tr>
-                        <td><a class='stability Unmarked' title='No stability level'></a><a class='trait' href='trait.CommaListHeaderConvertible.html'
-                               title='iron::headers::CommaListHeaderConvertible'>CommaListHeaderConvertible</a></td>
-                        <td class='docblock short'><p>A header with multiple comma-separated values. Implement this and a HeaderConvertible
-implementation for Vec<T> is yours for free—just make sure your reading does not consume the
-comma.</p>
+                        <td><a class='stability Experimental' title='Experimental'></a><a class='struct' href='struct.Accept.html'
+                               title='iron::headers::Accept'>Accept</a></td>
+                        <td class='docblock short'><p>The <code>Accept</code> header.</p>
 </td>
                     </tr>
                 
                     <tr>
-                        <td><a class='stability Unmarked' title='No stability level'></a><a class='trait' href='trait.HeaderConvertible.html'
-                               title='iron::headers::HeaderConvertible'>HeaderConvertible</a></td>
-                        <td class='docblock short'><p>A datatype for headers.</p>
+                        <td><a class='stability Experimental' title='Experimental'></a><a class='struct' href='struct.Authorization.html'
+                               title='iron::headers::Authorization'>Authorization</a></td>
+                        <td class='docblock short'><p>The <code>Authorization</code> header field.</p>
 </td>
                     </tr>
                 
                     <tr>
-                        <td><a class='stability Unmarked' title='No stability level'></a><a class='trait' href='trait.HeaderEnum.html'
-                               title='iron::headers::HeaderEnum'>HeaderEnum</a></td>
-                        <td class='docblock short'></td>
-                    </tr>
-                </table><h2 id='functions' class='section-header'><a href="#functions">Functions</a></h2>
-<table>
-                    <tr>
-                        <td><a class='stability Unmarked' title='No stability level'></a><a class='fn' href='fn.header_enum_from_stream.html'
-                               title='iron::headers::header_enum_from_stream'>header_enum_from_stream</a></td>
-                        <td class='docblock short'><p>Shifted out of being a default method to fix an ICE (not yet reported, TODO)</p>
+                        <td><a class='stability Experimental' title='Experimental'></a><a class='struct' href='struct.Connection.html'
+                               title='iron::headers::Connection'>Connection</a></td>
+                        <td class='docblock short'><p>The <code>Connection</code> header.</p>
 </td>
                     </tr>
-                </table><h2 id='types' class='section-header'><a href="#types">Type Definitions</a></h2>
-<table>
+                
                     <tr>
-                        <td><a class='stability Unmarked' title='No stability level'></a><a class='type' href='type.DeltaSeconds.html'
-                               title='iron::headers::DeltaSeconds'>DeltaSeconds</a></td>
-                        <td class='docblock short'></td>
+                        <td><a class='stability Experimental' title='Experimental'></a><a class='struct' href='struct.ContentLength.html'
+                               title='iron::headers::ContentLength'>ContentLength</a></td>
+                        <td class='docblock short'><p>The <code>Content-Length</code> header.</p>
+</td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Experimental' title='Experimental'></a><a class='struct' href='struct.ContentType.html'
+                               title='iron::headers::ContentType'>ContentType</a></td>
+                        <td class='docblock short'><p>The <code>Content-Type</code> header.</p>
+</td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Experimental' title='Experimental'></a><a class='struct' href='struct.Cookies.html'
+                               title='iron::headers::Cookies'>Cookies</a></td>
+                        <td class='docblock short'><p>The <code>Cookie</code> header. Defined in <a href="tools.ietf.org/html/rfc6265#section-5.4">RFC6265</a>:</p>
+</td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Experimental' title='Experimental'></a><a class='struct' href='struct.Date.html'
+                               title='iron::headers::Date'>Date</a></td>
+                        <td class='docblock short'><p>The <code>Date</code> header field.</p>
+</td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Experimental' title='Experimental'></a><a class='struct' href='struct.Host.html'
+                               title='iron::headers::Host'>Host</a></td>
+                        <td class='docblock short'><p>The <code>Host</code> header.</p>
+</td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Experimental' title='Experimental'></a><a class='struct' href='struct.Location.html'
+                               title='iron::headers::Location'>Location</a></td>
+                        <td class='docblock short'><p>The <code>Location</code> header.</p>
+</td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Experimental' title='Experimental'></a><a class='struct' href='struct.Server.html'
+                               title='iron::headers::Server'>Server</a></td>
+                        <td class='docblock short'><p>The <code>Server</code> header field.</p>
+</td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Experimental' title='Experimental'></a><a class='struct' href='struct.SetCookie.html'
+                               title='iron::headers::SetCookie'>SetCookie</a></td>
+                        <td class='docblock short'><p>The <code>Set-Cookie</code> header</p>
+</td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Experimental' title='Experimental'></a><a class='struct' href='struct.TransferEncoding.html'
+                               title='iron::headers::TransferEncoding'>TransferEncoding</a></td>
+                        <td class='docblock short'><p>The <code>Transfer-Encoding</code> header.</p>
+</td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Experimental' title='Experimental'></a><a class='struct' href='struct.Upgrade.html'
+                               title='iron::headers::Upgrade'>Upgrade</a></td>
+                        <td class='docblock short'><p>The <code>Upgrade</code> header.</p>
+</td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Experimental' title='Experimental'></a><a class='struct' href='struct.UserAgent.html'
+                               title='iron::headers::UserAgent'>UserAgent</a></td>
+                        <td class='docblock short'><p>The <code>User-Agent</code> header field.</p>
+</td>
                     </tr>
                 </table></section>
     <section id='search' class="content hidden"></section>

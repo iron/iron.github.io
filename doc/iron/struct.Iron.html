@@ -35,7 +35,7 @@
 
     <section class="sidebar">
         <a href='../iron/index.html'><img src='https://avatars0.githubusercontent.com/u/7853871?s=128' alt='' width='100'></a>
-        <p class='location'><a href='index.html'>iron</a></p><div class='block mod'><h2>Modules</h2><a class='mod ' href='errors/index.html'>errors</a><a class='mod ' href='headers/index.html'>headers</a><a class='mod ' href='method/index.html'>method</a><a class='mod ' href='middleware/index.html'>middleware</a><a class='mod ' href='modifier/index.html'>modifier</a><a class='mod ' href='prelude/index.html'>prelude</a><a class='mod ' href='response/index.html'>response</a><a class='mod ' href='status/index.html'>status</a><a class='mod ' href='typemap/index.html'>typemap</a></div><div class='block struct'><h2>Structs</h2><a class='struct current' href='struct.Iron.html'>Iron</a><a class='struct ' href='struct.Request.html'>Request</a><a class='struct ' href='struct.TypeMap.html'>TypeMap</a><a class='struct ' href='struct.Url.html'>Url</a></div><div class='block trait'><h2>Traits</h2><a class='trait ' href='trait.Error.html'>Error</a><a class='trait ' href='trait.ErrorRefExt.html'>ErrorRefExt</a><a class='trait ' href='trait.Plugin.html'>Plugin</a><a class='trait ' href='trait.Set.html'>Set</a></div>
+        <p class='location'><a href='index.html'>iron</a></p><div class='block mod'><h2>Modules</h2><a class='mod ' href='errors/index.html'>errors</a><a class='mod ' href='headers/index.html'>headers</a><a class='mod ' href='method/index.html'>method</a><a class='mod ' href='middleware/index.html'>middleware</a><a class='mod ' href='mime/index.html'>mime</a><a class='mod ' href='modifier/index.html'>modifier</a><a class='mod ' href='prelude/index.html'>prelude</a><a class='mod ' href='response/index.html'>response</a><a class='mod ' href='status/index.html'>status</a><a class='mod ' href='typemap/index.html'>typemap</a></div><div class='block struct'><h2>Structs</h2><a class='struct ' href='struct.Headers.html'>Headers</a><a class='struct current' href='struct.Iron.html'>Iron</a><a class='struct ' href='struct.Request.html'>Request</a><a class='struct ' href='struct.TypeMap.html'>TypeMap</a><a class='struct ' href='struct.Url.html'>Url</a></div><div class='block trait'><h2>Traits</h2><a class='trait ' href='trait.Error.html'>Error</a><a class='trait ' href='trait.ErrorRefExt.html'>ErrorRefExt</a><a class='trait ' href='trait.Plugin.html'>Plugin</a><a class='trait ' href='trait.Set.html'>Set</a></div>
     </section>
 
     <nav class="sub">
@@ -53,7 +53,7 @@
 <h1 class='fqn'><span class='in-band'>Struct <a href='index.html'>iron</a>::<wbr><a class='struct' href=''>Iron</a><wbr></span><span class='out-of-band'><span id='render-detail'>
             <a id="collapse-all" href="#">[-]
             </a>&nbsp;<a id="expand-all" href="#">[+]</a>
-        </span><a id='src-4719' href='../src/iron/src/iron.rs.html#16-20'>[src]</a></span></h1>
+        </span><a id='src-4531' href='../src/iron/src/iron.rs.html#23-27'>[src]</a></span></h1>
 <pre class='rust struct'>pub struct Iron&lt;H&gt; {
     pub handler: H,
 }</pre><div class='docblock'><p>The primary entrance point to <code>Iron</code>, a <code>struct</code> to instantiate a new server.</p>
@@ -63,7 +63,7 @@
 </div><h2 class='fields'>Fields</h2>
 <table><tr><td id='structfield.handler'><a class='stability Unmarked' title='No stability level'></a><code>handler</code></td><td><div class='docblock'><p>Iron contains a <code>Handler</code>, which it uses to create responses for client
 requests.</p>
-</div></td></tr></table><h2 id='methods'>Methods</h2><h3 class='impl'><a class='stability Unmarked' title='No stability level'></a><code>impl&lt;H: <a class='trait' href='../iron/middleware/trait.Handler.html' title='iron::middleware::Handler'>Handler</a>&gt; <a class='struct' href='../iron/struct.Iron.html' title='iron::Iron'>Iron</a>&lt;H&gt;</code></h3><div class='impl-methods'><h4 id='method.listen' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.listen' class='fnname'>listen</a>(self, ip: <a class='enum' href='http://doc.rust-lang.org/nightly/std/io/net/ip/enum.IpAddr.html' title='std::io::net::ip::IpAddr'>IpAddr</a>, port: <a href='http://doc.rust-lang.org/nightly/std/primitive.u16.html'>u16</a>)</code></h4>
+</div></td></tr></table><h2 id='methods'>Methods</h2><h3 class='impl'><a class='stability Unmarked' title='No stability level'></a><code>impl&lt;H: <a class='trait' href='../iron/middleware/trait.Handler.html' title='iron::middleware::Handler'>Handler</a>&gt; <a class='struct' href='../iron/struct.Iron.html' title='iron::Iron'>Iron</a>&lt;H&gt;</code></h3><div class='impl-methods'><h4 id='method.listen' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.listen' class='fnname'>listen</a>(self, ip: <a class='enum' href='http://doc.rust-lang.org/nightly/std/io/net/ip/enum.IpAddr.html' title='std::io::net::ip::IpAddr'>IpAddr</a>, port: <a href='http://doc.rust-lang.org/nightly/std/primitive.u16.html'>u16</a>) -&gt; <a class='type' href='../iron/type.IronResult.html' title='iron::IronResult'>IronResult</a>&lt;<a class='struct' href='../hyper/server/struct.Listening.html' title='hyper::server::Listening'>Listening</a>&gt;</code></h4>
 <div class='docblock'><p>Kick off the server process.</p>
 
 <p>Call this once to begin listening for requests on the server.
@@ -71,14 +71,15 @@ This consumes the Iron instance, but does the listening on
 another task, so is not blocking.</p>
 
 <p>Defaults to a threadpool of size 100.</p>
-</div><h4 id='method.listen_with' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.listen_with' class='fnname'>listen_with</a>(self, ip: <a class='enum' href='http://doc.rust-lang.org/nightly/std/io/net/ip/enum.IpAddr.html' title='std::io::net::ip::IpAddr'>IpAddr</a>, port: <a href='http://doc.rust-lang.org/nightly/std/primitive.u16.html'>u16</a>, threads: <a href='http://doc.rust-lang.org/nightly/std/primitive.uint.html'>uint</a>)</code></h4>
+</div><h4 id='method.listen_with' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.listen_with' class='fnname'>listen_with</a>(self, ip: <a class='enum' href='http://doc.rust-lang.org/nightly/std/io/net/ip/enum.IpAddr.html' title='std::io::net::ip::IpAddr'>IpAddr</a>, port: <a href='http://doc.rust-lang.org/nightly/std/primitive.u16.html'>u16</a>, threads: <a href='http://doc.rust-lang.org/nightly/std/primitive.uint.html'>uint</a>) -&gt; <a class='type' href='../iron/type.IronResult.html' title='iron::IronResult'>IronResult</a>&lt;<a class='struct' href='../hyper/server/struct.Listening.html' title='hyper::server::Listening'>Listening</a>&gt;</code></h4>
 <div class='docblock'><p>Kick off the server process with X threads.</p>
 </div><h4 id='method.new' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.new' class='fnname'>new</a>(handler: H) -&gt; <a class='struct' href='../iron/struct.Iron.html' title='iron::Iron'>Iron</a>&lt;H&gt;</code></h4>
 <div class='docblock'><p>Instantiate a new instance of <code>Iron</code>.</p>
 
 <p>This will create a new <code>Iron</code>, the base unit of the server, using the
 passed in <code>Handler</code>.</p>
-</div></div></section>
+</div></div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><a class='stability Unmarked' title='No stability level'></a><code>impl&lt;H: <a class='trait' href='../iron/middleware/trait.Handler.html' title='iron::middleware::Handler'>Handler</a>&gt; Handler for <a class='struct' href='../iron/struct.Iron.html' title='iron::Iron'>Iron</a>&lt;H&gt;</code></h3><div class='impl-methods'><h4 id='method.handle' class='method'><a class='stability Experimental' title='Experimental'></a><code>fn <a href='#method.handle' class='fnname'>handle</a>(&amp;self, http_req: <a class='struct' href='../hyper/server/request/struct.Request.html' title='hyper::server::request::Request'>HttpRequest</a>, http_res: <a class='struct' href='../iron/response/struct.HttpResponse.html' title='iron::response::HttpResponse'>HttpResponse</a>&lt;Fresh&gt;)</code></h4>
+</div></section>
     <section id='search' class="content hidden"></section>
 
     <section class="footer"></section>
