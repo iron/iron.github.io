@@ -294,12 +294,14 @@
 <span id='243'>243</span>
 <span id='244'>244</span>
 <span id='245'>245</span>
+<span id='246'>246</span>
 </pre><pre class='rust '>
 <span class='doccomment'>//! HTTP/HTTPS URL type for Iron.</span>
 
 <span class='kw'>use</span> <span class='ident'>rust_url</span>;
-<span class='kw'>use</span> <span class='ident'>rust_url</span>::{<span class='ident'>Host</span>, <span class='ident'>RelativeSchemeData</span>, <span class='ident'>UrlRelativeSchemeData</span>};
-<span class='kw'>use</span> <span class='ident'>rust_url</span>::{<span class='ident'>whatwg_scheme_type_mapper</span>, <span class='ident'>RelativeScheme</span>};
+<span class='kw'>use</span> <span class='ident'>rust_url</span>::{<span class='ident'>Host</span>, <span class='ident'>RelativeSchemeData</span>};
+<span class='kw'>use</span> <span class='ident'>rust_url</span>::{<span class='ident'>whatwg_scheme_type_mapper</span>};
+<span class='kw'>use</span> <span class='ident'>rust_url</span>::{<span class='ident'>SchemeData</span>, <span class='ident'>SchemeType</span>};
 <span class='kw'>use</span> <span class='ident'>rust_url</span>::<span class='ident'>format</span>::{<span class='ident'>PathFormatter</span>, <span class='ident'>UserInfoFormatter</span>};
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>fmt</span>::{<span class='kw'>mod</span>, <span class='ident'>Show</span>};
 
@@ -370,7 +372,7 @@
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>from_generic_url</span>(<span class='ident'>raw_url</span>: <span class='ident'>rust_url</span>::<span class='ident'>Url</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>Url</span>, <span class='ident'>String</span><span class='op'>&gt;</span> {
         <span class='comment'>// Create an Iron URL by extracting the relative scheme data.</span>
         <span class='kw'>match</span> <span class='ident'>raw_url</span>.<span class='ident'>scheme_data</span> {
-            <span class='ident'>RelativeSchemeData</span>(<span class='ident'>data</span>) <span class='op'>=&gt;</span> {
+            <span class='ident'>SchemeData</span>::<span class='ident'>Relative</span>(<span class='ident'>data</span>) <span class='op'>=&gt;</span> {
                 <span class='comment'>// Extract the port as a 16-bit unsigned integer.</span>
                 <span class='kw'>let</span> <span class='ident'>port</span>: <span class='ident'>u16</span> <span class='op'>=</span> <span class='kw'>match</span> <span class='ident'>data</span>.<span class='ident'>port</span> {
                     <span class='comment'>// If explicitly defined, unwrap it.</span>
@@ -379,7 +381,7 @@
                     <span class='comment'>// Otherwise, use the scheme&#39;s default port.</span>
                     <span class='prelude-val'>None</span> <span class='op'>=&gt;</span> {
                         <span class='kw'>match</span> <span class='ident'>whatwg_scheme_type_mapper</span>(<span class='ident'>raw_url</span>.<span class='ident'>scheme</span>.<span class='ident'>as_slice</span>()) {
-                            <span class='ident'>RelativeScheme</span>(<span class='ident'>port</span>) <span class='op'>=&gt;</span> <span class='ident'>port</span>,
+                            <span class='ident'>SchemeType</span>::<span class='ident'>Relative</span>(<span class='ident'>port</span>) <span class='op'>=&gt;</span> <span class='ident'>port</span>,
                             _ <span class='op'>=&gt;</span> <span class='kw'>return</span> <span class='prelude-val'>Err</span>(<span class='macro'>format</span><span class='macro'>!</span>(<span class='string'>&quot;Invalid relative scheme: `{}`&quot;</span>, <span class='ident'>raw_url</span>.<span class='ident'>scheme</span>))
                         }
                     }
@@ -419,8 +421,8 @@
 
         <span class='ident'>rust_url</span>::<span class='ident'>Url</span> {
             <span class='ident'>scheme</span>: <span class='self'>self</span>.<span class='ident'>scheme</span>,
-            <span class='ident'>scheme_data</span>: <span class='ident'>RelativeSchemeData</span>(
-                <span class='ident'>UrlRelativeSchemeData</span> {
+            <span class='ident'>scheme_data</span>: <span class='ident'>SchemeData</span>::<span class='ident'>Relative</span>(
+                <span class='ident'>RelativeSchemeData</span> {
                     <span class='ident'>username</span>: <span class='self'>self</span>.<span class='ident'>username</span>.<span class='ident'>unwrap_or</span>(<span class='string'>&quot;&quot;</span>.<span class='ident'>to_string</span>()),
                     <span class='ident'>password</span>: <span class='self'>self</span>.<span class='ident'>password</span>,
                     <span class='ident'>host</span>: <span class='self'>self</span>.<span class='ident'>host</span>,
