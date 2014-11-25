@@ -66,7 +66,6 @@
 <span id='15'>15</span>
 <span id='16'>16</span>
 <span id='17'>17</span>
-<span id='18'>18</span>
 </pre><pre class='rust '>
 <span class='attribute'>#<span class='op'>!</span>[<span class='ident'>crate_name</span> <span class='op'>=</span> <span class='string'>&quot;router&quot;</span>]</span>
 <span class='attribute'>#<span class='op'>!</span>[<span class='ident'>license</span> <span class='op'>=</span> <span class='string'>&quot;MIT&quot;</span>]</span>
@@ -75,10 +74,8 @@
 
 <span class='doccomment'>//! `Router` provides a fast router handler for the Iron web framework.</span>
 
-<span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>http</span>;
 <span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>iron</span>;
 <span class='kw'>extern</span> <span class='kw'>crate</span> <span class='string'>&quot;route-recognizer&quot;</span> <span class='kw'>as</span> <span class='ident'>recognizer</span>;
-<span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>typemap</span>;
 
 <span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>test</span>)]</span> <span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>test</span>;
 
@@ -86,6 +83,7 @@
 <span class='kw'>pub</span> <span class='kw'>use</span> <span class='ident'>recognizer</span>::<span class='ident'>Params</span>;
 
 <span class='kw'>mod</span> <span class='ident'>router</span>;
+
 </pre>
 </section>
     <section id='search' class="content hidden"></section>
