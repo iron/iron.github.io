@@ -176,12 +176,6 @@
 <span id='125'>125</span>
 <span id='126'>126</span>
 <span id='127'>127</span>
-<span id='128'>128</span>
-<span id='129'>129</span>
-<span id='130'>130</span>
-<span id='131'>131</span>
-<span id='132'>132</span>
-<span id='133'>133</span>
 </pre><pre class='rust '>
 <span class='doccomment'>//! Iron&#39;s HTTP Response representation and associated methods.</span>
 
@@ -247,10 +241,7 @@
         <span class='op'>*</span><span class='ident'>http_res</span>.<span class='ident'>status_mut</span>() <span class='op'>=</span> <span class='self'>self</span>.<span class='ident'>status</span>.<span class='ident'>clone</span>().<span class='ident'>unwrap_or</span>(<span class='ident'>status</span>::<span class='ident'>NotFound</span>);
 
         <span class='kw'>let</span> <span class='ident'>out</span> <span class='op'>=</span> <span class='kw'>match</span> <span class='self'>self</span>.<span class='ident'>body</span> {
-            <span class='prelude-val'>Some</span>(<span class='ident'>body</span>) <span class='op'>=&gt;</span> {
-                <span class='ident'>write_with_body</span>(<span class='ident'>http_res</span>, <span class='ident'>body</span>)
-            },
-
+            <span class='prelude-val'>Some</span>(<span class='ident'>body</span>) <span class='op'>=&gt;</span> <span class='ident'>write_with_body</span>(<span class='ident'>http_res</span>, <span class='ident'>body</span>),
             <span class='prelude-val'>None</span> <span class='op'>=&gt;</span> {
                 <span class='ident'>http_res</span>.<span class='ident'>headers_mut</span>().<span class='ident'>set</span>(<span class='ident'>headers</span>::<span class='ident'>ContentLength</span>(<span class='number'>0</span>));
                 <span class='ident'>http_res</span>.<span class='ident'>start</span>().<span class='ident'>and_then</span>(<span class='op'>|</span><span class='ident'>res</span><span class='op'>|</span> <span class='ident'>res</span>.<span class='ident'>end</span>())
@@ -259,10 +250,7 @@
 
         <span class='kw'>match</span> <span class='ident'>out</span> {
             <span class='prelude-val'>Err</span>(<span class='ident'>e</span>) <span class='op'>=&gt;</span> {
-                <span class='macro'>error</span><span class='macro'>!</span>(<span class='string'>&quot;Error reading/writing body: {}&quot;</span>, <span class='ident'>e</span>);
-
-                <span class='comment'>// Can&#39;t do anything else here since all headers/status have</span>
-                <span class='comment'>// already been sent.</span>
+                <span class='macro'>error</span><span class='macro'>!</span>(<span class='string'>&quot;Error writing response: {}&quot;</span>, <span class='ident'>e</span>);
             },
             _ <span class='op'>=&gt;</span> {}
         }
