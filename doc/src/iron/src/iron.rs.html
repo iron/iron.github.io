@@ -151,11 +151,17 @@
 <span id='100'>100</span>
 <span id='101'>101</span>
 <span id='102'>102</span>
+<span id='103'>103</span>
+<span id='104'>104</span>
+<span id='105'>105</span>
+<span id='106'>106</span>
+<span id='107'>107</span>
+<span id='108'>108</span>
 </pre><pre class='rust '>
 <span class='doccomment'>//! Exposes the `Iron` type, the main entrance point of the</span>
 <span class='doccomment'>//! `Iron` library.</span>
 
-<span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>io</span>::<span class='ident'>net</span>::<span class='ident'>ip</span>::<span class='ident'>IpAddr</span>;
+<span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>io</span>::<span class='ident'>net</span>::<span class='ident'>ip</span>::{<span class='ident'>ToSocketAddr</span>, <span class='ident'>SocketAddr</span>};
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>io</span>::{<span class='ident'>Listener</span>};
 
 <span class='kw'>pub</span> <span class='kw'>use</span> <span class='ident'>hyper</span>::<span class='ident'>server</span>::<span class='ident'>Listening</span>;
@@ -165,7 +171,7 @@
 <span class='kw'>use</span> <span class='ident'>request</span>::<span class='ident'>HttpRequest</span>;
 <span class='kw'>use</span> <span class='ident'>response</span>::<span class='ident'>HttpResponse</span>;
 
-<span class='kw'>use</span> <span class='ident'>errors</span>::<span class='ident'>HyperError</span>;
+<span class='kw'>use</span> <span class='ident'>errors</span>::{<span class='ident'>HyperError</span>, <span class='ident'>InvalidAddressError</span>};
 
 <span class='kw'>use</span> {<span class='ident'>Request</span>, <span class='ident'>Handler</span>, <span class='ident'>IronResult</span>, <span class='ident'>IronError</span>};
 <span class='kw'>use</span> <span class='ident'>status</span>;
@@ -188,13 +194,19 @@
     <span class='doccomment'>/// another task, so is not blocking.</span>
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// Defaults to a threadpool of size 100.</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>listen</span>(<span class='self'>self</span>, <span class='ident'>ip</span>: <span class='ident'>IpAddr</span>, <span class='ident'>port</span>: <span class='ident'>u16</span>) <span class='op'>-&gt;</span> <span class='ident'>IronResult</span><span class='op'>&lt;</span><span class='ident'>Listening</span><span class='op'>&gt;</span> {
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>listen</span><span class='op'>&lt;</span><span class='ident'>A</span>: <span class='ident'>ToSocketAddr</span><span class='op'>&gt;</span>(<span class='self'>self</span>, <span class='ident'>addr</span>: <span class='ident'>A</span>) <span class='op'>-&gt;</span> <span class='ident'>IronResult</span><span class='op'>&lt;</span><span class='ident'>Listening</span><span class='op'>&gt;</span> {
+        <span class='kw'>let</span> <span class='ident'>SocketAddr</span> { <span class='ident'>ip</span>, <span class='ident'>port</span> } <span class='op'>=</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>addr</span>.<span class='ident'>to_socket_addr</span>()
+            .<span class='ident'>map_err</span>(<span class='op'>|</span><span class='ident'>e</span><span class='op'>|</span> <span class='kw'>box</span> <span class='ident'>InvalidAddressError</span>::<span class='ident'>new</span>(<span class='ident'>e</span>) <span class='kw'>as</span> <span class='ident'>IronError</span>));
+
         <span class='ident'>Server</span>::<span class='ident'>http</span>(<span class='ident'>ip</span>, <span class='ident'>port</span>).<span class='ident'>listen</span>(<span class='self'>self</span>)
             .<span class='ident'>map_err</span>(<span class='op'>|</span><span class='ident'>e</span><span class='op'>|</span> <span class='kw'>box</span> <span class='ident'>HyperError</span>(<span class='ident'>e</span>) <span class='kw'>as</span> <span class='ident'>IronError</span>)
     }
 
     <span class='doccomment'>/// Kick off the server process with X threads.</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>listen_with</span>(<span class='self'>self</span>, <span class='ident'>ip</span>: <span class='ident'>IpAddr</span>, <span class='ident'>port</span>: <span class='ident'>u16</span>, <span class='ident'>threads</span>: <span class='ident'>uint</span>) <span class='op'>-&gt;</span> <span class='ident'>IronResult</span><span class='op'>&lt;</span><span class='ident'>Listening</span><span class='op'>&gt;</span> {
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>listen_with</span><span class='op'>&lt;</span><span class='ident'>A</span>: <span class='ident'>ToSocketAddr</span><span class='op'>&gt;</span>(<span class='self'>self</span>, <span class='ident'>addr</span>: <span class='ident'>A</span>, <span class='ident'>threads</span>: <span class='ident'>uint</span>) <span class='op'>-&gt;</span> <span class='ident'>IronResult</span><span class='op'>&lt;</span><span class='ident'>Listening</span><span class='op'>&gt;</span> {
+        <span class='kw'>let</span> <span class='ident'>SocketAddr</span> { <span class='ident'>ip</span>, <span class='ident'>port</span> } <span class='op'>=</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>addr</span>.<span class='ident'>to_socket_addr</span>()
+            .<span class='ident'>map_err</span>(<span class='op'>|</span><span class='ident'>e</span><span class='op'>|</span> <span class='kw'>box</span> <span class='ident'>InvalidAddressError</span>::<span class='ident'>new</span>(<span class='ident'>e</span>) <span class='kw'>as</span> <span class='ident'>IronError</span>));
+
         <span class='ident'>Server</span>::<span class='ident'>http</span>(<span class='ident'>ip</span>, <span class='ident'>port</span>).<span class='ident'>listen_threads</span>(<span class='self'>self</span>, <span class='ident'>threads</span>)
             .<span class='ident'>map_err</span>(<span class='op'>|</span><span class='ident'>e</span><span class='op'>|</span> <span class='kw'>box</span> <span class='ident'>HyperError</span>(<span class='ident'>e</span>) <span class='kw'>as</span> <span class='ident'>IronError</span>)
     }
