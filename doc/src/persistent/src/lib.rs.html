@@ -261,7 +261,6 @@
 <span id='210'>210</span>
 <span id='211'>211</span>
 <span id='212'>212</span>
-<span id='213'>213</span>
 </pre><pre class='rust '>
 <span class='attribute'>#<span class='op'>!</span>[<span class='ident'>crate_name</span> <span class='op'>=</span> <span class='string'>&quot;persistent&quot;</span>]</span>
 <span class='attribute'>#<span class='op'>!</span>[<span class='ident'>license</span> <span class='op'>=</span> <span class='string'>&quot;MIT&quot;</span>]</span>
@@ -273,12 +272,11 @@
 <span class='doccomment'>//! framework.</span>
 
 <span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>iron</span>;
-<span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>typemap</span>;
 <span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>plugin</span>;
 
 <span class='kw'>use</span> <span class='ident'>iron</span>::{<span class='ident'>Request</span>, <span class='ident'>Response</span>, <span class='ident'>BeforeMiddleware</span>, <span class='ident'>AfterMiddleware</span>, <span class='ident'>IronResult</span>};
+<span class='kw'>use</span> <span class='ident'>iron</span>::<span class='ident'>typemap</span>::<span class='ident'>Assoc</span>;
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>sync</span>::{<span class='ident'>Arc</span>, <span class='ident'>RWLock</span>, <span class='ident'>Mutex</span>};
-<span class='kw'>use</span> <span class='ident'>typemap</span>::<span class='ident'>Assoc</span>;
 <span class='kw'>use</span> <span class='ident'>plugin</span>::{<span class='ident'>PluginFor</span>, <span class='ident'>Phantom</span>};
 
 <span class='doccomment'>/// Middleware for data that persists between requests with read and write capabilities.</span>
