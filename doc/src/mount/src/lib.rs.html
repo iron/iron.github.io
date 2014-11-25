@@ -65,8 +65,6 @@
 <span id='14'>14</span>
 <span id='15'>15</span>
 <span id='16'>16</span>
-<span id='17'>17</span>
-<span id='18'>18</span>
 </pre><pre class='rust '>
 <span class='attribute'>#<span class='op'>!</span>[<span class='ident'>crate_name</span> <span class='op'>=</span> <span class='string'>&quot;mount&quot;</span>]</span>
 <span class='attribute'>#<span class='op'>!</span>[<span class='ident'>license</span> <span class='op'>=</span> <span class='string'>&quot;MIT&quot;</span>]</span>
@@ -76,11 +74,9 @@
 
 <span class='doccomment'>//! `Mount` provides mounting middleware for the Iron framework.</span>
 
-<span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>http</span>;
 <span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>iron</span>;
 <span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>regex</span>;
 <span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>url</span>;
-<span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>typemap</span>;
 <span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>sequence_trie</span>;
 
 <span class='kw'>pub</span> <span class='kw'>use</span> <span class='ident'>mount</span>::{<span class='ident'>Mount</span>, <span class='ident'>OriginalUrl</span>};
