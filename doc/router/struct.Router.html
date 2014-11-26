@@ -71,7 +71,7 @@ object, which is stored in the request <code>extensions</code>.</p>
 <code>/users/:userid/:friend</code> and store <code>userid</code> and <code>friend</code> in
 the exposed Params object:</p>
 <pre class='rust '>
-<span class='ident'>router</span>.<span class='ident'>route</span>(<span class='ident'>http</span>::<span class='ident'>method</span>::<span class='ident'>Get</span>, <span class='string'>&quot;/users/:userid/:friendid&quot;</span>, <span class='ident'>controller</span>);
+<span class='ident'>router</span>.<span class='ident'>route</span>(<span class='ident'>iron</span>::<span class='ident'>method</span>::<span class='ident'>Method</span>::<span class='ident'>Get</span>, <span class='string'>&quot;/users/:userid/:friendid&quot;</span>, <span class='ident'>controller</span>);
 </pre>
 
 <p>The controller provided to route can be any <code>Handler</code>, which allows
