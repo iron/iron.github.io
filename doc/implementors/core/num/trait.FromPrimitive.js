@@ -1,5 +1,6 @@
 (function() {var implementors = {};
 implementors['iron'] = ["<a class='stability Experimental' title='Experimental'></a>impl <a class='trait' href='http://doc.rust-lang.org/nightly/core/num/trait.FromPrimitive.html' title='core::num::FromPrimitive'>FromPrimitive</a> for <a class='enum' href='iron/status/enum.Status.html' title='iron::status::Status'>StatusCode</a>",];
+implementors['lib'] = ["<a class='stability Experimental' title='Experimental'></a>impl <a class='trait' href='http://doc.rust-lang.org/nightly/core/num/trait.FromPrimitive.html' title='core::num::FromPrimitive'>FromPrimitive</a> for <a class='enum' href='lib/status/enum.Status.html' title='lib::status::Status'>StatusCode</a>",];
 
             if (window.register_implementors) {
                 window.register_implementors(implementors);
