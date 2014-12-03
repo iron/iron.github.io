@@ -3,6 +3,7 @@ implementors['static_file'] = ["<a class='stability Unmarked' title='No stabilit
 implementors['mount'] = ["<a class='stability Unmarked' title='No stability level'></a>impl <a class='trait' href='iron/middleware/trait.Handler.html' title='iron::middleware::Handler'>Handler</a> for <a class='struct' href='mount/struct.Mount.html' title='mount::Mount'>Mount</a>",];
 implementors['router'] = ["<a class='stability Unmarked' title='No stability level'></a>impl <a class='trait' href='iron/middleware/trait.Handler.html' title='iron::middleware::Handler'>Handler</a> for <a class='struct' href='router/struct.Router.html' title='router::Router'>Router</a>",];
 implementors['iron'] = [];
+implementors['lib'] = ["<a class='stability Unmarked' title='No stability level'></a>impl <a class='trait' href='iron/middleware/trait.Handler.html' title='iron::middleware::Handler'>Handler</a> for <a class='struct' href='lib/struct.Router.html' title='lib::Router'>Router</a>",];
 
             if (window.register_implementors) {
                 window.register_implementors(implementors);
