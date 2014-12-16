@@ -167,12 +167,14 @@
 <span id='116'>116</span>
 <span id='117'>117</span>
 <span id='118'>118</span>
+<span id='119'>119</span>
 </pre><pre class='rust '>
 <span class='kw'>use</span> <span class='ident'>iron</span>::{<span class='ident'>Handler</span>, <span class='ident'>Response</span>, <span class='ident'>Request</span>, <span class='ident'>IronResult</span>, <span class='ident'>IronError</span>, <span class='ident'>Url</span>, <span class='ident'>Error</span>};
 <span class='kw'>use</span> <span class='ident'>iron</span>::<span class='ident'>typemap</span>::<span class='ident'>Assoc</span>;
 <span class='kw'>use</span> <span class='ident'>sequence_trie</span>::<span class='ident'>SequenceTrie</span>;
 
 <span class='doccomment'>/// Exposes the original, unmodified path to be stored in `Request::extensions`.</span>
+<span class='attribute'>#[<span class='ident'>deriving</span>(<span class='ident'>Copy</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>OriginalUrl</span>;
 <span class='kw'>impl</span> <span class='ident'>Assoc</span><span class='op'>&lt;</span><span class='ident'>Url</span><span class='op'>&gt;</span> <span class='kw'>for</span> <span class='ident'>OriginalUrl</span> {}
 
