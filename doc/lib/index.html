@@ -53,7 +53,7 @@
 <h1 class='fqn'><span class='in-band'>Crate <a class='mod' href=''>lib</a><wbr></span><span class='out-of-band'><a href='stability.html'>[stability]</a> <span id='render-detail'>
             <a id="collapse-all" href="#">[-]
             </a>&nbsp;<a id="expand-all" href="#">[+]</a>
-        </span><a id='src-0' href='../src/lib/lib.rs.html#1-123'>[src]</a></span></h1>
+        </span><a id='src-0' href='../src/lib/lib.rs.html#1-120'>[src]</a></span></h1>
 <div class='docblock'><p>The main crate for the Iron library.</p>
 
 <p>Iron is a high level web framework built in and for Rust.</p>
@@ -72,13 +72,6 @@ for creating and plugging in middleware.</p>
 </div><h2 id='reexports' class='section-header'><a href="#reexports">Reexports</a></h2>
 <table><tr><td><code>pub use response::<a class='struct' href='../lib/response/struct.Response.html' title='lib::response::Response'>Response</a>;</code></td></tr><tr><td><code>pub use middleware::{<a class='trait' href='../lib/middleware/trait.BeforeMiddleware.html' title='lib::middleware::BeforeMiddleware'>BeforeMiddleware</a>, <a class='trait' href='../lib/middleware/trait.AfterMiddleware.html' title='lib::middleware::AfterMiddleware'>AfterMiddleware</a>, <a class='trait' href='../lib/middleware/trait.AroundMiddleware.html' title='lib::middleware::AroundMiddleware'>AroundMiddleware</a>, <a class='trait' href='../lib/middleware/trait.Handler.html' title='lib::middleware::Handler'>Handler</a>, <a class='trait' href='../lib/middleware/trait.Chain.html' title='lib::middleware::Chain'>Chain</a>, <a class='struct' href='../lib/middleware/struct.ChainBuilder.html' title='lib::middleware::ChainBuilder'>ChainBuilder</a>};</code></td></tr></table><h2 id='modules' class='section-header'><a href="#modules">Modules</a></h2>
 <table>
-                    <tr>
-                        <td><a class='stability Unmarked' title='No stability level'></a><a class='mod' href='errors/index.html'
-                               title='lib::errors'>errors</a></td>
-                        <td class='docblock short'><p>Some common error types for use within Iron and in downstream middleware.</p>
-</td>
-                    </tr>
-                
                     <tr>
                         <td><a class='stability Experimental' title='Experimental'></a><a class='mod' href='headers/index.html'
                                title='lib::headers'>headers</a></td>
@@ -182,13 +175,9 @@ A Collection of Header implementations for common HTTP Headers.</p>
                     <tr>
                         <td><a class='stability Unmarked' title='No stability level'></a><a class='trait' href='trait.Error.html'
                                title='lib::Error'>Error</a></td>
-                        <td class='docblock short'></td>
-                    </tr>
-                
-                    <tr>
-                        <td><a class='stability Unmarked' title='No stability level'></a><a class='trait' href='trait.ErrorRefExt.html'
-                               title='lib::ErrorRefExt'>ErrorRefExt</a></td>
-                        <td class='docblock short'></td>
+                        <td class='docblock short'><p>An extension to std::error::Error which provides dynamic downcasting of
+errors for use in highly generic contexts.</p>
+</td>
                     </tr>
                 
                     <tr>
