@@ -68,11 +68,10 @@ extern crate iron;
 
 use iron::prelude::*;
 use iron::status;
-use iron::response::modifiers::{Status, Body};
 
 fn main() {
     fn hello_world(_: &amp;mut Request) -> IronResult&lt;Response&gt; {
-        Ok(Response::new().set(Status(status::Ok)).set(Body("Hello World!")))
+        Ok(Response::with((status::Ok, "Hello World!")))
     }
 
     Iron::new(hello_world).listen("localhost:3000").unwrap();
