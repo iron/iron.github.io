@@ -65,11 +65,11 @@
 <span id="14">14</span>
 <span id="15">15</span>
 </pre><pre class='rust '>
-<span class='attribute'>#<span class='op'>!</span>[<span class='ident'>deny</span>(<span class='ident'>missing_docs</span>, <span class='ident'>warnings</span>)]</span>
-<span class='attribute'>#<span class='op'>!</span>[<span class='ident'>feature</span>(<span class='ident'>core</span>)]</span>
-<span class='attribute'>#<span class='op'>!</span>[<span class='ident'>feature</span>(<span class='ident'>std_misc</span>)]</span>
+<span class='attribute'>#<span class='op'>!</span>[<span class='ident'>deny</span>(<span class='ident'>missing_docs</span>)]</span>
+<span class='attribute'>#<span class='op'>!</span>[<span class='ident'>feature</span>(<span class='ident'>core</span>, <span class='ident'>std_misc</span>)]</span>
+<span class='attribute'>#<span class='op'>!</span>[<span class='ident'>cfg_attr</span>(<span class='ident'>test</span>, <span class='ident'>deny</span>(<span class='ident'>warnings</span>))]</span>
 
-<span class='doccomment'>//! `Router` provides a fast router handler for the Iron web framework.</span>
+<span class='doccomment'>//! `Router` provides fast and flexible routing for Iron.</span>
 
 <span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>iron</span>;
 <span class='kw'>extern</span> <span class='kw'>crate</span> <span class='string'>&quot;route-recognizer&quot;</span> <span class='kw'>as</span> <span class='ident'>recognizer</span>;
