@@ -4,10 +4,10 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="API stability overview for the Rust `lib` crate.">
-    <meta name="keywords" content="rust, rustlang, rust-lang">
+    <meta name="description" content="API documentation for the Rust `PersistentError` enum in crate `lib`.">
+    <meta name="keywords" content="rust, rustlang, rust-lang, PersistentError">
 
-    <title>lib - Stability dashboard</title>
+    <title>lib::PersistentError - Rust</title>
 
     <link rel="stylesheet" type="text/css" href="../main.css">
 
@@ -35,7 +35,7 @@
 
     <section class="sidebar">
         
-        <p class='location'></p>
+        <p class='location'><a href='index.html'>lib</a></p><div class='block struct'><h2>Structs</h2><a class='struct ' href='struct.Read.html' title='Middleware for data that persists between Requests with read-only capabilities.'>Read</a><a class='struct ' href='struct.State.html' title='Middleware for data that persists between requests with read and write capabilities.'>State</a><a class='struct ' href='struct.Write.html' title='Middleware for data that persists between Requests for data which mostly needs to be written instead of read.'>Write</a></div><div class='block enum'><h2>Enums</h2><a class='enum current' href='enum.PersistentError.html' title='The type that can be returned by `eval` to indicate error.'>PersistentError</a></div>
     </section>
 
     <nav class="sub">
@@ -49,17 +49,19 @@
         </form>
     </nav>
 
-    <section id='main' class="content mod"><h1 class='fqn'>Stability dashboard: crate <a class='mod' href='index.html'>lib</a></h1>
-This dashboard summarizes the stability levels for all of the public modules of
-the crate, according to the total number of items at each level in the module and
-its children (percentages total for lib):
-<blockquote>
-<a class='stability Stable'></a> stable (12%),<br/>
-<a class='stability Unstable'></a> unstable (0%),<br/>
-<a class='stability Unmarked'></a> unmarked (87%)
-</blockquote>
-The counts do not include methods or trait
-implementations that are visible only through a re-exported type.<table><tr><td><a href='index.html'>lib</a></td><td class='summary-column'><span class='summary Stable' style='width: 12.9032%; display: inline-block'>&nbsp</span><span class='summary Unstable' style='width: 0.0000%; display: inline-block'>&nbsp</span><span class='summary Unmarked' style='width: 87.0968%; display: inline-block'>&nbsp</span></td></tr></table></section>
+    <section id='main' class="content enum">
+<h1 class='fqn'><span class='in-band'>Enum <a href='index.html'>lib</a>::<wbr><a class='enum' href=''>PersistentError</a><wbr></span><span class='out-of-band'><span id='render-detail'>
+            <a id="collapse-all" href="#">[-]
+            </a>&nbsp;<a id="expand-all" href="#">[+]</a>
+        </span><a id='src-18' href='../src/lib/lib.rs.html#18-21'>[src]</a></span></h1>
+<pre class='rust enum'>pub enum PersistentError {
+    NotFound,
+}</pre><div class='docblock'><p>The type that can be returned by <code>eval</code> to indicate error.</p>
+</div><h2 class='variants'>Variants</h2>
+<table><tr><td id='variant.NotFound'><a class='stability Unmarked' title='No stability level'></a><code>NotFound</code></td><td><div class='docblock'><p>The value was not found.</p>
+</div></td></tr></table><h2 id='implementations'>Trait Implementations</h2><h3 id='derived_implementations'>Derived Implementations </h3><h3 class='impl'><a class='stability Stable' title='Stable'></a><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/core/clone/trait.Clone.html' title='core::clone::Clone'>Clone</a> for <a class='enum' href='../lib/enum.PersistentError.html' title='lib::PersistentError'>PersistentError</a></code></h3><div class='impl-items'><h4 id='method.clone' class='method'><a class='stability Stable' title='Stable'></a><code>fn <a href='#method.clone' class='fnname'>clone</a>(&amp;self) -&gt; <a class='enum' href='../lib/enum.PersistentError.html' title='lib::PersistentError'>PersistentError</a></code></h4>
+<h4 id='method.clone_from' class='tymethod'><a class='stability Unstable' title='Unstable: this function is rarely used'></a><code>fn <a href='#tymethod.clone_from' class='fnname'>clone_from</a>(&amp;mut self, source: &amp;Self)</code></h4>
+</div></section>
     <section id='search' class="content hidden"></section>
 
     <section class="footer"></section>
