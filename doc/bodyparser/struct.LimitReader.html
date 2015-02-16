@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <meta name="description" content="API documentation for the Rust `LimitReader` struct in crate `bodyparser`.">
+    <meta name="keywords" content="rust, rustlang, rust-lang, LimitReader">
+
+    <title>bodyparser::LimitReader - Rust</title>
+
+    <link rel="stylesheet" type="text/css" href="../main.css">
+
+    
+    <link href='http://fonts.googleapis.com/css?family=Questrial|Alegreya+Sans+SC:400,900|Bilbo|Abel' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Alegreya+Sans+SC:400,900|Alegreya+Sans' rel='stylesheet' type='text/css'>
+
+
+</head>
+<body class="rustdoc">
+    <!--[if lte IE 8]>
+    <div class="warning">
+        This old browser is unsupported and will most likely display funky
+        things.
+    </div>
+    <![endif]-->
+
+    <div style="float: right;">
+    <a style="font-size: 2em; font-family: 'Alegreya Sans SC', 'Helvetica Neue', Arial, Tahoma, Verdana, sans-serif; font-weight: 400; margin: 0;" href="http://ironframework.io/">
+        IRON
+    </a>
+</div>
+
+
+
+    <section class="sidebar">
+        
+        <p class='location'><a href='index.html'>bodyparser</a></p><div class='block struct'><h2>Structs</h2><a class='struct ' href='struct.BodyError.html' title=''>BodyError</a><a class='struct ' href='struct.Json.html' title='Json is a plugin to parse a request body into JSON. Uses Raw plugin to parse the body with limit.'>Json</a><a class='struct current' href='struct.LimitReader.html' title='[Original impl](https://github.com/rust-lang/rust/blob/17bc7d8d5be3be9674d702ccad2fa88c487d23b0/src/libstd/old_io/util.rs#L20)'>LimitReader</a><a class='struct ' href='struct.MaxBodyLength.html' title='Use this key to modify the default body limit.'>MaxBodyLength</a><a class='struct ' href='struct.Raw.html' title='Raw is a plugin to read a request body into UTF-8 String. Doesn&#39;t read `multipart/form-data`.'>Raw</a><a class='struct ' href='struct.Struct.html' title='Struct is a plugin to parse a request body into a struct. Uses Raw plugin to parse the body with limit.'>Struct</a></div><div class='block enum'><h2>Enums</h2><a class='enum ' href='enum.BodyErrorCause.html' title=''>BodyErrorCause</a></div>
+    </section>
+
+    <nav class="sub">
+        <form class="search-form js-only">
+            <div class="search-container">
+                <input class="search-input" name="search"
+                       autocomplete="off"
+                       placeholder="Click or press 'S' to search, '?' for more options..."
+                       type="search">
+            </div>
+        </form>
+    </nav>
+
+    <section id='main' class="content struct">
+<h1 class='fqn'><span class='in-band'>Struct <a href='index.html'>bodyparser</a>::<wbr><a class='struct' href=''>LimitReader</a><wbr></span><span class='out-of-band'><span id='render-detail'>
+            <a id="collapse-all" href="#">[-]
+            </a>&nbsp;<a id="expand-all" href="#">[+]</a>
+        </span><a id='src-442' href='../src/bodyparser/limit_reader.rs.html#10-13'>[src]</a></span></h1>
+<pre class='rust struct'>pub struct LimitReader&lt;R&gt; {
+    // some fields omitted
+}</pre><div class='docblock'><p><a href="https://github.com/rust-lang/rust/blob/17bc7d8d5be3be9674d702ccad2fa88c487d23b0/src/libstd/old_io/util.rs#L20">Original impl</a></p>
+
+<p>The LimitReader from the <code>std</code> just stops to read when reaches a limit, but we don&#39;t want
+to return partially readed body to the client code because it is useless. This modified LimitReader
+returns <code>IoError</code> with <code>IoErrorKind::InvalidInput</code> when it reaches the limit.</p>
+</div><h2 id='methods'>Methods</h2><h3 class='impl'><a class='stability Unmarked' title='No stability level'></a><code>impl&lt;R: <a class='trait' href='http://doc.rust-lang.org/nightly/std/old_io/trait.Reader.html' title='std::old_io::Reader'>Reader</a>&gt; <a class='struct' href='../bodyparser/struct.LimitReader.html' title='bodyparser::LimitReader'>LimitReader</a>&lt;R&gt;</code></h3><div class='impl-items'><h4 id='method.new' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.new' class='fnname'>new</a>(r: R, limit: <a href='http://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>) -&gt; <a class='struct' href='../bodyparser/struct.LimitReader.html' title='bodyparser::LimitReader'>LimitReader</a>&lt;R&gt;</code></h4>
+<h4 id='method.into_inner' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.into_inner' class='fnname'>into_inner</a>(self) -&gt; R</code></h4>
+<h4 id='method.limit' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.limit' class='fnname'>limit</a>(&amp;self) -&gt; <a href='http://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a></code></h4>
+</div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><a class='stability Unstable' title='Unstable'></a><code>impl&lt;R: <a class='trait' href='http://doc.rust-lang.org/nightly/std/old_io/trait.Reader.html' title='std::old_io::Reader'>Reader</a>&gt; <a class='trait' href='http://doc.rust-lang.org/nightly/std/old_io/trait.Reader.html' title='std::old_io::Reader'>Reader</a> for <a class='struct' href='../bodyparser/struct.LimitReader.html' title='bodyparser::LimitReader'>LimitReader</a>&lt;R&gt;</code></h3><div class='impl-items'><h4 id='method.read' class='method'><a class='stability Unstable' title='Unstable'></a><code>fn <a href='#method.read' class='fnname'>read</a>(&amp;mut self, buf: <a href='http://doc.rust-lang.org/nightly/std/primitive.slice.html'>&amp;mut [</a><a href='http://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a><a href='http://doc.rust-lang.org/nightly/std/primitive.slice.html'>]</a>) -&gt; <a class='type' href='http://doc.rust-lang.org/nightly/std/old_io/type.IoResult.html' title='std::old_io::IoResult'>IoResult</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>&gt;</code></h4>
+<h4 id='method.read_at_least' class='tymethod'><a class='stability Unstable' title='Unstable'></a><code>fn <a href='#tymethod.read_at_least' class='fnname'>read_at_least</a>(&amp;mut self, min: <a href='http://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>, buf: <a href='http://doc.rust-lang.org/nightly/std/primitive.slice.html'>&amp;mut [</a><a href='http://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a><a href='http://doc.rust-lang.org/nightly/std/primitive.slice.html'>]</a>) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>, <a class='struct' href='http://doc.rust-lang.org/nightly/std/old_io/struct.IoError.html' title='std::old_io::IoError'>IoError</a>&gt;</code></h4>
+<h4 id='method.read_byte' class='tymethod'><a class='stability Unstable' title='Unstable'></a><code>fn <a href='#tymethod.read_byte' class='fnname'>read_byte</a>(&amp;mut self) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a>, <a class='struct' href='http://doc.rust-lang.org/nightly/std/old_io/struct.IoError.html' title='std::old_io::IoError'>IoError</a>&gt;</code></h4>
+<h4 id='method.push' class='tymethod'><a class='stability Unstable' title='Unstable'></a><code>fn <a href='#tymethod.push' class='fnname'>push</a>(&amp;mut self, len: <a href='http://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>, buf: &amp;mut <a class='struct' href='http://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a>&gt;) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>, <a class='struct' href='http://doc.rust-lang.org/nightly/std/old_io/struct.IoError.html' title='std::old_io::IoError'>IoError</a>&gt;</code></h4>
+<h4 id='method.push_at_least' class='tymethod'><a class='stability Unstable' title='Unstable'></a><code>fn <a href='#tymethod.push_at_least' class='fnname'>push_at_least</a>(&amp;mut self, min: <a href='http://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>, len: <a href='http://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>, buf: &amp;mut <a class='struct' href='http://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a>&gt;) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>, <a class='struct' href='http://doc.rust-lang.org/nightly/std/old_io/struct.IoError.html' title='std::old_io::IoError'>IoError</a>&gt;</code></h4>
+<h4 id='method.read_exact' class='tymethod'><a class='stability Unstable' title='Unstable'></a><code>fn <a href='#tymethod.read_exact' class='fnname'>read_exact</a>(&amp;mut self, len: <a href='http://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a class='struct' href='http://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a>&gt;, <a class='struct' href='http://doc.rust-lang.org/nightly/std/old_io/struct.IoError.html' title='std::old_io::IoError'>IoError</a>&gt;</code></h4>
+<h4 id='method.read_to_end' class='tymethod'><a class='stability Unstable' title='Unstable'></a><code>fn <a href='#tymethod.read_to_end' class='fnname'>read_to_end</a>(&amp;mut self) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a class='struct' href='http://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a>&gt;, <a class='struct' href='http://doc.rust-lang.org/nightly/std/old_io/struct.IoError.html' title='std::old_io::IoError'>IoError</a>&gt;</code></h4>
+<h4 id='method.read_to_string' class='tymethod'><a class='stability Unstable' title='Unstable'></a><code>fn <a href='#tymethod.read_to_string' class='fnname'>read_to_string</a>(&amp;mut self) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a class='struct' href='http://doc.rust-lang.org/nightly/collections/string/struct.String.html' title='collections::string::String'>String</a>, <a class='struct' href='http://doc.rust-lang.org/nightly/std/old_io/struct.IoError.html' title='std::old_io::IoError'>IoError</a>&gt;</code></h4>
+<h4 id='method.read_le_uint_n' class='tymethod'><a class='stability Unstable' title='Unstable'></a><code>fn <a href='#tymethod.read_le_uint_n' class='fnname'>read_le_uint_n</a>(&amp;mut self, nbytes: <a href='http://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.u64.html'>u64</a>, <a class='struct' href='http://doc.rust-lang.org/nightly/std/old_io/struct.IoError.html' title='std::old_io::IoError'>IoError</a>&gt;</code></h4>
+<h4 id='method.read_le_int_n' class='tymethod'><a class='stability Unstable' title='Unstable'></a><code>fn <a href='#tymethod.read_le_int_n' class='fnname'>read_le_int_n</a>(&amp;mut self, nbytes: <a href='http://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.i64.html'>i64</a>, <a class='struct' href='http://doc.rust-lang.org/nightly/std/old_io/struct.IoError.html' title='std::old_io::IoError'>IoError</a>&gt;</code></h4>
+<h4 id='method.read_be_uint_n' class='tymethod'><a class='stability Unstable' title='Unstable'></a><code>fn <a href='#tymethod.read_be_uint_n' class='fnname'>read_be_uint_n</a>(&amp;mut self, nbytes: <a href='http://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.u64.html'>u64</a>, <a class='struct' href='http://doc.rust-lang.org/nightly/std/old_io/struct.IoError.html' title='std::old_io::IoError'>IoError</a>&gt;</code></h4>
+<h4 id='method.read_be_int_n' class='tymethod'><a class='stability Unstable' title='Unstable'></a><code>fn <a href='#tymethod.read_be_int_n' class='fnname'>read_be_int_n</a>(&amp;mut self, nbytes: <a href='http://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.i64.html'>i64</a>, <a class='struct' href='http://doc.rust-lang.org/nightly/std/old_io/struct.IoError.html' title='std::old_io::IoError'>IoError</a>&gt;</code></h4>
+<h4 id='method.read_le_uint' class='tymethod'><a class='stability Unstable' title='Unstable'></a><code>fn <a href='#tymethod.read_le_uint' class='fnname'>read_le_uint</a>(&amp;mut self) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>, <a class='struct' href='http://doc.rust-lang.org/nightly/std/old_io/struct.IoError.html' title='std::old_io::IoError'>IoError</a>&gt;</code></h4>
+<h4 id='method.read_le_int' class='tymethod'><a class='stability Unstable' title='Unstable'></a><code>fn <a href='#tymethod.read_le_int' class='fnname'>read_le_int</a>(&amp;mut self) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.isize.html'>isize</a>, <a class='struct' href='http://doc.rust-lang.org/nightly/std/old_io/struct.IoError.html' title='std::old_io::IoError'>IoError</a>&gt;</code></h4>
+<h4 id='method.read_be_uint' class='tymethod'><a class='stability Unstable' title='Unstable'></a><code>fn <a href='#tymethod.read_be_uint' class='fnname'>read_be_uint</a>(&amp;mut self) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>, <a class='struct' href='http://doc.rust-lang.org/nightly/std/old_io/struct.IoError.html' title='std::old_io::IoError'>IoError</a>&gt;</code></h4>
+<h4 id='method.read_be_int' class='tymethod'><a class='stability Unstable' title='Unstable'></a><code>fn <a href='#tymethod.read_be_int' class='fnname'>read_be_int</a>(&amp;mut self) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.isize.html'>isize</a>, <a class='struct' href='http://doc.rust-lang.org/nightly/std/old_io/struct.IoError.html' title='std::old_io::IoError'>IoError</a>&gt;</code></h4>
+<h4 id='method.read_be_u64' class='tymethod'><a class='stability Unstable' title='Unstable'></a><code>fn <a href='#tymethod.read_be_u64' class='fnname'>read_be_u64</a>(&amp;mut self) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.u64.html'>u64</a>, <a class='struct' href='http://doc.rust-lang.org/nightly/std/old_io/struct.IoError.html' title='std::old_io::IoError'>IoError</a>&gt;</code></h4>
+<h4 id='method.read_be_u32' class='tymethod'><a class='stability Unstable' title='Unstable'></a><code>fn <a href='#tymethod.read_be_u32' class='fnname'>read_be_u32</a>(&amp;mut self) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.u32.html'>u32</a>, <a class='struct' href='http://doc.rust-lang.org/nightly/std/old_io/struct.IoError.html' title='std::old_io::IoError'>IoError</a>&gt;</code></h4>
+<h4 id='method.read_be_u16' class='tymethod'><a class='stability Unstable' title='Unstable'></a><code>fn <a href='#tymethod.read_be_u16' class='fnname'>read_be_u16</a>(&amp;mut self) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.u16.html'>u16</a>, <a class='struct' href='http://doc.rust-lang.org/nightly/std/old_io/struct.IoError.html' title='std::old_io::IoError'>IoError</a>&gt;</code></h4>
+<h4 id='method.read_be_i64' class='tymethod'><a class='stability Unstable' title='Unstable'></a><code>fn <a href='#tymethod.read_be_i64' class='fnname'>read_be_i64</a>(&amp;mut self) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.i64.html'>i64</a>, <a class='struct' href='http://doc.rust-lang.org/nightly/std/old_io/struct.IoError.html' title='std::old_io::IoError'>IoError</a>&gt;</code></h4>
+<h4 id='method.read_be_i32' class='tymethod'><a class='stability Unstable' title='Unstable'></a><code>fn <a href='#tymethod.read_be_i32' class='fnname'>read_be_i32</a>(&amp;mut self) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.i32.html'>i32</a>, <a class='struct' href='http://doc.rust-lang.org/nightly/std/old_io/struct.IoError.html' title='std::old_io::IoError'>IoError</a>&gt;</code></h4>
+<h4 id='method.read_be_i16' class='tymethod'><a class='stability Unstable' title='Unstable'></a><code>fn <a href='#tymethod.read_be_i16' class='fnname'>read_be_i16</a>(&amp;mut self) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.i16.html'>i16</a>, <a class='struct' href='http://doc.rust-lang.org/nightly/std/old_io/struct.IoError.html' title='std::old_io::IoError'>IoError</a>&gt;</code></h4>
+<h4 id='method.read_be_f64' class='tymethod'><a class='stability Unstable' title='Unstable'></a><code>fn <a href='#tymethod.read_be_f64' class='fnname'>read_be_f64</a>(&amp;mut self) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.f64.html'>f64</a>, <a class='struct' href='http://doc.rust-lang.org/nightly/std/old_io/struct.IoError.html' title='std::old_io::IoError'>IoError</a>&gt;</code></h4>
+<h4 id='method.read_be_f32' class='tymethod'><a class='stability Unstable' title='Unstable'></a><code>fn <a href='#tymethod.read_be_f32' class='fnname'>read_be_f32</a>(&amp;mut self) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.f32.html'>f32</a>, <a class='struct' href='http://doc.rust-lang.org/nightly/std/old_io/struct.IoError.html' title='std::old_io::IoError'>IoError</a>&gt;</code></h4>
+<h4 id='method.read_le_u64' class='tymethod'><a class='stability Unstable' title='Unstable'></a><code>fn <a href='#tymethod.read_le_u64' class='fnname'>read_le_u64</a>(&amp;mut self) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.u64.html'>u64</a>, <a class='struct' href='http://doc.rust-lang.org/nightly/std/old_io/struct.IoError.html' title='std::old_io::IoError'>IoError</a>&gt;</code></h4>
+<h4 id='method.read_le_u32' class='tymethod'><a class='stability Unstable' title='Unstable'></a><code>fn <a href='#tymethod.read_le_u32' class='fnname'>read_le_u32</a>(&amp;mut self) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.u32.html'>u32</a>, <a class='struct' href='http://doc.rust-lang.org/nightly/std/old_io/struct.IoError.html' title='std::old_io::IoError'>IoError</a>&gt;</code></h4>
+<h4 id='method.read_le_u16' class='tymethod'><a class='stability Unstable' title='Unstable'></a><code>fn <a href='#tymethod.read_le_u16' class='fnname'>read_le_u16</a>(&amp;mut self) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.u16.html'>u16</a>, <a class='struct' href='http://doc.rust-lang.org/nightly/std/old_io/struct.IoError.html' title='std::old_io::IoError'>IoError</a>&gt;</code></h4>
+<h4 id='method.read_le_i64' class='tymethod'><a class='stability Unstable' title='Unstable'></a><code>fn <a href='#tymethod.read_le_i64' class='fnname'>read_le_i64</a>(&amp;mut self) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.i64.html'>i64</a>, <a class='struct' href='http://doc.rust-lang.org/nightly/std/old_io/struct.IoError.html' title='std::old_io::IoError'>IoError</a>&gt;</code></h4>
+<h4 id='method.read_le_i32' class='tymethod'><a class='stability Unstable' title='Unstable'></a><code>fn <a href='#tymethod.read_le_i32' class='fnname'>read_le_i32</a>(&amp;mut self) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.i32.html'>i32</a>, <a class='struct' href='http://doc.rust-lang.org/nightly/std/old_io/struct.IoError.html' title='std::old_io::IoError'>IoError</a>&gt;</code></h4>
+<h4 id='method.read_le_i16' class='tymethod'><a class='stability Unstable' title='Unstable'></a><code>fn <a href='#tymethod.read_le_i16' class='fnname'>read_le_i16</a>(&amp;mut self) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.i16.html'>i16</a>, <a class='struct' href='http://doc.rust-lang.org/nightly/std/old_io/struct.IoError.html' title='std::old_io::IoError'>IoError</a>&gt;</code></h4>
+<h4 id='method.read_le_f64' class='tymethod'><a class='stability Unstable' title='Unstable'></a><code>fn <a href='#tymethod.read_le_f64' class='fnname'>read_le_f64</a>(&amp;mut self) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.f64.html'>f64</a>, <a class='struct' href='http://doc.rust-lang.org/nightly/std/old_io/struct.IoError.html' title='std::old_io::IoError'>IoError</a>&gt;</code></h4>
+<h4 id='method.read_le_f32' class='tymethod'><a class='stability Unstable' title='Unstable'></a><code>fn <a href='#tymethod.read_le_f32' class='fnname'>read_le_f32</a>(&amp;mut self) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.f32.html'>f32</a>, <a class='struct' href='http://doc.rust-lang.org/nightly/std/old_io/struct.IoError.html' title='std::old_io::IoError'>IoError</a>&gt;</code></h4>
+<h4 id='method.read_u8' class='tymethod'><a class='stability Unstable' title='Unstable'></a><code>fn <a href='#tymethod.read_u8' class='fnname'>read_u8</a>(&amp;mut self) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a>, <a class='struct' href='http://doc.rust-lang.org/nightly/std/old_io/struct.IoError.html' title='std::old_io::IoError'>IoError</a>&gt;</code></h4>
+<h4 id='method.read_i8' class='tymethod'><a class='stability Unstable' title='Unstable'></a><code>fn <a href='#tymethod.read_i8' class='fnname'>read_i8</a>(&amp;mut self) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.i8.html'>i8</a>, <a class='struct' href='http://doc.rust-lang.org/nightly/std/old_io/struct.IoError.html' title='std::old_io::IoError'>IoError</a>&gt;</code></h4>
+</div><h3 id='derived_implementations'>Derived Implementations </h3><h3 class='impl'><a class='stability Stable' title='Stable'></a><code>impl&lt;R: <a class='trait' href='http://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html' title='core::fmt::Debug'>Debug</a>&gt; <a class='trait' href='http://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html' title='core::fmt::Debug'>Debug</a> for <a class='struct' href='../bodyparser/struct.LimitReader.html' title='bodyparser::LimitReader'>LimitReader</a>&lt;R&gt;</code></h3><div class='impl-items'><h4 id='method.fmt' class='method'><a class='stability Stable' title='Stable'></a><code>fn <a href='#method.fmt' class='fnname'>fmt</a>(&amp;self, __arg_0: &amp;mut <a class='struct' href='http://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html' title='core::fmt::Formatter'>Formatter</a>) -&gt; <a class='type' href='http://doc.rust-lang.org/nightly/core/fmt/type.Result.html' title='core::fmt::Result'>Result</a></code></h4>
+</div></section>
+    <section id='search' class="content hidden"></section>
+
+    <section class="footer"></section>
+
+    <div id="help" class="hidden">
+        <div class="shortcuts">
+            <h1>Keyboard shortcuts</h1>
+            <dl>
+                <dt>?</dt>
+                <dd>Show this help dialog</dd>
+                <dt>S</dt>
+                <dd>Focus the search field</dd>
+                <dt>&larrb;</dt>
+                <dd>Move up in search results</dd>
+                <dt>&rarrb;</dt>
+                <dd>Move down in search results</dd>
+                <dt>&#9166;</dt>
+                <dd>Go to active search result</dd>
+            </dl>
+        </div>
+        <div class="infos">
+            <h1>Search tricks</h1>
+            <p>
+                Prefix searches with a type followed by a colon (e.g.
+                <code>fn:</code>) to restrict the search to a given type.
+            </p>
+            <p>
+                Accepted types are: <code>fn</code>, <code>mod</code>,
+                <code>struct</code>, <code>enum</code>,
+                <code>trait</code>, <code>typedef</code> (or
+                <code>tdef</code>).
+            </p>
+        </div>
+    </div>
+
+    <section class="content footer">
+    <div style="text-align: right;">
+        <a style="color: #428bca;" href="https://github.com/reem">@reem</a>
+        <a style="color: #428bca;" href="https://github.com/zzmp">@zzmp</a>
+        <a style="color: #428bca;" href="https://github.com/theptrk">@theptrk</a>
+        <a style="color: #428bca;" href="https://github.com/mcreinhard">@mcreinhard</a>
+    </div>
+</section>
+
+
+
+    <script>
+        window.rootPath = "../";
+        window.currentCrate = "bodyparser";
+        window.playgroundUrl = "";
+    </script>
+    <script src="../jquery.js"></script>
+    <script src="../main.js"></script>
+    
+    <script async src="../search-index.js"></script>
+</body>
+</html>

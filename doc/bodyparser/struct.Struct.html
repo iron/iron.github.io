@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <meta name="description" content="API documentation for the Rust `Struct` struct in crate `bodyparser`.">
+    <meta name="keywords" content="rust, rustlang, rust-lang, Struct">
+
+    <title>bodyparser::Struct - Rust</title>
+
+    <link rel="stylesheet" type="text/css" href="../main.css">
+
+    
+    <link href='http://fonts.googleapis.com/css?family=Questrial|Alegreya+Sans+SC:400,900|Bilbo|Abel' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Alegreya+Sans+SC:400,900|Alegreya+Sans' rel='stylesheet' type='text/css'>
+
+
+</head>
+<body class="rustdoc">
+    <!--[if lte IE 8]>
+    <div class="warning">
+        This old browser is unsupported and will most likely display funky
+        things.
+    </div>
+    <![endif]-->
+
+    <div style="float: right;">
+    <a style="font-size: 2em; font-family: 'Alegreya Sans SC', 'Helvetica Neue', Arial, Tahoma, Verdana, sans-serif; font-weight: 400; margin: 0;" href="http://ironframework.io/">
+        IRON
+    </a>
+</div>
+
+
+
+    <section class="sidebar">
+        
+        <p class='location'><a href='index.html'>bodyparser</a></p><div class='block struct'><h2>Structs</h2><a class='struct ' href='struct.BodyError.html' title=''>BodyError</a><a class='struct ' href='struct.Json.html' title='Json is a plugin to parse a request body into JSON. Uses Raw plugin to parse the body with limit.'>Json</a><a class='struct ' href='struct.LimitReader.html' title='[Original impl](https://github.com/rust-lang/rust/blob/17bc7d8d5be3be9674d702ccad2fa88c487d23b0/src/libstd/old_io/util.rs#L20)'>LimitReader</a><a class='struct ' href='struct.MaxBodyLength.html' title='Use this key to modify the default body limit.'>MaxBodyLength</a><a class='struct ' href='struct.Raw.html' title='Raw is a plugin to read a request body into UTF-8 String. Doesn&#39;t read `multipart/form-data`.'>Raw</a><a class='struct current' href='struct.Struct.html' title='Struct is a plugin to parse a request body into a struct. Uses Raw plugin to parse the body with limit.'>Struct</a></div><div class='block enum'><h2>Enums</h2><a class='enum ' href='enum.BodyErrorCause.html' title=''>BodyErrorCause</a></div>
+    </section>
+
+    <nav class="sub">
+        <form class="search-form js-only">
+            <div class="search-container">
+                <input class="search-input" name="search"
+                       autocomplete="off"
+                       placeholder="Click or press 'S' to search, '?' for more options..."
+                       type="search">
+            </div>
+        </form>
+    </nav>
+
+    <section id='main' class="content struct">
+<h1 class='fqn'><span class='in-band'>Struct <a href='index.html'>bodyparser</a>::<wbr><a class='struct' href=''>Struct</a><wbr></span><span class='out-of-band'><span id='render-detail'>
+            <a id="collapse-all" href="#">[-]
+            </a>&nbsp;<a id="expand-all" href="#">[+]</a>
+        </span><a id='src-933' href='../src/bodyparser/lib.rs.html#112'>[src]</a></span></h1>
+<pre class='rust struct'>pub struct Struct&lt;T: <a class='trait' href='http://doc.rust-lang.org/rustc-serialize/rustc-serialize/serialize/trait.Decodable.html' title='rustc-serialize::serialize::Decodable'>Decodable</a>&gt;;</pre><div class='docblock'><p>Struct is a plugin to parse a request body into a struct.
+Uses Raw plugin to parse the body with limit.</p>
+</div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><a class='stability Unmarked' title='No stability level'></a><code>impl&lt;T: 'static + <a class='trait' href='http://doc.rust-lang.org/rustc-serialize/rustc-serialize/serialize/trait.Decodable.html' title='rustc-serialize::serialize::Decodable'>Decodable</a>&gt; Key for <a class='struct' href='../bodyparser/struct.Struct.html' title='bodyparser::Struct'>Struct</a>&lt;T&gt;</code></h3><div class='impl-items'><h4 id='assoc_type.Value' class='type'><a class='stability Unmarked' title='No stability level'></a><code>type Value = <a class='enum' href='http://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;T&gt;</code></h4>
+</div><h3 class='impl'><a class='stability Unmarked' title='No stability level'></a><code>impl&lt;'a, T: 'static + <a class='trait' href='http://doc.rust-lang.org/rustc-serialize/rustc-serialize/serialize/trait.Decodable.html' title='rustc-serialize::serialize::Decodable'>Decodable</a>&gt; Plugin&lt;<a class='struct' href='../iron/request/struct.Request.html' title='iron::request::Request'>Request</a>&lt;'a&gt;&gt; for <a class='struct' href='../bodyparser/struct.Struct.html' title='bodyparser::Struct'>Struct</a>&lt;T&gt;</code></h3><div class='impl-items'><h4 id='assoc_type.Error' class='type'><a class='stability Unmarked' title='No stability level'></a><code>type Error = <a class='struct' href='../bodyparser/struct.BodyError.html' title='bodyparser::BodyError'>BodyError</a></code></h4>
+<h4 id='method.eval' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.eval' class='fnname'>eval</a>(req: &amp;mut <a class='struct' href='../iron/request/struct.Request.html' title='iron::request::Request'>Request</a>) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a class='enum' href='http://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;T&gt;, <a class='struct' href='../bodyparser/struct.BodyError.html' title='bodyparser::BodyError'>BodyError</a>&gt;</code></h4>
+</div><h3 id='derived_implementations'>Derived Implementations </h3><h3 class='impl'><a class='stability Stable' title='Stable'></a><code>impl&lt;T: <a class='trait' href='http://doc.rust-lang.org/nightly/core/clone/trait.Clone.html' title='core::clone::Clone'>Clone</a> + <a class='trait' href='http://doc.rust-lang.org/rustc-serialize/rustc-serialize/serialize/trait.Decodable.html' title='rustc-serialize::serialize::Decodable'>Decodable</a>&gt; <a class='trait' href='http://doc.rust-lang.org/nightly/core/clone/trait.Clone.html' title='core::clone::Clone'>Clone</a> for <a class='struct' href='../bodyparser/struct.Struct.html' title='bodyparser::Struct'>Struct</a>&lt;T&gt;</code></h3><div class='impl-items'><h4 id='method.clone' class='method'><a class='stability Stable' title='Stable'></a><code>fn <a href='#method.clone' class='fnname'>clone</a>(&amp;self) -&gt; <a class='struct' href='../bodyparser/struct.Struct.html' title='bodyparser::Struct'>Struct</a>&lt;T&gt;</code></h4>
+<h4 id='method.clone_from' class='tymethod'><a class='stability Unstable' title='Unstable: this function is rarely used'></a><code>fn <a href='#tymethod.clone_from' class='fnname'>clone_from</a>(&amp;mut self, source: &amp;Self)</code></h4>
+</div></section>
+    <section id='search' class="content hidden"></section>
+
+    <section class="footer"></section>
+
+    <div id="help" class="hidden">
+        <div class="shortcuts">
+            <h1>Keyboard shortcuts</h1>
+            <dl>
+                <dt>?</dt>
+                <dd>Show this help dialog</dd>
+                <dt>S</dt>
+                <dd>Focus the search field</dd>
+                <dt>&larrb;</dt>
+                <dd>Move up in search results</dd>
+                <dt>&rarrb;</dt>
+                <dd>Move down in search results</dd>
+                <dt>&#9166;</dt>
+                <dd>Go to active search result</dd>
+            </dl>
+        </div>
+        <div class="infos">
+            <h1>Search tricks</h1>
+            <p>
+                Prefix searches with a type followed by a colon (e.g.
+                <code>fn:</code>) to restrict the search to a given type.
+            </p>
+            <p>
+                Accepted types are: <code>fn</code>, <code>mod</code>,
+                <code>struct</code>, <code>enum</code>,
+                <code>trait</code>, <code>typedef</code> (or
+                <code>tdef</code>).
+            </p>
+        </div>
+    </div>
+
+    <section class="content footer">
+    <div style="text-align: right;">
+        <a style="color: #428bca;" href="https://github.com/reem">@reem</a>
+        <a style="color: #428bca;" href="https://github.com/zzmp">@zzmp</a>
+        <a style="color: #428bca;" href="https://github.com/theptrk">@theptrk</a>
+        <a style="color: #428bca;" href="https://github.com/mcreinhard">@mcreinhard</a>
+    </div>
+</section>
+
+
+
+    <script>
+        window.rootPath = "../";
+        window.currentCrate = "bodyparser";
+        window.playgroundUrl = "";
+    </script>
+    <script src="../jquery.js"></script>
+    <script src="../main.js"></script>
+    
+    <script async src="../search-index.js"></script>
+</body>
+</html>
