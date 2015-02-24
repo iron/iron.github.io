@@ -51,10 +51,11 @@
 
     <section id='main' class="content struct">
 <h1 class='fqn'><span class='in-band'>Struct <a href='index.html'>bodyparser</a>::<wbr><a class='struct' href=''>Struct</a><wbr></span><span class='out-of-band'><span id='render-detail'>
-            <a id="collapse-all" href="#">[-]
-            </a>&nbsp;<a id="expand-all" href="#">[+]</a>
-        </span><a id='src-933' href='../src/bodyparser/lib.rs.html#112'>[src]</a></span></h1>
-<pre class='rust struct'>pub struct Struct&lt;T: <a class='trait' href='http://doc.rust-lang.org/rustc-serialize/rustc-serialize/serialize/trait.Decodable.html' title='rustc-serialize::serialize::Decodable'>Decodable</a>&gt;;</pre><div class='docblock'><p>Struct is a plugin to parse a request body into a struct.
+            <a id="collapse-all" href="#">[-]</a>&nbsp;<a id="expand-all" href="#">[+]</a>
+        </span><a id='src-934' href='../src/bodyparser/lib.rs.html#113-115'>[src]</a></span></h1>
+<pre class='rust struct'>pub struct Struct&lt;T: <a class='trait' href='http://doc.rust-lang.org/rustc-serialize/rustc-serialize/serialize/trait.Decodable.html' title='rustc-serialize::serialize::Decodable'>Decodable</a>&gt; {
+    // some fields omitted
+}</pre><div class='docblock'><p>Struct is a plugin to parse a request body into a struct.
 Uses Raw plugin to parse the body with limit.</p>
 </div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><a class='stability Unmarked' title='No stability level'></a><code>impl&lt;T: 'static + <a class='trait' href='http://doc.rust-lang.org/rustc-serialize/rustc-serialize/serialize/trait.Decodable.html' title='rustc-serialize::serialize::Decodable'>Decodable</a>&gt; Key for <a class='struct' href='../bodyparser/struct.Struct.html' title='bodyparser::Struct'>Struct</a>&lt;T&gt;</code></h3><div class='impl-items'><h4 id='assoc_type.Value' class='type'><a class='stability Unmarked' title='No stability level'></a><code>type Value = <a class='enum' href='http://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;T&gt;</code></h4>
 </div><h3 class='impl'><a class='stability Unmarked' title='No stability level'></a><code>impl&lt;'a, T: 'static + <a class='trait' href='http://doc.rust-lang.org/rustc-serialize/rustc-serialize/serialize/trait.Decodable.html' title='rustc-serialize::serialize::Decodable'>Decodable</a>&gt; Plugin&lt;<a class='struct' href='../iron/request/struct.Request.html' title='iron::request::Request'>Request</a>&lt;'a&gt;&gt; for <a class='struct' href='../bodyparser/struct.Struct.html' title='bodyparser::Struct'>Struct</a>&lt;T&gt;</code></h3><div class='impl-items'><h4 id='assoc_type.Error' class='type'><a class='stability Unmarked' title='No stability level'></a><code>type Error = <a class='struct' href='../bodyparser/struct.BodyError.html' title='bodyparser::BodyError'>BodyError</a></code></h4>
