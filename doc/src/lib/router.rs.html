@@ -252,6 +252,9 @@
 <span id="201">201</span>
 <span id="202">202</span>
 <span id="203">203</span>
+<span id="204">204</span>
+<span id="205">205</span>
+<span id="206">206</span>
 </pre><pre class='rust '>
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>collections</span>::<span class='ident'>HashMap</span>;
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>collections</span>::<span class='ident'>hash_map</span>::<span class='ident'>Entry</span>::{<span class='ident'>Occupied</span>, <span class='ident'>Vacant</span>};
@@ -272,6 +275,9 @@
     <span class='comment'>// The routers, specialized by method.</span>
     <span class='ident'>routers</span>: <span class='ident'>HashMap</span><span class='op'>&lt;</span><span class='ident'>method</span>::<span class='ident'>Method</span>, <span class='ident'>Recognizer</span><span class='op'>&lt;</span><span class='ident'>Box</span><span class='op'>&lt;</span><span class='ident'>Handler</span><span class='op'>&gt;&gt;</span><span class='op'>&gt;</span>
 }
+
+<span class='kw'>unsafe</span> <span class='kw'>impl</span> <span class='ident'>Send</span> <span class='kw'>for</span> <span class='ident'>Router</span> {}
+<span class='kw'>unsafe</span> <span class='kw'>impl</span> <span class='ident'>Sync</span> <span class='kw'>for</span> <span class='ident'>Router</span> {}
 
 <span class='kw'>impl</span> <span class='ident'>Router</span> {
     <span class='doccomment'>/// Construct a new, empty `Router`.</span>
