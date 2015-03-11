@@ -35,7 +35,7 @@
 
     <section class="sidebar">
         <a href='../lib/index.html'><img src='https://avatars0.githubusercontent.com/u/7853871?s=128' alt='' width='100'></a>
-        <p class='location'><a href='index.html'>lib</a></p><div class='block mod'><h2>Modules</h2><a class='mod ' href='headers/index.html'>headers</a><a class='mod ' href='method/index.html'>method</a><a class='mod ' href='middleware/index.html'>middleware</a><a class='mod ' href='mime/index.html'>mime</a><a class='mod ' href='modifier/index.html'>modifier</a><a class='mod ' href='prelude/index.html'>prelude</a><a class='mod ' href='response/index.html'>response</a><a class='mod ' href='status/index.html'>status</a><a class='mod ' href='typemap/index.html'>typemap</a></div><div class='block struct'><h2>Structs</h2><a class='struct ' href='struct.Headers.html'>Headers</a><a class='struct ' href='struct.Iron.html'>Iron</a><a class='struct ' href='struct.Request.html'>Request</a><a class='struct ' href='struct.TypeMap.html'>TypeMap</a><a class='struct ' href='struct.Url.html'>Url</a></div><div class='block trait'><h2>Traits</h2><a class='trait ' href='trait.Error.html'>Error</a><a class='trait ' href='trait.Plugin.html'>Plugin</a><a class='trait current' href='trait.Set.html'>Set</a></div>
+        <p class='location'><a href='index.html'>lib</a></p><script>window.sidebarCurrent = {name: 'Set', ty: 'trait', relpath: ''};</script><script defer src="sidebar-items.js"></script>
     </section>
 
     <nav class="sub">
@@ -51,25 +51,26 @@
 
     <section id='main' class="content trait">
 <h1 class='fqn'><span class='in-band'>Trait <a href='index.html'>lib</a>::<wbr><a class='trait' href=''>Set</a><wbr></span><span class='out-of-band'><span id='render-detail'>
-            <a id="collapse-all" href="#">[-]
-            </a>&nbsp;<a id="expand-all" href="#">[+]</a>
+            <a id="collapse-all" href="#">[-]</a>&nbsp;<a id="expand-all" href="#">[+]</a>
         </span></span></h1>
 <pre class='rust trait'>pub trait Set {
-    fn <a href='#tymethod.set' class='fnname'>set</a>&lt;M: <a class='trait' href='../lib/modifier/trait.Modifier.html' title='lib::modifier::Modifier'>Modifier</a>&lt;Self&gt;&gt;(self, modifier: M) -&gt; Self { ... }
-    fn <a href='#tymethod.set_mut' class='fnname'>set_mut</a>&lt;M: <a class='trait' href='../lib/modifier/trait.Modifier.html' title='lib::modifier::Modifier'>Modifier</a>&lt;Self&gt;&gt;(&amp;mut self, modifier: M) -&gt; &amp;mut Self { ... }
-}</pre><div class='docblock'><p>A blanket trait providing the set and set_mut methods for all types.</p>
+    fn <a href='#tymethod.set' class='fnname'>set</a>&lt;M&gt;(self, modifier: M) -&gt; Self <span class='where'>where M: Modifier&lt;Self&gt;</span> { ... }
+    fn <a href='#tymethod.set_mut' class='fnname'>set_mut</a>&lt;M&gt;(&amp;mut self, modifier: M) -&gt; &amp;mut Self <span class='where'>where M: Modifier&lt;Self&gt;</span> { ... }
+}</pre><div class='docblock'><p>A trait providing the set and set_mut methods for all types.</p>
+
+<p>Simply implement this for your types and they can be used
+with modifiers.</p>
 </div>
             <h2 id='provided-methods'>Provided Methods</h2>
             <div class='methods'>
-        <h3 id='tymethod.set' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#tymethod.set' class='fnname'>set</a>&lt;M: <a class='trait' href='../lib/modifier/trait.Modifier.html' title='lib::modifier::Modifier'>Modifier</a>&lt;Self&gt;&gt;(self, modifier: M) -&gt; Self</code></h3><div class='docblock'><p>Modify self using the provided modifier.</p>
-</div><h3 id='tymethod.set_mut' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#tymethod.set_mut' class='fnname'>set_mut</a>&lt;M: <a class='trait' href='../lib/modifier/trait.Modifier.html' title='lib::modifier::Modifier'>Modifier</a>&lt;Self&gt;&gt;(&amp;mut self, modifier: M) -&gt; &amp;mut Self</code></h3><div class='docblock'><p>Modify self through a mutable reference with the provided modifier.</p>
-
-<p>Note that this still causes a shallow copy of self, so can be
-slow for types which are expensive to move.</p>
+        <h3 id='tymethod.set' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#tymethod.set' class='fnname'>set</a>&lt;M&gt;(self, modifier: M) -&gt; Self <span class='where'>where M: Modifier&lt;Self&gt;</span></code></h3><div class='docblock'><p>Modify self using the provided modifier.</p>
+</div><h3 id='tymethod.set_mut' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#tymethod.set_mut' class='fnname'>set_mut</a>&lt;M&gt;(&amp;mut self, modifier: M) -&gt; &amp;mut Self <span class='where'>where M: Modifier&lt;Self&gt;</span></code></h3><div class='docblock'><p>Modify self through a mutable reference with the provided modifier.</p>
 </div></div>
         <h2 id='implementors'>Implementors</h2>
         <ul class='item-list' id='implementors-list'>
-    </ul><script type="text/javascript" async
+    <li><a class='stability Unmarked' title='No stability level'></a><code>impl <a class='trait' href='../lib/prelude/trait.Set.html' title='lib::prelude::Set'>Set</a> for <a class='struct' href='../lib/response/struct.Response.html' title='lib::response::Response'>Response</a></code></li>
+<li><a class='stability Unmarked' title='No stability level'></a><code>impl&lt;'a&gt; <a class='trait' href='../lib/prelude/trait.Set.html' title='lib::prelude::Set'>Set</a> for <a class='struct' href='../lib/request/struct.Request.html' title='lib::request::Request'>Request</a>&lt;'a&gt;</code></li>
+</ul><script type="text/javascript" async
                               src="../implementors/modifier/trait.Set.js">
                       </script></section>
     <section id='search' class="content hidden"></section>

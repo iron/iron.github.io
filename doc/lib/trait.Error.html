@@ -35,7 +35,7 @@
 
     <section class="sidebar">
         <a href='../lib/index.html'><img src='https://avatars0.githubusercontent.com/u/7853871?s=128' alt='' width='100'></a>
-        <p class='location'><a href='index.html'>lib</a></p><div class='block mod'><h2>Modules</h2><a class='mod ' href='headers/index.html'>headers</a><a class='mod ' href='method/index.html'>method</a><a class='mod ' href='middleware/index.html'>middleware</a><a class='mod ' href='mime/index.html'>mime</a><a class='mod ' href='modifier/index.html'>modifier</a><a class='mod ' href='prelude/index.html'>prelude</a><a class='mod ' href='response/index.html'>response</a><a class='mod ' href='status/index.html'>status</a><a class='mod ' href='typemap/index.html'>typemap</a></div><div class='block struct'><h2>Structs</h2><a class='struct ' href='struct.Headers.html'>Headers</a><a class='struct ' href='struct.Iron.html'>Iron</a><a class='struct ' href='struct.Request.html'>Request</a><a class='struct ' href='struct.TypeMap.html'>TypeMap</a><a class='struct ' href='struct.Url.html'>Url</a></div><div class='block trait'><h2>Traits</h2><a class='trait current' href='trait.Error.html'>Error</a><a class='trait ' href='trait.Plugin.html'>Plugin</a><a class='trait ' href='trait.Set.html'>Set</a></div>
+        <p class='location'><a href='index.html'>lib</a></p><script>window.sidebarCurrent = {name: 'Error', ty: 'trait', relpath: ''};</script><script defer src="sidebar-items.js"></script>
     </section>
 
     <nav class="sub">
@@ -51,10 +51,9 @@
 
     <section id='main' class="content trait">
 <h1 class='fqn'><span class='in-band'>Trait <a href='index.html'>lib</a>::<wbr><a class='trait' href=''>Error</a><wbr></span><span class='out-of-band'><span id='render-detail'>
-            <a id="collapse-all" href="#">[-]
-            </a>&nbsp;<a id="expand-all" href="#">[+]</a>
+            <a id="collapse-all" href="#">[-]</a>&nbsp;<a id="expand-all" href="#">[+]</a>
         </span></span></h1>
-<pre class='rust trait'>pub trait Error: <a class='trait' href='http://doc.rust-lang.org/nightly/core/kinds/trait.Send.html' title='core::kinds::Send'>Send</a> + <a class='trait' href='http://doc.rust-lang.org/nightly/std/error/trait.Error.html' title='std::error::Error'>Error</a> + <a class='trait' href='http://doc.rust-lang.org/nightly/core/fmt/trait.Show.html' title='core::fmt::Show'>Show</a> + Typeable { }</pre><div class='docblock'><p>An extension to std::error::Error which provides dynamic downcasting of
+<pre class='rust trait'>pub trait Error <span class='where'>where Self: <a class='trait' href='http://doc.rust-lang.org/nightly/core/marker/trait.Send.html' title='core::marker::Send'>Send</a>, Self: <a class='trait' href='http://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html' title='core::fmt::Debug'>Debug</a>, Self: <a class='trait' href='http://doc.rust-lang.org/nightly/core/error/trait.Error.html' title='core::error::Error'>Error</a>, Self: Typeable</span> { }</pre><div class='docblock'><p>An extension to std::error::Error which provides dynamic downcasting of
 errors for use in highly generic contexts.</p>
 
 <h2 id="when-to-use-this-trait" class='section-header'><a
@@ -78,7 +77,7 @@ and will call them one after the other, rejecting the request on any
 error.</p>
 
 <p>The first step would be to write a <code>Verifier</code> trait:</p>
-<pre class='rust '>
+<pre id='rust-example-rendered' class='rust '>
 <span class='kw'>pub</span> <span class='kw'>trait</span> <span class='ident'>Verifier</span> {
     <span class='doccomment'>/// Verify the request, yielding an error if the request is invalid.</span>
     <span class='kw'>fn</span> <span class='ident'>verify</span>(<span class='kw-2'>&amp;</span><span class='ident'>Request</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>(), ???<span class='op'>&gt;</span>;

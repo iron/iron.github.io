@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <meta name="description" content="API documentation for the Rust `HeaderFormat` trait in crate `lib`.">
+    <meta name="keywords" content="rust, rustlang, rust-lang, HeaderFormat">
+
+    <title>lib::headers::HeaderFormat - Rust</title>
+
+    <link rel="stylesheet" type="text/css" href="../../main.css">
+
+    <link rel="shortcut icon" href="https://avatars0.githubusercontent.com/u/7853871?s=256">
+    <link href='http://fonts.googleapis.com/css?family=Questrial|Alegreya+Sans+SC:400,900|Bilbo|Abel' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Alegreya+Sans+SC:400,900|Alegreya+Sans' rel='stylesheet' type='text/css'>
+
+
+</head>
+<body class="rustdoc">
+    <!--[if lte IE 8]>
+    <div class="warning">
+        This old browser is unsupported and will most likely display funky
+        things.
+    </div>
+    <![endif]-->
+
+    <div style="float: right;">
+    <a style="font-size: 2em; font-family: 'Alegreya Sans SC', 'Helvetica Neue', Arial, Tahoma, Verdana, sans-serif; font-weight: 400; margin: 0;" href="http://ironframework.io/">
+        IRON
+    </a>
+</div>
+
+
+
+    <section class="sidebar">
+        <a href='../../lib/index.html'><img src='https://avatars0.githubusercontent.com/u/7853871?s=128' alt='' width='100'></a>
+        <p class='location'><a href='../index.html'>lib</a>::<wbr><a href='index.html'>headers</a></p><script>window.sidebarCurrent = {name: 'HeaderFormat', ty: 'trait', relpath: ''};</script><script defer src="sidebar-items.js"></script>
+    </section>
+
+    <nav class="sub">
+        <form class="search-form js-only">
+            <div class="search-container">
+                <input class="search-input" name="search"
+                       autocomplete="off"
+                       placeholder="Click or press 'S' to search, '?' for more options..."
+                       type="search">
+            </div>
+        </form>
+    </nav>
+
+    <section id='main' class="content trait">
+<h1 class='fqn'><span class='in-band'>Trait <a href='../index.html'>lib</a>::<wbr><a href='index.html'>headers</a>::<wbr><a class='trait' href=''>HeaderFormat</a><wbr></span><span class='out-of-band'><span id='render-detail'>
+            <a id="collapse-all" href="#">[-]</a>&nbsp;<a id="expand-all" href="#">[+]</a>
+        </span></span></h1>
+<pre class='rust trait'>pub trait HeaderFormat <span class='where'>where Self: <a class='trait' href='http://doc.rust-lang.org/nightly/core/marker/trait.Send.html' title='core::marker::Send'>Send</a>, Self: <a class='trait' href='http://doc.rust-lang.org/nightly/core/marker/trait.Sync.html' title='core::marker::Sync'>Sync</a>, Self: <a class='trait' href='../../hyper/header/trait.HeaderClone.html' title='hyper::header::HeaderClone'>HeaderClone</a>, Self: <a class='trait' href='http://doc.rust-lang.org/nightly/core/any/trait.Any.html' title='core::any::Any'>Any</a>, Self: <a class='trait' href='http://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html' title='core::fmt::Debug'>Debug</a></span> {
+    fn <a href='#tymethod.fmt_header' class='fnname'>fmt_header</a>(&amp;self, fmt: &amp;mut <a class='struct' href='http://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html' title='core::fmt::Formatter'>Formatter</a>) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.tuple.html'>()</a>, <a class='struct' href='http://doc.rust-lang.org/nightly/core/fmt/struct.Error.html' title='core::fmt::Error'>Error</a>&gt;;
+}</pre><div class='docblock'><p>A trait for any object that will represent a header field and value.</p>
+
+<p>This trait represents the formatting of a Header for output to a TcpStream.</p>
+</div>
+            <h2 id='required-methods'>Required Methods</h2>
+            <div class='methods'>
+        <h3 id='tymethod.fmt_header' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#tymethod.fmt_header' class='fnname'>fmt_header</a>(&amp;self, fmt: &amp;mut <a class='struct' href='http://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html' title='core::fmt::Formatter'>Formatter</a>) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.tuple.html'>()</a>, <a class='struct' href='http://doc.rust-lang.org/nightly/core/fmt/struct.Error.html' title='core::fmt::Error'>Error</a>&gt;</code></h3><div class='docblock'><p>Format a header to be output into a TcpStream.</p>
+
+<p>This method is not allowed to introduce an Err not produced
+by the passed-in Formatter.</p>
+</div></div>
+        <h2 id='implementors'>Implementors</h2>
+        <ul class='item-list' id='implementors-list'>
+    <li><a class='stability Unmarked' title='No stability level'></a><code>impl <a class='trait' href='../../lib/headers/trait.HeaderFormat.html' title='lib::headers::HeaderFormat'>HeaderFormat</a> for <a class='struct' href='../../lib/headers/struct.AccessControlAllowHeaders.html' title='lib::headers::AccessControlAllowHeaders'>AccessControlAllowHeaders</a></code></li>
+<li><a class='stability Unmarked' title='No stability level'></a><code>impl <a class='trait' href='../../lib/headers/trait.HeaderFormat.html' title='lib::headers::HeaderFormat'>HeaderFormat</a> for <a class='struct' href='../../lib/headers/struct.AccessControlAllowMethods.html' title='lib::headers::AccessControlAllowMethods'>AccessControlAllowMethods</a></code></li>
+<li><a class='stability Unmarked' title='No stability level'></a><code>impl <a class='trait' href='../../lib/headers/trait.HeaderFormat.html' title='lib::headers::HeaderFormat'>HeaderFormat</a> for <a class='enum' href='../../lib/headers/enum.AccessControlAllowOrigin.html' title='lib::headers::AccessControlAllowOrigin'>AccessControlAllowOrigin</a></code></li>
+<li><a class='stability Unmarked' title='No stability level'></a><code>impl <a class='trait' href='../../lib/headers/trait.HeaderFormat.html' title='lib::headers::HeaderFormat'>HeaderFormat</a> for <a class='struct' href='../../lib/headers/struct.AccessControlMaxAge.html' title='lib::headers::AccessControlMaxAge'>AccessControlMaxAge</a></code></li>
+<li><a class='stability Unmarked' title='No stability level'></a><code>impl <a class='trait' href='../../lib/headers/trait.HeaderFormat.html' title='lib::headers::HeaderFormat'>HeaderFormat</a> for <a class='struct' href='../../lib/headers/struct.AccessControlRequestHeaders.html' title='lib::headers::AccessControlRequestHeaders'>AccessControlRequestHeaders</a></code></li>
+<li><a class='stability Unmarked' title='No stability level'></a><code>impl <a class='trait' href='../../lib/headers/trait.HeaderFormat.html' title='lib::headers::HeaderFormat'>HeaderFormat</a> for <a class='struct' href='../../lib/headers/struct.AccessControlRequestMethod.html' title='lib::headers::AccessControlRequestMethod'>AccessControlRequestMethod</a></code></li>
+<li><a class='stability Unmarked' title='No stability level'></a><code>impl <a class='trait' href='../../lib/headers/trait.HeaderFormat.html' title='lib::headers::HeaderFormat'>HeaderFormat</a> for <a class='struct' href='../../lib/headers/struct.Accept.html' title='lib::headers::Accept'>Accept</a></code></li>
+<li><a class='stability Unmarked' title='No stability level'></a><code>impl <a class='trait' href='../../lib/headers/trait.HeaderFormat.html' title='lib::headers::HeaderFormat'>HeaderFormat</a> for <a class='struct' href='../../lib/headers/struct.AcceptCharset.html' title='lib::headers::AcceptCharset'>AcceptCharset</a></code></li>
+<li><a class='stability Unmarked' title='No stability level'></a><code>impl <a class='trait' href='../../lib/headers/trait.HeaderFormat.html' title='lib::headers::HeaderFormat'>HeaderFormat</a> for <a class='struct' href='../../lib/headers/struct.AcceptEncoding.html' title='lib::headers::AcceptEncoding'>AcceptEncoding</a></code></li>
+<li><a class='stability Unmarked' title='No stability level'></a><code>impl <a class='trait' href='../../lib/headers/trait.HeaderFormat.html' title='lib::headers::HeaderFormat'>HeaderFormat</a> for <a class='struct' href='../../lib/headers/struct.AcceptLanguage.html' title='lib::headers::AcceptLanguage'>AcceptLanguage</a></code></li>
+<li><a class='stability Unmarked' title='No stability level'></a><code>impl <a class='trait' href='../../lib/headers/trait.HeaderFormat.html' title='lib::headers::HeaderFormat'>HeaderFormat</a> for <a class='struct' href='../../lib/headers/struct.Allow.html' title='lib::headers::Allow'>Allow</a></code></li>
+<li><a class='stability Unmarked' title='No stability level'></a><code>impl&lt;S&gt; <a class='trait' href='../../lib/headers/trait.HeaderFormat.html' title='lib::headers::HeaderFormat'>HeaderFormat</a> for <a class='struct' href='../../lib/headers/struct.Authorization.html' title='lib::headers::Authorization'>Authorization</a>&lt;S&gt; <span class='where'>where S: 'static, S: <a class='trait' href='../../lib/headers/trait.Scheme.html' title='lib::headers::Scheme'>Scheme</a>, &lt;S as <a class='trait' href='http://doc.rust-lang.org/nightly/core/str/trait.FromStr.html' title='core::str::FromStr'>FromStr</a>&gt;::Err: 'static</span></code></li>
+<li><a class='stability Unmarked' title='No stability level'></a><code>impl <a class='trait' href='../../lib/headers/trait.HeaderFormat.html' title='lib::headers::HeaderFormat'>HeaderFormat</a> for <a class='struct' href='../../lib/headers/struct.CacheControl.html' title='lib::headers::CacheControl'>CacheControl</a></code></li>
+<li><a class='stability Unmarked' title='No stability level'></a><code>impl <a class='trait' href='../../lib/headers/trait.HeaderFormat.html' title='lib::headers::HeaderFormat'>HeaderFormat</a> for <a class='struct' href='../../lib/headers/struct.Cookie.html' title='lib::headers::Cookie'>Cookie</a></code></li>
+<li><a class='stability Unmarked' title='No stability level'></a><code>impl <a class='trait' href='../../lib/headers/trait.HeaderFormat.html' title='lib::headers::HeaderFormat'>HeaderFormat</a> for <a class='struct' href='../../lib/headers/struct.Connection.html' title='lib::headers::Connection'>Connection</a></code></li>
+<li><a class='stability Unmarked' title='No stability level'></a><code>impl <a class='trait' href='../../lib/headers/trait.HeaderFormat.html' title='lib::headers::HeaderFormat'>HeaderFormat</a> for <a class='struct' href='../../lib/headers/struct.ContentLength.html' title='lib::headers::ContentLength'>ContentLength</a></code></li>
+<li><a class='stability Unmarked' title='No stability level'></a><code>impl <a class='trait' href='../../lib/headers/trait.HeaderFormat.html' title='lib::headers::HeaderFormat'>HeaderFormat</a> for <a class='struct' href='../../lib/headers/struct.ContentType.html' title='lib::headers::ContentType'>ContentType</a></code></li>
+<li><a class='stability Unmarked' title='No stability level'></a><code>impl <a class='trait' href='../../lib/headers/trait.HeaderFormat.html' title='lib::headers::HeaderFormat'>HeaderFormat</a> for <a class='struct' href='../../lib/headers/struct.Date.html' title='lib::headers::Date'>Date</a></code></li>
+<li><a class='stability Unmarked' title='No stability level'></a><code>impl <a class='trait' href='../../lib/headers/trait.HeaderFormat.html' title='lib::headers::HeaderFormat'>HeaderFormat</a> for <a class='struct' href='../../lib/headers/struct.Etag.html' title='lib::headers::Etag'>Etag</a></code></li>
+<li><a class='stability Unmarked' title='No stability level'></a><code>impl <a class='trait' href='../../lib/headers/trait.HeaderFormat.html' title='lib::headers::HeaderFormat'>HeaderFormat</a> for <a class='struct' href='../../lib/headers/struct.Expires.html' title='lib::headers::Expires'>Expires</a></code></li>
+<li><a class='stability Unmarked' title='No stability level'></a><code>impl <a class='trait' href='../../lib/headers/trait.HeaderFormat.html' title='lib::headers::HeaderFormat'>HeaderFormat</a> for <a class='struct' href='../../lib/headers/struct.Host.html' title='lib::headers::Host'>Host</a></code></li>
+<li><a class='stability Unmarked' title='No stability level'></a><code>impl <a class='trait' href='../../lib/headers/trait.HeaderFormat.html' title='lib::headers::HeaderFormat'>HeaderFormat</a> for <a class='enum' href='../../lib/headers/enum.IfMatch.html' title='lib::headers::IfMatch'>IfMatch</a></code></li>
+<li><a class='stability Unmarked' title='No stability level'></a><code>impl <a class='trait' href='../../lib/headers/trait.HeaderFormat.html' title='lib::headers::HeaderFormat'>HeaderFormat</a> for <a class='struct' href='../../lib/headers/struct.LastModified.html' title='lib::headers::LastModified'>LastModified</a></code></li>
+<li><a class='stability Unmarked' title='No stability level'></a><code>impl <a class='trait' href='../../lib/headers/trait.HeaderFormat.html' title='lib::headers::HeaderFormat'>HeaderFormat</a> for <a class='struct' href='../../lib/headers/struct.IfModifiedSince.html' title='lib::headers::IfModifiedSince'>IfModifiedSince</a></code></li>
+<li><a class='stability Unmarked' title='No stability level'></a><code>impl <a class='trait' href='../../lib/headers/trait.HeaderFormat.html' title='lib::headers::HeaderFormat'>HeaderFormat</a> for <a class='enum' href='../../lib/headers/enum.IfNoneMatch.html' title='lib::headers::IfNoneMatch'>IfNoneMatch</a></code></li>
+<li><a class='stability Unmarked' title='No stability level'></a><code>impl <a class='trait' href='../../lib/headers/trait.HeaderFormat.html' title='lib::headers::HeaderFormat'>HeaderFormat</a> for <a class='struct' href='../../lib/headers/struct.IfUnmodifiedSince.html' title='lib::headers::IfUnmodifiedSince'>IfUnmodifiedSince</a></code></li>
+<li><a class='stability Unmarked' title='No stability level'></a><code>impl <a class='trait' href='../../lib/headers/trait.HeaderFormat.html' title='lib::headers::HeaderFormat'>HeaderFormat</a> for <a class='struct' href='../../lib/headers/struct.Location.html' title='lib::headers::Location'>Location</a></code></li>
+<li><a class='stability Unmarked' title='No stability level'></a><code>impl <a class='trait' href='../../lib/headers/trait.HeaderFormat.html' title='lib::headers::HeaderFormat'>HeaderFormat</a> for <a class='enum' href='../../lib/headers/enum.Pragma.html' title='lib::headers::Pragma'>Pragma</a></code></li>
+<li><a class='stability Unmarked' title='No stability level'></a><code>impl <a class='trait' href='../../lib/headers/trait.HeaderFormat.html' title='lib::headers::HeaderFormat'>HeaderFormat</a> for <a class='struct' href='../../lib/headers/struct.Referer.html' title='lib::headers::Referer'>Referer</a></code></li>
+<li><a class='stability Unmarked' title='No stability level'></a><code>impl <a class='trait' href='../../lib/headers/trait.HeaderFormat.html' title='lib::headers::HeaderFormat'>HeaderFormat</a> for <a class='struct' href='../../lib/headers/struct.Server.html' title='lib::headers::Server'>Server</a></code></li>
+<li><a class='stability Unmarked' title='No stability level'></a><code>impl <a class='trait' href='../../lib/headers/trait.HeaderFormat.html' title='lib::headers::HeaderFormat'>HeaderFormat</a> for <a class='struct' href='../../lib/headers/struct.SetCookie.html' title='lib::headers::SetCookie'>SetCookie</a></code></li>
+<li><a class='stability Unmarked' title='No stability level'></a><code>impl <a class='trait' href='../../lib/headers/trait.HeaderFormat.html' title='lib::headers::HeaderFormat'>HeaderFormat</a> for <a class='struct' href='../../lib/headers/struct.TransferEncoding.html' title='lib::headers::TransferEncoding'>TransferEncoding</a></code></li>
+<li><a class='stability Unmarked' title='No stability level'></a><code>impl <a class='trait' href='../../lib/headers/trait.HeaderFormat.html' title='lib::headers::HeaderFormat'>HeaderFormat</a> for <a class='struct' href='../../lib/headers/struct.Upgrade.html' title='lib::headers::Upgrade'>Upgrade</a></code></li>
+<li><a class='stability Unmarked' title='No stability level'></a><code>impl <a class='trait' href='../../lib/headers/trait.HeaderFormat.html' title='lib::headers::HeaderFormat'>HeaderFormat</a> for <a class='struct' href='../../lib/headers/struct.UserAgent.html' title='lib::headers::UserAgent'>UserAgent</a></code></li>
+<li><a class='stability Unmarked' title='No stability level'></a><code>impl <a class='trait' href='../../lib/headers/trait.HeaderFormat.html' title='lib::headers::HeaderFormat'>HeaderFormat</a> for <a class='enum' href='../../lib/headers/enum.Vary.html' title='lib::headers::Vary'>Vary</a></code></li>
+</ul><script type="text/javascript" async
+                              src="../../implementors/hyper/header/trait.HeaderFormat.js">
+                      </script></section>
+    <section id='search' class="content hidden"></section>
+
+    <section class="footer"></section>
+
+    <div id="help" class="hidden">
+        <div class="shortcuts">
+            <h1>Keyboard shortcuts</h1>
+            <dl>
+                <dt>?</dt>
+                <dd>Show this help dialog</dd>
+                <dt>S</dt>
+                <dd>Focus the search field</dd>
+                <dt>&larrb;</dt>
+                <dd>Move up in search results</dd>
+                <dt>&rarrb;</dt>
+                <dd>Move down in search results</dd>
+                <dt>&#9166;</dt>
+                <dd>Go to active search result</dd>
+            </dl>
+        </div>
+        <div class="infos">
+            <h1>Search tricks</h1>
+            <p>
+                Prefix searches with a type followed by a colon (e.g.
+                <code>fn:</code>) to restrict the search to a given type.
+            </p>
+            <p>
+                Accepted types are: <code>fn</code>, <code>mod</code>,
+                <code>struct</code>, <code>enum</code>,
+                <code>trait</code>, <code>typedef</code> (or
+                <code>tdef</code>).
+            </p>
+        </div>
+    </div>
+
+    <section class="content footer">
+    <div style="text-align: right;">
+        <a style="color: #428bca;" href="https://github.com/reem">@reem</a>
+        <a style="color: #428bca;" href="https://github.com/zzmp">@zzmp</a>
+        <a style="color: #428bca;" href="https://github.com/theptrk">@theptrk</a>
+        <a style="color: #428bca;" href="https://github.com/mcreinhard">@mcreinhard</a>
+    </div>
+</section>
+
+
+
+    <script>
+        window.rootPath = "../../";
+        window.currentCrate = "lib";
+        window.playgroundUrl = "";
+    </script>
+    <script src="../../jquery.js"></script>
+    <script src="../../main.js"></script>
+    
+    <script async src="../../search-index.js"></script>
+</body>
+</html>
