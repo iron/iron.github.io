@@ -35,7 +35,7 @@
 
     <section class="sidebar">
         
-        <p class='location'><a href='index.html'>urlencoded</a></p><div class='block struct'><h2>Structs</h2><a class='struct current' href='struct.UrlEncodedBody.html'>UrlEncodedBody</a><a class='struct ' href='struct.UrlEncodedQuery.html'>UrlEncodedQuery</a></div>
+        <p class='location'><a href='index.html'>urlencoded</a></p><script>window.sidebarCurrent = {name: 'UrlEncodedBody', ty: 'struct', relpath: ''};</script><script defer src="sidebar-items.js"></script>
     </section>
 
     <nav class="sub">
@@ -51,13 +51,14 @@
 
     <section id='main' class="content struct">
 <h1 class='fqn'><span class='in-band'>Struct <a href='index.html'>urlencoded</a>::<wbr><a class='struct' href=''>UrlEncodedBody</a><wbr></span><span class='out-of-band'><span id='render-detail'>
-            <a id="collapse-all" href="#">[-]
-            </a>&nbsp;<a id="expand-all" href="#">[+]</a>
-        </span><a id='src-22' href='../src/urlencoded/src/lib.rs.html#35'>[src]</a></span></h1>
+            <a id="collapse-all" href="#">[-]</a>&nbsp;<a id="expand-all" href="#">[+]</a>
+        </span><a id='src-19' href='../src/urlencoded/lib.rs.html#31'>[src]</a></span></h1>
 <pre class='rust struct'>pub struct UrlEncodedBody;</pre><div class='docblock'><p>Plugin for <code>Request</code> that extracts URL encoded data from the request body.</p>
 
 <p>Use it like this: <code>req.get_ref::&lt;UrlEncodedBody&gt;()</code></p>
-</div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><a class='stability Unmarked' title='No stability level'></a><code>impl Assoc&lt;<a class='type' href='../urlencoded/type.QueryMap.html' title='urlencoded::QueryMap'>QueryMap</a>&gt; for <a class='struct' href='../urlencoded/struct.UrlEncodedBody.html' title='urlencoded::UrlEncodedBody'>UrlEncodedBody</a></code></h3><div class='impl-methods'></div><h3 class='impl'><a class='stability Unmarked' title='No stability level'></a><code>impl PluginFor&lt;<a class='struct' href='../iron/request/struct.Request.html' title='iron::request::Request'>Request</a>, <a class='struct' href='http://doc.rust-lang.org/nightly/std/collections/hash/map/struct.HashMap.html' title='std::collections::hash::map::HashMap'>HashMap</a>&lt;<a class='struct' href='http://doc.rust-lang.org/nightly/collections/string/struct.String.html' title='collections::string::String'>String</a>, <a class='struct' href='http://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;<a class='struct' href='http://doc.rust-lang.org/nightly/collections/string/struct.String.html' title='collections::string::String'>String</a>&gt;&gt;&gt; for <a class='struct' href='../urlencoded/struct.UrlEncodedBody.html' title='urlencoded::UrlEncodedBody'>UrlEncodedBody</a></code></h3><div class='impl-methods'><h4 id='method.eval' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.eval' class='fnname'>eval</a>(req: &amp;mut <a class='struct' href='../iron/request/struct.Request.html' title='iron::request::Request'>Request</a>, _: Phantom&lt;<a class='struct' href='../urlencoded/struct.UrlEncodedBody.html' title='urlencoded::UrlEncodedBody'>UrlEncodedBody</a>&gt;) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='type' href='../urlencoded/type.QueryMap.html' title='urlencoded::QueryMap'>QueryMap</a>&gt;</code></h4>
+</div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><a class='stability Unmarked' title='No stability level'></a><code>impl Key for <a class='struct' href='../urlencoded/struct.UrlEncodedBody.html' title='urlencoded::UrlEncodedBody'>UrlEncodedBody</a></code></h3><div class='impl-items'><h4 id='assoc_type.Value' class='type'><a class='stability Unmarked' title='No stability level'></a><code>type Value = <a class='type' href='../urlencoded/type.QueryMap.html' title='urlencoded::QueryMap'>QueryMap</a></code></h4>
+</div><h3 class='impl'><a class='stability Unmarked' title='No stability level'></a><code>impl&lt;'a&gt; Plugin&lt;<a class='struct' href='../iron/request/struct.Request.html' title='iron::request::Request'>Request</a>&lt;'a&gt;&gt; for <a class='struct' href='../urlencoded/struct.UrlEncodedBody.html' title='urlencoded::UrlEncodedBody'>UrlEncodedBody</a></code></h3><div class='impl-items'><h4 id='assoc_type.Error' class='type'><a class='stability Unmarked' title='No stability level'></a><code>type Error = <a class='enum' href='../urlencoded/enum.UrlDecodingError.html' title='urlencoded::UrlDecodingError'>UrlDecodingError</a></code></h4>
+<h4 id='method.eval' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.eval' class='fnname'>eval</a>(req: &amp;mut <a class='struct' href='../iron/request/struct.Request.html' title='iron::request::Request'>Request</a>) -&gt; <a class='type' href='../urlencoded/type.QueryResult.html' title='urlencoded::QueryResult'>QueryResult</a></code></h4>
 </div></section>
     <section id='search' class="content hidden"></section>
 
@@ -98,8 +99,6 @@
     <div style="text-align: right;">
         <a style="color: #428bca;" href="https://github.com/reem">@reem</a>
         <a style="color: #428bca;" href="https://github.com/zzmp">@zzmp</a>
-        <a style="color: #428bca;" href="https://github.com/theptrk">@theptrk</a>
-        <a style="color: #428bca;" href="https://github.com/mcreinhard">@mcreinhard</a>
     </div>
 </section>
 
