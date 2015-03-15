@@ -73,9 +73,9 @@ fn main() {
     fn hello_world(_: &amp;mut Request) -> IronResult&lt;Response&gt; {
         Ok(Response::with((status::Ok, "Hello World!")))
     }
-
-    Iron::new(hello_world).http("localhost:3000").unwrap();
+    
     println!("On 3000");
+    Iron::new(hello_world).http("localhost:3000").unwrap();
 }
 
 </code></pre>
