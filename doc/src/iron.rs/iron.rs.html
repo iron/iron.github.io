@@ -216,13 +216,11 @@
 <span id="165">165</span>
 <span id="166">166</span>
 <span id="167">167</span>
-<span id="168">168</span>
 </pre><pre class='rust '>
 <span class='doccomment'>//! Exposes the `Iron` type, the main entrance point of the</span>
 <span class='doccomment'>//! `Iron` library.</span>
 
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>net</span>::{<span class='ident'>ToSocketAddrs</span>, <span class='ident'>SocketAddr</span>};
-<span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>os</span>;
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>path</span>::<span class='ident'>PathBuf</span>;
 
 <span class='kw'>pub</span> <span class='kw'>use</span> <span class='ident'>hyper</span>::<span class='ident'>server</span>::<span class='ident'>Listening</span>;
@@ -292,7 +290,7 @@
     <span class='doccomment'>/// Panics if the provided address does not parse. To avoid this</span>
     <span class='doccomment'>/// call `to_socket_addrs` yourself and pass a parsed `SocketAddr`.</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>http</span><span class='op'>&lt;</span><span class='ident'>A</span>: <span class='ident'>ToSocketAddrs</span> <span class='op'>+</span> <span class='lifetime'>&#39;static</span><span class='op'>&gt;</span>(<span class='self'>self</span>, <span class='ident'>addr</span>: <span class='ident'>A</span>) <span class='op'>-&gt;</span> <span class='ident'>HttpResult</span><span class='op'>&lt;</span><span class='ident'>Listening</span><span class='op'>&gt;</span> {
-        <span class='self'>self</span>.<span class='ident'>listen_with</span>(<span class='ident'>addr</span>, <span class='number'>2</span> <span class='op'>*</span> <span class='ident'>os</span>::<span class='ident'>num_cpus</span>(), <span class='ident'>Protocol</span>::<span class='ident'>Http</span>)
+        <span class='self'>self</span>.<span class='ident'>listen_with</span>(<span class='ident'>addr</span>, <span class='number'>2</span> <span class='op'>*</span> ::<span class='ident'>num_cpus</span>::<span class='ident'>get</span>(), <span class='ident'>Protocol</span>::<span class='ident'>Http</span>)
     }
 
     <span class='doccomment'>/// Kick off the server process using the HTTPS protocol.</span>
@@ -309,7 +307,7 @@
     <span class='doccomment'>/// call `to_socket_addrs` yourself and pass a parsed `SocketAddr`.</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>https</span><span class='op'>&lt;</span><span class='ident'>A</span>: <span class='ident'>ToSocketAddrs</span> <span class='op'>+</span> <span class='lifetime'>&#39;static</span><span class='op'>&gt;</span>(<span class='self'>self</span>, <span class='ident'>addr</span>: <span class='ident'>A</span>, <span class='ident'>certificate</span>: <span class='ident'>PathBuf</span>, <span class='ident'>key</span>: <span class='ident'>PathBuf</span>)
                                             <span class='op'>-&gt;</span> <span class='ident'>HttpResult</span><span class='op'>&lt;</span><span class='ident'>Listening</span><span class='op'>&gt;</span> {
-        <span class='self'>self</span>.<span class='ident'>listen_with</span>(<span class='ident'>addr</span>, <span class='number'>2</span> <span class='op'>*</span> <span class='ident'>os</span>::<span class='ident'>num_cpus</span>(),
+        <span class='self'>self</span>.<span class='ident'>listen_with</span>(<span class='ident'>addr</span>, <span class='number'>2</span> <span class='op'>*</span> ::<span class='ident'>num_cpus</span>::<span class='ident'>get</span>(),
                          <span class='ident'>Protocol</span>::<span class='ident'>Https</span> { <span class='ident'>certificate</span>: <span class='ident'>certificate</span>, <span class='ident'>key</span>: <span class='ident'>key</span> })
     }
 
