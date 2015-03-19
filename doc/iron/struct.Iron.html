@@ -52,7 +52,7 @@
     <section id='main' class="content struct">
 <h1 class='fqn'><span class='in-band'>Struct <a href='index.html'>iron</a>::<wbr><a class='struct' href=''>Iron</a><wbr></span><span class='out-of-band'><span id='render-detail'>
             <a id="collapse-all" href="#">[-]</a>&nbsp;<a id="expand-all" href="#">[+]</a>
-        </span><a id='src-3855' href='../src/iron/iron.rs.html#23-33'>[src]</a></span></h1>
+        </span><a id='src-3881' href='../src/iron/iron.rs.html#23-33'>[src]</a></span></h1>
 <pre class='rust struct'>pub struct Iron&lt;H&gt; {
     pub handler: H,
     pub addr: <a class='enum' href='http://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='struct' href='http://doc.rust-lang.org/nightly/std/net/addr/struct.SocketAddr.html' title='std::net::addr::SocketAddr'>SocketAddr</a>&gt;,
@@ -105,6 +105,7 @@ call <code>to_socket_addrs</code> yourself and pass a parsed <code>SocketAddr</c
 <p>This will create a new <code>Iron</code>, the base unit of the server, using the
 passed in <code>Handler</code>.</p>
 </div></div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><a class='stability Unmarked' title='No stability level'></a><code>impl&lt;H: <a class='trait' href='../iron/middleware/trait.Handler.html' title='iron::middleware::Handler'>Handler</a>&gt; Handler for <a class='struct' href='../iron/struct.Iron.html' title='iron::Iron'>Iron</a>&lt;H&gt;</code></h3><div class='impl-items'><h4 id='method.handle' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.handle' class='fnname'>handle</a>(&amp;self, http_req: <a class='struct' href='../iron/request/struct.HttpRequest.html' title='iron::request::HttpRequest'>HttpRequest</a>, http_res: <a class='struct' href='../iron/response/struct.HttpResponse.html' title='iron::response::HttpResponse'>HttpResponse</a>&lt;Fresh&gt;)</code></h4>
+<h4 id='method.check_continue' class='tymethod'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#tymethod.check_continue' class='fnname'>check_continue</a>(&amp;self, <a href='http://doc.rust-lang.org/nightly/std/primitive.tuple.html'>(&amp;<a class='enum' href='../iron/method/enum.Method.html' title='iron::method::Method'>Method</a>, &amp;RequestUri, &amp;<a class='struct' href='../iron/struct.Headers.html' title='iron::Headers'>Headers</a>)</a>) -&gt; <a class='enum' href='../iron/status/enum.Status.html' title='iron::status::Status'>StatusCode</a></code></h4>
 </div></section>
     <section id='search' class="content hidden"></section>
 
