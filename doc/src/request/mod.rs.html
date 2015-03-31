@@ -188,6 +188,7 @@
 <span id="137">137</span>
 <span id="138">138</span>
 <span id="139">139</span>
+<span id="140">140</span>
 </pre><pre class='rust '>
 <span class='doccomment'>//! Iron&#39;s HTTP Request representation and associated methods.</span>
 
@@ -204,6 +205,7 @@
 <span class='kw'>use</span> <span class='ident'>method</span>::<span class='ident'>Method</span>;
 
 <span class='kw'>pub</span> <span class='kw'>use</span> <span class='ident'>hyper</span>::<span class='ident'>server</span>::<span class='ident'>request</span>::<span class='ident'>Request</span> <span class='kw'>as</span> <span class='ident'>HttpRequest</span>;
+<span class='kw'>use</span> <span class='ident'>hyper</span>::<span class='ident'>buffer</span>;
 
 <span class='kw'>pub</span> <span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>url</span>::<span class='ident'>Url</span>;
 
@@ -278,7 +280,7 @@
                     <span class='prelude-val'>None</span> <span class='op'>=&gt;</span> <span class='kw'>return</span> <span class='prelude-val'>Err</span>(<span class='string'>&quot;No host specified in request&quot;</span>.<span class='ident'>to_string</span>())
                 };
 
-                <span class='kw'>match</span> <span class='ident'>Url</span>::<span class='ident'>parse</span>(<span class='ident'>url_string</span>.<span class='ident'>as_slice</span>()) {
+                <span class='kw'>match</span> <span class='ident'>Url</span>::<span class='ident'>parse</span>(<span class='kw-2'>&amp;</span><span class='ident'>url_string</span>) {
                     <span class='prelude-val'>Ok</span>(<span class='ident'>url</span>) <span class='op'>=&gt;</span> <span class='ident'>url</span>,
                     <span class='prelude-val'>Err</span>(<span class='ident'>e</span>) <span class='op'>=&gt;</span> <span class='kw'>return</span> <span class='prelude-val'>Err</span>(<span class='macro'>format</span><span class='macro'>!</span>(<span class='string'>&quot;Couldn&#39;t parse requested URL: {}&quot;</span>, <span class='ident'>e</span>))
                 }
@@ -299,11 +301,11 @@
 }
 
 <span class='doccomment'>/// The body of an Iron request,</span>
-<span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>Body</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span>, <span class='lifetime'>&#39;b</span>: <span class='lifetime'>&#39;a</span><span class='op'>&gt;</span>(<span class='ident'>HttpReader</span><span class='op'>&lt;</span><span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='kw-2'>mut</span> <span class='ident'>BufReader</span><span class='op'>&lt;</span><span class='kw-2'>&amp;</span><span class='lifetime'>&#39;b</span> <span class='kw-2'>mut</span> <span class='ident'>NetworkStream</span><span class='op'>&gt;&gt;</span>);
+<span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>Body</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span>, <span class='lifetime'>&#39;b</span>: <span class='lifetime'>&#39;a</span><span class='op'>&gt;</span>(<span class='ident'>HttpReader</span><span class='op'>&lt;</span><span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='kw-2'>mut</span> <span class='ident'>buffer</span>::<span class='ident'>BufReader</span><span class='op'>&lt;</span><span class='kw-2'>&amp;</span><span class='lifetime'>&#39;b</span> <span class='kw-2'>mut</span> <span class='ident'>NetworkStream</span><span class='op'>&gt;&gt;</span>);
 
 <span class='kw'>impl</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span>, <span class='lifetime'>&#39;b</span><span class='op'>&gt;</span> <span class='ident'>Body</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span>, <span class='lifetime'>&#39;b</span><span class='op'>&gt;</span> {
     <span class='doccomment'>/// Create a new reader for use in an Iron request from a hyper HttpReader.</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>new</span>(<span class='ident'>reader</span>: <span class='ident'>HttpReader</span><span class='op'>&lt;</span><span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='kw-2'>mut</span> <span class='ident'>BufReader</span><span class='op'>&lt;</span><span class='kw-2'>&amp;</span><span class='lifetime'>&#39;b</span> <span class='kw-2'>mut</span> <span class='ident'>NetworkStream</span><span class='op'>&gt;&gt;</span>) <span class='op'>-&gt;</span> <span class='ident'>Body</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span>, <span class='lifetime'>&#39;b</span><span class='op'>&gt;</span> {
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>new</span>(<span class='ident'>reader</span>: <span class='ident'>HttpReader</span><span class='op'>&lt;</span><span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='kw-2'>mut</span> <span class='ident'>buffer</span>::<span class='ident'>BufReader</span><span class='op'>&lt;</span><span class='kw-2'>&amp;</span><span class='lifetime'>&#39;b</span> <span class='kw-2'>mut</span> <span class='ident'>NetworkStream</span><span class='op'>&gt;&gt;</span>) <span class='op'>-&gt;</span> <span class='ident'>Body</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span>, <span class='lifetime'>&#39;b</span><span class='op'>&gt;</span> {
         <span class='ident'>Body</span>(<span class='ident'>reader</span>)
     }
 }
