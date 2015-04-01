@@ -52,7 +52,7 @@
     <section id='main' class="content mod">
 <h1 class='fqn'><span class='in-band'>Module <a href='../index.html'>iron</a>::<wbr><a class='mod' href=''>headers</a><wbr></span><span class='out-of-band'><span id='render-detail'>
             <a id="collapse-all" href="#">[-]</a>&nbsp;<a id="expand-all" href="#">[+]</a>
-        </span><a id='src-5234' href='https://hyperium.github.io/hyper/hyper/index.html/hyper/headers/index.html?gotosrc=5234'>[src]</a></span></h1>
+        </span><a id='src-5342' href='https://hyperium.github.io/hyper/hyper/index.html/hyper/headers/index.html?gotosrc=5342'>[src]</a></span></h1>
 <div class='docblock'><p>Headers container, and common header fields.</p>
 
 <p>hyper has the opinion that Headers should be strongly-typed, because that&#39;s
@@ -211,7 +211,7 @@ See also <a href="https://tools.ietf.org/html/rfc7231#section-7.4.1">https://too
                     <tr>
                         <td><a class='stability Unmarked' title='No stability level'></a><a class='struct' href='struct.EntityTag.html'
                                title='iron::headers::EntityTag'>EntityTag</a></td>
-                        <td class='docblock short'><p>An entity tag</p>
+                        <td class='docblock short'><p>An entity tag, defined in <a href="https://tools.ietf.org/html/rfc7232#section-2.3">RFC7232</a></p>
 </td>
                     </tr>
                 
@@ -261,6 +261,13 @@ See also <a href="https://tools.ietf.org/html/rfc7231#section-7.4.1">https://too
                         <td><a class='stability Unmarked' title='No stability level'></a><a class='struct' href='struct.Host.html'
                                title='iron::headers::Host'>Host</a></td>
                         <td class='docblock short'><p>The <code>Host</code> header.</p>
+</td>
+                    </tr>
+                
+                    <tr>
+                        <td><a class='stability Unmarked' title='No stability level'></a><a class='struct' href='struct.HttpDate.html'
+                               title='iron::headers::HttpDate'>HttpDate</a></td>
+                        <td class='docblock short'><p>A <code>time::Time</code> with HTTP formatting and parsing</p>
 </td>
                     </tr>
                 
