@@ -212,8 +212,6 @@
 <span id="161">161</span>
 <span id="162">162</span>
 <span id="163">163</span>
-<span id="164">164</span>
-<span id="165">165</span>
 </pre><pre class='rust '>
 <span class='doccomment'>//! Defines a series of convenience modifiers for editing Responses</span>
 <span class='doccomment'>//!</span>
@@ -308,11 +306,6 @@
 <span class='kw'>impl</span> <span class='ident'>Modifier</span><span class='op'>&lt;</span><span class='ident'>Response</span><span class='op'>&gt;</span> <span class='kw'>for</span> <span class='ident'>File</span> {
     <span class='kw'>fn</span> <span class='ident'>modify</span>(<span class='self'>self</span>, <span class='ident'>res</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>Response</span>) {
         <span class='comment'>// Set the content type based on the file extension if a path is available.</span>
-        <span class='kw'>if</span> <span class='kw'>let</span> <span class='prelude-val'>Some</span>(<span class='ident'>path</span>) <span class='op'>=</span> <span class='self'>self</span>.<span class='ident'>path</span>() {
-            <span class='kw'>let</span> <span class='ident'>mime_str</span> <span class='op'>=</span> <span class='ident'>MIME_TYPES</span>.<span class='ident'>mime_for_path</span>(<span class='ident'>path</span>);
-            <span class='kw'>let</span> _ <span class='op'>=</span> <span class='ident'>mime_str</span>.<span class='ident'>parse</span>().<span class='ident'>map</span>(<span class='op'>|</span><span class='ident'>mime</span>: <span class='ident'>Mime</span><span class='op'>|</span> <span class='ident'>res</span>.<span class='ident'>set_mut</span>(<span class='ident'>mime</span>));
-        }
-
         <span class='kw'>if</span> <span class='kw'>let</span> <span class='prelude-val'>Ok</span>(<span class='ident'>metadata</span>) <span class='op'>=</span> <span class='self'>self</span>.<span class='ident'>metadata</span>() {
             <span class='ident'>res</span>.<span class='ident'>headers</span>.<span class='ident'>set</span>(<span class='ident'>headers</span>::<span class='ident'>ContentLength</span>(<span class='ident'>metadata</span>.<span class='ident'>len</span>()));
         }
@@ -331,6 +324,9 @@
         <span class='ident'>File</span>::<span class='ident'>open</span>(<span class='self'>self</span>)
             .<span class='ident'>ok</span>().<span class='ident'>expect</span>(<span class='kw-2'>&amp;</span><span class='macro'>format</span><span class='macro'>!</span>(<span class='string'>&quot;No such file: {}&quot;</span>, <span class='self'>self</span>.<span class='ident'>display</span>()))
             .<span class='ident'>modify</span>(<span class='ident'>res</span>);
+
+        <span class='kw'>let</span> <span class='ident'>mime_str</span> <span class='op'>=</span> <span class='ident'>MIME_TYPES</span>.<span class='ident'>mime_for_path</span>(<span class='self'>self</span>);
+        <span class='kw'>let</span> _ <span class='op'>=</span> <span class='ident'>mime_str</span>.<span class='ident'>parse</span>().<span class='ident'>map</span>(<span class='op'>|</span><span class='ident'>mime</span>: <span class='ident'>Mime</span><span class='op'>|</span> <span class='ident'>res</span>.<span class='ident'>set_mut</span>(<span class='ident'>mime</span>));
     }
 }
 

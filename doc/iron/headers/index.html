@@ -52,7 +52,7 @@
     <section id='main' class="content mod">
 <h1 class='fqn'><span class='in-band'>Module <a href='../index.html'>iron</a>::<wbr><a class='mod' href=''>headers</a><wbr></span><span class='out-of-band'><span id='render-detail'>
             <a id="collapse-all" href="#">[-]</a>&nbsp;<a id="expand-all" href="#">[+]</a>
-        </span><a id='src-5342' href='https://hyperium.github.io/hyper/hyper/index.html/hyper/headers/index.html?gotosrc=5342'>[src]</a></span></h1>
+        </span><a id='src-5026' href='https://hyperium.github.io/hyper/hyper/index.html/hyper/headers/index.html?gotosrc=5026'>[src]</a></span></h1>
 <div class='docblock'><p>Headers container, and common header fields.</p>
 
 <p>hyper has the opinion that Headers should be strongly-typed, because that&#39;s
@@ -72,28 +72,31 @@ are already provided, such as <code>Host</code>, <code>ContentType</code>, <code
                     <tr>
                         <td><a class='stability Unmarked' title='No stability level'></a><a class='struct' href='struct.Accept.html'
                                title='iron::headers::Accept'>Accept</a></td>
-                        <td class='docblock short'><p>The <code>Accept</code> header.</p>
+                        <td class='docblock short'><p><code>Accept</code> header, defined in <a href="http://tools.ietf.org/html/rfc7231#section-5.3.2">RFC7231</a></p>
 </td>
                     </tr>
                 
                     <tr>
                         <td><a class='stability Unmarked' title='No stability level'></a><a class='struct' href='struct.AcceptCharset.html'
                                title='iron::headers::AcceptCharset'>AcceptCharset</a></td>
-                        <td class='docblock short'><p>The <code>Accept-Charset</code> header</p>
+                        <td class='docblock short'><p><code>Accept-Charset</code> header, defined in
+<a href="http://tools.ietf.org/html/rfc7231#section-5.3.3">RFC7231</a></p>
 </td>
                     </tr>
                 
                     <tr>
                         <td><a class='stability Unmarked' title='No stability level'></a><a class='struct' href='struct.AcceptEncoding.html'
                                title='iron::headers::AcceptEncoding'>AcceptEncoding</a></td>
-                        <td class='docblock short'><p>The <code>Accept-Encoding</code> header</p>
+                        <td class='docblock short'><p><code>Accept-Encoding</code> header, defined in
+<a href="http://tools.ietf.org/html/rfc7231#section-5.3.4">RFC7231</a></p>
 </td>
                     </tr>
                 
                     <tr>
                         <td><a class='stability Unmarked' title='No stability level'></a><a class='struct' href='struct.AcceptLanguage.html'
                                title='iron::headers::AcceptLanguage'>AcceptLanguage</a></td>
-                        <td class='docblock short'><p>The <code>Accept-Language</code> header</p>
+                        <td class='docblock short'><p><code>Accept-Language</code> header, defined in
+<a href="http://tools.ietf.org/html/rfc7231#section-5.3.5">RFC7231</a></p>
 </td>
                     </tr>
                 
@@ -140,8 +143,7 @@ part of <a href="http://www.w3.org/TR/cors/">CORS</a>.</p>
                     <tr>
                         <td><a class='stability Unmarked' title='No stability level'></a><a class='struct' href='struct.Allow.html'
                                title='iron::headers::Allow'>Allow</a></td>
-                        <td class='docblock short'><p>The <code>Allow</code> header.
-See also <a href="https://tools.ietf.org/html/rfc7231#section-7.4.1">https://tools.ietf.org/html/rfc7231#section-7.4.1</a></p>
+                        <td class='docblock short'><p><code>Allow</code> header, defined in <a href="http://tools.ietf.org/html/rfc7231#section-7.4.1">RFC7231</a></p>
 </td>
                     </tr>
                 
@@ -176,21 +178,24 @@ See also <a href="https://tools.ietf.org/html/rfc7231#section-7.4.1">https://too
                     <tr>
                         <td><a class='stability Unmarked' title='No stability level'></a><a class='struct' href='struct.ContentEncoding.html'
                                title='iron::headers::ContentEncoding'>ContentEncoding</a></td>
-                        <td class='docblock short'><p>The <code>Content-Encoding</code> header.</p>
+                        <td class='docblock short'><p><code>Content-Encoding</code> header, defined in
+<a href="http://tools.ietf.org/html/rfc7231#section-3.1.2.2">RFC7231</a></p>
 </td>
                     </tr>
                 
                     <tr>
                         <td><a class='stability Unmarked' title='No stability level'></a><a class='struct' href='struct.ContentLength.html'
                                title='iron::headers::ContentLength'>ContentLength</a></td>
-                        <td class='docblock short'><p>The <code>Content-Length</code> header.</p>
+                        <td class='docblock short'><p><code>Content-Length</code> header, defined in
+<a href="http://tools.ietf.org/html/rfc7230#section-3.3.2">RFC7230</a></p>
 </td>
                     </tr>
                 
                     <tr>
                         <td><a class='stability Unmarked' title='No stability level'></a><a class='struct' href='struct.ContentType.html'
                                title='iron::headers::ContentType'>ContentType</a></td>
-                        <td class='docblock short'><p>The <code>Content-Type</code> header.</p>
+                        <td class='docblock short'><p><code>Content-Type</code> header, defined in
+<a href="http://tools.ietf.org/html/rfc7231#section-3.1.1.5">RFC7231</a></p>
 </td>
                     </tr>
                 
@@ -204,7 +209,7 @@ See also <a href="https://tools.ietf.org/html/rfc7231#section-7.4.1">https://too
                     <tr>
                         <td><a class='stability Unmarked' title='No stability level'></a><a class='struct' href='struct.Date.html'
                                title='iron::headers::Date'>Date</a></td>
-                        <td class='docblock short'><p>The <code>Date</code> header field.</p>
+                        <td class='docblock short'><p><code>Date</code> header, defined in <a href="http://tools.ietf.org/html/rfc7231#section-7.1.1.2">RFC7231</a></p>
 </td>
                     </tr>
                 
@@ -225,7 +230,7 @@ See also <a href="https://tools.ietf.org/html/rfc7231#section-7.4.1">https://too
                     <tr>
                         <td><a class='stability Unmarked' title='No stability level'></a><a class='struct' href='struct.Expires.html'
                                title='iron::headers::Expires'>Expires</a></td>
-                        <td class='docblock short'><p>The <code>Expires</code> header field.</p>
+                        <td class='docblock short'><p><code>Expires</code> header, defined in <a href="http://tools.ietf.org/html/rfc7234#section-5.3">RFC7234</a></p>
 </td>
                     </tr>
                 
@@ -274,28 +279,31 @@ See also <a href="https://tools.ietf.org/html/rfc7231#section-7.4.1">https://too
                     <tr>
                         <td><a class='stability Unmarked' title='No stability level'></a><a class='struct' href='struct.IfModifiedSince.html'
                                title='iron::headers::IfModifiedSince'>IfModifiedSince</a></td>
-                        <td class='docblock short'><p>The <code>If-Modified-Since</code> header field.</p>
+                        <td class='docblock short'><p><code>If-Modified-Since</code> header, defined in
+<a href="http://tools.ietf.org/html/rfc7232#section-3.3">RFC7232</a></p>
 </td>
                     </tr>
                 
                     <tr>
                         <td><a class='stability Unmarked' title='No stability level'></a><a class='struct' href='struct.IfUnmodifiedSince.html'
                                title='iron::headers::IfUnmodifiedSince'>IfUnmodifiedSince</a></td>
-                        <td class='docblock short'><p>The <code>If-Unmodified-Since</code> header field.</p>
+                        <td class='docblock short'><p><code>If-Unmodified-Since</code> header, defined in
+<a href="http://tools.ietf.org/html/rfc7232#section-3.4">RFC7232</a></p>
 </td>
                     </tr>
                 
                     <tr>
                         <td><a class='stability Unmarked' title='No stability level'></a><a class='struct' href='struct.LastModified.html'
                                title='iron::headers::LastModified'>LastModified</a></td>
-                        <td class='docblock short'><p>The <code>LastModified</code> header field.</p>
+                        <td class='docblock short'><p><code>Last-Modified</code> header, defined in <a href="http://tools.ietf.org/html/rfc7232#section-2.2">RFC7232</a></p>
 </td>
                     </tr>
                 
                     <tr>
                         <td><a class='stability Unmarked' title='No stability level'></a><a class='struct' href='struct.Location.html'
                                title='iron::headers::Location'>Location</a></td>
-                        <td class='docblock short'><p>The <code>Location</code> header.</p>
+                        <td class='docblock short'><p><code>Location</code> header, defined in
+<a href="http://tools.ietf.org/html/rfc7231#section-7.1.2">RFC7231</a></p>
 </td>
                     </tr>
                 
@@ -317,14 +325,15 @@ See also <a href="https://tools.ietf.org/html/rfc7231#section-7.4.1">https://too
                     <tr>
                         <td><a class='stability Unmarked' title='No stability level'></a><a class='struct' href='struct.Referer.html'
                                title='iron::headers::Referer'>Referer</a></td>
-                        <td class='docblock short'><p>The <code>Referer</code> header.</p>
+                        <td class='docblock short'><p><code>Referer</code> header, defined in
+<a href="http://tools.ietf.org/html/rfc7231#section-5.5.2">RFC7231</a></p>
 </td>
                     </tr>
                 
                     <tr>
                         <td><a class='stability Unmarked' title='No stability level'></a><a class='struct' href='struct.Server.html'
                                title='iron::headers::Server'>Server</a></td>
-                        <td class='docblock short'><p>The <code>Server</code> header field.</p>
+                        <td class='docblock short'><p><code>Server</code> header, defined in <a href="http://tools.ietf.org/html/rfc7231#section-7.4.2">RFC7231</a></p>
 </td>
                     </tr>
                 
@@ -338,7 +347,8 @@ See also <a href="https://tools.ietf.org/html/rfc7231#section-7.4.1">https://too
                     <tr>
                         <td><a class='stability Unmarked' title='No stability level'></a><a class='struct' href='struct.TransferEncoding.html'
                                title='iron::headers::TransferEncoding'>TransferEncoding</a></td>
-                        <td class='docblock short'><p>The <code>Transfer-Encoding</code> header.</p>
+                        <td class='docblock short'><p><code>Transfer-Encoding</code> header, defined in
+<a href="http://tools.ietf.org/html/rfc7230#section-3.3.1">RFC7230</a></p>
 </td>
                     </tr>
                 
@@ -352,7 +362,8 @@ See also <a href="https://tools.ietf.org/html/rfc7231#section-7.4.1">https://too
                     <tr>
                         <td><a class='stability Unmarked' title='No stability level'></a><a class='struct' href='struct.UserAgent.html'
                                title='iron::headers::UserAgent'>UserAgent</a></td>
-                        <td class='docblock short'><p>The <code>User-Agent</code> header field.</p>
+                        <td class='docblock short'><p><code>User-Agent</code> header, defined in
+<a href="http://tools.ietf.org/html/rfc7231#section-5.5.3">RFC7231</a></p>
 </td>
                     </tr>
                 </table><h2 id='enums' class='section-header'><a href="#enums">Enums</a></h2>
