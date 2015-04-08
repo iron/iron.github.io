@@ -64,19 +64,19 @@
 <span id="13">13</span>
 <span id="14">14</span>
 </pre><pre class='rust '>
+<span class='attribute'>#<span class='op'>!</span>[<span class='ident'>crate_name</span> <span class='op'>=</span> <span class='string'>&quot;mount&quot;</span>]</span>
 <span class='attribute'>#<span class='op'>!</span>[<span class='ident'>deny</span>(<span class='ident'>missing_docs</span>)]</span>
 <span class='attribute'>#<span class='op'>!</span>[<span class='ident'>cfg_attr</span>(<span class='ident'>test</span>, <span class='ident'>deny</span>(<span class='ident'>warnings</span>))]</span>
 
-<span class='doccomment'>//! `Router` provides fast and flexible routing for Iron.</span>
+<span class='doccomment'>//! `Mount` provides mounting middleware for the Iron framework.</span>
 
 <span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>iron</span>;
-<span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>route_recognizer</span> <span class='kw'>as</span> <span class='ident'>recognizer</span>;
+<span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>url</span>;
+<span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>sequence_trie</span>;
 
-<span class='kw'>pub</span> <span class='kw'>use</span> <span class='ident'>router</span>::<span class='ident'>Router</span>;
-<span class='kw'>pub</span> <span class='kw'>use</span> <span class='ident'>recognizer</span>::<span class='ident'>Params</span>;
+<span class='kw'>pub</span> <span class='kw'>use</span> <span class='ident'>mount</span>::{<span class='ident'>Mount</span>, <span class='ident'>OriginalUrl</span>};
 
-<span class='kw'>mod</span> <span class='ident'>router</span>;
-
+<span class='kw'>mod</span> <span class='ident'>mount</span>;
 
 </pre>
 </section>

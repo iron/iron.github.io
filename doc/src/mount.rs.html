@@ -191,7 +191,7 @@
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>fmt</span>;
 
 <span class='doccomment'>/// Exposes the original, unmodified path to be stored in `Request::extensions`.</span>
-<span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Copy</span>)]</span>
+<span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Copy</span>, <span class='ident'>Clone</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>OriginalUrl</span>;
 <span class='kw'>impl</span> <span class='ident'>typemap</span>::<span class='ident'>Key</span> <span class='kw'>for</span> <span class='ident'>OriginalUrl</span> { <span class='kw'>type</span> <span class='ident'>Value</span> <span class='op'>=</span> <span class='ident'>Url</span>; }
 
@@ -211,7 +211,7 @@
 }
 
 <span class='kw'>struct</span> <span class='ident'>Match</span> {
-    <span class='ident'>handler</span>: <span class='ident'>Box</span><span class='op'>&lt;</span><span class='ident'>Handler</span> <span class='op'>+</span> <span class='ident'>Send</span> <span class='op'>+</span> <span class='ident'>Sync</span><span class='op'>&gt;</span>,
+    <span class='ident'>handler</span>: <span class='ident'>Box</span><span class='op'>&lt;</span><span class='ident'>Handler</span><span class='op'>&gt;</span>,
     <span class='ident'>length</span>: <span class='ident'>usize</span>
 }
 
@@ -253,8 +253,8 @@
         ).<span class='ident'>collect</span>();
 
         <span class='comment'>// Insert a match struct into the trie.</span>
-        <span class='self'>self</span>.<span class='ident'>inner</span>.<span class='ident'>insert</span>(<span class='ident'>key</span>.<span class='ident'>as_slice</span>(), <span class='ident'>Match</span> {
-            <span class='ident'>handler</span>: <span class='ident'>Box</span>::<span class='ident'>new</span>(<span class='ident'>handler</span>) <span class='kw'>as</span> <span class='ident'>Box</span><span class='op'>&lt;</span><span class='ident'>Handler</span> <span class='op'>+</span> <span class='ident'>Send</span> <span class='op'>+</span> <span class='ident'>Sync</span><span class='op'>&gt;</span>,
+        <span class='self'>self</span>.<span class='ident'>inner</span>.<span class='ident'>insert</span>(<span class='ident'>key</span>.<span class='ident'>as_ref</span>(), <span class='ident'>Match</span> {
+            <span class='ident'>handler</span>: <span class='ident'>Box</span>::<span class='ident'>new</span>(<span class='ident'>handler</span>) <span class='kw'>as</span> <span class='ident'>Box</span><span class='op'>&lt;</span><span class='ident'>Handler</span><span class='op'>&gt;</span>,
             <span class='ident'>length</span>: <span class='ident'>key</span>.<span class='ident'>len</span>()
         });
         <span class='self'>self</span>
@@ -266,7 +266,7 @@
         <span class='comment'>// Find the matching handler.</span>
         <span class='kw'>let</span> <span class='ident'>matched</span> <span class='op'>=</span> {
             <span class='comment'>// Extract the request path.</span>
-            <span class='kw'>let</span> <span class='ident'>path</span> <span class='op'>=</span> <span class='ident'>req</span>.<span class='ident'>url</span>.<span class='ident'>path</span>.<span class='ident'>as_slice</span>();
+            <span class='kw'>let</span> <span class='ident'>path</span> <span class='op'>=</span> <span class='kw-2'>&amp;</span><span class='op'>*</span><span class='ident'>req</span>.<span class='ident'>url</span>.<span class='ident'>path</span>;
 
             <span class='comment'>// If present, remove the trailing empty string (which represents a trailing slash).</span>
             <span class='comment'>// If it isn&#39;t removed the path will never match anything, because</span>
@@ -296,7 +296,7 @@
         <span class='comment'>// If the prefix is entirely removed and no trailing slash was present, the new path</span>
         <span class='comment'>// will be the empty list. For the purposes of redirection, conveying that the path</span>
         <span class='comment'>// did not include a trailing slash is more important than providing a non-empty list.</span>
-        <span class='ident'>req</span>.<span class='ident'>url</span>.<span class='ident'>path</span> <span class='op'>=</span> <span class='ident'>req</span>.<span class='ident'>url</span>.<span class='ident'>path</span>.<span class='ident'>as_slice</span>()[<span class='ident'>matched</span>.<span class='ident'>length</span>..].<span class='ident'>to_vec</span>();
+        <span class='ident'>req</span>.<span class='ident'>url</span>.<span class='ident'>path</span> <span class='op'>=</span> <span class='ident'>req</span>.<span class='ident'>url</span>.<span class='ident'>path</span>[<span class='ident'>matched</span>.<span class='ident'>length</span>..].<span class='ident'>to_vec</span>();
 
         <span class='kw'>let</span> <span class='ident'>res</span> <span class='op'>=</span> <span class='ident'>matched</span>.<span class='ident'>handler</span>.<span class='ident'>handle</span>(<span class='ident'>req</span>);
 
