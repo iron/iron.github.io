@@ -52,7 +52,7 @@
     <section id='main' class="content trait">
 <h1 class='fqn'><span class='in-band'>Trait <a href='../index.html'>iron</a>::<wbr><a href='index.html'>middleware</a>::<wbr><a class='trait' href=''>AroundMiddleware</a><wbr></span><span class='out-of-band'><span id='render-detail'>
             <a id="collapse-all" href="#">[-]</a>&nbsp;<a id="expand-all" href="#">[+]</a>
-        </span><a id='src-303' href='../../src/iron/middleware/mod.rs.html#114-123'>[src]</a></span></h1>
+        </span><a id='src-304' href='../../src/iron/middleware/mod.rs.html#115-124'>[src]</a></span></h1>
 <pre class='rust trait'>pub trait AroundMiddleware {
     fn <a href='#tymethod.around' class='fnname'>around</a>(self, handler: <a class='struct' href='http://doc.rust-lang.org/nightly/alloc/boxed/struct.Box.html' title='alloc::boxed::Box'>Box</a>&lt;<a class='trait' href='../../iron/middleware/trait.Handler.html' title='iron::middleware::Handler'>Handler</a>&gt;) -&gt; <a class='struct' href='http://doc.rust-lang.org/nightly/alloc/boxed/struct.Box.html' title='alloc::boxed::Box'>Box</a>&lt;<a class='trait' href='../../iron/middleware/trait.Handler.html' title='iron::middleware::Handler'>Handler</a>&gt;;
 }</pre><div class='docblock'><p>AroundMiddleware are used to wrap and replace the <code>Handler</code> in a <code>Chain</code>.</p>
@@ -73,7 +73,8 @@ using <code>Chain::around</code>, it is passed the <code>Chain</code>&#39;s curr
 </div></div>
         <h2 id='implementors'>Implementors</h2>
         <ul class='item-list' id='implementors-list'>
-    </ul><script type="text/javascript" async
+    <li><a class='stability Unmarked' title='No stability level'></a><code>impl&lt;F&gt; <a class='trait' href='../../iron/middleware/trait.AroundMiddleware.html' title='iron::middleware::AroundMiddleware'>AroundMiddleware</a> for F <span class='where'>where F: <a class='trait' href='http://doc.rust-lang.org/nightly/core/ops/trait.FnOnce.html' title='core::ops::FnOnce'>FnOnce</a>(<a class='struct' href='http://doc.rust-lang.org/nightly/alloc/boxed/struct.Box.html' title='alloc::boxed::Box'>Box</a>&lt;<a class='trait' href='../../iron/middleware/trait.Handler.html' title='iron::middleware::Handler'>Handler</a>&gt;) -&gt; <a class='struct' href='http://doc.rust-lang.org/nightly/alloc/boxed/struct.Box.html' title='alloc::boxed::Box'>Box</a>&lt;<a class='trait' href='../../iron/middleware/trait.Handler.html' title='iron::middleware::Handler'>Handler</a>&gt;</span></code></li>
+</ul><script type="text/javascript" async
                               src="../../implementors/iron/middleware/trait.AroundMiddleware.js">
                       </script></section>
     <section id='search' class="content hidden"></section>
