@@ -73,6 +73,9 @@ requests.</p>
 This consumes the Iron instance, but does the listening on
 another task, so is not blocking.</p>
 
+<p>The thread returns a guard that will automatically join with the parent
+once it is dropped, blocking until this happens.</p>
+
 <p>Defaults to a threadpool of size <code>2 * num_cpus</code>.</p>
 
 <h2 id="panics" class='section-header'><a
@@ -85,6 +88,9 @@ call <code>to_socket_addrs</code> yourself and pass a parsed <code>SocketAddr</c
 <p>Call this once to begin listening for requests on the server.
 This consumes the Iron instance, but does the listening on
 another task, so is not blocking.</p>
+
+<p>The thread returns a guard that will automatically join with the parent
+once it is dropped, blocking until this happens.</p>
 
 <p>Defaults to a threadpool of size <code>2 * num_cpus</code>.</p>
 
