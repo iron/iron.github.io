@@ -87,7 +87,7 @@
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>str</span>;
 <span class='kw'>use</span> <span class='ident'>rustc_serialize</span>::<span class='ident'>json</span>;
 
-<span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Debug</span>, <span class='ident'>Clone</span>)]</span>
+<span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Debug</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>enum</span> <span class='ident'>BodyErrorCause</span> {
     <span class='ident'>Utf8Error</span>(<span class='ident'>str</span>::<span class='ident'>Utf8Error</span>),
     <span class='ident'>IoError</span>(<span class='ident'>io</span>::<span class='ident'>Error</span>),
@@ -95,7 +95,7 @@
     <span class='ident'>DecoderError</span>(<span class='ident'>json</span>::<span class='ident'>DecoderError</span>)
 }
 
-<span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Debug</span>, <span class='ident'>Clone</span>)]</span>
+<span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Debug</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>BodyError</span> {
     <span class='kw'>pub</span> <span class='ident'>detail</span>: <span class='ident'>String</span>,
     <span class='kw'>pub</span> <span class='ident'>cause</span>: <span class='ident'>BodyErrorCause</span>
