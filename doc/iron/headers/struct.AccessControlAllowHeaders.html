@@ -52,13 +52,24 @@
     <section id='main' class="content struct">
 <h1 class='fqn'><span class='in-band'>Struct <a href='../index.html'>iron</a>::<wbr><a href='index.html'>headers</a>::<wbr><a class='struct' href=''>AccessControlAllowHeaders</a><wbr></span><span class='out-of-band'><span id='render-detail'>
             <a id="collapse-all" href="#">[-]</a>&nbsp;<a id="expand-all" href="#">[+]</a>
-        </span><a id='src-5478' href='https://hyperium.github.io/hyper/hyper/index.html/hyper/header/common/access_control_allow_headers/struct.AccessControlAllowHeaders.html?gotosrc=5478'>[src]</a></span></h1>
+        </span><a id='src-6703' href='https://hyperium.github.io/hyper/hyper/index.html/hyper/header/common/access_control_allow_headers/struct.AccessControlAllowHeaders.html?gotosrc=6703'>[src]</a></span></h1>
 <pre class='rust struct'>pub struct AccessControlAllowHeaders(pub <a class='struct' href='http://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;UniCase&lt;<a class='struct' href='http://doc.rust-lang.org/nightly/collections/string/struct.String.html' title='collections::string::String'>String</a>&gt;&gt;);</pre><div class='docblock'><p><code>Access-Control-Allow-Headers</code> header, part of
 <a href="www.w3.org/TR/cors/#access-control-allow-headers-response-header">CORS</a></p>
 
 <p>The <code>Access-Control-Allow-Headers</code> header indicates, as part of the
 response to a preflight request, which header field names can be used
 during the actual request.</p>
+
+<h1 id="abnf" class='section-header'><a
+                           href="#abnf">ABNF</a></h1>
+<pre><code class="language-plain">Access-Control-Allow-Headers: &quot;Access-Control-Allow-Headers&quot; &quot;:&quot; #field-name
+</code></pre>
+
+<h1 id="example-values" class='section-header'><a
+                           href="#example-values">Example values</a></h1>
+<ul>
+<li><code>accept-language, date</code></li>
+</ul>
 </div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><a class='stability Stable' title='Stable'></a><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/core/ops/trait.Deref.html' title='core::ops::Deref'>Deref</a> for <a class='struct' href='../../iron/headers/struct.AccessControlAllowHeaders.html' title='iron::headers::AccessControlAllowHeaders'>AccessControlAllowHeaders</a></code></h3><div class='impl-items'><h4 id='assoc_type.Target' class='type'><a class='stability Unmarked' title='No stability level'></a><code>type Target = <a class='struct' href='http://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;UniCase&lt;<a class='struct' href='http://doc.rust-lang.org/nightly/collections/string/struct.String.html' title='collections::string::String'>String</a>&gt;&gt;</code></h4>
 <h4 id='method.deref' class='method'><a class='stability Stable' title='Stable'></a><code>fn <a href='http://doc.rust-lang.org/nightly/core/ops/trait.Deref.html#method.deref' class='fnname'>deref</a>(&amp;'a self) -&gt; &amp;'a <a class='struct' href='http://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;UniCase&lt;<a class='struct' href='http://doc.rust-lang.org/nightly/collections/string/struct.String.html' title='collections::string::String'>String</a>&gt;&gt;</code></h4>
 </div><h3 class='impl'><a class='stability Stable' title='Stable'></a><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/core/ops/trait.DerefMut.html' title='core::ops::DerefMut'>DerefMut</a> for <a class='struct' href='../../iron/headers/struct.AccessControlAllowHeaders.html' title='iron::headers::AccessControlAllowHeaders'>AccessControlAllowHeaders</a></code></h3><div class='impl-items'><h4 id='method.deref_mut' class='method'><a class='stability Stable' title='Stable'></a><code>fn <a href='http://doc.rust-lang.org/nightly/core/ops/trait.DerefMut.html#method.deref_mut' class='fnname'>deref_mut</a>(&amp;'a mut self) -&gt; &amp;'a mut <a class='struct' href='http://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;UniCase&lt;<a class='struct' href='http://doc.rust-lang.org/nightly/collections/string/struct.String.html' title='collections::string::String'>String</a>&gt;&gt;</code></h4>

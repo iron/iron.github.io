@@ -52,7 +52,7 @@
     <section id='main' class="content enum">
 <h1 class='fqn'><span class='in-band'>Enum <a href='../index.html'>iron</a>::<wbr><a href='index.html'>headers</a>::<wbr><a class='enum' href=''>Vary</a><wbr></span><span class='out-of-band'><span id='render-detail'>
             <a id="collapse-all" href="#">[-]</a>&nbsp;<a id="expand-all" href="#">[+]</a>
-        </span><a id='src-17613' href='https://hyperium.github.io/hyper/hyper/index.html/hyper/header/common/vary/enum.Vary.html?gotosrc=17613'>[src]</a></span></h1>
+        </span><a id='src-19379' href='https://hyperium.github.io/hyper/hyper/index.html/hyper/header/common/vary/enum.Vary.html?gotosrc=19379'>[src]</a></span></h1>
 <pre class='rust enum'>pub enum Vary {
     Any,
     Items(<a class='struct' href='http://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;UniCase&lt;<a class='struct' href='http://doc.rust-lang.org/nightly/collections/string/struct.String.html' title='collections::string::String'>String</a>&gt;&gt;),
@@ -69,6 +69,12 @@ either a single asterisk (&quot;*&quot;) or a list of header field names
                            href="#abnf">ABNF</a></h1>
 <pre><code class="language-plain">Vary = &quot;*&quot; / 1#field-name
 </code></pre>
+
+<h1 id="example-values" class='section-header'><a
+                           href="#example-values">Example values</a></h1>
+<ul>
+<li><code>accept-encoding, accept-language</code></li>
+</ul>
 </div><h2 class='variants'>Variants</h2>
 <table><tr><td id='variant.Any'><a class='stability Unmarked' title='No stability level'></a><code>Any</code></td><td><div class='docblock'><p>Any value is a match</p>
 </div></td></tr><tr><td id='variant.Items'><a class='stability Unmarked' title='No stability level'></a><code>Items</code></td><td><div class='docblock'><p>Only the listed items are a match</p>

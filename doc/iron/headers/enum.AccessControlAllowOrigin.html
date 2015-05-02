@@ -52,20 +52,21 @@
     <section id='main' class="content enum">
 <h1 class='fqn'><span class='in-band'>Enum <a href='../index.html'>iron</a>::<wbr><a href='index.html'>headers</a>::<wbr><a class='enum' href=''>AccessControlAllowOrigin</a><wbr></span><span class='out-of-band'><span id='render-detail'>
             <a id="collapse-all" href="#">[-]</a>&nbsp;<a id="expand-all" href="#">[+]</a>
-        </span><a id='src-5960' href='https://hyperium.github.io/hyper/hyper/index.html/hyper/header/common/access_control_allow_origin/enum.AccessControlAllowOrigin.html?gotosrc=5960'>[src]</a></span></h1>
+        </span><a id='src-7198' href='https://hyperium.github.io/hyper/hyper/index.html/hyper/header/common/access_control_allow_origin/enum.AccessControlAllowOrigin.html?gotosrc=7198'>[src]</a></span></h1>
 <pre class='rust enum'>pub enum AccessControlAllowOrigin {
     Any,
     Value(Url),
 }</pre><div class='docblock'><p>The <code>Access-Control-Allow-Origin</code> response header,
-part of <a href="http://www.w3.org/TR/cors/">CORS</a>.</p>
+part of <a href="www.w3.org/TR/cors/#access-control-allow-origin-response-header">CORS</a></p>
 
-<blockquote>
 <p>The <code>Access-Control-Allow-Origin</code> header indicates whether a resource
 can be shared based by returning the value of the Origin request header,
 &quot;*&quot;, or &quot;null&quot; in the response.</p>
-</blockquote>
 
-<p>Spec: <a href="http://www.w3.org/TR/cors/#access-control-allow-origin-response-header">www.w3.org/TR/cors/#access-control-allow-origin-response-header</a></p>
+<h1 id="abnf" class='section-header'><a
+                           href="#abnf">ABNF</a></h1>
+<pre><code class="language-plain">Access-Control-Allow-Origin = &quot;Access-Control-Allow-Origin&quot; &quot;:&quot; origin-list-or-null | &quot;*&quot;
+</code></pre>
 </div><h2 class='variants'>Variants</h2>
 <table><tr><td id='variant.Any'><a class='stability Unmarked' title='No stability level'></a><code>Any</code></td><td><div class='docblock'><p>Allow all origins</p>
 </div></td></tr><tr><td id='variant.Value'><a class='stability Unmarked' title='No stability level'></a><code>Value</code></td><td><div class='docblock'><p>Allow one particular origin</p>

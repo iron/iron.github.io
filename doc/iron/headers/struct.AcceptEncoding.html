@@ -52,7 +52,7 @@
     <section id='main' class="content struct">
 <h1 class='fqn'><span class='in-band'>Struct <a href='../index.html'>iron</a>::<wbr><a href='index.html'>headers</a>::<wbr><a class='struct' href=''>AcceptEncoding</a><wbr></span><span class='out-of-band'><span id='render-detail'>
             <a id="collapse-all" href="#">[-]</a>&nbsp;<a id="expand-all" href="#">[+]</a>
-        </span><a id='src-7284' href='https://hyperium.github.io/hyper/hyper/index.html/hyper/header/common/accept_encoding/struct.AcceptEncoding.html?gotosrc=7284'>[src]</a></span></h1>
+        </span><a id='src-8550' href='https://hyperium.github.io/hyper/hyper/index.html/hyper/header/common/accept_encoding/struct.AcceptEncoding.html?gotosrc=8550'>[src]</a></span></h1>
 <pre class='rust struct'>pub struct AcceptEncoding(pub <a class='struct' href='http://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;<a class='struct' href='../../iron/headers/struct.QualityItem.html' title='iron::headers::QualityItem'>QualityItem</a>&lt;<a class='enum' href='../../iron/headers/enum.Encoding.html' title='iron::headers::Encoding'>Encoding</a>&gt;&gt;);</pre><div class='docblock'><p><code>Accept-Encoding</code> header, defined in
 <a href="http://tools.ietf.org/html/rfc7231#section-5.3.4">RFC7231</a></p>
 
@@ -67,6 +67,16 @@ preferred.</p>
 <pre><code class="language-plain">Accept-Encoding  = #( codings [ weight ] )
 codings          = content-coding / &quot;identity&quot; / &quot;*&quot;
 </code></pre>
+
+<h1 id="example-values" class='section-header'><a
+                           href="#example-values">Example values</a></h1>
+<ul>
+<li><code>compress, gzip</code></li>
+<li>``</li>
+<li><code>*</code></li>
+<li><code>compress;q=0.5, gzip;q=1</code></li>
+<li><code>gzip;q=1.0, identity; q=0.5, *;q=0</code></li>
+</ul>
 </div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><a class='stability Stable' title='Stable'></a><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/core/ops/trait.Deref.html' title='core::ops::Deref'>Deref</a> for <a class='struct' href='../../iron/headers/struct.AcceptEncoding.html' title='iron::headers::AcceptEncoding'>AcceptEncoding</a></code></h3><div class='impl-items'><h4 id='assoc_type.Target' class='type'><a class='stability Unmarked' title='No stability level'></a><code>type Target = <a class='struct' href='http://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;<a class='struct' href='../../iron/headers/struct.QualityItem.html' title='iron::headers::QualityItem'>QualityItem</a>&lt;<a class='enum' href='../../iron/headers/enum.Encoding.html' title='iron::headers::Encoding'>Encoding</a>&gt;&gt;</code></h4>
 <h4 id='method.deref' class='method'><a class='stability Stable' title='Stable'></a><code>fn <a href='http://doc.rust-lang.org/nightly/core/ops/trait.Deref.html#method.deref' class='fnname'>deref</a>(&amp;'a self) -&gt; &amp;'a <a class='struct' href='http://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;<a class='struct' href='../../iron/headers/struct.QualityItem.html' title='iron::headers::QualityItem'>QualityItem</a>&lt;<a class='enum' href='../../iron/headers/enum.Encoding.html' title='iron::headers::Encoding'>Encoding</a>&gt;&gt;</code></h4>
 </div><h3 class='impl'><a class='stability Stable' title='Stable'></a><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/core/ops/trait.DerefMut.html' title='core::ops::DerefMut'>DerefMut</a> for <a class='struct' href='../../iron/headers/struct.AcceptEncoding.html' title='iron::headers::AcceptEncoding'>AcceptEncoding</a></code></h3><div class='impl-items'><h4 id='method.deref_mut' class='method'><a class='stability Stable' title='Stable'></a><code>fn <a href='http://doc.rust-lang.org/nightly/core/ops/trait.DerefMut.html#method.deref_mut' class='fnname'>deref_mut</a>(&amp;'a mut self) -&gt; &amp;'a mut <a class='struct' href='http://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;<a class='struct' href='../../iron/headers/struct.QualityItem.html' title='iron::headers::QualityItem'>QualityItem</a>&lt;<a class='enum' href='../../iron/headers/enum.Encoding.html' title='iron::headers::Encoding'>Encoding</a>&gt;&gt;</code></h4>

@@ -52,7 +52,7 @@
     <section id='main' class="content struct">
 <h1 class='fqn'><span class='in-band'>Struct <a href='../index.html'>iron</a>::<wbr><a href='index.html'>headers</a>::<wbr><a class='struct' href=''>UserAgent</a><wbr></span><span class='out-of-band'><span id='render-detail'>
             <a id="collapse-all" href="#">[-]</a>&nbsp;<a id="expand-all" href="#">[+]</a>
-        </span><a id='src-17379' href='https://hyperium.github.io/hyper/hyper/index.html/hyper/header/common/user_agent/struct.UserAgent.html?gotosrc=17379'>[src]</a></span></h1>
+        </span><a id='src-19138' href='https://hyperium.github.io/hyper/hyper/index.html/hyper/header/common/user_agent/struct.UserAgent.html?gotosrc=19138'>[src]</a></span></h1>
 <pre class='rust struct'>pub struct UserAgent(pub <a class='struct' href='http://doc.rust-lang.org/nightly/collections/string/struct.String.html' title='collections::string::String'>String</a>);</pre><div class='docblock'><p><code>User-Agent</code> header, defined in
 <a href="http://tools.ietf.org/html/rfc7231#section-5.5.3">RFC7231</a></p>
 
@@ -70,6 +70,19 @@ unless specifically configured not to do so.</p>
 product         = token [&quot;/&quot; product-version]
 product-version = token
 </code></pre>
+
+<h1 id="example-values" class='section-header'><a
+                           href="#example-values">Example values</a></h1>
+<ul>
+<li><code>CERN-LineMode/2.15 libwww/2.17b3</code></li>
+<li><code>Bunnies</code></li>
+</ul>
+
+<h1 id="notes" class='section-header'><a
+                           href="#notes">Notes</a></h1>
+<ul>
+<li>The parser does not split the value</li>
+</ul>
 </div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><a class='stability Stable' title='Stable'></a><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/core/ops/trait.Deref.html' title='core::ops::Deref'>Deref</a> for <a class='struct' href='../../iron/headers/struct.UserAgent.html' title='iron::headers::UserAgent'>UserAgent</a></code></h3><div class='impl-items'><h4 id='assoc_type.Target' class='type'><a class='stability Unmarked' title='No stability level'></a><code>type Target = <a class='struct' href='http://doc.rust-lang.org/nightly/collections/string/struct.String.html' title='collections::string::String'>String</a></code></h4>
 <h4 id='method.deref' class='method'><a class='stability Stable' title='Stable'></a><code>fn <a href='http://doc.rust-lang.org/nightly/core/ops/trait.Deref.html#method.deref' class='fnname'>deref</a>(&amp;'a self) -&gt; &amp;'a <a class='struct' href='http://doc.rust-lang.org/nightly/collections/string/struct.String.html' title='collections::string::String'>String</a></code></h4>
 </div><h3 class='impl'><a class='stability Stable' title='Stable'></a><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/core/ops/trait.DerefMut.html' title='core::ops::DerefMut'>DerefMut</a> for <a class='struct' href='../../iron/headers/struct.UserAgent.html' title='iron::headers::UserAgent'>UserAgent</a></code></h3><div class='impl-items'><h4 id='method.deref_mut' class='method'><a class='stability Stable' title='Stable'></a><code>fn <a href='http://doc.rust-lang.org/nightly/core/ops/trait.DerefMut.html#method.deref_mut' class='fnname'>deref_mut</a>(&amp;'a mut self) -&gt; &amp;'a mut <a class='struct' href='http://doc.rust-lang.org/nightly/collections/string/struct.String.html' title='collections::string::String'>String</a></code></h4>

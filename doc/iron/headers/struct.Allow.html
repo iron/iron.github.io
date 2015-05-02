@@ -52,7 +52,7 @@
     <section id='main' class="content struct">
 <h1 class='fqn'><span class='in-band'>Struct <a href='../index.html'>iron</a>::<wbr><a href='index.html'>headers</a>::<wbr><a class='struct' href=''>Allow</a><wbr></span><span class='out-of-band'><span id='render-detail'>
             <a id="collapse-all" href="#">[-]</a>&nbsp;<a id="expand-all" href="#">[+]</a>
-        </span><a id='src-8090' href='https://hyperium.github.io/hyper/hyper/index.html/hyper/header/common/allow/struct.Allow.html?gotosrc=8090'>[src]</a></span></h1>
+        </span><a id='src-9048' href='https://hyperium.github.io/hyper/hyper/index.html/hyper/header/common/allow/struct.Allow.html?gotosrc=9048'>[src]</a></span></h1>
 <pre class='rust struct'>pub struct Allow(pub <a class='struct' href='http://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;<a class='enum' href='../../iron/method/enum.Method.html' title='iron::method::Method'>Method</a>&gt;);</pre><div class='docblock'><p><code>Allow</code> header, defined in <a href="http://tools.ietf.org/html/rfc7231#section-7.4.1">RFC7231</a></p>
 
 <p>The <code>Allow</code> header field lists the set of methods advertised as
@@ -64,6 +64,14 @@ with the resource.</p>
                            href="#abnf">ABNF</a></h1>
 <pre><code class="language-plain">Allow = #method
 </code></pre>
+
+<h1 id="example-values" class='section-header'><a
+                           href="#example-values">Example values</a></h1>
+<ul>
+<li><code>GET, HEAD, PUT</code></li>
+<li><code>OPTIONS, GET, PUT, POST, DELETE, HEAD, TRACE, CONNECT, PATCH, fOObAr</code></li>
+<li>``</li>
+</ul>
 </div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><a class='stability Stable' title='Stable'></a><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/core/ops/trait.Deref.html' title='core::ops::Deref'>Deref</a> for <a class='struct' href='../../iron/headers/struct.Allow.html' title='iron::headers::Allow'>Allow</a></code></h3><div class='impl-items'><h4 id='assoc_type.Target' class='type'><a class='stability Unmarked' title='No stability level'></a><code>type Target = <a class='struct' href='http://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;<a class='enum' href='../../iron/method/enum.Method.html' title='iron::method::Method'>Method</a>&gt;</code></h4>
 <h4 id='method.deref' class='method'><a class='stability Stable' title='Stable'></a><code>fn <a href='http://doc.rust-lang.org/nightly/core/ops/trait.Deref.html#method.deref' class='fnname'>deref</a>(&amp;'a self) -&gt; &amp;'a <a class='struct' href='http://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;<a class='enum' href='../../iron/method/enum.Method.html' title='iron::method::Method'>Method</a>&gt;</code></h4>
 </div><h3 class='impl'><a class='stability Stable' title='Stable'></a><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/core/ops/trait.DerefMut.html' title='core::ops::DerefMut'>DerefMut</a> for <a class='struct' href='../../iron/headers/struct.Allow.html' title='iron::headers::Allow'>Allow</a></code></h3><div class='impl-items'><h4 id='method.deref_mut' class='method'><a class='stability Stable' title='Stable'></a><code>fn <a href='http://doc.rust-lang.org/nightly/core/ops/trait.DerefMut.html#method.deref_mut' class='fnname'>deref_mut</a>(&amp;'a mut self) -&gt; &amp;'a mut <a class='struct' href='http://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;<a class='enum' href='../../iron/method/enum.Method.html' title='iron::method::Method'>Method</a>&gt;</code></h4>
