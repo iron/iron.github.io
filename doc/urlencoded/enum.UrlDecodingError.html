@@ -12,10 +12,7 @@
     <link rel="stylesheet" type="text/css" href="../main.css">
 
     
-    <link href='http://fonts.googleapis.com/css?family=Questrial|Alegreya+Sans+SC:400,900|Bilbo|Abel' rel='stylesheet' type='text/css'>
-<link href='http://fonts.googleapis.com/css?family=Alegreya+Sans+SC:400,900|Alegreya+Sans' rel='stylesheet' type='text/css'>
-
-
+    
 </head>
 <body class="rustdoc">
     <!--[if lte IE 8]>
@@ -25,13 +22,7 @@
     </div>
     <![endif]-->
 
-    <div style="float: right;">
-    <a style="font-size: 2em; font-family: 'Alegreya Sans SC', 'Helvetica Neue', Arial, Tahoma, Verdana, sans-serif; font-weight: 400; margin: 0;" href="http://ironframework.io/">
-        IRON
-    </a>
-</div>
-
-
+    
 
     <section class="sidebar">
         
@@ -50,11 +41,13 @@
     </nav>
 
     <section id='main' class="content enum">
-<h1 class='fqn'><span class='in-band'>Enum <a href='index.html'>urlencoded</a>::<wbr><a class='enum' href=''>UrlDecodingError</a><wbr></span><span class='out-of-band'><span id='render-detail'>
-            <a id="collapse-all" href="#">[-]</a>&nbsp;<a id="expand-all" href="#">[+]</a>
-        </span><a id='src-22' href='../src/urlencoded/lib.rs.html#41-46'>[src]</a></span></h1>
+<h1 class='fqn'><span class='in-band'>Enum <a href='index.html'>urlencoded</a>::<wbr><a class='enum' href=''>UrlDecodingError</a></span><span class='out-of-band'><span id='render-detail'>
+            <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
+                [<span class='inner'>&#x2212;</span>]
+            </a>
+        </span><a id='src-22' class='srclink' href='../src/urlencoded/lib.rs.html#40-45' title='goto source code'>[src]</a></span></h1>
 <pre class='rust enum'>pub enum UrlDecodingError {
-    BodyError(BodyError),
+    BodyError(<a class='struct' href='../bodyparser/errors/struct.BodyError.html' title='bodyparser::errors::BodyError'>BodyError</a>),
     EmptyQuery,
 }</pre><div class='docblock'><p>An error representing the two possible errors that can occur during URL decoding.</p>
 
@@ -64,14 +57,12 @@ and that goes for both body and url queries.</p>
 <p>The second type of error that can occur is that something goes wrong
 when parsing the request body.</p>
 </div><h2 class='variants'>Variants</h2>
-<table><tr><td id='variant.BodyError'><a class='stability Unmarked' title='No stability level'></a><code>BodyError</code></td><td><div class='docblock'><p>An error parsing the request body</p>
-</div></td></tr><tr><td id='variant.EmptyQuery'><a class='stability Unmarked' title='No stability level'></a><code>EmptyQuery</code></td><td><div class='docblock'><p>An empty query string, either in body or url query</p>
-</div></td></tr></table><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><a class='stability Stable' title='Stable'></a><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/core/fmt/trait.Display.html' title='core::fmt::Display'>Display</a> for <a class='enum' href='../urlencoded/enum.UrlDecodingError.html' title='urlencoded::UrlDecodingError'>UrlDecodingError</a></code></h3><div class='impl-items'><h4 id='method.fmt' class='method'><a class='stability Stable' title='Stable'></a><code>fn <a href='#method.fmt' class='fnname'>fmt</a>(&amp;self, f: &amp;mut <a class='struct' href='http://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html' title='core::fmt::Formatter'>Formatter</a>) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.tuple.html'>()</a>, <a class='struct' href='http://doc.rust-lang.org/nightly/core/fmt/struct.Error.html' title='core::fmt::Error'>Error</a>&gt;</code></h4>
-</div><h3 class='impl'><a class='stability Unstable' title='Unstable: the exact API of this trait may change'></a><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/core/error/trait.Error.html' title='core::error::Error'>StdError</a> for <a class='enum' href='../urlencoded/enum.UrlDecodingError.html' title='urlencoded::UrlDecodingError'>UrlDecodingError</a></code></h3><div class='impl-items'><h4 id='method.description' class='method'><a class='stability Unstable' title='Unstable: the exact API of this trait may change'></a><code>fn <a href='#method.description' class='fnname'>description</a>(&amp;self) -&gt; &amp;<a href='http://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a></code></h4>
-<h4 id='method.cause' class='method'><a class='stability Unstable' title='Unstable: the exact API of this trait may change'></a><code>fn <a href='#method.cause' class='fnname'>cause</a>(&amp;self) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;&amp;<a class='trait' href='http://doc.rust-lang.org/nightly/core/error/trait.Error.html' title='core::error::Error'>StdError</a>&gt;</code></h4>
-</div><h3 id='derived_implementations'>Derived Implementations </h3><h3 class='impl'><a class='stability Stable' title='Stable'></a><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html' title='core::fmt::Debug'>Debug</a> for <a class='enum' href='../urlencoded/enum.UrlDecodingError.html' title='urlencoded::UrlDecodingError'>UrlDecodingError</a></code></h3><div class='impl-items'><h4 id='method.fmt' class='method'><a class='stability Stable' title='Stable'></a><code>fn <a href='#method.fmt' class='fnname'>fmt</a>(&amp;self, __arg_0: &amp;mut <a class='struct' href='http://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html' title='core::fmt::Formatter'>Formatter</a>) -&gt; <a class='type' href='http://doc.rust-lang.org/nightly/core/fmt/type.Result.html' title='core::fmt::Result'>Result</a></code></h4>
-</div><h3 class='impl'><a class='stability Stable' title='Stable'></a><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/core/clone/trait.Clone.html' title='core::clone::Clone'>Clone</a> for <a class='enum' href='../urlencoded/enum.UrlDecodingError.html' title='urlencoded::UrlDecodingError'>UrlDecodingError</a></code></h3><div class='impl-items'><h4 id='method.clone' class='method'><a class='stability Stable' title='Stable'></a><code>fn <a href='#method.clone' class='fnname'>clone</a>(&amp;self) -&gt; <a class='enum' href='../urlencoded/enum.UrlDecodingError.html' title='urlencoded::UrlDecodingError'>UrlDecodingError</a></code></h4>
-<h4 id='method.clone_from' class='tymethod'><a class='stability Unstable' title='Unstable: this function is rarely used'></a><code>fn <a href='#tymethod.clone_from' class='fnname'>clone_from</a>(&amp;mut self, source: &amp;Self)</code></h4>
+<table><tr><td id='variant.BodyError'><code>BodyError</code></td><td><div class='docblock'><p>An error parsing the request body</p>
+</div></td></tr><tr><td id='variant.EmptyQuery'><code>EmptyQuery</code></td><td><div class='docblock'><p>An empty query string, either in body or url query</p>
+</div></td></tr></table><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/core/fmt/trait.Display.html' title='core::fmt::Display'>Display</a> for <a class='enum' href='../urlencoded/enum.UrlDecodingError.html' title='urlencoded::UrlDecodingError'>UrlDecodingError</a></code></h3><div class='impl-items'><h4 id='method.fmt' class='method'><code>fn <a href='http://doc.rust-lang.org/nightly/core/fmt/trait.Display.html#method.fmt' class='fnname'>fmt</a>(&amp;self, f: &amp;mut <a class='struct' href='http://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html' title='core::fmt::Formatter'>Formatter</a>) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.tuple.html'>()</a>, <a class='struct' href='http://doc.rust-lang.org/nightly/core/fmt/struct.Error.html' title='core::fmt::Error'>Error</a>&gt;</code></h4>
+</div><h3 class='impl'><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/std/error/trait.Error.html' title='std::error::Error'>StdError</a> for <a class='enum' href='../urlencoded/enum.UrlDecodingError.html' title='urlencoded::UrlDecodingError'>UrlDecodingError</a></code></h3><div class='impl-items'><h4 id='method.description' class='method'><code>fn <a href='http://doc.rust-lang.org/nightly/std/error/trait.Error.html#method.description' class='fnname'>description</a>(&amp;self) -&gt; &amp;<a href='http://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a></code></h4>
+<h4 id='method.cause' class='method'><code>fn <a href='http://doc.rust-lang.org/nightly/std/error/trait.Error.html#method.cause' class='fnname'>cause</a>(&amp;self) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;&amp;<a class='trait' href='http://doc.rust-lang.org/nightly/std/error/trait.Error.html' title='std::error::Error'>StdError</a>&gt;</code></h4>
+</div><h3 id='derived_implementations'>Derived Implementations </h3><h3 class='impl'><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html' title='core::fmt::Debug'>Debug</a> for <a class='enum' href='../urlencoded/enum.UrlDecodingError.html' title='urlencoded::UrlDecodingError'>UrlDecodingError</a></code></h3><div class='impl-items'><h4 id='method.fmt' class='method'><code>fn <a href='http://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html#method.fmt' class='fnname'>fmt</a>(&amp;self, __arg_0: &amp;mut <a class='struct' href='http://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html' title='core::fmt::Formatter'>Formatter</a>) -&gt; <a class='type' href='http://doc.rust-lang.org/nightly/core/fmt/type.Result.html' title='core::fmt::Result'>Result</a></code></h4>
 </div></section>
     <section id='search' class="content hidden"></section>
 
@@ -105,17 +96,14 @@ when parsing the request body.</p>
                 <code>trait</code>, <code>typedef</code> (or
                 <code>tdef</code>).
             </p>
+            <p>
+                Search functions by type signature (e.g.
+                <code>vec -> usize</code>)
+            </p>
         </div>
     </div>
 
-    <section class="content footer">
-    <div style="text-align: right;">
-        <a style="color: #428bca;" href="https://github.com/reem">@reem</a>
-        <a style="color: #428bca;" href="https://github.com/zzmp">@zzmp</a>
-    </div>
-</section>
-
-
+    
 
     <script>
         window.rootPath = "../";

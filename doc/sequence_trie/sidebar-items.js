@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["Keys","An iteterator over the keys of a `SequenceTrie`."],["SequenceTrie","A `SequenceTrie` is recursively defined as a value and a map containing child Tries."]]});

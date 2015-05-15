@@ -12,10 +12,7 @@
     <link rel="stylesheet" type="text/css" href="../../main.css">
 
     <link rel="shortcut icon" href="https://avatars0.githubusercontent.com/u/7853871?s=256">
-    <link href='http://fonts.googleapis.com/css?family=Questrial|Alegreya+Sans+SC:400,900|Bilbo|Abel' rel='stylesheet' type='text/css'>
-<link href='http://fonts.googleapis.com/css?family=Alegreya+Sans+SC:400,900|Alegreya+Sans' rel='stylesheet' type='text/css'>
-
-
+    
 </head>
 <body class="rustdoc">
     <!--[if lte IE 8]>
@@ -25,13 +22,7 @@
     </div>
     <![endif]-->
 
-    <div style="float: right;">
-    <a style="font-size: 2em; font-family: 'Alegreya Sans SC', 'Helvetica Neue', Arial, Tahoma, Verdana, sans-serif; font-weight: 400; margin: 0;" href="http://ironframework.io/">
-        IRON
-    </a>
-</div>
-
-
+    
 
     <section class="sidebar">
         <a href='../../iron/index.html'><img src='https://avatars0.githubusercontent.com/u/7853871?s=128' alt='' width='100'></a>
@@ -54,7 +45,7 @@
             <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                 [<span class='inner'>&#x2212;</span>]
             </a>
-        </span><a id='src-37137' class='srclink' href='https://hyperium.github.io/hyper/hyper/index.html/hyper/status/enum.Status.html?gotosrc=37137' title='goto source code'>[src]</a></span></h1>
+        </span><a id='src-37137' class='srclink' href='../../hyper/status/enum.Status.html?gotosrc=37137' title='goto source code'>[src]</a></span></h1>
 <pre class='rust enum'>pub enum Status {
     Continue,
     SwitchingProtocols,
@@ -265,7 +256,7 @@ deriving any meaning from it at all costs.</p>
 
 <p>Bear in mind also that in HTTP/2.0 the reason phrase is abolished from transmission, and so
 this canonical reason phrase really is the only reason phrase you’ll find.</p>
-</div><h4 id='method.class' class='method'><code>fn <a href='#method.class' class='fnname'>class</a>(&amp;self) -&gt; <a class='enum' href='https://hyperium.github.io/hyper/hyper/index.html/hyper/status/enum.StatusClass.html' title='hyper::status::StatusClass'>StatusClass</a></code></h4>
+</div><h4 id='method.class' class='method'><code>fn <a href='#method.class' class='fnname'>class</a>(&amp;self) -&gt; <a class='enum' href='../../hyper/status/enum.StatusClass.html' title='hyper::status::StatusClass'>StatusClass</a></code></h4>
 <div class='docblock'><p>Determine the class of a status code, based on its first digit.</p>
 </div><h4 id='method.is_informational' class='method'><code>fn <a href='#method.is_informational' class='fnname'>is_informational</a>(&amp;self) -&gt; <a href='http://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></code></h4>
 <div class='docblock'><p>Check if class is Informational.</p>
@@ -292,7 +283,7 @@ this canonical reason phrase really is the only reason phrase you’ll find.</p>
 <h4 id='method.clone_from' class='method'><code>fn <a href='http://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#method.clone_from' class='fnname'>clone_from</a>(&amp;mut self, source: &amp;Self)</code></h4>
 </div><h3 class='impl'><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/core/cmp/trait.PartialOrd.html' title='core::cmp::PartialOrd'>PartialOrd</a>&lt;<a class='enum' href='../../iron/status/enum.Status.html' title='iron::status::Status'>StatusCode</a>&gt; for <a class='enum' href='../../iron/status/enum.Status.html' title='iron::status::Status'>StatusCode</a></code></h3><div class='impl-items'><h4 id='method.partial_cmp' class='method'><code>fn <a href='http://doc.rust-lang.org/nightly/core/cmp/trait.PartialOrd.html#method.partial_cmp' class='fnname'>partial_cmp</a>(&amp;self, other: &amp;<a class='enum' href='../../iron/status/enum.Status.html' title='iron::status::Status'>StatusCode</a>) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='enum' href='http://doc.rust-lang.org/nightly/core/cmp/enum.Ordering.html' title='core::cmp::Ordering'>Ordering</a>&gt;</code></h4>
 </div><h3 class='impl'><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/core/cmp/trait.Ord.html' title='core::cmp::Ord'>Ord</a> for <a class='enum' href='../../iron/status/enum.Status.html' title='iron::status::Status'>StatusCode</a></code></h3><div class='impl-items'><h4 id='method.cmp' class='method'><code>fn <a href='http://doc.rust-lang.org/nightly/core/cmp/trait.Ord.html#method.cmp' class='fnname'>cmp</a>(&amp;self, other: &amp;<a class='enum' href='../../iron/status/enum.Status.html' title='iron::status::Status'>StatusCode</a>) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/cmp/enum.Ordering.html' title='core::cmp::Ordering'>Ordering</a></code></h4>
-</div><h3 class='impl'><code>impl Modifier&lt;<a class='struct' href='../../iron/response/struct.Response.html' title='iron::response::Response'>Response</a>&gt; for <a class='enum' href='../../iron/status/enum.Status.html' title='iron::status::Status'>Status</a></code></h3><div class='impl-items'><h4 id='method.modify' class='method'><code>fn <a href='#method.modify' class='fnname'>modify</a>(self, res: &amp;mut <a class='struct' href='../../iron/response/struct.Response.html' title='iron::response::Response'>Response</a>)</code></h4>
+</div><h3 class='impl'><code>impl <a class='trait' href='../../modifier/trait.Modifier.html' title='modifier::Modifier'>Modifier</a>&lt;<a class='struct' href='../../iron/response/struct.Response.html' title='iron::response::Response'>Response</a>&gt; for <a class='enum' href='../../iron/status/enum.Status.html' title='iron::status::Status'>Status</a></code></h3><div class='impl-items'><h4 id='method.modify' class='method'><code>fn <a href='../../modifier/trait.Modifier.html#method.modify' class='fnname'>modify</a>(self, res: &amp;mut <a class='struct' href='../../iron/response/struct.Response.html' title='iron::response::Response'>Response</a>)</code></h4>
 </div><h3 id='derived_implementations'>Derived Implementations </h3><h3 class='impl'><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html' title='core::fmt::Debug'>Debug</a> for <a class='enum' href='../../iron/status/enum.Status.html' title='iron::status::Status'>StatusCode</a></code></h3><div class='impl-items'><h4 id='method.fmt' class='method'><code>fn <a href='http://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html#method.fmt' class='fnname'>fmt</a>(&amp;self, __arg_0: &amp;mut <a class='struct' href='http://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html' title='core::fmt::Formatter'>Formatter</a>) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.tuple.html'>()</a>, <a class='struct' href='http://doc.rust-lang.org/nightly/core/fmt/struct.Error.html' title='core::fmt::Error'>Error</a>&gt;</code></h4>
 </div></section>
     <section id='search' class="content hidden"></section>
@@ -334,14 +325,7 @@ this canonical reason phrase really is the only reason phrase you’ll find.</p>
         </div>
     </div>
 
-    <section class="content footer">
-    <div style="text-align: right;">
-        <a style="color: #428bca;" href="https://github.com/reem">@reem</a>
-        <a style="color: #428bca;" href="https://github.com/zzmp">@zzmp</a>
-    </div>
-</section>
-
-
+    
 
     <script>
         window.rootPath = "../../";

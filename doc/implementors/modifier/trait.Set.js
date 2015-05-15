@@ -1,5 +1,5 @@
 (function() {var implementors = {};
-implementors['static'] = ["<a class='stability Unmarked' title='No stability level'></a>impl Set for <a class='struct' href='static/struct.Static.html' title='static::Static'>Static</a>",];
+implementors['staticfile'] = ["impl <a class='trait' href='modifier/trait.Set.html' title='modifier::Set'>Set</a> for <a class='struct' href='staticfile/struct.Static.html' title='staticfile::Static'>Static</a>",];
 
             if (window.register_implementors) {
                 window.register_implementors(implementors);

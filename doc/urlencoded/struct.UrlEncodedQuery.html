@@ -12,10 +12,7 @@
     <link rel="stylesheet" type="text/css" href="../main.css">
 
     
-    <link href='http://fonts.googleapis.com/css?family=Questrial|Alegreya+Sans+SC:400,900|Bilbo|Abel' rel='stylesheet' type='text/css'>
-<link href='http://fonts.googleapis.com/css?family=Alegreya+Sans+SC:400,900|Alegreya+Sans' rel='stylesheet' type='text/css'>
-
-
+    
 </head>
 <body class="rustdoc">
     <!--[if lte IE 8]>
@@ -25,13 +22,7 @@
     </div>
     <![endif]-->
 
-    <div style="float: right;">
-    <a style="font-size: 2em; font-family: 'Alegreya Sans SC', 'Helvetica Neue', Arial, Tahoma, Verdana, sans-serif; font-weight: 400; margin: 0;" href="http://ironframework.io/">
-        IRON
-    </a>
-</div>
-
-
+    
 
     <section class="sidebar">
         
@@ -50,15 +41,17 @@
     </nav>
 
     <section id='main' class="content struct">
-<h1 class='fqn'><span class='in-band'>Struct <a href='index.html'>urlencoded</a>::<wbr><a class='struct' href=''>UrlEncodedQuery</a><wbr></span><span class='out-of-band'><span id='render-detail'>
-            <a id="collapse-all" href="#">[-]</a>&nbsp;<a id="expand-all" href="#">[+]</a>
-        </span><a id='src-16' href='../src/urlencoded/lib.rs.html#26'>[src]</a></span></h1>
+<h1 class='fqn'><span class='in-band'>Struct <a href='index.html'>urlencoded</a>::<wbr><a class='struct' href=''>UrlEncodedQuery</a></span><span class='out-of-band'><span id='render-detail'>
+            <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
+                [<span class='inner'>&#x2212;</span>]
+            </a>
+        </span><a id='src-16' class='srclink' href='../src/urlencoded/lib.rs.html#25' title='goto source code'>[src]</a></span></h1>
 <pre class='rust struct'>pub struct UrlEncodedQuery;</pre><div class='docblock'><p>Plugin for <code>Request</code> that extracts URL encoded data from the URL query string.</p>
 
 <p>Use it like this: <code>req.get_ref::&lt;UrlEncodedQuery&gt;()</code></p>
-</div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><a class='stability Unmarked' title='No stability level'></a><code>impl Key for <a class='struct' href='../urlencoded/struct.UrlEncodedQuery.html' title='urlencoded::UrlEncodedQuery'>UrlEncodedQuery</a></code></h3><div class='impl-items'><h4 id='assoc_type.Value' class='type'><a class='stability Unmarked' title='No stability level'></a><code>type Value = <a class='type' href='../urlencoded/type.QueryMap.html' title='urlencoded::QueryMap'>QueryMap</a></code></h4>
-</div><h3 class='impl'><a class='stability Unmarked' title='No stability level'></a><code>impl&lt;'a&gt; Plugin&lt;<a class='struct' href='../iron/request/struct.Request.html' title='iron::request::Request'>Request</a>&lt;'a&gt;&gt; for <a class='struct' href='../urlencoded/struct.UrlEncodedQuery.html' title='urlencoded::UrlEncodedQuery'>UrlEncodedQuery</a></code></h3><div class='impl-items'><h4 id='assoc_type.Error' class='type'><a class='stability Unmarked' title='No stability level'></a><code>type Error = <a class='enum' href='../urlencoded/enum.UrlDecodingError.html' title='urlencoded::UrlDecodingError'>UrlDecodingError</a></code></h4>
-<h4 id='method.eval' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.eval' class='fnname'>eval</a>(req: &amp;mut <a class='struct' href='../iron/request/struct.Request.html' title='iron::request::Request'>Request</a>) -&gt; <a class='type' href='../urlencoded/type.QueryResult.html' title='urlencoded::QueryResult'>QueryResult</a></code></h4>
+</div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><code>impl <a class='trait' href='../typemap/trait.Key.html' title='typemap::Key'>Key</a> for <a class='struct' href='../urlencoded/struct.UrlEncodedQuery.html' title='urlencoded::UrlEncodedQuery'>UrlEncodedQuery</a></code></h3><div class='impl-items'><h4 id='assoc_type.Value' class='type'><code>type Value = <a class='type' href='../urlencoded/type.QueryMap.html' title='urlencoded::QueryMap'>QueryMap</a></code></h4>
+</div><h3 class='impl'><code>impl&lt;'a, 'b&gt; <a class='trait' href='../plugin/trait.Plugin.html' title='plugin::Plugin'>Plugin</a>&lt;<a class='struct' href='../iron/request/struct.Request.html' title='iron::request::Request'>Request</a>&lt;'a, 'b&gt;&gt; for <a class='struct' href='../urlencoded/struct.UrlEncodedQuery.html' title='urlencoded::UrlEncodedQuery'>UrlEncodedQuery</a></code></h3><div class='impl-items'><h4 id='assoc_type.Error' class='type'><code>type Error = <a class='enum' href='../urlencoded/enum.UrlDecodingError.html' title='urlencoded::UrlDecodingError'>UrlDecodingError</a></code></h4>
+<h4 id='method.eval' class='method'><code>fn <a href='../plugin/trait.Plugin.html#method.eval' class='fnname'>eval</a>(req: &amp;mut <a class='struct' href='../iron/request/struct.Request.html' title='iron::request::Request'>Request</a>) -&gt; <a class='type' href='../urlencoded/type.QueryResult.html' title='urlencoded::QueryResult'>QueryResult</a></code></h4>
 </div></section>
     <section id='search' class="content hidden"></section>
 
@@ -92,17 +85,14 @@
                 <code>trait</code>, <code>typedef</code> (or
                 <code>tdef</code>).
             </p>
+            <p>
+                Search functions by type signature (e.g.
+                <code>vec -> usize</code>)
+            </p>
         </div>
     </div>
 
-    <section class="content footer">
-    <div style="text-align: right;">
-        <a style="color: #428bca;" href="https://github.com/reem">@reem</a>
-        <a style="color: #428bca;" href="https://github.com/zzmp">@zzmp</a>
-    </div>
-</section>
-
-
+    
 
     <script>
         window.rootPath = "../";

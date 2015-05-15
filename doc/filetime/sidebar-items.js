@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["FileTime","A helper structure to represent a timestamp for a file."]]});

@@ -12,10 +12,7 @@
     <link rel="stylesheet" type="text/css" href="../../main.css">
 
     <link rel="shortcut icon" href="https://avatars0.githubusercontent.com/u/7853871?s=256">
-    <link href='http://fonts.googleapis.com/css?family=Questrial|Alegreya+Sans+SC:400,900|Bilbo|Abel' rel='stylesheet' type='text/css'>
-<link href='http://fonts.googleapis.com/css?family=Alegreya+Sans+SC:400,900|Alegreya+Sans' rel='stylesheet' type='text/css'>
-
-
+    
 </head>
 <body class="rustdoc">
     <!--[if lte IE 8]>
@@ -25,13 +22,7 @@
     </div>
     <![endif]-->
 
-    <div style="float: right;">
-    <a style="font-size: 2em; font-family: 'Alegreya Sans SC', 'Helvetica Neue', Arial, Tahoma, Verdana, sans-serif; font-weight: 400; margin: 0;" href="http://ironframework.io/">
-        IRON
-    </a>
-</div>
-
-
+    
 
     <section class="sidebar">
         <a href='../../iron/index.html'><img src='https://avatars0.githubusercontent.com/u/7853871?s=128' alt='' width='100'></a>
@@ -54,16 +45,16 @@
             <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                 [<span class='inner'>&#x2212;</span>]
             </a>
-        </span><a id='src-5600' class='srclink' href='https://hyperium.github.io/hyper/hyper/index.html/hyper/error/enum.HttpError.html?gotosrc=5600' title='goto source code'>[src]</a></span></h1>
+        </span><a id='src-5600' class='srclink' href='../../hyper/error/enum.HttpError.html?gotosrc=5600' title='goto source code'>[src]</a></span></h1>
 <pre class='rust enum'>pub enum HttpError {
     Method,
-    Uri(ParseError),
+    Uri(<a class='enum' href='../../url/parser/enum.ParseError.html' title='url::parser::ParseError'>ParseError</a>),
     Version,
     Header,
     TooLarge,
     Status,
     Io(<a class='struct' href='http://doc.rust-lang.org/nightly/std/io/error/struct.Error.html' title='std::io::error::Error'>Error</a>),
-    Ssl(<a class='enum' href='https://sfackler.github.io/rust-openssl/doc/openssl/openssl/ssl/error/enum.SslError.html' title='openssl::ssl::error::SslError'>SslError</a>),
+    Ssl(<a class='enum' href='../../openssl/ssl/error/enum.SslError.html' title='openssl::ssl::error::SslError'>SslError</a>),
 }</pre><div class='docblock'><p>A set of errors that can occur parsing HTTP streams.</p>
 </div><h2 class='variants'>Variants</h2>
 <table><tr><td id='variant.Method'><code>Method</code></td><td><div class='docblock'><p>An invalid <code>Method</code>, such as <code>GE,T</code>.</p>
@@ -78,9 +69,9 @@
 </div><h3 class='impl'><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/std/error/trait.Error.html' title='std::error::Error'>Error</a> for <a class='enum' href='../../iron/error/enum.HttpError.html' title='iron::error::HttpError'>Error</a></code></h3><div class='impl-items'><h4 id='method.description' class='method'><code>fn <a href='http://doc.rust-lang.org/nightly/std/error/trait.Error.html#method.description' class='fnname'>description</a>(&amp;self) -&gt; &amp;<a href='http://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a></code></h4>
 <h4 id='method.cause' class='method'><code>fn <a href='http://doc.rust-lang.org/nightly/std/error/trait.Error.html#method.cause' class='fnname'>cause</a>(&amp;self) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;&amp;<a class='trait' href='http://doc.rust-lang.org/nightly/std/error/trait.Error.html' title='std::error::Error'>Error</a>&gt;</code></h4>
 </div><h3 class='impl'><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/core/convert/trait.From.html' title='core::convert::From'>From</a>&lt;<a class='struct' href='http://doc.rust-lang.org/nightly/std/io/error/struct.Error.html' title='std::io::error::Error'>Error</a>&gt; for <a class='enum' href='../../iron/error/enum.HttpError.html' title='iron::error::HttpError'>Error</a></code></h3><div class='impl-items'><h4 id='method.from' class='method'><code>fn <a href='http://doc.rust-lang.org/nightly/core/convert/trait.From.html#method.from' class='fnname'>from</a>(err: <a class='struct' href='http://doc.rust-lang.org/nightly/std/io/error/struct.Error.html' title='std::io::error::Error'>Error</a>) -&gt; <a class='enum' href='../../iron/error/enum.HttpError.html' title='iron::error::HttpError'>Error</a></code></h4>
-</div><h3 class='impl'><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/core/convert/trait.From.html' title='core::convert::From'>From</a>&lt;ParseError&gt; for <a class='enum' href='../../iron/error/enum.HttpError.html' title='iron::error::HttpError'>Error</a></code></h3><div class='impl-items'><h4 id='method.from' class='method'><code>fn <a href='http://doc.rust-lang.org/nightly/core/convert/trait.From.html#method.from' class='fnname'>from</a>(err: ParseError) -&gt; <a class='enum' href='../../iron/error/enum.HttpError.html' title='iron::error::HttpError'>Error</a></code></h4>
-</div><h3 class='impl'><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/core/convert/trait.From.html' title='core::convert::From'>From</a>&lt;<a class='enum' href='https://sfackler.github.io/rust-openssl/doc/openssl/openssl/ssl/error/enum.SslError.html' title='openssl::ssl::error::SslError'>SslError</a>&gt; for <a class='enum' href='../../iron/error/enum.HttpError.html' title='iron::error::HttpError'>Error</a></code></h3><div class='impl-items'><h4 id='method.from' class='method'><code>fn <a href='http://doc.rust-lang.org/nightly/core/convert/trait.From.html#method.from' class='fnname'>from</a>(err: <a class='enum' href='https://sfackler.github.io/rust-openssl/doc/openssl/openssl/ssl/error/enum.SslError.html' title='openssl::ssl::error::SslError'>SslError</a>) -&gt; <a class='enum' href='../../iron/error/enum.HttpError.html' title='iron::error::HttpError'>Error</a></code></h4>
-</div><h3 class='impl'><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/core/convert/trait.From.html' title='core::convert::From'>From</a>&lt;Error&gt; for <a class='enum' href='../../iron/error/enum.HttpError.html' title='iron::error::HttpError'>Error</a></code></h3><div class='impl-items'><h4 id='method.from' class='method'><code>fn <a href='http://doc.rust-lang.org/nightly/core/convert/trait.From.html#method.from' class='fnname'>from</a>(err: Error) -&gt; <a class='enum' href='../../iron/error/enum.HttpError.html' title='iron::error::HttpError'>Error</a></code></h4>
+</div><h3 class='impl'><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/core/convert/trait.From.html' title='core::convert::From'>From</a>&lt;<a class='enum' href='../../url/parser/enum.ParseError.html' title='url::parser::ParseError'>ParseError</a>&gt; for <a class='enum' href='../../iron/error/enum.HttpError.html' title='iron::error::HttpError'>Error</a></code></h3><div class='impl-items'><h4 id='method.from' class='method'><code>fn <a href='http://doc.rust-lang.org/nightly/core/convert/trait.From.html#method.from' class='fnname'>from</a>(err: <a class='enum' href='../../url/parser/enum.ParseError.html' title='url::parser::ParseError'>ParseError</a>) -&gt; <a class='enum' href='../../iron/error/enum.HttpError.html' title='iron::error::HttpError'>Error</a></code></h4>
+</div><h3 class='impl'><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/core/convert/trait.From.html' title='core::convert::From'>From</a>&lt;<a class='enum' href='../../openssl/ssl/error/enum.SslError.html' title='openssl::ssl::error::SslError'>SslError</a>&gt; for <a class='enum' href='../../iron/error/enum.HttpError.html' title='iron::error::HttpError'>Error</a></code></h3><div class='impl-items'><h4 id='method.from' class='method'><code>fn <a href='http://doc.rust-lang.org/nightly/core/convert/trait.From.html#method.from' class='fnname'>from</a>(err: <a class='enum' href='../../openssl/ssl/error/enum.SslError.html' title='openssl::ssl::error::SslError'>SslError</a>) -&gt; <a class='enum' href='../../iron/error/enum.HttpError.html' title='iron::error::HttpError'>Error</a></code></h4>
+</div><h3 class='impl'><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/core/convert/trait.From.html' title='core::convert::From'>From</a>&lt;<a class='enum' href='../../httparse/enum.Error.html' title='httparse::Error'>Error</a>&gt; for <a class='enum' href='../../iron/error/enum.HttpError.html' title='iron::error::HttpError'>Error</a></code></h3><div class='impl-items'><h4 id='method.from' class='method'><code>fn <a href='http://doc.rust-lang.org/nightly/core/convert/trait.From.html#method.from' class='fnname'>from</a>(err: <a class='enum' href='../../httparse/enum.Error.html' title='httparse::Error'>Error</a>) -&gt; <a class='enum' href='../../iron/error/enum.HttpError.html' title='iron::error::HttpError'>Error</a></code></h4>
 </div><h3 id='derived_implementations'>Derived Implementations </h3><h3 class='impl'><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html' title='core::fmt::Debug'>Debug</a> for <a class='enum' href='../../iron/error/enum.HttpError.html' title='iron::error::HttpError'>Error</a></code></h3><div class='impl-items'><h4 id='method.fmt' class='method'><code>fn <a href='http://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html#method.fmt' class='fnname'>fmt</a>(&amp;self, __arg_0: &amp;mut <a class='struct' href='http://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html' title='core::fmt::Formatter'>Formatter</a>) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.tuple.html'>()</a>, <a class='struct' href='http://doc.rust-lang.org/nightly/core/fmt/struct.Error.html' title='core::fmt::Error'>Error</a>&gt;</code></h4>
 </div></section>
     <section id='search' class="content hidden"></section>
@@ -122,14 +113,7 @@
         </div>
     </div>
 
-    <section class="content footer">
-    <div style="text-align: right;">
-        <a style="color: #428bca;" href="https://github.com/reem">@reem</a>
-        <a style="color: #428bca;" href="https://github.com/zzmp">@zzmp</a>
-    </div>
-</section>
-
-
+    
 
     <script>
         window.rootPath = "../../";

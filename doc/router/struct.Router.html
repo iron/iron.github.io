@@ -12,10 +12,7 @@
     <link rel="stylesheet" type="text/css" href="../main.css">
 
     
-    <link href='http://fonts.googleapis.com/css?family=Questrial|Alegreya+Sans+SC:400,900|Bilbo|Abel' rel='stylesheet' type='text/css'>
-<link href='http://fonts.googleapis.com/css?family=Alegreya+Sans+SC:400,900|Alegreya+Sans' rel='stylesheet' type='text/css'>
-
-
+    
 </head>
 <body class="rustdoc">
     <!--[if lte IE 8]>
@@ -25,13 +22,7 @@
     </div>
     <![endif]-->
 
-    <div style="float: right;">
-    <a style="font-size: 2em; font-family: 'Alegreya Sans SC', 'Helvetica Neue', Arial, Tahoma, Verdana, sans-serif; font-weight: 400; margin: 0;" href="http://ironframework.io/">
-        IRON
-    </a>
-</div>
-
-
+    
 
     <section class="sidebar">
         
@@ -50,19 +41,21 @@
     </nav>
 
     <section id='main' class="content struct">
-<h1 class='fqn'><span class='in-band'>Struct <a href='index.html'>router</a>::<wbr><a class='struct' href=''>Router</a><wbr></span><span class='out-of-band'><span id='render-detail'>
-            <a id="collapse-all" href="#">[-]</a>&nbsp;<a id="expand-all" href="#">[+]</a>
-        </span><a id='src-32' href='../src/router/router.rs.html#16-19'>[src]</a></span></h1>
+<h1 class='fqn'><span class='in-band'>Struct <a href='index.html'>router</a>::<wbr><a class='struct' href=''>Router</a></span><span class='out-of-band'><span id='render-detail'>
+            <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
+                [<span class='inner'>&#x2212;</span>]
+            </a>
+        </span><a id='src-32' class='srclink' href='../src/router/router.rs.html#16-19' title='goto source code'>[src]</a></span></h1>
 <pre class='rust struct'>pub struct Router {
     // some fields omitted
 }</pre><div class='docblock'><p><code>Router</code> provides an interface for creating complex routes as middleware
 for the Iron framework.</p>
-</div><h2 id='methods'>Methods</h2><h3 class='impl'><a class='stability Unmarked' title='No stability level'></a><code>impl <a class='struct' href='../router/struct.Router.html' title='router::Router'>Router</a></code></h3><div class='impl-items'><h4 id='method.new' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.new' class='fnname'>new</a>() -&gt; <a class='struct' href='../router/struct.Router.html' title='router::Router'>Router</a></code></h4>
+</div><h2 id='methods'>Methods</h2><h3 class='impl'><code>impl <a class='struct' href='../router/struct.Router.html' title='router::Router'>Router</a></code></h3><div class='impl-items'><h4 id='method.new' class='method'><code>fn <a href='#method.new' class='fnname'>new</a>() -&gt; <a class='struct' href='../router/struct.Router.html' title='router::Router'>Router</a></code></h4>
 <div class='docblock'><p>Construct a new, empty <code>Router</code>.</p>
 <pre id='rust-example-rendered' class='rust '>
 <span class='kw'>let</span> <span class='ident'>router</span> <span class='op'>=</span> <span class='ident'>Router</span>::<span class='ident'>new</span>();
 </pre>
-</div><h4 id='method.route' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.route' class='fnname'>route</a>&lt;H, S&gt;(&amp;mut self, method: Method, glob: S, handler: H) -&gt; &amp;mut <a class='struct' href='../router/struct.Router.html' title='router::Router'>Router</a> <span class='where'>where H: <a class='trait' href='../iron/middleware/trait.Handler.html' title='iron::middleware::Handler'>Handler</a>, S: <a class='trait' href='http://doc.rust-lang.org/nightly/core/str/trait.Str.html' title='core::str::Str'>Str</a></span></code></h4>
+</div><h4 id='method.route' class='method'><code>fn <a href='#method.route' class='fnname'>route</a>&lt;H, S&gt;(&amp;mut self, method: <a class='enum' href='../hyper/method/enum.Method.html' title='hyper::method::Method'>Method</a>, glob: S, handler: H) -&gt; &amp;mut <a class='struct' href='../router/struct.Router.html' title='router::Router'>Router</a> <span class='where'>where H: <a class='trait' href='../iron/middleware/trait.Handler.html' title='iron::middleware::Handler'>Handler</a>, S: <a class='trait' href='http://doc.rust-lang.org/nightly/core/convert/trait.AsRef.html' title='core::convert::AsRef'>AsRef</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>&gt;</span></code></h4>
 <div class='docblock'><p>Add a new route to a <code>Router</code>, matching both a method and glob pattern.</p>
 
 <p><code>route</code> supports glob patterns: <code>*</code> for a single wildcard segment and
@@ -82,22 +75,22 @@ extreme flexibility when handling routes. For instance, you could provide
 a <code>Chain</code>, a <code>Handler</code>, which contains an authorization middleware and
 a controller function, so that you can confirm that the request is
 authorized for this route before handling it.</p>
-</div><h4 id='method.get' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.get' class='fnname'>get</a>&lt;H: <a class='trait' href='../iron/middleware/trait.Handler.html' title='iron::middleware::Handler'>Handler</a>, S: <a class='trait' href='http://doc.rust-lang.org/nightly/core/str/trait.Str.html' title='core::str::Str'>Str</a>&gt;(&amp;mut self, glob: S, handler: H) -&gt; &amp;mut <a class='struct' href='../router/struct.Router.html' title='router::Router'>Router</a></code></h4>
+</div><h4 id='method.get' class='method'><code>fn <a href='#method.get' class='fnname'>get</a>&lt;H: <a class='trait' href='../iron/middleware/trait.Handler.html' title='iron::middleware::Handler'>Handler</a>, S: <a class='trait' href='http://doc.rust-lang.org/nightly/core/convert/trait.AsRef.html' title='core::convert::AsRef'>AsRef</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>&gt;&gt;(&amp;mut self, glob: S, handler: H) -&gt; &amp;mut <a class='struct' href='../router/struct.Router.html' title='router::Router'>Router</a></code></h4>
 <div class='docblock'><p>Like route, but specialized to the <code>Get</code> method.</p>
-</div><h4 id='method.post' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.post' class='fnname'>post</a>&lt;H: <a class='trait' href='../iron/middleware/trait.Handler.html' title='iron::middleware::Handler'>Handler</a>, S: <a class='trait' href='http://doc.rust-lang.org/nightly/core/str/trait.Str.html' title='core::str::Str'>Str</a>&gt;(&amp;mut self, glob: S, handler: H) -&gt; &amp;mut <a class='struct' href='../router/struct.Router.html' title='router::Router'>Router</a></code></h4>
+</div><h4 id='method.post' class='method'><code>fn <a href='#method.post' class='fnname'>post</a>&lt;H: <a class='trait' href='../iron/middleware/trait.Handler.html' title='iron::middleware::Handler'>Handler</a>, S: <a class='trait' href='http://doc.rust-lang.org/nightly/core/convert/trait.AsRef.html' title='core::convert::AsRef'>AsRef</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>&gt;&gt;(&amp;mut self, glob: S, handler: H) -&gt; &amp;mut <a class='struct' href='../router/struct.Router.html' title='router::Router'>Router</a></code></h4>
 <div class='docblock'><p>Like route, but specialized to the <code>Post</code> method.</p>
-</div><h4 id='method.put' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.put' class='fnname'>put</a>&lt;H: <a class='trait' href='../iron/middleware/trait.Handler.html' title='iron::middleware::Handler'>Handler</a>, S: <a class='trait' href='http://doc.rust-lang.org/nightly/core/str/trait.Str.html' title='core::str::Str'>Str</a>&gt;(&amp;mut self, glob: S, handler: H) -&gt; &amp;mut <a class='struct' href='../router/struct.Router.html' title='router::Router'>Router</a></code></h4>
+</div><h4 id='method.put' class='method'><code>fn <a href='#method.put' class='fnname'>put</a>&lt;H: <a class='trait' href='../iron/middleware/trait.Handler.html' title='iron::middleware::Handler'>Handler</a>, S: <a class='trait' href='http://doc.rust-lang.org/nightly/core/convert/trait.AsRef.html' title='core::convert::AsRef'>AsRef</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>&gt;&gt;(&amp;mut self, glob: S, handler: H) -&gt; &amp;mut <a class='struct' href='../router/struct.Router.html' title='router::Router'>Router</a></code></h4>
 <div class='docblock'><p>Like route, but specialized to the <code>Put</code> method.</p>
-</div><h4 id='method.delete' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.delete' class='fnname'>delete</a>&lt;H: <a class='trait' href='../iron/middleware/trait.Handler.html' title='iron::middleware::Handler'>Handler</a>, S: <a class='trait' href='http://doc.rust-lang.org/nightly/core/str/trait.Str.html' title='core::str::Str'>Str</a>&gt;(&amp;mut self, glob: S, handler: H) -&gt; &amp;mut <a class='struct' href='../router/struct.Router.html' title='router::Router'>Router</a></code></h4>
+</div><h4 id='method.delete' class='method'><code>fn <a href='#method.delete' class='fnname'>delete</a>&lt;H: <a class='trait' href='../iron/middleware/trait.Handler.html' title='iron::middleware::Handler'>Handler</a>, S: <a class='trait' href='http://doc.rust-lang.org/nightly/core/convert/trait.AsRef.html' title='core::convert::AsRef'>AsRef</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>&gt;&gt;(&amp;mut self, glob: S, handler: H) -&gt; &amp;mut <a class='struct' href='../router/struct.Router.html' title='router::Router'>Router</a></code></h4>
 <div class='docblock'><p>Like route, but specialized to the <code>Delete</code> method.</p>
-</div><h4 id='method.head' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.head' class='fnname'>head</a>&lt;H: <a class='trait' href='../iron/middleware/trait.Handler.html' title='iron::middleware::Handler'>Handler</a>, S: <a class='trait' href='http://doc.rust-lang.org/nightly/core/str/trait.Str.html' title='core::str::Str'>Str</a>&gt;(&amp;mut self, glob: S, handler: H) -&gt; &amp;mut <a class='struct' href='../router/struct.Router.html' title='router::Router'>Router</a></code></h4>
+</div><h4 id='method.head' class='method'><code>fn <a href='#method.head' class='fnname'>head</a>&lt;H: <a class='trait' href='../iron/middleware/trait.Handler.html' title='iron::middleware::Handler'>Handler</a>, S: <a class='trait' href='http://doc.rust-lang.org/nightly/core/convert/trait.AsRef.html' title='core::convert::AsRef'>AsRef</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>&gt;&gt;(&amp;mut self, glob: S, handler: H) -&gt; &amp;mut <a class='struct' href='../router/struct.Router.html' title='router::Router'>Router</a></code></h4>
 <div class='docblock'><p>Like route, but specialized to the <code>Head</code> method.</p>
-</div><h4 id='method.patch' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.patch' class='fnname'>patch</a>&lt;H: <a class='trait' href='../iron/middleware/trait.Handler.html' title='iron::middleware::Handler'>Handler</a>, S: <a class='trait' href='http://doc.rust-lang.org/nightly/core/str/trait.Str.html' title='core::str::Str'>Str</a>&gt;(&amp;mut self, glob: S, handler: H) -&gt; &amp;mut <a class='struct' href='../router/struct.Router.html' title='router::Router'>Router</a></code></h4>
+</div><h4 id='method.patch' class='method'><code>fn <a href='#method.patch' class='fnname'>patch</a>&lt;H: <a class='trait' href='../iron/middleware/trait.Handler.html' title='iron::middleware::Handler'>Handler</a>, S: <a class='trait' href='http://doc.rust-lang.org/nightly/core/convert/trait.AsRef.html' title='core::convert::AsRef'>AsRef</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>&gt;&gt;(&amp;mut self, glob: S, handler: H) -&gt; &amp;mut <a class='struct' href='../router/struct.Router.html' title='router::Router'>Router</a></code></h4>
 <div class='docblock'><p>Like route, but specialized to the <code>Patch</code> method.</p>
-</div><h4 id='method.options' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.options' class='fnname'>options</a>&lt;H: <a class='trait' href='../iron/middleware/trait.Handler.html' title='iron::middleware::Handler'>Handler</a>, S: <a class='trait' href='http://doc.rust-lang.org/nightly/core/str/trait.Str.html' title='core::str::Str'>Str</a>&gt;(&amp;mut self, glob: S, handler: H) -&gt; &amp;mut <a class='struct' href='../router/struct.Router.html' title='router::Router'>Router</a></code></h4>
+</div><h4 id='method.options' class='method'><code>fn <a href='#method.options' class='fnname'>options</a>&lt;H: <a class='trait' href='../iron/middleware/trait.Handler.html' title='iron::middleware::Handler'>Handler</a>, S: <a class='trait' href='http://doc.rust-lang.org/nightly/core/convert/trait.AsRef.html' title='core::convert::AsRef'>AsRef</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>&gt;&gt;(&amp;mut self, glob: S, handler: H) -&gt; &amp;mut <a class='struct' href='../router/struct.Router.html' title='router::Router'>Router</a></code></h4>
 <div class='docblock'><p>Like route, but specialized to the <code>Options</code> method.</p>
-</div></div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><a class='stability Stable' title='Stable'></a><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/core/marker/trait.Send.html' title='core::marker::Send'>Send</a> for <a class='struct' href='../router/struct.Router.html' title='router::Router'>Router</a></code></h3><div class='impl-items'></div><h3 class='impl'><a class='stability Stable' title='Stable'></a><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/core/marker/trait.Sync.html' title='core::marker::Sync'>Sync</a> for <a class='struct' href='../router/struct.Router.html' title='router::Router'>Router</a></code></h3><div class='impl-items'></div><h3 class='impl'><a class='stability Unmarked' title='No stability level'></a><code>impl Key for <a class='struct' href='../router/struct.Router.html' title='router::Router'>Router</a></code></h3><div class='impl-items'><h4 id='assoc_type.Value' class='type'><a class='stability Unmarked' title='No stability level'></a><code>type Value = <a class='struct' href='../router/struct.Params.html' title='router::Params'>Params</a></code></h4>
-</div><h3 class='impl'><a class='stability Unmarked' title='No stability level'></a><code>impl <a class='trait' href='../iron/middleware/trait.Handler.html' title='iron::middleware::Handler'>Handler</a> for <a class='struct' href='../router/struct.Router.html' title='router::Router'>Router</a></code></h3><div class='impl-items'><h4 id='method.handle' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.handle' class='fnname'>handle</a>(&amp;self, req: &amp;mut <a class='struct' href='../iron/request/struct.Request.html' title='iron::request::Request'>Request</a>) -&gt; <a class='type' href='../iron/type.IronResult.html' title='iron::IronResult'>IronResult</a>&lt;<a class='struct' href='../iron/response/struct.Response.html' title='iron::response::Response'>Response</a>&gt;</code></h4>
+</div></div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><code>impl <a class='trait' href='../typemap/trait.Key.html' title='typemap::Key'>Key</a> for <a class='struct' href='../router/struct.Router.html' title='router::Router'>Router</a></code></h3><div class='impl-items'><h4 id='assoc_type.Value' class='type'><code>type Value = <a class='struct' href='../router/struct.Params.html' title='router::Params'>Params</a></code></h4>
+</div><h3 class='impl'><code>impl <a class='trait' href='../iron/middleware/trait.Handler.html' title='iron::middleware::Handler'>Handler</a> for <a class='struct' href='../router/struct.Router.html' title='router::Router'>Router</a></code></h3><div class='impl-items'><h4 id='method.handle' class='method'><code>fn <a href='../iron/middleware/trait.Handler.html#method.handle' class='fnname'>handle</a>(&amp;self, req: &amp;mut <a class='struct' href='../iron/request/struct.Request.html' title='iron::request::Request'>Request</a>) -&gt; <a class='type' href='../iron/type.IronResult.html' title='iron::IronResult'>IronResult</a>&lt;<a class='struct' href='../iron/response/struct.Response.html' title='iron::response::Response'>Response</a>&gt;</code></h4>
 </div></section>
     <section id='search' class="content hidden"></section>
 
@@ -131,17 +124,14 @@ authorized for this route before handling it.</p>
                 <code>trait</code>, <code>typedef</code> (or
                 <code>tdef</code>).
             </p>
+            <p>
+                Search functions by type signature (e.g.
+                <code>vec -> usize</code>)
+            </p>
         </div>
     </div>
 
-    <section class="content footer">
-    <div style="text-align: right;">
-        <a style="color: #428bca;" href="https://github.com/reem">@reem</a>
-        <a style="color: #428bca;" href="https://github.com/zzmp">@zzmp</a>
-    </div>
-</section>
-
-
+    
 
     <script>
         window.rootPath = "../";

@@ -12,10 +12,7 @@
     <link rel="stylesheet" type="text/css" href="../../main.css">
 
     <link rel="shortcut icon" href="https://avatars0.githubusercontent.com/u/7853871?s=256">
-    <link href='http://fonts.googleapis.com/css?family=Questrial|Alegreya+Sans+SC:400,900|Bilbo|Abel' rel='stylesheet' type='text/css'>
-<link href='http://fonts.googleapis.com/css?family=Alegreya+Sans+SC:400,900|Alegreya+Sans' rel='stylesheet' type='text/css'>
-
-
+    
 </head>
 <body class="rustdoc">
     <!--[if lte IE 8]>
@@ -25,13 +22,7 @@
     </div>
     <![endif]-->
 
-    <div style="float: right;">
-    <a style="font-size: 2em; font-family: 'Alegreya Sans SC', 'Helvetica Neue', Arial, Tahoma, Verdana, sans-serif; font-weight: 400; margin: 0;" href="http://ironframework.io/">
-        IRON
-    </a>
-</div>
-
-
+    
 
     <section class="sidebar">
         <a href='../../iron/index.html'><img src='https://avatars0.githubusercontent.com/u/7853871?s=128' alt='' width='100'></a>
@@ -54,8 +45,8 @@
             <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                 [<span class='inner'>&#x2212;</span>]
             </a>
-        </span><a id='src-7033' class='srclink' href='https://hyperium.github.io/hyper/hyper/index.html/hyper/header/common/access_control_allow_headers/struct.AccessControlAllowHeaders.html?gotosrc=7033' title='goto source code'>[src]</a></span></h1>
-<pre class='rust struct'>pub struct AccessControlAllowHeaders(pub <a class='struct' href='http://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;UniCase&lt;<a class='struct' href='http://doc.rust-lang.org/nightly/collections/string/struct.String.html' title='collections::string::String'>String</a>&gt;&gt;);</pre><div class='docblock'><p><code>Access-Control-Allow-Headers</code> header, part of
+        </span><a id='src-7033' class='srclink' href='../../hyper/header/common/access_control_allow_headers/struct.AccessControlAllowHeaders.html?gotosrc=7033' title='goto source code'>[src]</a></span></h1>
+<pre class='rust struct'>pub struct AccessControlAllowHeaders(pub <a class='struct' href='http://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;<a class='struct' href='../../unicase/struct.UniCase.html' title='unicase::UniCase'>UniCase</a>&lt;<a class='struct' href='http://doc.rust-lang.org/nightly/collections/string/struct.String.html' title='collections::string::String'>String</a>&gt;&gt;);</pre><div class='docblock'><p><code>Access-Control-Allow-Headers</code> header, part of
 <a href="http://www.w3.org/TR/cors/#access-control-allow-headers-response-header">CORS</a></p>
 
 <p>The <code>Access-Control-Allow-Headers</code> header indicates, as part of the
@@ -72,7 +63,7 @@ during the actual request.</p>
 <ul>
 <li><code>accept-language, date</code></li>
 </ul>
-</div><h2 id='deref-methods'>Methods from <a class='trait' href='http://doc.rust-lang.org/nightly/core/ops/trait.Deref.html' title='core::ops::Deref'>Deref</a>&lt;Target=<a class='struct' href='http://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;UniCase&lt;<a class='struct' href='http://doc.rust-lang.org/nightly/collections/string/struct.String.html' title='collections::string::String'>String</a>&gt;&gt;&gt;</h2><div class='impl-items'><h4 id='method.new' class='method'><code>fn <a href='#method.new' class='fnname'>new</a>() -&gt; <a class='struct' href='http://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;T&gt;</code></h4>
+</div><h2 id='deref-methods'>Methods from <a class='trait' href='http://doc.rust-lang.org/nightly/core/ops/trait.Deref.html' title='core::ops::Deref'>Deref</a>&lt;Target=<a class='struct' href='http://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;<a class='struct' href='../../unicase/struct.UniCase.html' title='unicase::UniCase'>UniCase</a>&lt;<a class='struct' href='http://doc.rust-lang.org/nightly/collections/string/struct.String.html' title='collections::string::String'>String</a>&gt;&gt;&gt;</h2><div class='impl-items'><h4 id='method.new' class='method'><code>fn <a href='#method.new' class='fnname'>new</a>() -&gt; <a class='struct' href='http://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;T&gt;</code></h4>
 <div class='docblock'><p>Constructs a new, empty <code>Vec&lt;T&gt;</code>.</p>
 
 <p>The vector will not allocate until elements are pushed onto it.</p>
@@ -482,9 +473,9 @@ it to this <code>Vec</code>. The <code>other</code> vector is traversed in-order
 
 <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>vec</span>, [<span class='number'>1</span>, <span class='number'>2</span>, <span class='number'>3</span>, <span class='number'>2</span>]);
 </pre>
-</div></div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/core/ops/trait.Deref.html' title='core::ops::Deref'>Deref</a> for <a class='struct' href='../../iron/headers/struct.AccessControlAllowHeaders.html' title='iron::headers::AccessControlAllowHeaders'>AccessControlAllowHeaders</a></code></h3><div class='impl-items'><h4 id='assoc_type.Target' class='type'><code>type Target = <a class='struct' href='http://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;UniCase&lt;<a class='struct' href='http://doc.rust-lang.org/nightly/collections/string/struct.String.html' title='collections::string::String'>String</a>&gt;&gt;</code></h4>
-<h4 id='method.deref' class='method'><code>fn <a href='http://doc.rust-lang.org/nightly/core/ops/trait.Deref.html#method.deref' class='fnname'>deref</a>(&amp;'a self) -&gt; &amp;'a <a class='struct' href='http://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;UniCase&lt;<a class='struct' href='http://doc.rust-lang.org/nightly/collections/string/struct.String.html' title='collections::string::String'>String</a>&gt;&gt;</code></h4>
-</div><h3 class='impl'><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/core/ops/trait.DerefMut.html' title='core::ops::DerefMut'>DerefMut</a> for <a class='struct' href='../../iron/headers/struct.AccessControlAllowHeaders.html' title='iron::headers::AccessControlAllowHeaders'>AccessControlAllowHeaders</a></code></h3><div class='impl-items'><h4 id='method.deref_mut' class='method'><code>fn <a href='http://doc.rust-lang.org/nightly/core/ops/trait.DerefMut.html#method.deref_mut' class='fnname'>deref_mut</a>(&amp;'a mut self) -&gt; &amp;'a mut <a class='struct' href='http://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;UniCase&lt;<a class='struct' href='http://doc.rust-lang.org/nightly/collections/string/struct.String.html' title='collections::string::String'>String</a>&gt;&gt;</code></h4>
+</div></div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/core/ops/trait.Deref.html' title='core::ops::Deref'>Deref</a> for <a class='struct' href='../../iron/headers/struct.AccessControlAllowHeaders.html' title='iron::headers::AccessControlAllowHeaders'>AccessControlAllowHeaders</a></code></h3><div class='impl-items'><h4 id='assoc_type.Target' class='type'><code>type Target = <a class='struct' href='http://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;<a class='struct' href='../../unicase/struct.UniCase.html' title='unicase::UniCase'>UniCase</a>&lt;<a class='struct' href='http://doc.rust-lang.org/nightly/collections/string/struct.String.html' title='collections::string::String'>String</a>&gt;&gt;</code></h4>
+<h4 id='method.deref' class='method'><code>fn <a href='http://doc.rust-lang.org/nightly/core/ops/trait.Deref.html#method.deref' class='fnname'>deref</a>(&amp;'a self) -&gt; &amp;'a <a class='struct' href='http://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;<a class='struct' href='../../unicase/struct.UniCase.html' title='unicase::UniCase'>UniCase</a>&lt;<a class='struct' href='http://doc.rust-lang.org/nightly/collections/string/struct.String.html' title='collections::string::String'>String</a>&gt;&gt;</code></h4>
+</div><h3 class='impl'><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/core/ops/trait.DerefMut.html' title='core::ops::DerefMut'>DerefMut</a> for <a class='struct' href='../../iron/headers/struct.AccessControlAllowHeaders.html' title='iron::headers::AccessControlAllowHeaders'>AccessControlAllowHeaders</a></code></h3><div class='impl-items'><h4 id='method.deref_mut' class='method'><code>fn <a href='http://doc.rust-lang.org/nightly/core/ops/trait.DerefMut.html#method.deref_mut' class='fnname'>deref_mut</a>(&amp;'a mut self) -&gt; &amp;'a mut <a class='struct' href='http://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;<a class='struct' href='../../unicase/struct.UniCase.html' title='unicase::UniCase'>UniCase</a>&lt;<a class='struct' href='http://doc.rust-lang.org/nightly/collections/string/struct.String.html' title='collections::string::String'>String</a>&gt;&gt;</code></h4>
 </div><h3 class='impl'><code>impl <a class='trait' href='../../iron/headers/trait.Header.html' title='iron::headers::Header'>Header</a> for <a class='struct' href='../../iron/headers/struct.AccessControlAllowHeaders.html' title='iron::headers::AccessControlAllowHeaders'>AccessControlAllowHeaders</a></code></h3><div class='impl-items'><h4 id='method.header_name' class='method'><code>fn <a href='../../iron/headers/trait.Header.html#method.header_name' class='fnname'>header_name</a>() -&gt; &amp;'static <a href='http://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a></code></h4>
 <h4 id='method.parse_header' class='method'><code>fn <a href='../../iron/headers/trait.Header.html#method.parse_header' class='fnname'>parse_header</a>(raw: <a href='http://doc.rust-lang.org/nightly/std/primitive.slice.html'>&amp;[</a><a class='struct' href='http://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a>&gt;<a href='http://doc.rust-lang.org/nightly/std/primitive.slice.html'>]</a>) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='struct' href='../../iron/headers/struct.AccessControlAllowHeaders.html' title='iron::headers::AccessControlAllowHeaders'>AccessControlAllowHeaders</a>&gt;</code></h4>
 </div><h3 class='impl'><code>impl <a class='trait' href='../../iron/headers/trait.HeaderFormat.html' title='iron::headers::HeaderFormat'>HeaderFormat</a> for <a class='struct' href='../../iron/headers/struct.AccessControlAllowHeaders.html' title='iron::headers::AccessControlAllowHeaders'>AccessControlAllowHeaders</a></code></h3><div class='impl-items'><h4 id='method.fmt_header' class='method'><code>fn <a href='../../iron/headers/trait.HeaderFormat.html#method.fmt_header' class='fnname'>fmt_header</a>(&amp;self, f: &amp;mut <a class='struct' href='http://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html' title='core::fmt::Formatter'>Formatter</a>) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.tuple.html'>()</a>, <a class='struct' href='http://doc.rust-lang.org/nightly/core/fmt/struct.Error.html' title='core::fmt::Error'>Error</a>&gt;</code></h4>
@@ -534,14 +525,7 @@ it to this <code>Vec</code>. The <code>other</code> vector is traversed in-order
         </div>
     </div>
 
-    <section class="content footer">
-    <div style="text-align: right;">
-        <a style="color: #428bca;" href="https://github.com/reem">@reem</a>
-        <a style="color: #428bca;" href="https://github.com/zzmp">@zzmp</a>
-    </div>
-</section>
-
-
+    
 
     <script>
         window.rootPath = "../../";

@@ -12,10 +12,7 @@
     <link rel="stylesheet" type="text/css" href="../main.css">
 
     <link rel="shortcut icon" href="https://avatars0.githubusercontent.com/u/7853871?s=256">
-    <link href='http://fonts.googleapis.com/css?family=Questrial|Alegreya+Sans+SC:400,900|Bilbo|Abel' rel='stylesheet' type='text/css'>
-<link href='http://fonts.googleapis.com/css?family=Alegreya+Sans+SC:400,900|Alegreya+Sans' rel='stylesheet' type='text/css'>
-
-
+    
 </head>
 <body class="rustdoc">
     <!--[if lte IE 8]>
@@ -25,13 +22,7 @@
     </div>
     <![endif]-->
 
-    <div style="float: right;">
-    <a style="font-size: 2em; font-family: 'Alegreya Sans SC', 'Helvetica Neue', Arial, Tahoma, Verdana, sans-serif; font-weight: 400; margin: 0;" href="http://ironframework.io/">
-        IRON
-    </a>
-</div>
-
-
+    
 
     <section class="sidebar">
         <a href='../iron/index.html'><img src='https://avatars0.githubusercontent.com/u/7853871?s=128' alt='' width='100'></a>
@@ -57,7 +48,7 @@
         </span><a id='src-1658' class='srclink' href='../src/iron/request/url.rs.html#11-52' title='goto source code'>[src]</a></span></h1>
 <pre class='rust struct'>pub struct Url {
     pub scheme: <a class='struct' href='http://doc.rust-lang.org/nightly/collections/string/struct.String.html' title='collections::string::String'>String</a>,
-    pub host: Host,
+    pub host: <a class='enum' href='../url/host/enum.Host.html' title='url::host::Host'>Host</a>,
     pub port: <a href='http://doc.rust-lang.org/nightly/std/primitive.u16.html'>u16</a>,
     pub path: <a class='struct' href='http://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;<a class='struct' href='http://doc.rust-lang.org/nightly/collections/string/struct.String.html' title='collections::string::String'>String</a>&gt;,
     pub username: <a class='enum' href='http://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='struct' href='http://doc.rust-lang.org/nightly/collections/string/struct.String.html' title='collections::string::String'>String</a>&gt;,
@@ -107,9 +98,9 @@ Otherwise, a possibly empty, percent encoded string.</p>
 <p>HTTP and HTTPS are relative schemes.</p>
 
 <p>See: <a href="http://url.spec.whatwg.org/#relative-scheme">http://url.spec.whatwg.org/#relative-scheme</a></p>
-</div><h4 id='method.from_generic_url' class='method'><code>fn <a href='#method.from_generic_url' class='fnname'>from_generic_url</a>(raw_url: Url) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a class='struct' href='../iron/struct.Url.html' title='iron::Url'>Url</a>, <a class='struct' href='http://doc.rust-lang.org/nightly/collections/string/struct.String.html' title='collections::string::String'>String</a>&gt;</code></h4>
+</div><h4 id='method.from_generic_url' class='method'><code>fn <a href='#method.from_generic_url' class='fnname'>from_generic_url</a>(raw_url: <a class='struct' href='../url/struct.Url.html' title='url::Url'>Url</a>) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a class='struct' href='../iron/struct.Url.html' title='iron::Url'>Url</a>, <a class='struct' href='http://doc.rust-lang.org/nightly/collections/string/struct.String.html' title='collections::string::String'>String</a>&gt;</code></h4>
 <div class='docblock'><p>Create a <code>Url</code> from a <code>rust-url</code> <code>Url</code>.</p>
-</div><h4 id='method.into_generic_url' class='method'><code>fn <a href='#method.into_generic_url' class='fnname'>into_generic_url</a>(self) -&gt; Url</code></h4>
+</div><h4 id='method.into_generic_url' class='method'><code>fn <a href='#method.into_generic_url' class='fnname'>into_generic_url</a>(self) -&gt; <a class='struct' href='../url/struct.Url.html' title='url::Url'>Url</a></code></h4>
 <div class='docblock'><p>Create a <code>rust-url</code> <code>Url</code> from a <code>Url</code>.</p>
 </div></div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/core/fmt/trait.Display.html' title='core::fmt::Display'>Display</a> for <a class='struct' href='../iron/struct.Url.html' title='iron::Url'>Url</a></code></h3><div class='impl-items'><h4 id='method.fmt' class='method'><code>fn <a href='http://doc.rust-lang.org/nightly/core/fmt/trait.Display.html#method.fmt' class='fnname'>fmt</a>(&amp;self, formatter: &amp;mut <a class='struct' href='http://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html' title='core::fmt::Formatter'>Formatter</a>) -&gt; <a class='type' href='http://doc.rust-lang.org/nightly/core/fmt/type.Result.html' title='core::fmt::Result'>Result</a></code></h4>
 </div><h3 id='derived_implementations'>Derived Implementations </h3><h3 class='impl'><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html' title='core::fmt::Debug'>Debug</a> for <a class='struct' href='../iron/struct.Url.html' title='iron::Url'>Url</a></code></h3><div class='impl-items'><h4 id='method.fmt' class='method'><code>fn <a href='http://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html#method.fmt' class='fnname'>fmt</a>(&amp;self, __arg_0: &amp;mut <a class='struct' href='http://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html' title='core::fmt::Formatter'>Formatter</a>) -&gt; <a class='type' href='http://doc.rust-lang.org/nightly/core/fmt/type.Result.html' title='core::fmt::Result'>Result</a></code></h4>
@@ -157,14 +148,7 @@ Otherwise, a possibly empty, percent encoded string.</p>
         </div>
     </div>
 
-    <section class="content footer">
-    <div style="text-align: right;">
-        <a style="color: #428bca;" href="https://github.com/reem">@reem</a>
-        <a style="color: #428bca;" href="https://github.com/zzmp">@zzmp</a>
-    </div>
-</section>
-
-
+    
 
     <script>
         window.rootPath = "../";
