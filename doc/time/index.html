@@ -43,8 +43,22 @@
     <section id='main' class="content mod">
 <h1 class='fqn'><span class='in-band'>Crate <a class='mod' href=''>time</a><wbr></span><span class='out-of-band'><a href='stability.html'>[stability]</a> <span id='render-detail'>
             <a id="collapse-all" href="#">[-]</a>&nbsp;<a id="expand-all" href="#">[+]</a>
-        </span><a id='src-0' href='../src/time/lib.rs.html#11-1545'>[src]</a></span></h1>
+        </span><a id='src-0' href='../src/time/lib.rs.html#11-1553'>[src]</a></span></h1>
 <div class='docblock'><p>Simple time handling.</p>
+
+<h1 id="usage" class='section-header'><a
+                           href="#usage">Usage</a></h1>
+<p>This crate is <a href="https://crates.io/crates/time">on crates.io</a> and can be
+used by adding <code>time</code> to the dependencies in your project&#39;s <code>Cargo.toml</code>.</p>
+
+<pre><code class="language-toml">[dependencies]
+time = &quot;0.1&quot;
+</code></pre>
+
+<p>And this in your crate root:</p>
+<pre id='rust-example-rendered' class='rust '>
+<span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>time</span>;
+</pre>
 </div><h2 id='structs' class='section-header'><a href="#structs">Structs</a></h2>
 <table>
                     <tr>
@@ -72,7 +86,8 @@ This also allows for the negative duration; see individual methods for details.<
                     <tr>
                         <td><a class='stability Unmarked' title='No stability level'></a><a class='struct' href='struct.Timespec.html'
                                title='time::Timespec'>Timespec</a></td>
-                        <td class='docblock short'><p>A record specifying a time value in seconds and nanoseconds.</p>
+                        <td class='docblock short'><p>A record specifying a time value in seconds and nanoseconds, where
+nanoseconds represent the offset from the given second.</p>
 </td>
                     </tr>
                 

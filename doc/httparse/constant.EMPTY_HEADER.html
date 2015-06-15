@@ -43,8 +43,15 @@
     <section id='main' class="content constant">
 <h1 class='fqn'><span class='in-band'><a href='index.html'>httparse</a>::<wbr><a class='constant' href=''>EMPTY_HEADER</a><wbr></span><span class='out-of-band'><span id='render-detail'>
             <a id="collapse-all" href="#">[-]</a>&nbsp;<a id="expand-all" href="#">[+]</a>
-        </span><a id='src-1823' href='../src/httparse/lib.rs.html#235'>[src]</a></span></h1>
-<pre class='rust const'>pub const EMPTY_HEADER: <a class='struct' href='../httparse/struct.Header.html' title='httparse::Header'>Header</a>&lt;'static&gt;<code> = </code><code>Header { name: "", value: b"" }</code></pre></section>
+        </span><a id='src-2289' href='../src/httparse/lib.rs.html#291'>[src]</a></span></h1>
+<pre class='rust const'>pub const EMPTY_HEADER: <a class='struct' href='../httparse/struct.Header.html' title='httparse::Header'>Header</a>&lt;'static&gt;<code> = </code><code>Header { name: "", value: b"" }</code></pre><div class='docblock'><p>An empty header, useful for constructing a <code>Header</code> array to pass in for
+parsing.</p>
+
+<h1 id="example" class='section-header'><a
+                           href="#example">Example</a></h1><pre id='rust-example-rendered' class='rust '>
+<span class='kw'>let</span> <span class='ident'>headers</span> <span class='op'>=</span> [<span class='ident'>httparse</span>::<span class='ident'>EMPTY_HEADER</span>; <span class='number'>64</span>];
+</pre>
+</div></section>
     <section id='search' class="content hidden"></section>
 
     <section class="footer"></section>

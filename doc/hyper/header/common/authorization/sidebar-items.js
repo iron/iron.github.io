@@ -1,1 +1,1 @@
-initSidebarItems({"trait":[["Scheme","An Authorization scheme to be used in the header."]],"struct":[["Authorization","`Authorization` header, defined in RFC7235"],["Basic","Credential holder for Basic Authentication"]]});
+initSidebarItems({"struct":[["Authorization","`Authorization` header, defined in RFC7235"],["Basic","Credential holder for Basic Authentication"]],"trait":[["Scheme","An Authorization scheme to be used in the header."]]});

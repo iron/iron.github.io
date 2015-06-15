@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/url-0.2.34/src/lib.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/url-0.2.35/src/lib.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>lib.rs.html -- source</title>
@@ -1064,12 +1064,6 @@
 <span id="1022">1022</span>
 <span id="1023">1023</span>
 <span id="1024">1024</span>
-<span id="1025">1025</span>
-<span id="1026">1026</span>
-<span id="1027">1027</span>
-<span id="1028">1028</span>
-<span id="1029">1029</span>
-<span id="1030">1030</span>
 </pre><pre class='rust '>
 <span class='comment'>// Copyright 2013-2015 Simon Sapin.</span>
 <span class='comment'>//</span>
@@ -1197,7 +1191,6 @@ assert!(css_url.serialize() == &quot;http://servo.github.io/rust-url/main.css&qu
 <span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>matches</span>;
 
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>fmt</span>::{<span class='self'>self</span>, <span class='ident'>Formatter</span>};
-<span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>hash</span>;
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>str</span>;
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>path</span>::{<span class='ident'>Path</span>, <span class='ident'>PathBuf</span>};
 
@@ -1223,7 +1216,7 @@ assert!(css_url.serialize() == &quot;http://servo.github.io/rust-url/main.css&qu
 
 
 <span class='doccomment'>/// The parsed representation of an absolute URL.</span>
-<span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>PartialEq</span>, <span class='ident'>Eq</span>, <span class='ident'>Clone</span>, <span class='ident'>Debug</span>)]</span>
+<span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>PartialEq</span>, <span class='ident'>Eq</span>, <span class='ident'>Clone</span>, <span class='ident'>Debug</span>, <span class='ident'>Hash</span>, <span class='ident'>PartialOrd</span>, <span class='ident'>Ord</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>Url</span> {
     <span class='doccomment'>/// The scheme (a.k.a. protocol) of the URL, in ASCII lower case.</span>
     <span class='kw'>pub</span> <span class='ident'>scheme</span>: <span class='ident'>String</span>,
@@ -1254,7 +1247,7 @@ assert!(css_url.serialize() == &quot;http://servo.github.io/rust-url/main.css&qu
 }
 
 <span class='doccomment'>/// The components of the URL whose representation depends on where the scheme is *relative*.</span>
-<span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>PartialEq</span>, <span class='ident'>Eq</span>, <span class='ident'>Clone</span>, <span class='ident'>Debug</span>)]</span>
+<span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>PartialEq</span>, <span class='ident'>Eq</span>, <span class='ident'>Clone</span>, <span class='ident'>Debug</span>, <span class='ident'>Hash</span>, <span class='ident'>PartialOrd</span>, <span class='ident'>Ord</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>enum</span> <span class='ident'>SchemeData</span> {
     <span class='doccomment'>/// Components for URLs in a *relative* scheme such as HTTP.</span>
     <span class='ident'>Relative</span>(<span class='ident'>RelativeSchemeData</span>),
@@ -1268,7 +1261,7 @@ assert!(css_url.serialize() == &quot;http://servo.github.io/rust-url/main.css&qu
 }
 
 <span class='doccomment'>/// Components for URLs in a *relative* scheme such as HTTP.</span>
-<span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>PartialEq</span>, <span class='ident'>Eq</span>, <span class='ident'>Clone</span>, <span class='ident'>Debug</span>)]</span>
+<span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>PartialEq</span>, <span class='ident'>Eq</span>, <span class='ident'>Clone</span>, <span class='ident'>Debug</span>, <span class='ident'>Hash</span>, <span class='ident'>PartialOrd</span>, <span class='ident'>Ord</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>RelativeSchemeData</span> {
     <span class='doccomment'>/// The username of the URL, as a possibly empty, percent-encoded string.</span>
     <span class='doccomment'>///</span>
@@ -1307,11 +1300,6 @@ assert!(css_url.serialize() == &quot;http://servo.github.io/rust-url/main.css&qu
     <span class='kw'>pub</span> <span class='ident'>path</span>: <span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>String</span><span class='op'>&gt;</span>,
 }
 
-<span class='kw'>impl</span> <span class='ident'>hash</span>::<span class='ident'>Hash</span> <span class='kw'>for</span> <span class='ident'>Url</span> {
-    <span class='kw'>fn</span> <span class='ident'>hash</span><span class='op'>&lt;</span><span class='ident'>H</span>: <span class='ident'>hash</span>::<span class='ident'>Hasher</span><span class='op'>&gt;</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>state</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>H</span>) {
-        <span class='self'>self</span>.<span class='ident'>serialize</span>().<span class='ident'>hash</span>(<span class='ident'>state</span>)
-    }
-}
 
 <span class='kw'>impl</span> <span class='ident'>str</span>::<span class='ident'>FromStr</span> <span class='kw'>for</span> <span class='ident'>Url</span> {
     <span class='kw'>type</span> <span class='prelude-val'>Err</span> <span class='op'>=</span> <span class='ident'>ParseError</span>;
@@ -1478,7 +1466,7 @@ assert!(css_url.serialize() == &quot;http://servo.github.io/rust-url/main.css&qu
 
 
 <span class='doccomment'>/// Determines the behavior of the URL parser for a given scheme.</span>
-<span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>PartialEq</span>, <span class='ident'>Eq</span>, <span class='ident'>Copy</span>, <span class='ident'>Debug</span>, <span class='ident'>Clone</span>)]</span>
+<span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>PartialEq</span>, <span class='ident'>Eq</span>, <span class='ident'>Copy</span>, <span class='ident'>Debug</span>, <span class='ident'>Clone</span>, <span class='ident'>Hash</span>, <span class='ident'>PartialOrd</span>, <span class='ident'>Ord</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>enum</span> <span class='ident'>SchemeType</span> {
     <span class='doccomment'>/// Indicate that the scheme is *non-relative*.</span>
     <span class='doccomment'>///</span>

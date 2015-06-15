@@ -1,1 +1,1 @@
-initSidebarItems({"mod":[["nfa",""]],"struct":[["Match",""],["Params",""],["Router",""]]});
+initSidebarItems({"struct":[["Match",""],["Params",""],["Router",""]],"mod":[["nfa",""]]});

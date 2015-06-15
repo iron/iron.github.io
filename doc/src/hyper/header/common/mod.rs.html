@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/hyper-0.5.0/src/header/common/mod.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/hyper-0.5.2/src/header/common/mod.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>mod.rs.html -- source</title>
@@ -417,7 +417,7 @@
 <span class='kw'>pub</span> <span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>accept_charset</span>::<span class='ident'>AcceptCharset</span>;
 <span class='kw'>pub</span> <span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>accept_encoding</span>::<span class='ident'>AcceptEncoding</span>;
 <span class='kw'>pub</span> <span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>accept_language</span>::<span class='ident'>AcceptLanguage</span>;
-<span class='kw'>pub</span> <span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>accept_ranges</span>::<span class='ident'>AcceptRanges</span>;
+<span class='kw'>pub</span> <span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>accept_ranges</span>::{<span class='ident'>AcceptRanges</span>, <span class='ident'>RangeUnit</span>};
 <span class='kw'>pub</span> <span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>allow</span>::<span class='ident'>Allow</span>;
 <span class='kw'>pub</span> <span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>authorization</span>::{<span class='ident'>Authorization</span>, <span class='ident'>Scheme</span>, <span class='ident'>Basic</span>};
 <span class='kw'>pub</span> <span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>cache_control</span>::{<span class='ident'>CacheControl</span>, <span class='ident'>CacheDirective</span>};
@@ -529,12 +529,12 @@
             <span class='kw'>let</span> <span class='ident'>result_cmp</span>: <span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>String</span><span class='op'>&gt;</span> <span class='op'>=</span> <span class='ident'>result</span>
                 .<span class='ident'>to_ascii_lowercase</span>()
                 .<span class='ident'>split</span>(<span class='string'>&#39; &#39;</span>)
-                .<span class='ident'>map</span>(<span class='op'>|</span><span class='ident'>x</span><span class='op'>|</span> <span class='ident'>x</span>.<span class='ident'>to_string</span>())
+                .<span class='ident'>map</span>(<span class='op'>|</span><span class='ident'>x</span><span class='op'>|</span> <span class='ident'>x</span>.<span class='ident'>to_owned</span>())
                 .<span class='ident'>collect</span>();
             <span class='kw'>let</span> <span class='ident'>expected_cmp</span>: <span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>String</span><span class='op'>&gt;</span> <span class='op'>=</span> <span class='ident'>expected</span>
                 .<span class='ident'>to_ascii_lowercase</span>()
                 .<span class='ident'>split</span>(<span class='string'>&#39; &#39;</span>)
-                .<span class='ident'>map</span>(<span class='op'>|</span><span class='ident'>x</span><span class='op'>|</span> <span class='ident'>x</span>.<span class='ident'>to_string</span>())
+                .<span class='ident'>map</span>(<span class='op'>|</span><span class='ident'>x</span><span class='op'>|</span> <span class='ident'>x</span>.<span class='ident'>to_owned</span>())
                 .<span class='ident'>collect</span>();
             <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>result_cmp</span>.<span class='ident'>concat</span>(), <span class='ident'>expected_cmp</span>.<span class='ident'>concat</span>());
         }
