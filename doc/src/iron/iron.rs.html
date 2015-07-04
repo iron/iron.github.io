@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/iron-0.1.19/src/iron.rs`.">
+    <meta name="description" content="Source to the Rust file `src/iron.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>iron.rs.html -- source</title>
@@ -212,11 +212,21 @@
 <span id="170">170</span>
 <span id="171">171</span>
 <span id="172">172</span>
+<span id="173">173</span>
+<span id="174">174</span>
+<span id="175">175</span>
+<span id="176">176</span>
+<span id="177">177</span>
+<span id="178">178</span>
+<span id="179">179</span>
+<span id="180">180</span>
+<span id="181">181</span>
 </pre><pre class='rust '>
 <span class='doccomment'>//! Exposes the `Iron` type, the main entrance point of the</span>
 <span class='doccomment'>//! `Iron` library.</span>
 
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>net</span>::{<span class='ident'>ToSocketAddrs</span>, <span class='ident'>SocketAddr</span>};
+<span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;ssl&quot;</span>)]</span>
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>path</span>::<span class='ident'>PathBuf</span>;
 
 <span class='kw'>pub</span> <span class='kw'>use</span> <span class='ident'>hyper</span>::<span class='ident'>server</span>::<span class='ident'>Listening</span>;
@@ -254,6 +264,7 @@
     <span class='doccomment'>/// Plaintext HTTP/1</span>
     <span class='ident'>Http</span>,
     <span class='doccomment'>/// HTTP/1 over SSL/TLS</span>
+    <span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;ssl&quot;</span>)]</span>
     <span class='ident'>Https</span> {
         <span class='doccomment'>/// Path to SSL certificate file</span>
         <span class='ident'>certificate</span>: <span class='ident'>PathBuf</span>,
@@ -267,6 +278,7 @@
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>name</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;static</span> <span class='ident'>str</span> {
         <span class='kw'>match</span> <span class='op'>*</span><span class='self'>self</span> {
             <span class='ident'>Protocol</span>::<span class='ident'>Http</span> <span class='op'>=&gt;</span> <span class='string'>&quot;http&quot;</span>,
+            <span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;ssl&quot;</span>)]</span>
             <span class='ident'>Protocol</span>::<span class='ident'>Https</span> { .. } <span class='op'>=&gt;</span> <span class='string'>&quot;https&quot;</span>
         }
     }
@@ -307,6 +319,7 @@
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// Panics if the provided address does not parse. To avoid this</span>
     <span class='doccomment'>/// call `to_socket_addrs` yourself and pass a parsed `SocketAddr`.</span>
+    <span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;ssl&quot;</span>)]</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>https</span><span class='op'>&lt;</span><span class='ident'>A</span>: <span class='ident'>ToSocketAddrs</span><span class='op'>&gt;</span>(<span class='self'>self</span>, <span class='ident'>addr</span>: <span class='ident'>A</span>, <span class='ident'>certificate</span>: <span class='ident'>PathBuf</span>, <span class='ident'>key</span>: <span class='ident'>PathBuf</span>)
                                    <span class='op'>-&gt;</span> <span class='ident'>HttpResult</span><span class='op'>&lt;</span><span class='ident'>Listening</span><span class='op'>&gt;</span> {
         <span class='self'>self</span>.<span class='ident'>listen_with</span>(<span class='ident'>addr</span>, <span class='number'>2</span> <span class='op'>*</span> ::<span class='ident'>num_cpus</span>::<span class='ident'>get</span>(),
@@ -328,13 +341,18 @@
 
         <span class='self'>self</span>.<span class='ident'>protocol</span> <span class='op'>=</span> <span class='prelude-val'>Some</span>(<span class='ident'>protocol</span>.<span class='ident'>clone</span>());
 
-        <span class='kw'>let</span> <span class='ident'>server</span> <span class='op'>=</span> <span class='kw'>match</span> <span class='ident'>protocol</span> {
-            <span class='ident'>Protocol</span>::<span class='ident'>Http</span> <span class='op'>=&gt;</span> <span class='ident'>Server</span>::<span class='ident'>http</span>(<span class='self'>self</span>),
-            <span class='ident'>Protocol</span>::<span class='ident'>Https</span> { <span class='kw-2'>ref</span> <span class='ident'>certificate</span>, <span class='kw-2'>ref</span> <span class='ident'>key</span> } <span class='op'>=&gt;</span>
-                <span class='ident'>Server</span>::<span class='ident'>https</span>(<span class='self'>self</span>, <span class='ident'>certificate</span>, <span class='ident'>key</span>)
-        };
+        <span class='kw'>match</span> <span class='ident'>protocol</span> {
+            <span class='ident'>Protocol</span>::<span class='ident'>Http</span> <span class='op'>=&gt;</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>Server</span>::<span class='ident'>http</span>(<span class='ident'>sock_addr</span>)).<span class='ident'>handle_threads</span>(<span class='self'>self</span>, <span class='ident'>threads</span>),
 
-        <span class='prelude-val'>Ok</span>(<span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>server</span>.<span class='ident'>listen_threads</span>(<span class='ident'>sock_addr</span>, <span class='ident'>threads</span>)))
+            <span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;ssl&quot;</span>)]</span>
+            <span class='ident'>Protocol</span>::<span class='ident'>Https</span> { <span class='kw-2'>ref</span> <span class='ident'>certificate</span>, <span class='kw-2'>ref</span> <span class='ident'>key</span> } <span class='op'>=&gt;</span> {
+                <span class='kw'>use</span> <span class='ident'>hyper</span>::<span class='ident'>net</span>::<span class='ident'>Openssl</span>;
+
+                <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>Server</span>::<span class='ident'>https</span>(<span class='ident'>sock_addr</span>,
+                                   <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>Openssl</span>::<span class='ident'>with_cert_and_key</span>(<span class='ident'>certificate</span>, <span class='ident'>key</span>))))
+                    .<span class='ident'>handle_threads</span>(<span class='self'>self</span>, <span class='ident'>threads</span>)
+            },
+        }
     }
 
     <span class='doccomment'>/// Instantiate a new instance of `Iron`.</span>
