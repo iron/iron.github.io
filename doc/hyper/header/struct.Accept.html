@@ -45,7 +45,7 @@
             <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                 [<span class='inner'>&#x2212;</span>]
             </a>
-        </span><a id='src-6154' class='srclink' href='../../src/hyper/header/common/mod.rs.html#197' title='goto source code'>[src]</a></span></h1>
+        </span><a id='src-6223' class='srclink' href='../../src/hyper/header/common/mod.rs.html#198' title='goto source code'>[src]</a></span></h1>
 <pre class='rust struct'>pub struct Accept(pub <a class='struct' href='http://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;<a class='struct' href='../../hyper/header/struct.QualityItem.html' title='hyper::header::QualityItem'>QualityItem</a>&lt;<a class='struct' href='../../mime/struct.Mime.html' title='mime::Mime'>Mime</a>&gt;&gt;);</pre><div class='docblock'><p><code>Accept</code> header, defined in <a href="http://tools.ietf.org/html/rfc7231#section-5.3.2">RFC7231</a></p>
 
 <p>The <code>Accept</code> header field can be used by user agents to specify
@@ -107,11 +107,12 @@ accept-ext = OWS &quot;;&quot; OWS token [ &quot;=&quot; ( token / quoted-string
 <span class='ident'>headers</span>.<span class='ident'>set</span>(
     <span class='ident'>Accept</span>(<span class='macro'>vec</span><span class='macro'>!</span>[
         <span class='ident'>qitem</span>(<span class='ident'>Mime</span>(<span class='ident'>TopLevel</span>::<span class='ident'>Text</span>, <span class='ident'>SubLevel</span>::<span class='ident'>Html</span>, <span class='macro'>vec</span><span class='macro'>!</span>[])),
-        <span class='ident'>qitem</span>(<span class='ident'>Mime</span>(<span class='ident'>TopLevel</span>::<span class='ident'>Application</span>, <span class='ident'>SubLevel</span>::<span class='ident'>Ext</span>(<span class='string'>&quot;xhtml+xml&quot;</span>.<span class='ident'>to_owned</span>()), <span class='macro'>vec</span><span class='macro'>!</span>[])),
+        <span class='ident'>qitem</span>(<span class='ident'>Mime</span>(<span class='ident'>TopLevel</span>::<span class='ident'>Application</span>,
+                   <span class='ident'>SubLevel</span>::<span class='ident'>Ext</span>(<span class='string'>&quot;xhtml+xml&quot;</span>.<span class='ident'>to_owned</span>()), <span class='macro'>vec</span><span class='macro'>!</span>[])),
         <span class='ident'>QualityItem</span>::<span class='ident'>new</span>(<span class='ident'>Mime</span>(<span class='ident'>TopLevel</span>::<span class='ident'>Application</span>, <span class='ident'>SubLevel</span>::<span class='ident'>Xml</span>, <span class='macro'>vec</span><span class='macro'>!</span>[]),
                          <span class='ident'>Quality</span>(<span class='number'>900</span>)),
-                         <span class='ident'>qitem</span>(<span class='ident'>Mime</span>(<span class='ident'>TopLevel</span>::<span class='ident'>Image</span>, <span class='ident'>SubLevel</span>::<span class='ident'>Ext</span>(<span class='string'>&quot;webp&quot;</span>.<span class='ident'>to_owned</span>()), <span class='macro'>vec</span><span class='macro'>!</span>[])),
-
+                         <span class='ident'>qitem</span>(<span class='ident'>Mime</span>(<span class='ident'>TopLevel</span>::<span class='ident'>Image</span>,
+                                    <span class='ident'>SubLevel</span>::<span class='ident'>Ext</span>(<span class='string'>&quot;webp&quot;</span>.<span class='ident'>to_owned</span>()), <span class='macro'>vec</span><span class='macro'>!</span>[])),
                          <span class='ident'>QualityItem</span>::<span class='ident'>new</span>(<span class='ident'>Mime</span>(<span class='ident'>TopLevel</span>::<span class='ident'>Star</span>, <span class='ident'>SubLevel</span>::<span class='ident'>Star</span>, <span class='macro'>vec</span><span class='macro'>!</span>[]),
                                           <span class='ident'>Quality</span>(<span class='number'>800</span>))
     ])

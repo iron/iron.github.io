@@ -45,7 +45,7 @@
             <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                 [<span class='inner'>&#x2212;</span>]
             </a>
-        </span><a id='src-846' class='srclink' href='../../src/hyper/client/mod.rs.html#1-460' title='goto source code'>[src]</a></span></h1>
+        </span><a id='src-877' class='srclink' href='../../src/hyper/client/mod.rs.html#1-460' title='goto source code'>[src]</a></span></h1>
 <div class='docblock'><p>HTTP Client</p>
 
 <h1 id="usage" class='section-header'><a
@@ -84,7 +84,7 @@ and make multiple requests simultaneously.</p>
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>sync</span>::<span class='ident'>Arc</span>;
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>thread</span>;
 
-<span class='comment'>// Note: an Arc is used here because `thread::spawn` creates threads that </span>
+<span class='comment'>// Note: an Arc is used here because `thread::spawn` creates threads that</span>
 <span class='comment'>// can outlive the main thread, so we must use reference counting to keep</span>
 <span class='comment'>// the Client alive long enough. Scoped threads could skip the Arc.</span>
 <span class='kw'>let</span> <span class='ident'>client</span> <span class='op'>=</span> <span class='ident'>Arc</span>::<span class='ident'>new</span>(<span class='ident'>Client</span>::<span class='ident'>new</span>());
