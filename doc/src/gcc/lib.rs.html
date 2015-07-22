@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/gcc-0.3.9/src/lib.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/gcc-0.3.10/src/lib.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>lib.rs.html -- source</title>
@@ -538,6 +538,23 @@
 <span id="496">496</span>
 <span id="497">497</span>
 <span id="498">498</span>
+<span id="499">499</span>
+<span id="500">500</span>
+<span id="501">501</span>
+<span id="502">502</span>
+<span id="503">503</span>
+<span id="504">504</span>
+<span id="505">505</span>
+<span id="506">506</span>
+<span id="507">507</span>
+<span id="508">508</span>
+<span id="509">509</span>
+<span id="510">510</span>
+<span id="511">511</span>
+<span id="512">512</span>
+<span id="513">513</span>
+<span id="514">514</span>
+<span id="515">515</span>
 </pre><pre class='rust '>
 <span class='doccomment'>//! A library for build scripts to compile custom C code</span>
 <span class='doccomment'>//!</span>
@@ -546,7 +563,7 @@
 <span class='doccomment'>//!</span>
 <span class='doccomment'>//! ```toml</span>
 <span class='doccomment'>//! [build-dependencies]</span>
-<span class='doccomment'>//! gcc = &quot;0.2&quot;</span>
+<span class='doccomment'>//! gcc = &quot;0.3&quot;</span>
 <span class='doccomment'>//! ```</span>
 <span class='doccomment'>//!</span>
 <span class='doccomment'>//! The purpose of this crate is to provide the utility functions necessary to</span>
@@ -592,6 +609,10 @@
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>io</span>;
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>path</span>::{<span class='ident'>PathBuf</span>, <span class='ident'>Path</span>};
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>process</span>::{<span class='ident'>Command</span>, <span class='ident'>Stdio</span>};
+
+<span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>windows</span>)]</span>
+<span class='kw'>mod</span> <span class='ident'>registry</span>;
+<span class='kw'>pub</span> <span class='kw'>mod</span> <span class='ident'>windows_registry</span>;
 
 <span class='doccomment'>/// Extra configuration to pass to gcc.</span>
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>Config</span> {
@@ -787,7 +808,7 @@
     <span class='kw'>fn</span> <span class='ident'>compile_object</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>file</span>: <span class='kw-2'>&amp;</span><span class='ident'>Path</span>, <span class='ident'>dst</span>: <span class='kw-2'>&amp;</span><span class='ident'>Path</span>) {
         <span class='kw'>let</span> <span class='ident'>is_asm</span> <span class='op'>=</span> <span class='ident'>file</span>.<span class='ident'>extension</span>().<span class='ident'>and_then</span>(<span class='op'>|</span><span class='ident'>s</span><span class='op'>|</span> <span class='ident'>s</span>.<span class='ident'>to_str</span>()) <span class='op'>==</span> <span class='prelude-val'>Some</span>(<span class='string'>&quot;asm&quot;</span>);
         <span class='kw'>let</span> <span class='ident'>msvc</span> <span class='op'>=</span> <span class='self'>self</span>.<span class='ident'>target</span>.<span class='ident'>contains</span>(<span class='string'>&quot;msvc&quot;</span>);
-        <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>cmd</span> <span class='op'>=</span> <span class='kw'>if</span> <span class='ident'>msvc</span> <span class='op'>&amp;&amp;</span> <span class='ident'>is_asm</span> {
+        <span class='kw'>let</span> (<span class='kw-2'>mut</span> <span class='ident'>cmd</span>, <span class='ident'>name</span>) <span class='op'>=</span> <span class='kw'>if</span> <span class='ident'>msvc</span> <span class='op'>&amp;&amp;</span> <span class='ident'>is_asm</span> {
             <span class='self'>self</span>.<span class='ident'>msvc_macro_assembler</span>()
         } <span class='kw'>else</span> {
             <span class='self'>self</span>.<span class='ident'>compile_cmd</span>()
@@ -810,40 +831,52 @@
         }
         <span class='ident'>cmd</span>.<span class='ident'>arg</span>(<span class='ident'>file</span>);
 
-        <span class='ident'>run</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>cmd</span>, <span class='kw-2'>&amp;</span><span class='self'>self</span>.<span class='ident'>compiler</span>());
+        <span class='ident'>run</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>cmd</span>, <span class='kw-2'>&amp;</span><span class='ident'>name</span>);
     }
 
-    <span class='kw'>fn</span> <span class='ident'>compiler</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>String</span> {
+    <span class='kw'>fn</span> <span class='ident'>compiler</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> (<span class='ident'>Command</span>, <span class='ident'>String</span>) {
         <span class='kw'>let</span> (<span class='ident'>env</span>, <span class='ident'>msvc</span>, <span class='ident'>gnu</span>, <span class='ident'>default</span>) <span class='op'>=</span> <span class='kw'>if</span> <span class='self'>self</span>.<span class='ident'>cpp</span> {
             (<span class='string'>&quot;CXX&quot;</span>, <span class='string'>&quot;cl&quot;</span>, <span class='string'>&quot;g++&quot;</span>, <span class='string'>&quot;c++&quot;</span>)
         } <span class='kw'>else</span> {
             (<span class='string'>&quot;CC&quot;</span>, <span class='string'>&quot;cl&quot;</span>, <span class='string'>&quot;gcc&quot;</span>, <span class='string'>&quot;cc&quot;</span>)
         };
-
-        <span class='ident'>get_var</span>(<span class='ident'>env</span>).<span class='ident'>unwrap_or</span>(<span class='kw'>if</span> <span class='macro'>cfg</span><span class='macro'>!</span>(<span class='ident'>windows</span>) {
-            <span class='kw'>if</span> <span class='self'>self</span>.<span class='ident'>target</span>.<span class='ident'>contains</span>(<span class='string'>&quot;msvc&quot;</span>) {
-                <span class='ident'>msvc</span>.<span class='ident'>to_string</span>()
+        <span class='ident'>get_var</span>(<span class='ident'>env</span>).<span class='ident'>ok</span>().<span class='ident'>map</span>(<span class='op'>|</span><span class='ident'>env</span><span class='op'>|</span> {
+            <span class='kw'>let</span> <span class='ident'>fname</span> <span class='op'>=</span> <span class='ident'>Path</span>::<span class='ident'>new</span>(<span class='kw-2'>&amp;</span><span class='ident'>env</span>).<span class='ident'>file_name</span>().<span class='ident'>unwrap</span>().<span class='ident'>to_string_lossy</span>()
+                                       .<span class='ident'>into_owned</span>();
+            (<span class='ident'>Command</span>::<span class='ident'>new</span>(<span class='ident'>env</span>), <span class='ident'>fname</span>)
+        }).<span class='ident'>or_else</span>(<span class='op'>||</span> {
+            <span class='ident'>windows_registry</span>::<span class='ident'>find</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>.<span class='ident'>target</span>, <span class='string'>&quot;cl.exe&quot;</span>).<span class='ident'>map</span>(<span class='op'>|</span><span class='ident'>cmd</span><span class='op'>|</span> {
+                (<span class='ident'>cmd</span>, <span class='string'>&quot;cl.exe&quot;</span>.<span class='ident'>to_string</span>())
+            })
+        }).<span class='ident'>unwrap_or_else</span>(<span class='op'>||</span> {
+            <span class='kw'>let</span> <span class='ident'>compiler</span> <span class='op'>=</span> <span class='kw'>if</span> <span class='self'>self</span>.<span class='ident'>target</span>.<span class='ident'>contains</span>(<span class='string'>&quot;windows&quot;</span>) {
+                <span class='kw'>if</span> <span class='self'>self</span>.<span class='ident'>target</span>.<span class='ident'>contains</span>(<span class='string'>&quot;msvc&quot;</span>) {
+                    <span class='ident'>msvc</span>.<span class='ident'>to_string</span>()
+                } <span class='kw'>else</span> {
+                    <span class='ident'>gnu</span>.<span class='ident'>to_string</span>()
+                }
+            } <span class='kw'>else</span> <span class='kw'>if</span> <span class='self'>self</span>.<span class='ident'>target</span>.<span class='ident'>contains</span>(<span class='string'>&quot;android&quot;</span>) {
+                <span class='macro'>format</span><span class='macro'>!</span>(<span class='string'>&quot;{}-{}&quot;</span>, <span class='self'>self</span>.<span class='ident'>target</span>, <span class='ident'>gnu</span>)
             } <span class='kw'>else</span> {
-                <span class='ident'>gnu</span>.<span class='ident'>to_string</span>()
-            }
-        } <span class='kw'>else</span> <span class='kw'>if</span> <span class='self'>self</span>.<span class='ident'>target</span>.<span class='ident'>contains</span>(<span class='string'>&quot;android&quot;</span>) {
-            <span class='macro'>format</span><span class='macro'>!</span>(<span class='string'>&quot;{}-{}&quot;</span>, <span class='self'>self</span>.<span class='ident'>target</span>, <span class='ident'>gnu</span>)
-        } <span class='kw'>else</span> {
-            <span class='ident'>default</span>.<span class='ident'>to_string</span>()
+                <span class='ident'>default</span>.<span class='ident'>to_string</span>()
+            };
+            (<span class='ident'>Command</span>::<span class='ident'>new</span>(<span class='ident'>compiler</span>.<span class='ident'>clone</span>()), <span class='ident'>compiler</span>)
         })
     }
 
-    <span class='kw'>fn</span> <span class='ident'>compile_cmd</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>Command</span> {
+    <span class='kw'>fn</span> <span class='ident'>compile_cmd</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> (<span class='ident'>Command</span>, <span class='ident'>String</span>) {
         <span class='kw'>let</span> <span class='ident'>opt_level</span> <span class='op'>=</span> <span class='ident'>getenv_unwrap</span>(<span class='string'>&quot;OPT_LEVEL&quot;</span>);
         <span class='kw'>let</span> <span class='ident'>profile</span> <span class='op'>=</span> <span class='ident'>getenv_unwrap</span>(<span class='string'>&quot;PROFILE&quot;</span>);
         <span class='kw'>let</span> <span class='ident'>msvc</span> <span class='op'>=</span> <span class='self'>self</span>.<span class='ident'>target</span>.<span class='ident'>contains</span>(<span class='string'>&quot;msvc&quot;</span>);
         <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;{} {}&quot;</span>, <span class='ident'>profile</span>, <span class='ident'>opt_level</span>);
 
-        <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>cmd</span> <span class='op'>=</span> <span class='ident'>Command</span>::<span class='ident'>new</span>(<span class='self'>self</span>.<span class='ident'>compiler</span>());
+        <span class='kw'>let</span> (<span class='kw-2'>mut</span> <span class='ident'>cmd</span>, <span class='ident'>name</span>) <span class='op'>=</span> <span class='self'>self</span>.<span class='ident'>compiler</span>();
 
         <span class='kw'>if</span> <span class='ident'>msvc</span> {
             <span class='ident'>cmd</span>.<span class='ident'>arg</span>(<span class='string'>&quot;/MD&quot;</span>); <span class='comment'>// link against msvcrt.dll for now</span>
-            <span class='ident'>cmd</span>.<span class='ident'>arg</span>(<span class='macro'>format</span><span class='macro'>!</span>(<span class='string'>&quot;/O{}&quot;</span>, <span class='ident'>opt_level</span>));
+            <span class='kw'>if</span> <span class='ident'>opt_level</span> <span class='op'>!=</span> <span class='string'>&quot;0&quot;</span> {
+                <span class='ident'>cmd</span>.<span class='ident'>arg</span>(<span class='string'>&quot;/O2&quot;</span>);
+            }
         } <span class='kw'>else</span> {
             <span class='ident'>cmd</span>.<span class='ident'>arg</span>(<span class='macro'>format</span><span class='macro'>!</span>(<span class='string'>&quot;-O{}&quot;</span>, <span class='ident'>opt_level</span>));
             <span class='ident'>cmd</span>.<span class='ident'>arg</span>(<span class='string'>&quot;-c&quot;</span>);
@@ -896,15 +929,14 @@
                 <span class='ident'>cmd</span>.<span class='ident'>arg</span>(<span class='kw-2'>&amp;</span><span class='macro'>format</span><span class='macro'>!</span>(<span class='string'>&quot;{}D{}&quot;</span>, <span class='ident'>lead</span>, <span class='ident'>key</span>));
             }
         }
-        <span class='kw'>return</span> <span class='ident'>cmd</span>
+        (<span class='ident'>cmd</span>, <span class='ident'>name</span>)
     }
 
-    <span class='kw'>fn</span> <span class='ident'>msvc_macro_assembler</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>Command</span> {
-        <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>cmd</span> <span class='op'>=</span> <span class='kw'>if</span> <span class='self'>self</span>.<span class='ident'>target</span>.<span class='ident'>contains</span>(<span class='string'>&quot;x86_64&quot;</span>) {
-            <span class='ident'>Command</span>::<span class='ident'>new</span>(<span class='string'>&quot;ml64.exe&quot;</span>)
-        } <span class='kw'>else</span> {
-            <span class='ident'>Command</span>::<span class='ident'>new</span>(<span class='string'>&quot;ml.exe&quot;</span>)
-        };
+    <span class='kw'>fn</span> <span class='ident'>msvc_macro_assembler</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> (<span class='ident'>Command</span>, <span class='ident'>String</span>) {
+        <span class='kw'>let</span> <span class='ident'>tool</span> <span class='op'>=</span> <span class='kw'>if</span> <span class='self'>self</span>.<span class='ident'>target</span>.<span class='ident'>contains</span>(<span class='string'>&quot;x86_64&quot;</span>) {<span class='string'>&quot;ml64.exe&quot;</span>} <span class='kw'>else</span> {<span class='string'>&quot;ml.exe&quot;</span>};
+        <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>cmd</span> <span class='op'>=</span> <span class='ident'>windows_registry</span>::<span class='ident'>find</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>.<span class='ident'>target</span>, <span class='ident'>tool</span>).<span class='ident'>unwrap_or_else</span>(<span class='op'>||</span> {
+            <span class='ident'>Command</span>::<span class='ident'>new</span>(<span class='ident'>tool</span>)
+        });
         <span class='kw'>for</span> <span class='ident'>directory</span> <span class='kw'>in</span> <span class='self'>self</span>.<span class='ident'>include_directories</span>.<span class='ident'>iter</span>() {
             <span class='ident'>cmd</span>.<span class='ident'>arg</span>(<span class='string'>&quot;/I&quot;</span>).<span class='ident'>arg</span>(<span class='ident'>directory</span>);
         }
@@ -915,16 +947,18 @@
                 <span class='ident'>cmd</span>.<span class='ident'>arg</span>(<span class='kw-2'>&amp;</span><span class='macro'>format</span><span class='macro'>!</span>(<span class='string'>&quot;/D{}&quot;</span>, <span class='ident'>key</span>));
             }
         }
-        <span class='kw'>return</span> <span class='ident'>cmd</span>
+        (<span class='ident'>cmd</span>, <span class='ident'>tool</span>.<span class='ident'>to_string</span>())
     }
 
     <span class='kw'>fn</span> <span class='ident'>assemble</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>lib_name</span>: <span class='kw-2'>&amp;</span><span class='ident'>str</span>, <span class='ident'>dst</span>: <span class='kw-2'>&amp;</span><span class='ident'>Path</span>, <span class='ident'>objects</span>: <span class='kw-2'>&amp;</span>[<span class='ident'>PathBuf</span>]) {
         <span class='kw'>if</span> <span class='self'>self</span>.<span class='ident'>target</span>.<span class='ident'>contains</span>(<span class='string'>&quot;msvc&quot;</span>) {
+            <span class='kw'>let</span> <span class='ident'>cmd</span> <span class='op'>=</span> <span class='ident'>windows_registry</span>::<span class='ident'>find</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>.<span class='ident'>target</span>, <span class='string'>&quot;lib.exe&quot;</span>);
+            <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>cmd</span> <span class='op'>=</span> <span class='ident'>cmd</span>.<span class='ident'>unwrap_or</span>(<span class='ident'>Command</span>::<span class='ident'>new</span>(<span class='string'>&quot;lib.exe&quot;</span>));
             <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>out</span> <span class='op'>=</span> <span class='ident'>OsString</span>::<span class='ident'>from</span>(<span class='string'>&quot;/OUT:&quot;</span>);
             <span class='ident'>out</span>.<span class='ident'>push</span>(<span class='ident'>dst</span>);
-            <span class='ident'>run</span>(<span class='ident'>Command</span>::<span class='ident'>new</span>(<span class='string'>&quot;lib.exe&quot;</span>).<span class='ident'>arg</span>(<span class='ident'>out</span>).<span class='ident'>arg</span>(<span class='string'>&quot;/nologo&quot;</span>)
-                                       .<span class='ident'>args</span>(<span class='ident'>objects</span>)
-                                       .<span class='ident'>args</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>.<span class='ident'>objects</span>), <span class='string'>&quot;lib.exe&quot;</span>);
+            <span class='ident'>run</span>(<span class='ident'>cmd</span>.<span class='ident'>arg</span>(<span class='ident'>out</span>).<span class='ident'>arg</span>(<span class='string'>&quot;/nologo&quot;</span>)
+                   .<span class='ident'>args</span>(<span class='ident'>objects</span>)
+                   .<span class='ident'>args</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>.<span class='ident'>objects</span>), <span class='string'>&quot;lib.exe&quot;</span>);
 
             <span class='comment'>// The Rust compiler will look for libfoo.a and foo.lib, but the</span>
             <span class='comment'>// MSVC linker will also be passed foo.lib, so be sure that both</span>

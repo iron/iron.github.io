@@ -45,7 +45,7 @@
             <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                 [<span class='inner'>&#x2212;</span>]
             </a>
-        </span><a id='src-0' class='srclink' href='../src/lazy_static/lib.rs.html#1-124' title='goto source code'>[src]</a></span></h1>
+        </span><a id='src-0' class='srclink' href='../src/lazy_static/lib.rs.html#1-131' title='goto source code'>[src]</a></span></h1>
 <div class='docblock'><p>A macro for declaring lazily evaluated statics.</p>
 
 <p>Using this macro, it is possible to have <code>static</code>s that require code to be
@@ -63,10 +63,13 @@ as well as anything that requires function calls to be computed.</p>
 }
 </pre>
 
+<p>Metadata (such as doc comments) is allowed on each ref.</p>
+
 <h1 id="semantic" class='section-header'><a
                            href="#semantic">Semantic</a></h1>
-<p>For a given <code>static ref NAME: TYPE = EXPR;</code>, the macro generates a
-unique type that implements <code>Deref&lt;TYPE&gt;</code> and stores it in a static with name <code>NAME</code>.</p>
+<p>For a given <code>static ref NAME: TYPE = EXPR;</code>, the macro generates a unique type that
+implements <code>Deref&lt;TYPE&gt;</code> and stores it in a static with name <code>NAME</code>. (Metadata ends up
+attaching to this type.)</p>
 
 <p>On first deref, <code>EXPR</code> gets evaluated and stored internally, such that all further derefs
 can return a reference to the same object.</p>
