@@ -45,14 +45,14 @@
             <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                 [<span class='inner'>&#x2212;</span>]
             </a>
-        </span><a id='src-29' class='srclink' href='../src/router/router.rs.html#15-18' title='goto source code'>[src]</a></span></h1>
+        </span><a id='src-29' class='srclink' href='../src/router/router.rs.html#18-21' title='goto source code'>[src]</a></span></h1>
 <pre class='rust struct'>pub struct Router {
     // some fields omitted
 }</pre><div class='docblock'><p><code>Router</code> provides an interface for creating complex routes as middleware
 for the Iron framework.</p>
 </div><h2 id='methods'>Methods</h2><h3 class='impl'><code>impl <a class='struct' href='../router/struct.Router.html' title='router::Router'>Router</a></code></h3><div class='impl-items'><h4 id='method.new' class='method'><code>fn <a href='#method.new' class='fnname'>new</a>() -&gt; <a class='struct' href='../router/struct.Router.html' title='router::Router'>Router</a></code></h4>
 <div class='docblock'><p>Construct a new, empty <code>Router</code>.</p>
-<pre id='rust-example-rendered' class='rust '>
+<pre class='rust rust-example-rendered'>
 <span class='kw'>let</span> <span class='ident'>router</span> <span class='op'>=</span> <span class='ident'>Router</span>::<span class='ident'>new</span>();
 </pre>
 </div><h4 id='method.route' class='method'><code>fn <a href='#method.route' class='fnname'>route</a>&lt;H, S&gt;(&amp;mut self, method: <a class='enum' href='../hyper/method/enum.Method.html' title='hyper::method::Method'>Method</a>, glob: S, handler: H) -&gt; &amp;mut <a class='struct' href='../router/struct.Router.html' title='router::Router'>Router</a> <span class='where'>where H: <a class='trait' href='../iron/middleware/trait.Handler.html' title='iron::middleware::Handler'>Handler</a>, S: <a class='trait' href='http://doc.rust-lang.org/nightly/core/convert/trait.AsRef.html' title='core::convert::AsRef'>AsRef</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>&gt;</span></code></h4>
@@ -65,7 +65,7 @@ object, which is stored in the request <code>extensions</code>.</p>
 <p>For instance, to route <code>Get</code> requests on any route matching
 <code>/users/:userid/:friend</code> and store <code>userid</code> and <code>friend</code> in
 the exposed Params object:</p>
-<pre id='rust-example-rendered' class='rust '>
+<pre class='rust rust-example-rendered'>
 <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>router</span> <span class='op'>=</span> <span class='ident'>Router</span>::<span class='ident'>new</span>();
 <span class='ident'>router</span>.<span class='ident'>route</span>(<span class='ident'>method</span>::<span class='ident'>Get</span>, <span class='string'>&quot;/users/:userid/:friendid&quot;</span>, <span class='ident'>controller</span>);
 </pre>

@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/hyper-0.6.5/src/header/mod.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-0a35038f75765ae4/hyper-0.6.8/src/header/mod.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>mod.rs.html -- source</title>
@@ -825,8 +825,6 @@
 <span id="783">783</span>
 <span id="784">784</span>
 <span id="785">785</span>
-<span id="786">786</span>
-<span id="787">787</span>
 </pre><pre class='rust '>
 <span class='doccomment'>//! Headers container, and common header fields.</span>
 <span class='doccomment'>//!</span>
@@ -1212,9 +1210,7 @@
             }
         }
 
-        <span class='kw'>let</span> <span class='ident'>result</span> <span class='op'>=</span> <span class='ident'>Headers</span>::<span class='ident'>new</span>();
-        <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>deserializer</span>.<span class='ident'>visit_map</span>(<span class='ident'>HeadersVisitor</span>));
-        <span class='prelude-val'>Ok</span>(<span class='ident'>result</span>)
+        <span class='ident'>deserializer</span>.<span class='ident'>visit_map</span>(<span class='ident'>HeadersVisitor</span>)
     }
 }
 

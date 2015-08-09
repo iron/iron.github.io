@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `src/iron.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-0a35038f75765ae4/iron-0.1.20/src/iron.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>iron.rs.html -- source</title>
@@ -212,6 +212,15 @@
 <span id="170">170</span>
 <span id="171">171</span>
 <span id="172">172</span>
+<span id="173">173</span>
+<span id="174">174</span>
+<span id="175">175</span>
+<span id="176">176</span>
+<span id="177">177</span>
+<span id="178">178</span>
+<span id="179">179</span>
+<span id="180">180</span>
+<span id="181">181</span>
 </pre><pre class='rust '>
 <span class='doccomment'>//! Exposes the `Iron` type, the main entrance point of the</span>
 <span class='doccomment'>//! `Iron` library.</span>
@@ -342,7 +351,7 @@
                 <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>Server</span>::<span class='ident'>https</span>(<span class='ident'>sock_addr</span>,
                                    <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>Openssl</span>::<span class='ident'>with_cert_and_key</span>(<span class='ident'>certificate</span>, <span class='ident'>key</span>))))
                     .<span class='ident'>handle_threads</span>(<span class='self'>self</span>, <span class='ident'>threads</span>)
-            }
+            },
         }
     }
 
@@ -357,34 +366,43 @@
     <span class='kw'>fn</span> <span class='ident'>bad_request</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='kw-2'>mut</span> <span class='ident'>http_res</span>: <span class='ident'>HttpResponse</span><span class='op'>&lt;</span><span class='ident'>Fresh</span><span class='op'>&gt;</span>) {
         <span class='op'>*</span><span class='ident'>http_res</span>.<span class='ident'>status_mut</span>() <span class='op'>=</span> <span class='ident'>status</span>::<span class='ident'>BadRequest</span>;
 
-        <span class='comment'>// Consume and flush the response.</span>
+        <span class='kw'>let</span> <span class='ident'>http_res</span> <span class='op'>=</span> <span class='kw'>match</span> <span class='ident'>http_res</span>.<span class='ident'>start</span>() {
+            <span class='prelude-val'>Ok</span>(<span class='ident'>res</span>) <span class='op'>=&gt;</span> <span class='ident'>res</span>,
+            <span class='comment'>// Would like this to work, but if not *shrug*</span>
+            <span class='prelude-val'>Err</span>(_) <span class='op'>=&gt;</span> <span class='kw'>return</span>,
+        };
+
         <span class='comment'>// We would like this to work, but can&#39;t do anything if it doesn&#39;t.</span>
-        <span class='kw'>if</span> <span class='kw'>let</span> <span class='prelude-val'>Ok</span>(<span class='ident'>res</span>) <span class='op'>=</span> <span class='ident'>http_res</span>.<span class='ident'>start</span>()
-        {
-            <span class='kw'>let</span> _ <span class='op'>=</span> <span class='ident'>res</span>.<span class='ident'>end</span>();
-        }
+        <span class='kw'>let</span> _ <span class='op'>=</span> <span class='ident'>http_res</span>.<span class='ident'>end</span>();
     }
 }
 
 <span class='kw'>impl</span><span class='op'>&lt;</span><span class='ident'>H</span>: <span class='ident'>Handler</span><span class='op'>&gt;</span> ::<span class='ident'>hyper</span>::<span class='ident'>server</span>::<span class='ident'>Handler</span> <span class='kw'>for</span> <span class='ident'>Iron</span><span class='op'>&lt;</span><span class='ident'>H</span><span class='op'>&gt;</span> {
     <span class='kw'>fn</span> <span class='ident'>handle</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>http_req</span>: <span class='ident'>HttpRequest</span>, <span class='ident'>http_res</span>: <span class='ident'>HttpResponse</span><span class='op'>&lt;</span><span class='ident'>Fresh</span><span class='op'>&gt;</span>) {
         <span class='comment'>// Create `Request` wrapper.</span>
-        <span class='kw'>match</span> <span class='ident'>Request</span>::<span class='ident'>from_http</span>(<span class='ident'>http_req</span>, <span class='self'>self</span>.<span class='ident'>addr</span>.<span class='ident'>clone</span>().<span class='ident'>unwrap</span>(),
-                                 <span class='self'>self</span>.<span class='ident'>protocol</span>.<span class='ident'>as_ref</span>().<span class='ident'>unwrap</span>()) {
-            <span class='prelude-val'>Ok</span>(<span class='kw-2'>mut</span> <span class='ident'>req</span>) <span class='op'>=&gt;</span> {
-                <span class='comment'>// Dispatch the request, write the response back to http_res</span>
-                <span class='self'>self</span>.<span class='ident'>handler</span>.<span class='ident'>handle</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>req</span>).<span class='ident'>unwrap_or_else</span>(<span class='op'>|</span><span class='ident'>e</span><span class='op'>|</span> {
-                    <span class='macro'>error</span><span class='macro'>!</span>(<span class='string'>&quot;Error handling:\n{:?}\nError was: {:?}&quot;</span>, <span class='ident'>req</span>, <span class='ident'>e</span>.<span class='ident'>error</span>);
-                    <span class='ident'>e</span>.<span class='ident'>response</span>
-                }).<span class='ident'>write_back</span>(<span class='ident'>http_res</span>)
-            },
+        <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>req</span> <span class='op'>=</span> <span class='kw'>match</span> <span class='ident'>Request</span>::<span class='ident'>from_http</span>(<span class='ident'>http_req</span>, <span class='self'>self</span>.<span class='ident'>addr</span>.<span class='ident'>clone</span>().<span class='ident'>unwrap</span>(),
+                                               <span class='self'>self</span>.<span class='ident'>protocol</span>.<span class='ident'>as_ref</span>().<span class='ident'>unwrap</span>()) {
+            <span class='prelude-val'>Ok</span>(<span class='ident'>req</span>) <span class='op'>=&gt;</span> <span class='ident'>req</span>,
             <span class='prelude-val'>Err</span>(<span class='ident'>e</span>) <span class='op'>=&gt;</span> {
                 <span class='macro'>error</span><span class='macro'>!</span>(<span class='string'>&quot;Error creating request:\n    {}&quot;</span>, <span class='ident'>e</span>);
-                <span class='self'>self</span>.<span class='ident'>bad_request</span>(<span class='ident'>http_res</span>)
+                <span class='kw'>return</span> <span class='self'>self</span>.<span class='ident'>bad_request</span>(<span class='ident'>http_res</span>);
+            }
+        };
+
+        <span class='comment'>// Dispatch the request</span>
+        <span class='kw'>let</span> <span class='ident'>res</span> <span class='op'>=</span> <span class='self'>self</span>.<span class='ident'>handler</span>.<span class='ident'>handle</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>req</span>);
+
+        <span class='kw'>match</span> <span class='ident'>res</span> {
+            <span class='comment'>// Write the response back to http_res</span>
+            <span class='prelude-val'>Ok</span>(<span class='ident'>res</span>) <span class='op'>=&gt;</span> <span class='ident'>res</span>.<span class='ident'>write_back</span>(<span class='ident'>http_res</span>),
+            <span class='prelude-val'>Err</span>(<span class='ident'>e</span>) <span class='op'>=&gt;</span> {
+                <span class='macro'>error</span><span class='macro'>!</span>(<span class='string'>&quot;Error handling:\n{:?}\nError was: {:?}&quot;</span>, <span class='ident'>req</span>, <span class='ident'>e</span>.<span class='ident'>error</span>);
+                <span class='ident'>e</span>.<span class='ident'>response</span>.<span class='ident'>write_back</span>(<span class='ident'>http_res</span>);
             }
         }
     }
 }
+
 </pre>
 </section>
     <section id='search' class="content hidden"></section>

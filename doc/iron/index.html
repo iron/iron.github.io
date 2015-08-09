@@ -61,7 +61,7 @@ avoids the bottlenecks encountered in highly concurrent code by avoiding shared
 writes and locking in the core framework.</p>
 
 <h2 id="hello-world" class='section-header'><a
-                           href="#hello-world">Hello World</a></h2><pre id='rust-example-rendered' class='rust '>
+                           href="#hello-world">Hello World</a></h2><pre class='rust rust-example-rendered'>
 <span class='ident'>Iron</span>::<span class='ident'>new</span>(<span class='op'>|</span><span class='ident'>req</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>Request</span><span class='op'>|</span> {
     <span class='prelude-val'>Ok</span>(<span class='ident'>Response</span>::<span class='ident'>with</span>((<span class='ident'>status</span>::<span class='prelude-val'>Ok</span>, <span class='string'>&quot;Hello World!&quot;</span>)))
 }).<span class='ident'>http</span>(<span class='string'>&quot;localhost:3000&quot;</span>).<span class='ident'>unwrap</span>();
