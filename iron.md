@@ -7,7 +7,8 @@ allowing for ridiculously modular setups.
 
 ## Installation
 
-Iron tracks Rust nightly, which you can install [here](http://www.rust-lang.org/).
+Iron can be used on any channel of the [Rust langague](https://www.rust-lang.org),
+stable, beta, or nightly.
 
 To quickly get started creating Iron applications, you should use
 [Iron-Core](https://github.com/iron/core), which bundles several common
