@@ -7,7 +7,7 @@ allowing for ridiculously modular setups.
 
 ## Installation
 
-Iron can be used on any channel of the [Rust langague](https://www.rust-lang.org),
+Iron can be used on any channel of the [Rust language](https://www.rust-lang.org):
 stable, beta, or nightly.
 
 To quickly get started creating Iron applications, you should use
