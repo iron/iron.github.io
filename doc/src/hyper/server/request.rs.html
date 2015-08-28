@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-0a35038f75765ae4/hyper-0.6.10/src/server/request.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-0a35038f75765ae4/hyper-0.6.11/src/server/request.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>request.rs.html -- source</title>
@@ -341,6 +341,7 @@
 <span id="299">299</span>
 <span id="300">300</span>
 <span id="301">301</span>
+<span id="302">302</span>
 </pre><pre class='rust '>
 <span class='doccomment'>//! Server Requests</span>
 <span class='doccomment'>//!</span>
@@ -425,10 +426,11 @@
     <span class='doccomment'>/// extern crate openssl;</span>
     <span class='doccomment'>/// # #[cfg(feature = &quot;openssl&quot;)]</span>
     <span class='doccomment'>/// use openssl::ssl::SslStream;</span>
+    <span class='doccomment'>/// use hyper::net::HttpStream;</span>
     <span class='doccomment'>/// # fn main() {}</span>
     <span class='doccomment'>/// # #[cfg(feature = &quot;openssl&quot;)]</span>
     <span class='doccomment'>/// # fn doc_ssl(req: hyper::server::Request) {</span>
-    <span class='doccomment'>/// let maybe_ssl = req.ssl::&lt;SslStream&gt;();</span>
+    <span class='doccomment'>/// let maybe_ssl = req.ssl::&lt;SslStream&lt;HttpStream&gt;&gt;();</span>
     <span class='doccomment'>/// # }</span>
     <span class='doccomment'>/// ```</span>
     <span class='attribute'>#[<span class='ident'>inline</span>]</span>
