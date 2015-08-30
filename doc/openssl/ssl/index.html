@@ -34,7 +34,7 @@
             <div class="search-container">
                 <input class="search-input" name="search"
                        autocomplete="off"
-                       placeholder="Click or press ‘S’ to search, ‘?’ for more options…"
+                       placeholder="Click or press 'S' to search, '?' for more options..."
                        type="search">
             </div>
         </form>
@@ -347,8 +347,8 @@
                         <td><a class='constant' href='constant.SSL_VERIFY_FAIL_IF_NO_PEER_CERT.html'
                                title='openssl::ssl::SSL_VERIFY_FAIL_IF_NO_PEER_CERT'>SSL_VERIFY_FAIL_IF_NO_PEER_CERT</a></td>
                         <td class='docblock short'>
-                             <p>Terminate handshake if client did not return a certificate.
-Use together with SSL_VERIFY_PEER.</p>
+                             <p>/// Terminate handshake if client did not return a certificate.
+/// Use together with SSL_VERIFY_PEER.</p>
 
                         </td>
                     </tr>
@@ -357,7 +357,7 @@ Use together with SSL_VERIFY_PEER.</p>
                         <td><a class='constant' href='constant.SSL_VERIFY_NONE.html'
                                title='openssl::ssl::SSL_VERIFY_NONE'>SSL_VERIFY_NONE</a></td>
                         <td class='docblock short'>
-                             <p>Do not verify the server&#39;s certificate</p>
+                             <p>/// Do not verify the server&#39;s certificate</p>
 
                         </td>
                     </tr>
@@ -366,7 +366,7 @@ Use together with SSL_VERIFY_PEER.</p>
                         <td><a class='constant' href='constant.SSL_VERIFY_PEER.html'
                                title='openssl::ssl::SSL_VERIFY_PEER'>SSL_VERIFY_PEER</a></td>
                         <td class='docblock short'>
-                             <p>Verify that the server&#39;s certificate is trusted</p>
+                             <p>/// Verify that the server&#39;s certificate is trusted</p>
 
                         </td>
                     </tr>
@@ -406,44 +406,37 @@ when user-data should be carried for all verification process</p>
     <section class="footer"></section>
 
     <div id="help" class="hidden">
-        <div>
-            <div class="shortcuts">
-                <h1>Keyboard Shortcuts</h1>
-
-                <dl>
-                    <dt>?</dt>
-                    <dd>Show this help dialog</dd>
-                    <dt>S</dt>
-                    <dd>Focus the search field</dd>
-                    <dt>&larrb;</dt>
-                    <dd>Move up in search results</dd>
-                    <dt>&rarrb;</dt>
-                    <dd>Move down in search results</dd>
-                    <dt>&#9166;</dt>
-                    <dd>Go to active search result</dd>
-                </dl>
-            </div>
-
-            <div class="infos">
-                <h1>Search Tricks</h1>
-
-                <p>
-                    Prefix searches with a type followed by a colon (e.g.
-                    <code>fn:</code>) to restrict the search to a given type.
-                </p>
-
-                <p>
-                    Accepted types are: <code>fn</code>, <code>mod</code>,
-                    <code>struct</code>, <code>enum</code>,
-                    <code>trait</code>, <code>type</code>, <code>macro</code>,
-                    and <code>const</code>.
-                </p>
-
-                <p>
-                    Search functions by type signature (e.g.
-                    <code>vec -> usize</code>)
-                </p>
-            </div>
+        <div class="shortcuts">
+            <h1>Keyboard shortcuts</h1>
+            <dl>
+                <dt>?</dt>
+                <dd>Show this help dialog</dd>
+                <dt>S</dt>
+                <dd>Focus the search field</dd>
+                <dt>&larrb;</dt>
+                <dd>Move up in search results</dd>
+                <dt>&rarrb;</dt>
+                <dd>Move down in search results</dd>
+                <dt>&#9166;</dt>
+                <dd>Go to active search result</dd>
+            </dl>
+        </div>
+        <div class="infos">
+            <h1>Search tricks</h1>
+            <p>
+                Prefix searches with a type followed by a colon (e.g.
+                <code>fn:</code>) to restrict the search to a given type.
+            </p>
+            <p>
+                Accepted types are: <code>fn</code>, <code>mod</code>,
+                <code>struct</code>, <code>enum</code>,
+                <code>trait</code>, <code>typedef</code> (or
+                <code>tdef</code>).
+            </p>
+            <p>
+                Search functions by type signature (e.g.
+                <code>vec -> usize</code>)
+            </p>
         </div>
     </div>
 

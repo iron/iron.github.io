@@ -34,7 +34,7 @@
             <div class="search-container">
                 <input class="search-input" name="search"
                        autocomplete="off"
-                       placeholder="Click or press ‘S’ to search, ‘?’ for more options…"
+                       placeholder="Click or press 'S' to search, '?' for more options..."
                        type="search">
             </div>
         </form>
@@ -73,7 +73,8 @@ encoding.</p>
          <span class='number'>10</span>, <span class='string'>b&#39;c&#39;</span>, <span class='string'>b&#39;u&#39;</span>, <span class='string'>b&#39;s&#39;</span>, <span class='string'>b&#39;t&#39;</span>, <span class='string'>b&#39;o&#39;</span>, <span class='string'>b&#39;m&#39;</span>, <span class='string'>b&#39;-&#39;</span>, <span class='string'>b&#39;k&#39;</span>, <span class='string'>b&#39;e&#39;</span>, <span class='string'>b&#39;y&#39;</span>,
          <span class='number'>12</span>, <span class='string'>b&#39;c&#39;</span>, <span class='string'>b&#39;u&#39;</span>, <span class='string'>b&#39;s&#39;</span>, <span class='string'>b&#39;t&#39;</span>, <span class='string'>b&#39;o&#39;</span>, <span class='string'>b&#39;m&#39;</span>, <span class='string'>b&#39;-&#39;</span>, <span class='string'>b&#39;v&#39;</span>, <span class='string'>b&#39;a&#39;</span>, <span class='string'>b&#39;l&#39;</span>,
          <span class='string'>b&#39;u&#39;</span>, <span class='string'>b&#39;e&#39;</span>],
-    <span class='ident'>result</span>);</pre>
+    <span class='ident'>result</span>);
+</pre>
 
 <p>Encodes some pseudo-headers that are already found in the static table.</p>
 <pre class='rust rust-example-rendered'>
@@ -87,7 +88,8 @@ encoding.</p>
 
 <span class='comment'>// The headers are encoded by providing their index (with a bit flag</span>
 <span class='comment'>// indicating that the indexed representation is used).</span>
-<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>encoder</span>.<span class='ident'>encode</span>(<span class='kw-2'>&amp;</span><span class='ident'>headers</span>), <span class='macro'>vec</span><span class='macro'>!</span>[<span class='number'>2</span> <span class='op'>|</span> <span class='number'>0x80</span>, <span class='number'>4</span> <span class='op'>|</span> <span class='number'>0x80</span>]);</pre>
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>encoder</span>.<span class='ident'>encode</span>(<span class='kw-2'>&amp;</span><span class='ident'>headers</span>), <span class='macro'>vec</span><span class='macro'>!</span>[<span class='number'>2</span> <span class='op'>|</span> <span class='number'>0x80</span>, <span class='number'>4</span> <span class='op'>|</span> <span class='number'>0x80</span>]);
+</pre>
 </div><h2 id='structs' class='section-header'><a href="#structs">Structs</a></h2>
 <table>
                     <tr class=' module-item'>
@@ -116,44 +118,37 @@ will use the context built by previous encode calls.</p>
     <section class="footer"></section>
 
     <div id="help" class="hidden">
-        <div>
-            <div class="shortcuts">
-                <h1>Keyboard Shortcuts</h1>
-
-                <dl>
-                    <dt>?</dt>
-                    <dd>Show this help dialog</dd>
-                    <dt>S</dt>
-                    <dd>Focus the search field</dd>
-                    <dt>&larrb;</dt>
-                    <dd>Move up in search results</dd>
-                    <dt>&rarrb;</dt>
-                    <dd>Move down in search results</dd>
-                    <dt>&#9166;</dt>
-                    <dd>Go to active search result</dd>
-                </dl>
-            </div>
-
-            <div class="infos">
-                <h1>Search Tricks</h1>
-
-                <p>
-                    Prefix searches with a type followed by a colon (e.g.
-                    <code>fn:</code>) to restrict the search to a given type.
-                </p>
-
-                <p>
-                    Accepted types are: <code>fn</code>, <code>mod</code>,
-                    <code>struct</code>, <code>enum</code>,
-                    <code>trait</code>, <code>type</code>, <code>macro</code>,
-                    and <code>const</code>.
-                </p>
-
-                <p>
-                    Search functions by type signature (e.g.
-                    <code>vec -> usize</code>)
-                </p>
-            </div>
+        <div class="shortcuts">
+            <h1>Keyboard shortcuts</h1>
+            <dl>
+                <dt>?</dt>
+                <dd>Show this help dialog</dd>
+                <dt>S</dt>
+                <dd>Focus the search field</dd>
+                <dt>&larrb;</dt>
+                <dd>Move up in search results</dd>
+                <dt>&rarrb;</dt>
+                <dd>Move down in search results</dd>
+                <dt>&#9166;</dt>
+                <dd>Go to active search result</dd>
+            </dl>
+        </div>
+        <div class="infos">
+            <h1>Search tricks</h1>
+            <p>
+                Prefix searches with a type followed by a colon (e.g.
+                <code>fn:</code>) to restrict the search to a given type.
+            </p>
+            <p>
+                Accepted types are: <code>fn</code>, <code>mod</code>,
+                <code>struct</code>, <code>enum</code>,
+                <code>trait</code>, <code>typedef</code> (or
+                <code>tdef</code>).
+            </p>
+            <p>
+                Search functions by type signature (e.g.
+                <code>vec -> usize</code>)
+            </p>
         </div>
     </div>
 
