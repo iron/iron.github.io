@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-0a35038f75765ae4/hyper-0.6.13/src/http/h1.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-0a35038f75765ae4/hyper-0.6.14/src/http/h1.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>h1.rs.html -- source</title>
@@ -24,17 +24,17 @@
 
     
 
-    <section class="sidebar">
+    <nav class="sidebar">
         
         
-    </section>
+    </nav>
 
     <nav class="sub">
         <form class="search-form js-only">
             <div class="search-container">
                 <input class="search-input" name="search"
                        autocomplete="off"
-                       placeholder="Click or press 'S' to search, '?' for more options..."
+                       placeholder="Click or press ‘S’ to search, ‘?’ for more options…"
                        type="search">
             </div>
         </form>
@@ -1079,6 +1079,96 @@
 <span id="1037">1037</span>
 <span id="1038">1038</span>
 <span id="1039">1039</span>
+<span id="1040">1040</span>
+<span id="1041">1041</span>
+<span id="1042">1042</span>
+<span id="1043">1043</span>
+<span id="1044">1044</span>
+<span id="1045">1045</span>
+<span id="1046">1046</span>
+<span id="1047">1047</span>
+<span id="1048">1048</span>
+<span id="1049">1049</span>
+<span id="1050">1050</span>
+<span id="1051">1051</span>
+<span id="1052">1052</span>
+<span id="1053">1053</span>
+<span id="1054">1054</span>
+<span id="1055">1055</span>
+<span id="1056">1056</span>
+<span id="1057">1057</span>
+<span id="1058">1058</span>
+<span id="1059">1059</span>
+<span id="1060">1060</span>
+<span id="1061">1061</span>
+<span id="1062">1062</span>
+<span id="1063">1063</span>
+<span id="1064">1064</span>
+<span id="1065">1065</span>
+<span id="1066">1066</span>
+<span id="1067">1067</span>
+<span id="1068">1068</span>
+<span id="1069">1069</span>
+<span id="1070">1070</span>
+<span id="1071">1071</span>
+<span id="1072">1072</span>
+<span id="1073">1073</span>
+<span id="1074">1074</span>
+<span id="1075">1075</span>
+<span id="1076">1076</span>
+<span id="1077">1077</span>
+<span id="1078">1078</span>
+<span id="1079">1079</span>
+<span id="1080">1080</span>
+<span id="1081">1081</span>
+<span id="1082">1082</span>
+<span id="1083">1083</span>
+<span id="1084">1084</span>
+<span id="1085">1085</span>
+<span id="1086">1086</span>
+<span id="1087">1087</span>
+<span id="1088">1088</span>
+<span id="1089">1089</span>
+<span id="1090">1090</span>
+<span id="1091">1091</span>
+<span id="1092">1092</span>
+<span id="1093">1093</span>
+<span id="1094">1094</span>
+<span id="1095">1095</span>
+<span id="1096">1096</span>
+<span id="1097">1097</span>
+<span id="1098">1098</span>
+<span id="1099">1099</span>
+<span id="1100">1100</span>
+<span id="1101">1101</span>
+<span id="1102">1102</span>
+<span id="1103">1103</span>
+<span id="1104">1104</span>
+<span id="1105">1105</span>
+<span id="1106">1106</span>
+<span id="1107">1107</span>
+<span id="1108">1108</span>
+<span id="1109">1109</span>
+<span id="1110">1110</span>
+<span id="1111">1111</span>
+<span id="1112">1112</span>
+<span id="1113">1113</span>
+<span id="1114">1114</span>
+<span id="1115">1115</span>
+<span id="1116">1116</span>
+<span id="1117">1117</span>
+<span id="1118">1118</span>
+<span id="1119">1119</span>
+<span id="1120">1120</span>
+<span id="1121">1121</span>
+<span id="1122">1122</span>
+<span id="1123">1123</span>
+<span id="1124">1124</span>
+<span id="1125">1125</span>
+<span id="1126">1126</span>
+<span id="1127">1127</span>
+<span id="1128">1128</span>
+<span id="1129">1129</span>
 </pre><pre class='rust '>
 <span class='doccomment'>//! Adapts the HTTP/1.1 implementation into the `HttpMessage` API.</span>
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>borrow</span>::<span class='ident'>Cow</span>;
@@ -1117,19 +1207,70 @@
 
 <span class='kw'>const</span> <span class='ident'>MAX_INVALID_RESPONSE_BYTES</span>: <span class='ident'>usize</span> <span class='op'>=</span> <span class='number'>1024</span> <span class='op'>*</span> <span class='number'>128</span>;
 
+<span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Debug</span>)]</span>
+<span class='kw'>struct</span> <span class='ident'>Wrapper</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span> {
+    <span class='ident'>obj</span>: <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span>,
+}
+
+<span class='kw'>impl</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span> <span class='ident'>Wrapper</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span> {
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>new</span>(<span class='ident'>obj</span>: <span class='ident'>T</span>) <span class='op'>-&gt;</span> <span class='ident'>Wrapper</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span> {
+        <span class='ident'>Wrapper</span> { <span class='ident'>obj</span>: <span class='prelude-val'>Some</span>(<span class='ident'>obj</span>) }
+    }
+
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>map_in_place</span><span class='op'>&lt;</span><span class='ident'>F</span><span class='op'>&gt;</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>f</span>: <span class='ident'>F</span>) <span class='kw'>where</span> <span class='ident'>F</span>: <span class='ident'>FnOnce</span>(<span class='ident'>T</span>) <span class='op'>-&gt;</span> <span class='ident'>T</span> {
+        <span class='kw'>let</span> <span class='ident'>obj</span> <span class='op'>=</span> <span class='self'>self</span>.<span class='ident'>obj</span>.<span class='ident'>take</span>().<span class='ident'>unwrap</span>();
+        <span class='kw'>let</span> <span class='ident'>res</span> <span class='op'>=</span> <span class='ident'>f</span>(<span class='ident'>obj</span>);
+        <span class='self'>self</span>.<span class='ident'>obj</span> <span class='op'>=</span> <span class='prelude-val'>Some</span>(<span class='ident'>res</span>);
+    }
+
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>into_inner</span>(<span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>T</span> { <span class='self'>self</span>.<span class='ident'>obj</span>.<span class='ident'>unwrap</span>() }
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>as_mut</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>T</span> { <span class='self'>self</span>.<span class='ident'>obj</span>.<span class='ident'>as_mut</span>().<span class='ident'>unwrap</span>() }
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>as_ref</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span><span class='ident'>T</span> { <span class='self'>self</span>.<span class='ident'>obj</span>.<span class='ident'>as_ref</span>().<span class='ident'>unwrap</span>() }
+}
+
+<span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Debug</span>)]</span>
+<span class='kw'>enum</span> <span class='ident'>Stream</span> {
+    <span class='ident'>Idle</span>(<span class='ident'>Box</span><span class='op'>&lt;</span><span class='ident'>NetworkStream</span> <span class='op'>+</span> <span class='ident'>Send</span><span class='op'>&gt;</span>),
+    <span class='ident'>Writing</span>(<span class='ident'>HttpWriter</span><span class='op'>&lt;</span><span class='ident'>BufWriter</span><span class='op'>&lt;</span><span class='ident'>Box</span><span class='op'>&lt;</span><span class='ident'>NetworkStream</span> <span class='op'>+</span> <span class='ident'>Send</span><span class='op'>&gt;&gt;</span><span class='op'>&gt;</span>),
+    <span class='ident'>Reading</span>(<span class='ident'>HttpReader</span><span class='op'>&lt;</span><span class='ident'>BufReader</span><span class='op'>&lt;</span><span class='ident'>Box</span><span class='op'>&lt;</span><span class='ident'>NetworkStream</span> <span class='op'>+</span> <span class='ident'>Send</span><span class='op'>&gt;&gt;</span><span class='op'>&gt;</span>),
+}
+
+<span class='kw'>impl</span> <span class='ident'>Stream</span> {
+    <span class='kw'>fn</span> <span class='ident'>writer_mut</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>HttpWriter</span><span class='op'>&lt;</span><span class='ident'>BufWriter</span><span class='op'>&lt;</span><span class='ident'>Box</span><span class='op'>&lt;</span><span class='ident'>NetworkStream</span> <span class='op'>+</span> <span class='ident'>Send</span><span class='op'>&gt;&gt;</span><span class='op'>&gt;&gt;</span> {
+        <span class='kw'>match</span> <span class='op'>*</span><span class='self'>self</span> {
+            <span class='ident'>Stream</span>::<span class='ident'>Writing</span>(<span class='kw-2'>ref</span> <span class='kw-2'>mut</span> <span class='ident'>writer</span>) <span class='op'>=&gt;</span> <span class='prelude-val'>Some</span>(<span class='ident'>writer</span>),
+            _ <span class='op'>=&gt;</span> <span class='prelude-val'>None</span>,
+        }
+    }
+    <span class='kw'>fn</span> <span class='ident'>reader_mut</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>HttpReader</span><span class='op'>&lt;</span><span class='ident'>BufReader</span><span class='op'>&lt;</span><span class='ident'>Box</span><span class='op'>&lt;</span><span class='ident'>NetworkStream</span> <span class='op'>+</span> <span class='ident'>Send</span><span class='op'>&gt;&gt;</span><span class='op'>&gt;&gt;</span> {
+        <span class='kw'>match</span> <span class='op'>*</span><span class='self'>self</span> {
+            <span class='ident'>Stream</span>::<span class='ident'>Reading</span>(<span class='kw-2'>ref</span> <span class='kw-2'>mut</span> <span class='ident'>reader</span>) <span class='op'>=&gt;</span> <span class='prelude-val'>Some</span>(<span class='ident'>reader</span>),
+            _ <span class='op'>=&gt;</span> <span class='prelude-val'>None</span>,
+        }
+    }
+    <span class='kw'>fn</span> <span class='ident'>reader_ref</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='kw-2'>&amp;</span><span class='ident'>HttpReader</span><span class='op'>&lt;</span><span class='ident'>BufReader</span><span class='op'>&lt;</span><span class='ident'>Box</span><span class='op'>&lt;</span><span class='ident'>NetworkStream</span> <span class='op'>+</span> <span class='ident'>Send</span><span class='op'>&gt;&gt;</span><span class='op'>&gt;&gt;</span> {
+        <span class='kw'>match</span> <span class='op'>*</span><span class='self'>self</span> {
+            <span class='ident'>Stream</span>::<span class='ident'>Reading</span>(<span class='kw-2'>ref</span> <span class='ident'>reader</span>) <span class='op'>=&gt;</span> <span class='prelude-val'>Some</span>(<span class='ident'>reader</span>),
+            _ <span class='op'>=&gt;</span> <span class='prelude-val'>None</span>,
+        }
+    }
+
+    <span class='kw'>fn</span> <span class='ident'>new</span>(<span class='ident'>stream</span>: <span class='ident'>Box</span><span class='op'>&lt;</span><span class='ident'>NetworkStream</span> <span class='op'>+</span> <span class='ident'>Send</span><span class='op'>&gt;</span>) <span class='op'>-&gt;</span> <span class='ident'>Stream</span> {
+        <span class='ident'>Stream</span>::<span class='ident'>Idle</span>(<span class='ident'>stream</span>)
+    }
+}
+
 <span class='doccomment'>/// An implementation of the `HttpMessage` trait for HTTP/1.1.</span>
 <span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Debug</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>Http11Message</span> {
     <span class='ident'>method</span>: <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>Method</span><span class='op'>&gt;</span>,
-    <span class='ident'>stream</span>: <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>Box</span><span class='op'>&lt;</span><span class='ident'>NetworkStream</span> <span class='op'>+</span> <span class='ident'>Send</span><span class='op'>&gt;&gt;</span>,
-    <span class='ident'>writer</span>: <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>HttpWriter</span><span class='op'>&lt;</span><span class='ident'>BufWriter</span><span class='op'>&lt;</span><span class='ident'>Box</span><span class='op'>&lt;</span><span class='ident'>NetworkStream</span> <span class='op'>+</span> <span class='ident'>Send</span><span class='op'>&gt;&gt;</span><span class='op'>&gt;&gt;</span>,
-    <span class='ident'>reader</span>: <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>HttpReader</span><span class='op'>&lt;</span><span class='ident'>BufReader</span><span class='op'>&lt;</span><span class='ident'>Box</span><span class='op'>&lt;</span><span class='ident'>NetworkStream</span> <span class='op'>+</span> <span class='ident'>Send</span><span class='op'>&gt;&gt;</span><span class='op'>&gt;&gt;</span>,
+    <span class='ident'>stream</span>: <span class='ident'>Wrapper</span><span class='op'>&lt;</span><span class='ident'>Stream</span><span class='op'>&gt;</span>,
 }
 
 <span class='kw'>impl</span> <span class='ident'>Write</span> <span class='kw'>for</span> <span class='ident'>Http11Message</span> {
     <span class='attribute'>#[<span class='ident'>inline</span>]</span>
     <span class='kw'>fn</span> <span class='ident'>write</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>buf</span>: <span class='kw-2'>&amp;</span>[<span class='ident'>u8</span>]) <span class='op'>-&gt;</span> <span class='ident'>io</span>::<span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>usize</span><span class='op'>&gt;</span> {
-        <span class='kw'>match</span> <span class='self'>self</span>.<span class='ident'>writer</span> {
+        <span class='kw'>match</span> <span class='self'>self</span>.<span class='ident'>stream</span>.<span class='ident'>as_mut</span>().<span class='ident'>writer_mut</span>() {
             <span class='prelude-val'>None</span> <span class='op'>=&gt;</span> <span class='prelude-val'>Err</span>(<span class='ident'>io</span>::<span class='ident'>Error</span>::<span class='ident'>new</span>(<span class='ident'>io</span>::<span class='ident'>ErrorKind</span>::<span class='ident'>Other</span>,
                                           <span class='string'>&quot;Not in a writable state&quot;</span>)),
             <span class='prelude-val'>Some</span>(<span class='kw-2'>ref</span> <span class='kw-2'>mut</span> <span class='ident'>writer</span>) <span class='op'>=&gt;</span> <span class='ident'>writer</span>.<span class='ident'>write</span>(<span class='ident'>buf</span>),
@@ -1137,7 +1278,7 @@
     }
     <span class='attribute'>#[<span class='ident'>inline</span>]</span>
     <span class='kw'>fn</span> <span class='ident'>flush</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>io</span>::<span class='prelude-ty'>Result</span><span class='op'>&lt;</span>()<span class='op'>&gt;</span> {
-        <span class='kw'>match</span> <span class='self'>self</span>.<span class='ident'>writer</span> {
+        <span class='kw'>match</span> <span class='self'>self</span>.<span class='ident'>stream</span>.<span class='ident'>as_mut</span>().<span class='ident'>writer_mut</span>() {
             <span class='prelude-val'>None</span> <span class='op'>=&gt;</span> <span class='prelude-val'>Err</span>(<span class='ident'>io</span>::<span class='ident'>Error</span>::<span class='ident'>new</span>(<span class='ident'>io</span>::<span class='ident'>ErrorKind</span>::<span class='ident'>Other</span>,
                                           <span class='string'>&quot;Not in a writable state&quot;</span>)),
             <span class='prelude-val'>Some</span>(<span class='kw-2'>ref</span> <span class='kw-2'>mut</span> <span class='ident'>writer</span>) <span class='op'>=&gt;</span> <span class='ident'>writer</span>.<span class='ident'>flush</span>(),
@@ -1148,7 +1289,7 @@
 <span class='kw'>impl</span> <span class='ident'>Read</span> <span class='kw'>for</span> <span class='ident'>Http11Message</span> {
     <span class='attribute'>#[<span class='ident'>inline</span>]</span>
     <span class='kw'>fn</span> <span class='ident'>read</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>buf</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> [<span class='ident'>u8</span>]) <span class='op'>-&gt;</span> <span class='ident'>io</span>::<span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>usize</span><span class='op'>&gt;</span> {
-        <span class='kw'>match</span> <span class='self'>self</span>.<span class='ident'>reader</span> {
+        <span class='kw'>match</span> <span class='self'>self</span>.<span class='ident'>stream</span>.<span class='ident'>as_mut</span>().<span class='ident'>reader_mut</span>() {
             <span class='prelude-val'>None</span> <span class='op'>=&gt;</span> <span class='prelude-val'>Err</span>(<span class='ident'>io</span>::<span class='ident'>Error</span>::<span class='ident'>new</span>(<span class='ident'>io</span>::<span class='ident'>ErrorKind</span>::<span class='ident'>Other</span>,
                                           <span class='string'>&quot;Not in a readable state&quot;</span>)),
             <span class='prelude-val'>Some</span>(<span class='kw-2'>ref</span> <span class='kw-2'>mut</span> <span class='ident'>reader</span>) <span class='op'>=&gt;</span> <span class='ident'>reader</span>.<span class='ident'>read</span>(<span class='ident'>buf</span>),
@@ -1158,177 +1299,215 @@
 
 <span class='kw'>impl</span> <span class='ident'>HttpMessage</span> <span class='kw'>for</span> <span class='ident'>Http11Message</span> {
     <span class='kw'>fn</span> <span class='ident'>set_outgoing</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='kw-2'>mut</span> <span class='ident'>head</span>: <span class='ident'>RequestHead</span>) <span class='op'>-&gt;</span> ::<span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>RequestHead</span><span class='op'>&gt;</span> {
-        <span class='kw'>let</span> <span class='ident'>stream</span> <span class='op'>=</span> <span class='kw'>match</span> <span class='self'>self</span>.<span class='ident'>stream</span>.<span class='ident'>take</span>() {
-            <span class='prelude-val'>Some</span>(<span class='ident'>stream</span>) <span class='op'>=&gt;</span> <span class='ident'>stream</span>,
-            <span class='prelude-val'>None</span> <span class='op'>=&gt;</span> {
-                <span class='kw'>return</span> <span class='prelude-val'>Err</span>(<span class='ident'>From</span>::<span class='ident'>from</span>(<span class='ident'>io</span>::<span class='ident'>Error</span>::<span class='ident'>new</span>(
+        <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>res</span> <span class='op'>=</span> <span class='prelude-val'>Err</span>(<span class='ident'>Error</span>::<span class='ident'>from</span>(<span class='ident'>io</span>::<span class='ident'>Error</span>::<span class='ident'>new</span>(
                             <span class='ident'>io</span>::<span class='ident'>ErrorKind</span>::<span class='ident'>Other</span>,
-                            <span class='string'>&quot;Message not idle, cannot start new outgoing&quot;</span>)));
+                            <span class='string'>&quot;&quot;</span>)));
+        <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>method</span> <span class='op'>=</span> <span class='prelude-val'>None</span>;
+        <span class='self'>self</span>.<span class='ident'>stream</span>.<span class='ident'>map_in_place</span>(<span class='op'>|</span><span class='ident'>stream</span>: <span class='ident'>Stream</span><span class='op'>|</span> <span class='op'>-&gt;</span> <span class='ident'>Stream</span> {
+            <span class='kw'>let</span> <span class='ident'>stream</span> <span class='op'>=</span> <span class='kw'>match</span> <span class='ident'>stream</span> {
+                <span class='ident'>Stream</span>::<span class='ident'>Idle</span>(<span class='ident'>stream</span>) <span class='op'>=&gt;</span> <span class='ident'>stream</span>,
+                _ <span class='op'>=&gt;</span> {
+                    <span class='ident'>res</span> <span class='op'>=</span> <span class='prelude-val'>Err</span>(<span class='ident'>Error</span>::<span class='ident'>from</span>(<span class='ident'>io</span>::<span class='ident'>Error</span>::<span class='ident'>new</span>(
+                                <span class='ident'>io</span>::<span class='ident'>ErrorKind</span>::<span class='ident'>Other</span>,
+                                <span class='string'>&quot;Message not idle, cannot start new outgoing&quot;</span>)));
+                    <span class='kw'>return</span> <span class='ident'>stream</span>;
+                },
+            };
+            <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>stream</span> <span class='op'>=</span> <span class='ident'>BufWriter</span>::<span class='ident'>new</span>(<span class='ident'>stream</span>);
+
+            <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>uri</span> <span class='op'>=</span> <span class='ident'>head</span>.<span class='ident'>url</span>.<span class='ident'>serialize_path</span>().<span class='ident'>unwrap</span>();
+            <span class='kw'>if</span> <span class='kw'>let</span> <span class='prelude-val'>Some</span>(<span class='kw-2'>ref</span> <span class='ident'>q</span>) <span class='op'>=</span> <span class='ident'>head</span>.<span class='ident'>url</span>.<span class='ident'>query</span> {
+                <span class='ident'>uri</span>.<span class='ident'>push</span>(<span class='string'>&#39;?&#39;</span>);
+                <span class='ident'>uri</span>.<span class='ident'>push_str</span>(<span class='kw-2'>&amp;</span><span class='ident'>q</span>[..]);
             }
-        };
-        <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>stream</span> <span class='op'>=</span> <span class='ident'>BufWriter</span>::<span class='ident'>new</span>(<span class='ident'>stream</span>);
 
-        <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>uri</span> <span class='op'>=</span> <span class='ident'>head</span>.<span class='ident'>url</span>.<span class='ident'>serialize_path</span>().<span class='ident'>unwrap</span>();
-        <span class='kw'>if</span> <span class='kw'>let</span> <span class='prelude-val'>Some</span>(<span class='kw-2'>ref</span> <span class='ident'>q</span>) <span class='op'>=</span> <span class='ident'>head</span>.<span class='ident'>url</span>.<span class='ident'>query</span> {
-            <span class='ident'>uri</span>.<span class='ident'>push</span>(<span class='string'>&#39;?&#39;</span>);
-            <span class='ident'>uri</span>.<span class='ident'>push_str</span>(<span class='kw-2'>&amp;</span><span class='ident'>q</span>[..]);
-        }
+            <span class='kw'>let</span> <span class='ident'>version</span> <span class='op'>=</span> <span class='ident'>version</span>::<span class='ident'>HttpVersion</span>::<span class='ident'>Http11</span>;
+            <span class='macro'>debug</span><span class='macro'>!</span>(<span class='string'>&quot;request line: {:?} {:?} {:?}&quot;</span>, <span class='ident'>head</span>.<span class='ident'>method</span>, <span class='ident'>uri</span>, <span class='ident'>version</span>);
+            <span class='kw'>match</span> <span class='macro'>write</span><span class='macro'>!</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>stream</span>, <span class='string'>&quot;{} {} {}{}&quot;</span>,
+                         <span class='ident'>head</span>.<span class='ident'>method</span>, <span class='ident'>uri</span>, <span class='ident'>version</span>, <span class='ident'>LINE_ENDING</span>) {
+                             <span class='prelude-val'>Err</span>(<span class='ident'>e</span>) <span class='op'>=&gt;</span> {
+                                 <span class='ident'>res</span> <span class='op'>=</span> <span class='prelude-val'>Err</span>(<span class='ident'>From</span>::<span class='ident'>from</span>(<span class='ident'>e</span>));
+                                 <span class='comment'>// TODO What should we do if the BufWriter doesn&#39;t wanna</span>
+                                 <span class='comment'>// relinquish the stream?</span>
+                                 <span class='kw'>return</span> <span class='ident'>Stream</span>::<span class='ident'>Idle</span>(<span class='ident'>stream</span>.<span class='ident'>into_inner</span>().<span class='ident'>ok</span>().<span class='ident'>unwrap</span>());
+                             },
+                             <span class='prelude-val'>Ok</span>(_) <span class='op'>=&gt;</span> {},
+                         };
 
-        <span class='kw'>let</span> <span class='ident'>version</span> <span class='op'>=</span> <span class='ident'>version</span>::<span class='ident'>HttpVersion</span>::<span class='ident'>Http11</span>;
-        <span class='macro'>debug</span><span class='macro'>!</span>(<span class='string'>&quot;request line: {:?} {:?} {:?}&quot;</span>, <span class='ident'>head</span>.<span class='ident'>method</span>, <span class='ident'>uri</span>, <span class='ident'>version</span>);
-        <span class='macro'>try</span><span class='macro'>!</span>(<span class='macro'>write</span><span class='macro'>!</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>stream</span>, <span class='string'>&quot;{} {} {}{}&quot;</span>,
-                    <span class='ident'>head</span>.<span class='ident'>method</span>, <span class='ident'>uri</span>, <span class='ident'>version</span>, <span class='ident'>LINE_ENDING</span>));
+            <span class='kw'>let</span> <span class='ident'>stream</span> <span class='op'>=</span> {
+                <span class='kw'>let</span> <span class='ident'>write_headers</span> <span class='op'>=</span> <span class='op'>|</span><span class='kw-2'>mut</span> <span class='ident'>stream</span>: <span class='ident'>BufWriter</span><span class='op'>&lt;</span><span class='ident'>Box</span><span class='op'>&lt;</span><span class='ident'>NetworkStream</span> <span class='op'>+</span> <span class='ident'>Send</span><span class='op'>&gt;&gt;</span>, <span class='ident'>head</span>: <span class='kw-2'>&amp;</span><span class='ident'>RequestHead</span><span class='op'>|</span> {
+                    <span class='macro'>debug</span><span class='macro'>!</span>(<span class='string'>&quot;headers={:?}&quot;</span>, <span class='ident'>head</span>.<span class='ident'>headers</span>);
+                    <span class='kw'>match</span> <span class='macro'>write</span><span class='macro'>!</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>stream</span>, <span class='string'>&quot;{}{}&quot;</span>, <span class='ident'>head</span>.<span class='ident'>headers</span>, <span class='ident'>LINE_ENDING</span>) {
+                        <span class='prelude-val'>Ok</span>(_) <span class='op'>=&gt;</span> <span class='prelude-val'>Ok</span>(<span class='ident'>stream</span>),
+                        <span class='prelude-val'>Err</span>(<span class='ident'>e</span>) <span class='op'>=&gt;</span> {
+                            <span class='prelude-val'>Err</span>((<span class='ident'>e</span>, <span class='ident'>stream</span>.<span class='ident'>into_inner</span>().<span class='ident'>unwrap</span>()))
+                        }
+                    }
+                };
+                <span class='kw'>match</span> <span class='kw-2'>&amp;</span><span class='ident'>head</span>.<span class='ident'>method</span> {
+                    <span class='kw-2'>&amp;</span><span class='ident'>Method</span>::<span class='ident'>Get</span> <span class='op'>|</span> <span class='kw-2'>&amp;</span><span class='ident'>Method</span>::<span class='ident'>Head</span> <span class='op'>=&gt;</span> {
+                        <span class='kw'>let</span> <span class='ident'>writer</span> <span class='op'>=</span> <span class='kw'>match</span> <span class='ident'>write_headers</span>(<span class='ident'>stream</span>, <span class='kw-2'>&amp;</span><span class='ident'>head</span>) {
+                            <span class='prelude-val'>Ok</span>(<span class='ident'>w</span>) <span class='op'>=&gt;</span> <span class='ident'>w</span>,
+                            <span class='prelude-val'>Err</span>(<span class='ident'>e</span>) <span class='op'>=&gt;</span> {
+                                <span class='ident'>res</span> <span class='op'>=</span> <span class='prelude-val'>Err</span>(<span class='ident'>From</span>::<span class='ident'>from</span>(<span class='ident'>e</span>.<span class='number'>0</span>));
+                                <span class='kw'>return</span> <span class='ident'>Stream</span>::<span class='ident'>Idle</span>(<span class='ident'>e</span>.<span class='number'>1</span>);
+                            }
+                        };
+                        <span class='ident'>EmptyWriter</span>(<span class='ident'>writer</span>)
+                    },
+                    _ <span class='op'>=&gt;</span> {
+                        <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>chunked</span> <span class='op'>=</span> <span class='boolval'>true</span>;
+                        <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>len</span> <span class='op'>=</span> <span class='number'>0</span>;
 
-        <span class='kw'>let</span> <span class='ident'>stream</span> <span class='op'>=</span> {
-            <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>write_headers</span> <span class='op'>=</span> <span class='op'>|</span><span class='kw-2'>mut</span> <span class='ident'>stream</span>: <span class='ident'>BufWriter</span><span class='op'>&lt;</span><span class='ident'>Box</span><span class='op'>&lt;</span><span class='ident'>NetworkStream</span> <span class='op'>+</span> <span class='ident'>Send</span><span class='op'>&gt;&gt;</span>, <span class='ident'>head</span>: <span class='kw-2'>&amp;</span><span class='ident'>RequestHead</span><span class='op'>|</span> {
-                <span class='macro'>debug</span><span class='macro'>!</span>(<span class='string'>&quot;headers={:?}&quot;</span>, <span class='ident'>head</span>.<span class='ident'>headers</span>);
-                <span class='kw'>match</span> <span class='macro'>write</span><span class='macro'>!</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>stream</span>, <span class='string'>&quot;{}{}&quot;</span>, <span class='ident'>head</span>.<span class='ident'>headers</span>, <span class='ident'>LINE_ENDING</span>) {
-                    <span class='prelude-val'>Ok</span>(_) <span class='op'>=&gt;</span> <span class='prelude-val'>Ok</span>(<span class='ident'>stream</span>),
-                    <span class='prelude-val'>Err</span>(<span class='ident'>e</span>) <span class='op'>=&gt;</span> {
-                        <span class='self'>self</span>.<span class='ident'>stream</span> <span class='op'>=</span> <span class='prelude-val'>Some</span>(<span class='ident'>stream</span>.<span class='ident'>into_inner</span>().<span class='ident'>unwrap</span>());
-                        <span class='prelude-val'>Err</span>(<span class='ident'>e</span>)
+                        <span class='kw'>match</span> <span class='ident'>head</span>.<span class='ident'>headers</span>.<span class='ident'>get</span>::<span class='op'>&lt;</span><span class='ident'>header</span>::<span class='ident'>ContentLength</span><span class='op'>&gt;</span>() {
+                            <span class='prelude-val'>Some</span>(<span class='ident'>cl</span>) <span class='op'>=&gt;</span> {
+                                <span class='ident'>chunked</span> <span class='op'>=</span> <span class='boolval'>false</span>;
+                                <span class='ident'>len</span> <span class='op'>=</span> <span class='op'>*</span><span class='op'>*</span><span class='ident'>cl</span>;
+                            },
+                            <span class='prelude-val'>None</span> <span class='op'>=&gt;</span> ()
+                        };
+
+                        <span class='comment'>// can&#39;t do in match above, thanks borrowck</span>
+                        <span class='kw'>if</span> <span class='ident'>chunked</span> {
+                            <span class='kw'>let</span> <span class='ident'>encodings</span> <span class='op'>=</span> <span class='kw'>match</span> <span class='ident'>head</span>.<span class='ident'>headers</span>.<span class='ident'>get_mut</span>::<span class='op'>&lt;</span><span class='ident'>header</span>::<span class='ident'>TransferEncoding</span><span class='op'>&gt;</span>() {
+                                <span class='prelude-val'>Some</span>(<span class='ident'>encodings</span>) <span class='op'>=&gt;</span> {
+                                    <span class='comment'>//TODO: check if chunked is already in encodings. use HashSet?</span>
+                                    <span class='ident'>encodings</span>.<span class='ident'>push</span>(<span class='ident'>header</span>::<span class='ident'>Encoding</span>::<span class='ident'>Chunked</span>);
+                                    <span class='boolval'>false</span>
+                                },
+                                <span class='prelude-val'>None</span> <span class='op'>=&gt;</span> <span class='boolval'>true</span>
+                            };
+
+                            <span class='kw'>if</span> <span class='ident'>encodings</span> {
+                                <span class='ident'>head</span>.<span class='ident'>headers</span>.<span class='ident'>set</span>(
+                                    <span class='ident'>header</span>::<span class='ident'>TransferEncoding</span>(<span class='macro'>vec</span><span class='macro'>!</span>[<span class='ident'>header</span>::<span class='ident'>Encoding</span>::<span class='ident'>Chunked</span>]))
+                            }
+                        }
+
+                        <span class='kw'>let</span> <span class='ident'>stream</span> <span class='op'>=</span> <span class='kw'>match</span> <span class='ident'>write_headers</span>(<span class='ident'>stream</span>, <span class='kw-2'>&amp;</span><span class='ident'>head</span>) {
+                            <span class='prelude-val'>Ok</span>(<span class='ident'>s</span>) <span class='op'>=&gt;</span> <span class='ident'>s</span>,
+                            <span class='prelude-val'>Err</span>(<span class='ident'>e</span>) <span class='op'>=&gt;</span> {
+                                <span class='ident'>res</span> <span class='op'>=</span> <span class='prelude-val'>Err</span>(<span class='ident'>From</span>::<span class='ident'>from</span>(<span class='ident'>e</span>.<span class='number'>0</span>));
+                                <span class='kw'>return</span> <span class='ident'>Stream</span>::<span class='ident'>Idle</span>(<span class='ident'>e</span>.<span class='number'>1</span>);
+                            },
+                        };
+
+                        <span class='kw'>if</span> <span class='ident'>chunked</span> {
+                            <span class='ident'>ChunkedWriter</span>(<span class='ident'>stream</span>)
+                        } <span class='kw'>else</span> {
+                            <span class='ident'>SizedWriter</span>(<span class='ident'>stream</span>, <span class='ident'>len</span>)
+                        }
                     }
                 }
             };
-            <span class='kw'>match</span> <span class='kw-2'>&amp;</span><span class='ident'>head</span>.<span class='ident'>method</span> {
-                <span class='kw-2'>&amp;</span><span class='ident'>Method</span>::<span class='ident'>Get</span> <span class='op'>|</span> <span class='kw-2'>&amp;</span><span class='ident'>Method</span>::<span class='ident'>Head</span> <span class='op'>=&gt;</span> {
-                    <span class='ident'>EmptyWriter</span>(<span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>write_headers</span>(<span class='ident'>stream</span>, <span class='kw-2'>&amp;</span><span class='ident'>head</span>)))
-                },
-                _ <span class='op'>=&gt;</span> {
-                    <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>chunked</span> <span class='op'>=</span> <span class='boolval'>true</span>;
-                    <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>len</span> <span class='op'>=</span> <span class='number'>0</span>;
 
-                    <span class='kw'>match</span> <span class='ident'>head</span>.<span class='ident'>headers</span>.<span class='ident'>get</span>::<span class='op'>&lt;</span><span class='ident'>header</span>::<span class='ident'>ContentLength</span><span class='op'>&gt;</span>() {
-                        <span class='prelude-val'>Some</span>(<span class='ident'>cl</span>) <span class='op'>=&gt;</span> {
-                            <span class='ident'>chunked</span> <span class='op'>=</span> <span class='boolval'>false</span>;
-                            <span class='ident'>len</span> <span class='op'>=</span> <span class='op'>*</span><span class='op'>*</span><span class='ident'>cl</span>;
-                        },
-                        <span class='prelude-val'>None</span> <span class='op'>=&gt;</span> ()
-                    };
+            <span class='ident'>method</span> <span class='op'>=</span> <span class='prelude-val'>Some</span>(<span class='ident'>head</span>.<span class='ident'>method</span>.<span class='ident'>clone</span>());
+            <span class='ident'>res</span> <span class='op'>=</span> <span class='prelude-val'>Ok</span>(<span class='ident'>head</span>);
+            <span class='ident'>Stream</span>::<span class='ident'>Writing</span>(<span class='ident'>stream</span>)
+        });
 
-                    <span class='comment'>// can&#39;t do in match above, thanks borrowck</span>
-                    <span class='kw'>if</span> <span class='ident'>chunked</span> {
-                        <span class='kw'>let</span> <span class='ident'>encodings</span> <span class='op'>=</span> <span class='kw'>match</span> <span class='ident'>head</span>.<span class='ident'>headers</span>.<span class='ident'>get_mut</span>::<span class='op'>&lt;</span><span class='ident'>header</span>::<span class='ident'>TransferEncoding</span><span class='op'>&gt;</span>() {
-                            <span class='prelude-val'>Some</span>(<span class='ident'>encodings</span>) <span class='op'>=&gt;</span> {
-                                <span class='comment'>//TODO: check if chunked is already in encodings. use HashSet?</span>
-                                <span class='ident'>encodings</span>.<span class='ident'>push</span>(<span class='ident'>header</span>::<span class='ident'>Encoding</span>::<span class='ident'>Chunked</span>);
-                                <span class='boolval'>false</span>
-                            },
-                            <span class='prelude-val'>None</span> <span class='op'>=&gt;</span> <span class='boolval'>true</span>
-                        };
-
-                        <span class='kw'>if</span> <span class='ident'>encodings</span> {
-                            <span class='ident'>head</span>.<span class='ident'>headers</span>.<span class='ident'>set</span>(
-                                <span class='ident'>header</span>::<span class='ident'>TransferEncoding</span>(<span class='macro'>vec</span><span class='macro'>!</span>[<span class='ident'>header</span>::<span class='ident'>Encoding</span>::<span class='ident'>Chunked</span>]))
-                        }
-                    }
-
-                    <span class='kw'>let</span> <span class='ident'>stream</span> <span class='op'>=</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>write_headers</span>(<span class='ident'>stream</span>, <span class='kw-2'>&amp;</span><span class='ident'>head</span>));
-
-                    <span class='kw'>if</span> <span class='ident'>chunked</span> {
-                        <span class='ident'>ChunkedWriter</span>(<span class='ident'>stream</span>)
-                    } <span class='kw'>else</span> {
-                        <span class='ident'>SizedWriter</span>(<span class='ident'>stream</span>, <span class='ident'>len</span>)
-                    }
-                }
-            }
-        };
-
-        <span class='self'>self</span>.<span class='ident'>writer</span> <span class='op'>=</span> <span class='prelude-val'>Some</span>(<span class='ident'>stream</span>);
-        <span class='self'>self</span>.<span class='ident'>method</span> <span class='op'>=</span> <span class='prelude-val'>Some</span>(<span class='ident'>head</span>.<span class='ident'>method</span>.<span class='ident'>clone</span>());
-
-        <span class='prelude-val'>Ok</span>(<span class='ident'>head</span>)
+        <span class='self'>self</span>.<span class='ident'>method</span> <span class='op'>=</span> <span class='ident'>method</span>;
+        <span class='ident'>res</span>
     }
 
     <span class='kw'>fn</span> <span class='ident'>get_incoming</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> ::<span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>ResponseHead</span><span class='op'>&gt;</span> {
         <span class='macro'>try</span><span class='macro'>!</span>(<span class='self'>self</span>.<span class='ident'>flush_outgoing</span>());
-        <span class='kw'>let</span> <span class='ident'>stream</span> <span class='op'>=</span> <span class='kw'>match</span> <span class='self'>self</span>.<span class='ident'>stream</span>.<span class='ident'>take</span>() {
-            <span class='prelude-val'>Some</span>(<span class='ident'>stream</span>) <span class='op'>=&gt;</span> <span class='ident'>stream</span>,
-            <span class='prelude-val'>None</span> <span class='op'>=&gt;</span> {
-                <span class='comment'>// The message was already in the reading state...</span>
-                <span class='comment'>// TODO Decide what happens in case we try to get a new incoming at that point</span>
-                <span class='kw'>return</span> <span class='prelude-val'>Err</span>(<span class='ident'>From</span>::<span class='ident'>from</span>(
+        <span class='kw'>let</span> <span class='ident'>method</span> <span class='op'>=</span> <span class='self'>self</span>.<span class='ident'>method</span>.<span class='ident'>take</span>().<span class='ident'>unwrap_or</span>(<span class='ident'>Method</span>::<span class='ident'>Get</span>);
+        <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>res</span> <span class='op'>=</span> <span class='prelude-val'>Err</span>(<span class='ident'>From</span>::<span class='ident'>from</span>(
                         <span class='ident'>io</span>::<span class='ident'>Error</span>::<span class='ident'>new</span>(<span class='ident'>io</span>::<span class='ident'>ErrorKind</span>::<span class='ident'>Other</span>,
                         <span class='string'>&quot;Read already in progress&quot;</span>)));
-            }
-        };
-
-        <span class='kw'>let</span> <span class='ident'>expected_no_content</span> <span class='op'>=</span> <span class='ident'>stream</span>.<span class='ident'>previous_response_expected_no_content</span>();
-        <span class='macro'>trace</span><span class='macro'>!</span>(<span class='string'>&quot;previous_response_expected_no_content = {}&quot;</span>, <span class='ident'>expected_no_content</span>);
-
-        <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>stream</span> <span class='op'>=</span> <span class='ident'>BufReader</span>::<span class='ident'>new</span>(<span class='ident'>stream</span>);
-
-        <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>invalid_bytes_read</span> <span class='op'>=</span> <span class='number'>0</span>;
-        <span class='kw'>let</span> <span class='ident'>head</span>;
-        <span class='kw'>loop</span> {
-            <span class='ident'>head</span> <span class='op'>=</span> <span class='kw'>match</span> <span class='ident'>parse_response</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>stream</span>) {
-                <span class='prelude-val'>Ok</span>(<span class='ident'>head</span>) <span class='op'>=&gt;</span> <span class='ident'>head</span>,
-                <span class='prelude-val'>Err</span>(::<span class='ident'>Error</span>::<span class='ident'>Version</span>)
-                <span class='kw'>if</span> <span class='ident'>expected_no_content</span> <span class='op'>&amp;&amp;</span> <span class='ident'>invalid_bytes_read</span> <span class='op'>&lt;</span> <span class='ident'>MAX_INVALID_RESPONSE_BYTES</span> <span class='op'>=&gt;</span> {
-                    <span class='macro'>trace</span><span class='macro'>!</span>(<span class='string'>&quot;expected_no_content, found content&quot;</span>);
-                    <span class='ident'>invalid_bytes_read</span> <span class='op'>+=</span> <span class='number'>1</span>;
-                    <span class='ident'>stream</span>.<span class='ident'>consume</span>(<span class='number'>1</span>);
-                    <span class='kw'>continue</span>;
-                }
-                <span class='prelude-val'>Err</span>(<span class='ident'>e</span>) <span class='op'>=&gt;</span> {
-                    <span class='self'>self</span>.<span class='ident'>stream</span> <span class='op'>=</span> <span class='prelude-val'>Some</span>(<span class='ident'>stream</span>.<span class='ident'>into_inner</span>());
-                    <span class='kw'>return</span> <span class='prelude-val'>Err</span>(<span class='ident'>e</span>);
+        <span class='self'>self</span>.<span class='ident'>stream</span>.<span class='ident'>map_in_place</span>(<span class='op'>|</span><span class='ident'>stream</span><span class='op'>|</span> {
+            <span class='kw'>let</span> <span class='ident'>stream</span> <span class='op'>=</span> <span class='kw'>match</span> <span class='ident'>stream</span> {
+                <span class='ident'>Stream</span>::<span class='ident'>Idle</span>(<span class='ident'>stream</span>) <span class='op'>=&gt;</span> <span class='ident'>stream</span>,
+                _ <span class='op'>=&gt;</span> {
+                    <span class='comment'>// The message was already in the reading state...</span>
+                    <span class='comment'>// TODO Decide what happens in case we try to get a new incoming at that point</span>
+                    <span class='ident'>res</span> <span class='op'>=</span> <span class='prelude-val'>Err</span>(<span class='ident'>From</span>::<span class='ident'>from</span>(
+                            <span class='ident'>io</span>::<span class='ident'>Error</span>::<span class='ident'>new</span>(<span class='ident'>io</span>::<span class='ident'>ErrorKind</span>::<span class='ident'>Other</span>,
+                                           <span class='string'>&quot;Read already in progress&quot;</span>)));
+                    <span class='kw'>return</span> <span class='ident'>stream</span>;
                 }
             };
-            <span class='kw'>break</span>;
-        }
 
-        <span class='kw'>let</span> <span class='ident'>raw_status</span> <span class='op'>=</span> <span class='ident'>head</span>.<span class='ident'>subject</span>;
-        <span class='kw'>let</span> <span class='ident'>headers</span> <span class='op'>=</span> <span class='ident'>head</span>.<span class='ident'>headers</span>;
+            <span class='kw'>let</span> <span class='ident'>expected_no_content</span> <span class='op'>=</span> <span class='ident'>stream</span>.<span class='ident'>previous_response_expected_no_content</span>();
+            <span class='macro'>trace</span><span class='macro'>!</span>(<span class='string'>&quot;previous_response_expected_no_content = {}&quot;</span>, <span class='ident'>expected_no_content</span>);
 
-        <span class='kw'>let</span> <span class='ident'>method</span> <span class='op'>=</span> <span class='self'>self</span>.<span class='ident'>method</span>.<span class='ident'>take</span>().<span class='ident'>unwrap_or</span>(<span class='ident'>Method</span>::<span class='ident'>Get</span>);
+            <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>stream</span> <span class='op'>=</span> <span class='ident'>BufReader</span>::<span class='ident'>new</span>(<span class='ident'>stream</span>);
 
-        <span class='kw'>let</span> <span class='ident'>is_empty</span> <span class='op'>=</span> <span class='op'>!</span><span class='ident'>should_have_response_body</span>(<span class='kw-2'>&amp;</span><span class='ident'>method</span>, <span class='ident'>raw_status</span>.<span class='number'>0</span>);
-        <span class='ident'>stream</span>.<span class='ident'>get_mut</span>().<span class='ident'>set_previous_response_expected_no_content</span>(<span class='ident'>is_empty</span>);
-        <span class='comment'>// According to https://tools.ietf.org/html/rfc7230#section-3.3.3</span>
-        <span class='comment'>// 1. HEAD reponses, and Status 1xx, 204, and 304 cannot have a body.</span>
-        <span class='comment'>// 2. Status 2xx to a CONNECT cannot have a body.</span>
-        <span class='comment'>// 3. Transfer-Encoding: chunked has a chunked body.</span>
-        <span class='comment'>// 4. If multiple differing Content-Length headers or invalid, close connection.</span>
-        <span class='comment'>// 5. Content-Length header has a sized body.</span>
-        <span class='comment'>// 6. Not Client.</span>
-        <span class='comment'>// 7. Read till EOF.</span>
-        <span class='self'>self</span>.<span class='ident'>reader</span> <span class='op'>=</span> <span class='prelude-val'>Some</span>(<span class='kw'>if</span> <span class='ident'>is_empty</span> {
-            <span class='ident'>EmptyReader</span>(<span class='ident'>stream</span>)
-        } <span class='kw'>else</span> {
-             <span class='kw'>if</span> <span class='kw'>let</span> <span class='prelude-val'>Some</span>(<span class='kw-2'>&amp;</span><span class='ident'>TransferEncoding</span>(<span class='kw-2'>ref</span> <span class='ident'>codings</span>)) <span class='op'>=</span> <span class='ident'>headers</span>.<span class='ident'>get</span>() {
-                <span class='kw'>if</span> <span class='ident'>codings</span>.<span class='ident'>last</span>() <span class='op'>==</span> <span class='prelude-val'>Some</span>(<span class='kw-2'>&amp;</span><span class='ident'>Chunked</span>) {
-                    <span class='ident'>ChunkedReader</span>(<span class='ident'>stream</span>, <span class='prelude-val'>None</span>)
+            <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>invalid_bytes_read</span> <span class='op'>=</span> <span class='number'>0</span>;
+            <span class='kw'>let</span> <span class='ident'>head</span>;
+            <span class='kw'>loop</span> {
+                <span class='ident'>head</span> <span class='op'>=</span> <span class='kw'>match</span> <span class='ident'>parse_response</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>stream</span>) {
+                    <span class='prelude-val'>Ok</span>(<span class='ident'>head</span>) <span class='op'>=&gt;</span> <span class='ident'>head</span>,
+                    <span class='prelude-val'>Err</span>(::<span class='ident'>Error</span>::<span class='ident'>Version</span>)
+                        <span class='kw'>if</span> <span class='ident'>expected_no_content</span> <span class='op'>&amp;&amp;</span> <span class='ident'>invalid_bytes_read</span> <span class='op'>&lt;</span> <span class='ident'>MAX_INVALID_RESPONSE_BYTES</span> <span class='op'>=&gt;</span> {
+                            <span class='macro'>trace</span><span class='macro'>!</span>(<span class='string'>&quot;expected_no_content, found content&quot;</span>);
+                            <span class='ident'>invalid_bytes_read</span> <span class='op'>+=</span> <span class='number'>1</span>;
+                            <span class='ident'>stream</span>.<span class='ident'>consume</span>(<span class='number'>1</span>);
+                            <span class='kw'>continue</span>;
+                        }
+                    <span class='prelude-val'>Err</span>(<span class='ident'>e</span>) <span class='op'>=&gt;</span> {
+                        <span class='ident'>res</span> <span class='op'>=</span> <span class='prelude-val'>Err</span>(<span class='ident'>e</span>);
+                        <span class='kw'>return</span> <span class='ident'>Stream</span>::<span class='ident'>Idle</span>(<span class='ident'>stream</span>.<span class='ident'>into_inner</span>());
+                    }
+                };
+                <span class='kw'>break</span>;
+            }
+
+            <span class='kw'>let</span> <span class='ident'>raw_status</span> <span class='op'>=</span> <span class='ident'>head</span>.<span class='ident'>subject</span>;
+            <span class='kw'>let</span> <span class='ident'>headers</span> <span class='op'>=</span> <span class='ident'>head</span>.<span class='ident'>headers</span>;
+
+            <span class='kw'>let</span> <span class='ident'>is_empty</span> <span class='op'>=</span> <span class='op'>!</span><span class='ident'>should_have_response_body</span>(<span class='kw-2'>&amp;</span><span class='ident'>method</span>, <span class='ident'>raw_status</span>.<span class='number'>0</span>);
+            <span class='ident'>stream</span>.<span class='ident'>get_mut</span>().<span class='ident'>set_previous_response_expected_no_content</span>(<span class='ident'>is_empty</span>);
+            <span class='comment'>// According to https://tools.ietf.org/html/rfc7230#section-3.3.3</span>
+            <span class='comment'>// 1. HEAD reponses, and Status 1xx, 204, and 304 cannot have a body.</span>
+            <span class='comment'>// 2. Status 2xx to a CONNECT cannot have a body.</span>
+            <span class='comment'>// 3. Transfer-Encoding: chunked has a chunked body.</span>
+            <span class='comment'>// 4. If multiple differing Content-Length headers or invalid, close connection.</span>
+            <span class='comment'>// 5. Content-Length header has a sized body.</span>
+            <span class='comment'>// 6. Not Client.</span>
+            <span class='comment'>// 7. Read till EOF.</span>
+            <span class='kw'>let</span> <span class='ident'>reader</span> <span class='op'>=</span> <span class='kw'>if</span> <span class='ident'>is_empty</span> {
+                <span class='ident'>EmptyReader</span>(<span class='ident'>stream</span>)
+            } <span class='kw'>else</span> {
+                <span class='kw'>if</span> <span class='kw'>let</span> <span class='prelude-val'>Some</span>(<span class='kw-2'>&amp;</span><span class='ident'>TransferEncoding</span>(<span class='kw-2'>ref</span> <span class='ident'>codings</span>)) <span class='op'>=</span> <span class='ident'>headers</span>.<span class='ident'>get</span>() {
+                    <span class='kw'>if</span> <span class='ident'>codings</span>.<span class='ident'>last</span>() <span class='op'>==</span> <span class='prelude-val'>Some</span>(<span class='kw-2'>&amp;</span><span class='ident'>Chunked</span>) {
+                        <span class='ident'>ChunkedReader</span>(<span class='ident'>stream</span>, <span class='prelude-val'>None</span>)
+                    } <span class='kw'>else</span> {
+                        <span class='macro'>trace</span><span class='macro'>!</span>(<span class='string'>&quot;not chuncked. read till eof&quot;</span>);
+                        <span class='ident'>EofReader</span>(<span class='ident'>stream</span>)
+                    }
+                } <span class='kw'>else</span> <span class='kw'>if</span> <span class='kw'>let</span> <span class='prelude-val'>Some</span>(<span class='kw-2'>&amp;</span><span class='ident'>ContentLength</span>(<span class='ident'>len</span>)) <span class='op'>=</span>  <span class='ident'>headers</span>.<span class='ident'>get</span>() {
+                    <span class='ident'>SizedReader</span>(<span class='ident'>stream</span>, <span class='ident'>len</span>)
+                } <span class='kw'>else</span> <span class='kw'>if</span> <span class='ident'>headers</span>.<span class='ident'>has</span>::<span class='op'>&lt;</span><span class='ident'>ContentLength</span><span class='op'>&gt;</span>() {
+                    <span class='macro'>trace</span><span class='macro'>!</span>(<span class='string'>&quot;illegal Content-Length: {:?}&quot;</span>, <span class='ident'>headers</span>.<span class='ident'>get_raw</span>(<span class='string'>&quot;Content-Length&quot;</span>));
+                    <span class='ident'>res</span> <span class='op'>=</span> <span class='prelude-val'>Err</span>(<span class='ident'>Error</span>::<span class='ident'>Header</span>);
+                    <span class='kw'>return</span> <span class='ident'>Stream</span>::<span class='ident'>Idle</span>(<span class='ident'>stream</span>.<span class='ident'>into_inner</span>());
                 } <span class='kw'>else</span> {
-                    <span class='macro'>trace</span><span class='macro'>!</span>(<span class='string'>&quot;not chuncked. read till eof&quot;</span>);
+                    <span class='macro'>trace</span><span class='macro'>!</span>(<span class='string'>&quot;neither Transfer-Encoding nor Content-Length&quot;</span>);
                     <span class='ident'>EofReader</span>(<span class='ident'>stream</span>)
                 }
-            } <span class='kw'>else</span> <span class='kw'>if</span> <span class='kw'>let</span> <span class='prelude-val'>Some</span>(<span class='kw-2'>&amp;</span><span class='ident'>ContentLength</span>(<span class='ident'>len</span>)) <span class='op'>=</span>  <span class='ident'>headers</span>.<span class='ident'>get</span>() {
-                <span class='ident'>SizedReader</span>(<span class='ident'>stream</span>, <span class='ident'>len</span>)
-            } <span class='kw'>else</span> <span class='kw'>if</span> <span class='ident'>headers</span>.<span class='ident'>has</span>::<span class='op'>&lt;</span><span class='ident'>ContentLength</span><span class='op'>&gt;</span>() {
-                <span class='macro'>trace</span><span class='macro'>!</span>(<span class='string'>&quot;illegal Content-Length: {:?}&quot;</span>, <span class='ident'>headers</span>.<span class='ident'>get_raw</span>(<span class='string'>&quot;Content-Length&quot;</span>));
-                <span class='kw'>return</span> <span class='prelude-val'>Err</span>(<span class='ident'>Error</span>::<span class='ident'>Header</span>);
-            } <span class='kw'>else</span> {
-                <span class='macro'>trace</span><span class='macro'>!</span>(<span class='string'>&quot;neither Transfer-Encoding nor Content-Length&quot;</span>);
-                <span class='ident'>EofReader</span>(<span class='ident'>stream</span>)
-            }
+            };
+
+            <span class='macro'>trace</span><span class='macro'>!</span>(<span class='string'>&quot;Http11Message.reader = {:?}&quot;</span>, <span class='ident'>reader</span>);
+
+
+            <span class='ident'>res</span> <span class='op'>=</span> <span class='prelude-val'>Ok</span>(<span class='ident'>ResponseHead</span> {
+                <span class='ident'>headers</span>: <span class='ident'>headers</span>,
+                <span class='ident'>raw_status</span>: <span class='ident'>raw_status</span>,
+                <span class='ident'>version</span>: <span class='ident'>head</span>.<span class='ident'>version</span>,
+            });
+
+            <span class='ident'>Stream</span>::<span class='ident'>Reading</span>(<span class='ident'>reader</span>)
         });
-
-        <span class='macro'>trace</span><span class='macro'>!</span>(<span class='string'>&quot;Http11Message.reader = {:?}&quot;</span>, <span class='self'>self</span>.<span class='ident'>reader</span>);
-
-
-        <span class='prelude-val'>Ok</span>(<span class='ident'>ResponseHead</span> {
-            <span class='ident'>headers</span>: <span class='ident'>headers</span>,
-            <span class='ident'>raw_status</span>: <span class='ident'>raw_status</span>,
-            <span class='ident'>version</span>: <span class='ident'>head</span>.<span class='ident'>version</span>,
-        })
+        <span class='ident'>res</span>
     }
 
     <span class='kw'>fn</span> <span class='ident'>has_body</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>bool</span> {
-        <span class='kw'>match</span> <span class='self'>self</span>.<span class='ident'>reader</span> {
-            <span class='prelude-val'>Some</span>(<span class='ident'>EmptyReader</span>(..)) <span class='op'>|</span>
-            <span class='prelude-val'>Some</span>(<span class='ident'>SizedReader</span>(_, <span class='number'>0</span>)) <span class='op'>|</span>
-            <span class='prelude-val'>Some</span>(<span class='ident'>ChunkedReader</span>(_, <span class='prelude-val'>Some</span>(<span class='number'>0</span>))) <span class='op'>=&gt;</span> <span class='boolval'>false</span>,
+        <span class='kw'>match</span> <span class='self'>self</span>.<span class='ident'>stream</span>.<span class='ident'>as_ref</span>().<span class='ident'>reader_ref</span>() {
+            <span class='prelude-val'>Some</span>(<span class='kw-2'>&amp;</span><span class='ident'>EmptyReader</span>(..)) <span class='op'>|</span>
+            <span class='prelude-val'>Some</span>(<span class='kw-2'>&amp;</span><span class='ident'>SizedReader</span>(_, <span class='number'>0</span>)) <span class='op'>|</span>
+            <span class='prelude-val'>Some</span>(<span class='kw-2'>&amp;</span><span class='ident'>ChunkedReader</span>(_, <span class='prelude-val'>Some</span>(<span class='number'>0</span>))) <span class='op'>=&gt;</span> <span class='boolval'>false</span>,
             <span class='comment'>// specifically EofReader is always true</span>
             _ <span class='op'>=&gt;</span> <span class='boolval'>true</span>
         }
@@ -1355,43 +1534,31 @@
 
 <span class='kw'>impl</span> <span class='ident'>Http11Message</span> {
     <span class='doccomment'>/// Consumes the `Http11Message` and returns the underlying `NetworkStream`.</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>into_inner</span>(<span class='kw-2'>mut</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>Box</span><span class='op'>&lt;</span><span class='ident'>NetworkStream</span> <span class='op'>+</span> <span class='ident'>Send</span><span class='op'>&gt;</span> {
-        <span class='kw'>if</span> <span class='self'>self</span>.<span class='ident'>stream</span>.<span class='ident'>is_some</span>() {
-            <span class='self'>self</span>.<span class='ident'>stream</span>.<span class='ident'>take</span>().<span class='ident'>unwrap</span>()
-        } <span class='kw'>else</span> <span class='kw'>if</span> <span class='self'>self</span>.<span class='ident'>writer</span>.<span class='ident'>is_some</span>() {
-            <span class='self'>self</span>.<span class='ident'>writer</span>.<span class='ident'>take</span>().<span class='ident'>unwrap</span>().<span class='ident'>into_inner</span>().<span class='ident'>into_inner</span>().<span class='ident'>unwrap</span>()
-        } <span class='kw'>else</span> <span class='kw'>if</span> <span class='self'>self</span>.<span class='ident'>reader</span>.<span class='ident'>is_some</span>() {
-            <span class='self'>self</span>.<span class='ident'>reader</span>.<span class='ident'>take</span>().<span class='ident'>unwrap</span>().<span class='ident'>into_inner</span>().<span class='ident'>into_inner</span>()
-        } <span class='kw'>else</span> {
-            <span class='macro'>panic</span><span class='macro'>!</span>(<span class='string'>&quot;Http11Message lost its underlying stream somehow&quot;</span>);
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>into_inner</span>(<span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>Box</span><span class='op'>&lt;</span><span class='ident'>NetworkStream</span> <span class='op'>+</span> <span class='ident'>Send</span><span class='op'>&gt;</span> {
+        <span class='kw'>match</span> <span class='self'>self</span>.<span class='ident'>stream</span>.<span class='ident'>into_inner</span>() {
+            <span class='ident'>Stream</span>::<span class='ident'>Idle</span>(<span class='ident'>stream</span>) <span class='op'>=&gt;</span> <span class='ident'>stream</span>,
+            <span class='ident'>Stream</span>::<span class='ident'>Writing</span>(<span class='ident'>stream</span>) <span class='op'>=&gt;</span> <span class='ident'>stream</span>.<span class='ident'>into_inner</span>().<span class='ident'>into_inner</span>().<span class='ident'>unwrap</span>(),
+            <span class='ident'>Stream</span>::<span class='ident'>Reading</span>(<span class='ident'>stream</span>) <span class='op'>=&gt;</span> <span class='ident'>stream</span>.<span class='ident'>into_inner</span>().<span class='ident'>into_inner</span>(),
         }
     }
 
     <span class='doccomment'>/// Gets a mutable reference to the underlying `NetworkStream`, regardless of the state of the</span>
     <span class='doccomment'>/// `Http11Message`.</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>get_ref</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span>(<span class='ident'>NetworkStream</span> <span class='op'>+</span> <span class='ident'>Send</span>) {
-        <span class='kw'>if</span> <span class='self'>self</span>.<span class='ident'>stream</span>.<span class='ident'>is_some</span>() {
-            <span class='kw-2'>&amp;</span><span class='op'>*</span><span class='op'>*</span><span class='self'>self</span>.<span class='ident'>stream</span>.<span class='ident'>as_ref</span>().<span class='ident'>unwrap</span>()
-        } <span class='kw'>else</span> <span class='kw'>if</span> <span class='self'>self</span>.<span class='ident'>writer</span>.<span class='ident'>is_some</span>() {
-            <span class='kw-2'>&amp;</span><span class='op'>*</span><span class='op'>*</span><span class='self'>self</span>.<span class='ident'>writer</span>.<span class='ident'>as_ref</span>().<span class='ident'>unwrap</span>().<span class='ident'>get_ref</span>().<span class='ident'>get_ref</span>()
-        } <span class='kw'>else</span> <span class='kw'>if</span> <span class='self'>self</span>.<span class='ident'>reader</span>.<span class='ident'>is_some</span>() {
-            <span class='kw-2'>&amp;</span><span class='op'>*</span><span class='op'>*</span><span class='self'>self</span>.<span class='ident'>reader</span>.<span class='ident'>as_ref</span>().<span class='ident'>unwrap</span>().<span class='ident'>get_ref</span>().<span class='ident'>get_ref</span>()
-        } <span class='kw'>else</span> {
-            <span class='macro'>panic</span><span class='macro'>!</span>(<span class='string'>&quot;Http11Message lost its underlying stream somehow&quot;</span>);
+        <span class='kw'>match</span> <span class='op'>*</span><span class='self'>self</span>.<span class='ident'>stream</span>.<span class='ident'>as_ref</span>() {
+            <span class='ident'>Stream</span>::<span class='ident'>Idle</span>(<span class='kw-2'>ref</span> <span class='ident'>stream</span>) <span class='op'>=&gt;</span> <span class='kw-2'>&amp;</span><span class='op'>*</span><span class='op'>*</span><span class='ident'>stream</span>,
+            <span class='ident'>Stream</span>::<span class='ident'>Writing</span>(<span class='kw-2'>ref</span> <span class='ident'>stream</span>) <span class='op'>=&gt;</span> <span class='kw-2'>&amp;</span><span class='op'>*</span><span class='op'>*</span><span class='ident'>stream</span>.<span class='ident'>get_ref</span>().<span class='ident'>get_ref</span>(),
+            <span class='ident'>Stream</span>::<span class='ident'>Reading</span>(<span class='kw-2'>ref</span> <span class='ident'>stream</span>) <span class='op'>=&gt;</span> <span class='kw-2'>&amp;</span><span class='op'>*</span><span class='op'>*</span><span class='ident'>stream</span>.<span class='ident'>get_ref</span>().<span class='ident'>get_ref</span>()
         }
     }
 
     <span class='doccomment'>/// Gets a mutable reference to the underlying `NetworkStream`, regardless of the state of the</span>
     <span class='doccomment'>/// `Http11Message`.</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>get_mut</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> (<span class='ident'>NetworkStream</span> <span class='op'>+</span> <span class='ident'>Send</span>) {
-        <span class='kw'>if</span> <span class='self'>self</span>.<span class='ident'>stream</span>.<span class='ident'>is_some</span>() {
-            <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='op'>*</span><span class='op'>*</span><span class='self'>self</span>.<span class='ident'>stream</span>.<span class='ident'>as_mut</span>().<span class='ident'>unwrap</span>()
-        } <span class='kw'>else</span> <span class='kw'>if</span> <span class='self'>self</span>.<span class='ident'>writer</span>.<span class='ident'>is_some</span>() {
-            <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='op'>*</span><span class='op'>*</span><span class='self'>self</span>.<span class='ident'>writer</span>.<span class='ident'>as_mut</span>().<span class='ident'>unwrap</span>().<span class='ident'>get_mut</span>().<span class='ident'>get_mut</span>()
-        } <span class='kw'>else</span> <span class='kw'>if</span> <span class='self'>self</span>.<span class='ident'>reader</span>.<span class='ident'>is_some</span>() {
-            <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='op'>*</span><span class='op'>*</span><span class='self'>self</span>.<span class='ident'>reader</span>.<span class='ident'>as_mut</span>().<span class='ident'>unwrap</span>().<span class='ident'>get_mut</span>().<span class='ident'>get_mut</span>()
-        } <span class='kw'>else</span> {
-            <span class='macro'>panic</span><span class='macro'>!</span>(<span class='string'>&quot;Http11Message lost its underlying stream somehow&quot;</span>);
+        <span class='kw'>match</span> <span class='op'>*</span><span class='self'>self</span>.<span class='ident'>stream</span>.<span class='ident'>as_mut</span>() {
+            <span class='ident'>Stream</span>::<span class='ident'>Idle</span>(<span class='kw-2'>ref</span> <span class='kw-2'>mut</span> <span class='ident'>stream</span>) <span class='op'>=&gt;</span> <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='op'>*</span><span class='op'>*</span><span class='ident'>stream</span>,
+            <span class='ident'>Stream</span>::<span class='ident'>Writing</span>(<span class='kw-2'>ref</span> <span class='kw-2'>mut</span> <span class='ident'>stream</span>) <span class='op'>=&gt;</span> <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='op'>*</span><span class='op'>*</span><span class='ident'>stream</span>.<span class='ident'>get_mut</span>().<span class='ident'>get_mut</span>(),
+            <span class='ident'>Stream</span>::<span class='ident'>Reading</span>(<span class='kw-2'>ref</span> <span class='kw-2'>mut</span> <span class='ident'>stream</span>) <span class='op'>=&gt;</span> <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='op'>*</span><span class='op'>*</span><span class='ident'>stream</span>.<span class='ident'>get_mut</span>().<span class='ident'>get_mut</span>()
         }
     }
 
@@ -1400,9 +1567,7 @@
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>with_stream</span>(<span class='ident'>stream</span>: <span class='ident'>Box</span><span class='op'>&lt;</span><span class='ident'>NetworkStream</span> <span class='op'>+</span> <span class='ident'>Send</span><span class='op'>&gt;</span>) <span class='op'>-&gt;</span> <span class='ident'>Http11Message</span> {
         <span class='ident'>Http11Message</span> {
             <span class='ident'>method</span>: <span class='prelude-val'>None</span>,
-            <span class='ident'>stream</span>: <span class='prelude-val'>Some</span>(<span class='ident'>stream</span>),
-            <span class='ident'>writer</span>: <span class='prelude-val'>None</span>,
-            <span class='ident'>reader</span>: <span class='prelude-val'>None</span>,
+            <span class='ident'>stream</span>: <span class='ident'>Wrapper</span>::<span class='ident'>new</span>(<span class='ident'>Stream</span>::<span class='ident'>new</span>(<span class='ident'>stream</span>)),
         }
     }
 
@@ -1410,22 +1575,26 @@
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// TODO It might be sensible to lift this up to the `HttpMessage` trait itself...</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>flush_outgoing</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> ::<span class='prelude-ty'>Result</span><span class='op'>&lt;</span>()<span class='op'>&gt;</span> {
-        <span class='kw'>match</span> <span class='self'>self</span>.<span class='ident'>writer</span> {
-            <span class='prelude-val'>None</span> <span class='op'>=&gt;</span> <span class='kw'>return</span> <span class='prelude-val'>Ok</span>(()),
-            <span class='prelude-val'>Some</span>(_) <span class='op'>=&gt;</span> {},
-        };
-
-        <span class='kw'>let</span> <span class='ident'>writer</span> <span class='op'>=</span> <span class='self'>self</span>.<span class='ident'>writer</span>.<span class='ident'>take</span>().<span class='ident'>unwrap</span>();
-         <span class='comment'>// end() already flushes</span>
-        <span class='kw'>let</span> <span class='ident'>raw</span> <span class='op'>=</span> <span class='kw'>match</span> <span class='ident'>writer</span>.<span class='ident'>end</span>() {
-            <span class='prelude-val'>Ok</span>(<span class='ident'>buf</span>) <span class='op'>=&gt;</span> <span class='ident'>buf</span>.<span class='ident'>into_inner</span>().<span class='ident'>unwrap</span>(),
-            <span class='prelude-val'>Err</span>(<span class='ident'>e</span>) <span class='op'>=&gt;</span> {
-                <span class='self'>self</span>.<span class='ident'>writer</span> <span class='op'>=</span> <span class='prelude-val'>Some</span>(<span class='ident'>e</span>.<span class='number'>1</span>);
-                <span class='kw'>return</span> <span class='prelude-val'>Err</span>(<span class='ident'>From</span>::<span class='ident'>from</span>(<span class='ident'>e</span>.<span class='number'>0</span>));
-            }
-        };
-        <span class='self'>self</span>.<span class='ident'>stream</span> <span class='op'>=</span> <span class='prelude-val'>Some</span>(<span class='ident'>raw</span>);
-        <span class='prelude-val'>Ok</span>(())
+        <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>res</span> <span class='op'>=</span> <span class='prelude-val'>Ok</span>(());
+        <span class='self'>self</span>.<span class='ident'>stream</span>.<span class='ident'>map_in_place</span>(<span class='op'>|</span><span class='ident'>stream</span><span class='op'>|</span> {
+            <span class='kw'>let</span> <span class='ident'>writer</span> <span class='op'>=</span> <span class='kw'>match</span> <span class='ident'>stream</span> {
+                <span class='ident'>Stream</span>::<span class='ident'>Writing</span>(<span class='ident'>writer</span>) <span class='op'>=&gt;</span> <span class='ident'>writer</span>,
+                _ <span class='op'>=&gt;</span> {
+                    <span class='ident'>res</span> <span class='op'>=</span> <span class='prelude-val'>Ok</span>(());
+                    <span class='kw'>return</span> <span class='ident'>stream</span>;
+                },
+            };
+            <span class='comment'>// end() already flushes</span>
+            <span class='kw'>let</span> <span class='ident'>raw</span> <span class='op'>=</span> <span class='kw'>match</span> <span class='ident'>writer</span>.<span class='ident'>end</span>() {
+                <span class='prelude-val'>Ok</span>(<span class='ident'>buf</span>) <span class='op'>=&gt;</span> <span class='ident'>buf</span>.<span class='ident'>into_inner</span>().<span class='ident'>unwrap</span>(),
+                <span class='prelude-val'>Err</span>(<span class='ident'>e</span>) <span class='op'>=&gt;</span> {
+                    <span class='ident'>res</span> <span class='op'>=</span> <span class='prelude-val'>Err</span>(<span class='ident'>From</span>::<span class='ident'>from</span>(<span class='ident'>e</span>.<span class='number'>0</span>));
+                    <span class='kw'>return</span> <span class='ident'>Stream</span>::<span class='ident'>Writing</span>(<span class='ident'>e</span>.<span class='number'>1</span>);
+                }
+            };
+            <span class='ident'>Stream</span>::<span class='ident'>Idle</span>(<span class='ident'>raw</span>)
+        });
+        <span class='ident'>res</span>
     }
 }
 
@@ -1975,10 +2144,12 @@
     <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>error</span>::<span class='ident'>Error</span>;
     <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>io</span>::{<span class='self'>self</span>, <span class='ident'>Read</span>, <span class='ident'>Write</span>};
 
+
     <span class='kw'>use</span> <span class='ident'>buffer</span>::<span class='ident'>BufReader</span>;
     <span class='kw'>use</span> <span class='ident'>mock</span>::<span class='ident'>MockStream</span>;
+    <span class='kw'>use</span> <span class='ident'>http</span>::<span class='ident'>HttpMessage</span>;
 
-    <span class='kw'>use</span> <span class='ident'>super</span>::{<span class='ident'>read_chunk_size</span>, <span class='ident'>parse_request</span>, <span class='ident'>parse_response</span>};
+    <span class='kw'>use</span> <span class='ident'>super</span>::{<span class='ident'>read_chunk_size</span>, <span class='ident'>parse_request</span>, <span class='ident'>parse_response</span>, <span class='ident'>Http11Message</span>};
 
     <span class='attribute'>#[<span class='ident'>test</span>]</span>
     <span class='kw'>fn</span> <span class='ident'>test_write_chunked</span>() {
@@ -2070,6 +2241,15 @@
     }
 
     <span class='attribute'>#[<span class='ident'>test</span>]</span>
+    <span class='kw'>fn</span> <span class='ident'>test_message_get_incoming_invalid_content_length</span>() {
+        <span class='kw'>let</span> <span class='ident'>raw</span> <span class='op'>=</span> <span class='ident'>MockStream</span>::<span class='ident'>with_input</span>(
+            <span class='string'>b&quot;HTTP/1.1 200 OK\r\nContent-Length: asdf\r\n\r\n&quot;</span>);
+        <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>msg</span> <span class='op'>=</span> <span class='ident'>Http11Message</span>::<span class='ident'>with_stream</span>(<span class='ident'>Box</span>::<span class='ident'>new</span>(<span class='ident'>raw</span>));
+        <span class='macro'>assert</span><span class='macro'>!</span>(<span class='ident'>msg</span>.<span class='ident'>get_incoming</span>().<span class='ident'>is_err</span>());
+        <span class='macro'>assert</span><span class='macro'>!</span>(<span class='ident'>msg</span>.<span class='ident'>close_connection</span>().<span class='ident'>is_ok</span>());
+    }
+
+    <span class='attribute'>#[<span class='ident'>test</span>]</span>
     <span class='kw'>fn</span> <span class='ident'>test_parse_incoming</span>() {
         <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>raw</span> <span class='op'>=</span> <span class='ident'>MockStream</span>::<span class='ident'>with_input</span>(<span class='string'>b&quot;GET /echo HTTP/1.1\r\nHost: hyper.rs\r\n\r\n&quot;</span>);
         <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>buf</span> <span class='op'>=</span> <span class='ident'>BufReader</span>::<span class='ident'>new</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>raw</span>);
@@ -2125,40 +2305,49 @@
 
     <section class="footer"></section>
 
-    <div id="help" class="hidden">
-        <div class="shortcuts">
-            <h1>Keyboard shortcuts</h1>
-            <dl>
-                <dt>?</dt>
-                <dd>Show this help dialog</dd>
-                <dt>S</dt>
-                <dd>Focus the search field</dd>
-                <dt>&larrb;</dt>
-                <dd>Move up in search results</dd>
-                <dt>&rarrb;</dt>
-                <dd>Move down in search results</dd>
-                <dt>&#9166;</dt>
-                <dd>Go to active search result</dd>
-            </dl>
+    <aside id="help" class="hidden">
+        <div>
+            <h1 class="hidden">Help</h1>
+
+            <div class="shortcuts">
+                <h2>Keyboard Shortcuts</h2>
+
+                <dl>
+                    <dt>?</dt>
+                    <dd>Show this help dialog</dd>
+                    <dt>S</dt>
+                    <dd>Focus the search field</dd>
+                    <dt>&larrb;</dt>
+                    <dd>Move up in search results</dd>
+                    <dt>&rarrb;</dt>
+                    <dd>Move down in search results</dd>
+                    <dt>&#9166;</dt>
+                    <dd>Go to active search result</dd>
+                </dl>
+            </div>
+
+            <div class="infos">
+                <h2>Search Tricks</h2>
+
+                <p>
+                    Prefix searches with a type followed by a colon (e.g.
+                    <code>fn:</code>) to restrict the search to a given type.
+                </p>
+
+                <p>
+                    Accepted types are: <code>fn</code>, <code>mod</code>,
+                    <code>struct</code>, <code>enum</code>,
+                    <code>trait</code>, <code>type</code>, <code>macro</code>,
+                    and <code>const</code>.
+                </p>
+
+                <p>
+                    Search functions by type signature (e.g.
+                    <code>vec -> usize</code>)
+                </p>
+            </div>
         </div>
-        <div class="infos">
-            <h1>Search tricks</h1>
-            <p>
-                Prefix searches with a type followed by a colon (e.g.
-                <code>fn:</code>) to restrict the search to a given type.
-            </p>
-            <p>
-                Accepted types are: <code>fn</code>, <code>mod</code>,
-                <code>struct</code>, <code>enum</code>,
-                <code>trait</code>, <code>typedef</code> (or
-                <code>tdef</code>).
-            </p>
-            <p>
-                Search functions by type signature (e.g.
-                <code>vec -> usize</code>)
-            </p>
-        </div>
-    </div>
+    </aside>
 
     
 
