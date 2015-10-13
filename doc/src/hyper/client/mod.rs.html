@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-0a35038f75765ae4/hyper-0.6.14/src/client/mod.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-0a35038f75765ae4/hyper-0.6.15/src/client/mod.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>mod.rs.html -- source</title>
@@ -566,6 +566,11 @@
 <span id="524">524</span>
 <span id="525">525</span>
 <span id="526">526</span>
+<span id="527">527</span>
+<span id="528">528</span>
+<span id="529">529</span>
+<span id="530">530</span>
+<span id="531">531</span>
 </pre><pre class='rust '>
 <span class='doccomment'>//! HTTP Client</span>
 <span class='doccomment'>//!</span>
@@ -727,6 +732,11 @@
     <span class='doccomment'>/// Build a Head request.</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>head</span><span class='op'>&lt;</span><span class='ident'>U</span>: <span class='ident'>IntoUrl</span><span class='op'>&gt;</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>url</span>: <span class='ident'>U</span>) <span class='op'>-&gt;</span> <span class='ident'>RequestBuilder</span><span class='op'>&lt;</span><span class='ident'>U</span><span class='op'>&gt;</span> {
         <span class='self'>self</span>.<span class='ident'>request</span>(<span class='ident'>Method</span>::<span class='ident'>Head</span>, <span class='ident'>url</span>)
+    }
+
+    <span class='doccomment'>/// Build a Patch request.</span>
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>patch</span><span class='op'>&lt;</span><span class='ident'>U</span>: <span class='ident'>IntoUrl</span><span class='op'>&gt;</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>url</span>: <span class='ident'>U</span>) <span class='op'>-&gt;</span> <span class='ident'>RequestBuilder</span><span class='op'>&lt;</span><span class='ident'>U</span><span class='op'>&gt;</span> {
+        <span class='self'>self</span>.<span class='ident'>request</span>(<span class='ident'>Method</span>::<span class='ident'>Patch</span>, <span class='ident'>url</span>)
     }
 
     <span class='doccomment'>/// Build a Post request.</span>
