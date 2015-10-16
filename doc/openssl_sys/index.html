@@ -24,10 +24,10 @@
 
     
 
-    <nav class="sidebar">
+    <section class="sidebar">
         
         <p class='location'></p><script>window.sidebarCurrent = {name: 'openssl_sys', ty: 'mod', relpath: '../'};</script>
-    </nav>
+    </section>
 
     <nav class="sub">
         <form class="search-form js-only">
@@ -45,7 +45,7 @@
             <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                 [<span class='inner'>&#x2212;</span>]
             </a>
-        </span><a id='src-0' class='srclink' href='../src/openssl_sys/lib.rs.html#1-691' title='goto source code'>[src]</a></span></h1>
+        </span><a id='src-0' class='srclink' href='../src/openssl_sys/lib.rs.html#1-700' title='goto source code'>[src]</a></span></h1>
 <h2 id='modules' class='section-header'><a href="#modules">Modules</a></h2>
 <table>
                     <tr class=' module-item'>
@@ -1892,6 +1892,30 @@
                     </tr>
                 
                     <tr class=' module-item'>
+                        <td><a class='fn' href='fn.EVP_aes_128_cfb1.html'
+                               title='openssl_sys::EVP_aes_128_cfb1'>EVP_aes_128_cfb1</a></td>
+                        <td class='docblock short'>
+                             
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='fn' href='fn.EVP_aes_128_cfb128.html'
+                               title='openssl_sys::EVP_aes_128_cfb128'>EVP_aes_128_cfb128</a></td>
+                        <td class='docblock short'>
+                             
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='fn' href='fn.EVP_aes_128_cfb8.html'
+                               title='openssl_sys::EVP_aes_128_cfb8'>EVP_aes_128_cfb8</a></td>
+                        <td class='docblock short'>
+                             
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
                         <td><a class='fn' href='fn.EVP_aes_128_ecb.html'
                                title='openssl_sys::EVP_aes_128_ecb'>EVP_aes_128_ecb</a></td>
                         <td class='docblock short'>
@@ -1902,6 +1926,30 @@
                     <tr class=' module-item'>
                         <td><a class='fn' href='fn.EVP_aes_256_cbc.html'
                                title='openssl_sys::EVP_aes_256_cbc'>EVP_aes_256_cbc</a></td>
+                        <td class='docblock short'>
+                             
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='fn' href='fn.EVP_aes_256_cfb1.html'
+                               title='openssl_sys::EVP_aes_256_cfb1'>EVP_aes_256_cfb1</a></td>
+                        <td class='docblock short'>
+                             
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='fn' href='fn.EVP_aes_256_cfb128.html'
+                               title='openssl_sys::EVP_aes_256_cfb128'>EVP_aes_256_cfb128</a></td>
+                        <td class='docblock short'>
+                             
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='fn' href='fn.EVP_aes_256_cfb8.html'
+                               title='openssl_sys::EVP_aes_256_cfb8'>EVP_aes_256_cfb8</a></td>
                         <td class='docblock short'>
                              
                         </td>
@@ -2057,6 +2105,14 @@
                     <tr class=' module-item'>
                         <td><a class='fn' href='fn.PEM_read_bio_DHparams.html'
                                title='openssl_sys::PEM_read_bio_DHparams'>PEM_read_bio_DHparams</a></td>
+                        <td class='docblock short'>
+                             
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='fn' href='fn.PEM_read_bio_PUBKEY.html'
+                               title='openssl_sys::PEM_read_bio_PUBKEY'>PEM_read_bio_PUBKEY</a></td>
                         <td class='docblock short'>
                              
                         </td>
@@ -2369,6 +2425,14 @@
                     <tr class=' module-item'>
                         <td><a class='fn' href='fn.SSL_CTX_use_certificate.html'
                                title='openssl_sys::SSL_CTX_use_certificate'>SSL_CTX_use_certificate</a></td>
+                        <td class='docblock short'>
+                             
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='fn' href='fn.SSL_CTX_use_certificate_chain_file.html'
+                               title='openssl_sys::SSL_CTX_use_certificate_chain_file'>SSL_CTX_use_certificate_chain_file</a></td>
                         <td class='docblock short'>
                              
                         </td>
@@ -3115,12 +3179,10 @@
 
     <section class="footer"></section>
 
-    <aside id="help" class="hidden">
+    <div id="help" class="hidden">
         <div>
-            <h1 class="hidden">Help</h1>
-
             <div class="shortcuts">
-                <h2>Keyboard Shortcuts</h2>
+                <h1>Keyboard Shortcuts</h1>
 
                 <dl>
                     <dt>?</dt>
@@ -3137,7 +3199,7 @@
             </div>
 
             <div class="infos">
-                <h2>Search Tricks</h2>
+                <h1>Search Tricks</h1>
 
                 <p>
                     Prefix searches with a type followed by a colon (e.g.
@@ -3147,8 +3209,8 @@
                 <p>
                     Accepted types are: <code>fn</code>, <code>mod</code>,
                     <code>struct</code>, <code>enum</code>,
-                    <code>trait</code>, <code>type</code>, <code>macro</code>,
-                    and <code>const</code>.
+                    <code>trait</code>, <code>typedef</code> (or
+                    <code>tdef</code>).
                 </p>
 
                 <p>
@@ -3157,7 +3219,7 @@
                 </p>
             </div>
         </div>
-    </aside>
+    </div>
 
     
 

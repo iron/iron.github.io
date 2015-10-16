@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-0a35038f75765ae4/openssl-0.6.6/src/ssl/mod.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-0a35038f75765ae4/openssl-0.6.7/src/ssl/mod.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>mod.rs.html -- source</title>
@@ -24,10 +24,10 @@
 
     
 
-    <nav class="sidebar">
+    <section class="sidebar">
         
         
-    </nav>
+    </section>
 
     <nav class="sub">
         <form class="search-form js-only">
@@ -1497,6 +1497,16 @@
 <span id="1455">1455</span>
 <span id="1456">1456</span>
 <span id="1457">1457</span>
+<span id="1458">1458</span>
+<span id="1459">1459</span>
+<span id="1460">1460</span>
+<span id="1461">1461</span>
+<span id="1462">1462</span>
+<span id="1463">1463</span>
+<span id="1464">1464</span>
+<span id="1465">1465</span>
+<span id="1466">1466</span>
+<span id="1467">1467</span>
 </pre><pre class='rust '>
 <span class='kw'>use</span> <span class='ident'>libc</span>::{<span class='ident'>c_int</span>, <span class='ident'>c_void</span>, <span class='ident'>c_long</span>};
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>any</span>::<span class='ident'>TypeId</span>;
@@ -2017,6 +2027,16 @@
         <span class='ident'>wrap_ssl_result</span>(
             <span class='kw'>unsafe</span> {
                 <span class='ident'>ffi</span>::<span class='ident'>SSL_CTX_use_certificate_file</span>(<span class='self'>self</span>.<span class='ident'>ctx</span>, <span class='ident'>file</span>.<span class='ident'>as_ptr</span>(), <span class='ident'>file_type</span> <span class='kw'>as</span> <span class='ident'>c_int</span>)
+            })
+    }
+
+    <span class='doccomment'>/// Specifies the file that contains certificate chain</span>
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>set_certificate_chain_file</span><span class='op'>&lt;</span><span class='ident'>P</span>: <span class='ident'>AsRef</span><span class='op'>&lt;</span><span class='ident'>Path</span><span class='op'>&gt;&gt;</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>file</span>: <span class='ident'>P</span>, <span class='ident'>file_type</span>: <span class='ident'>X509FileType</span>)
+                                                <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>(),<span class='ident'>SslError</span><span class='op'>&gt;</span> {
+        <span class='kw'>let</span> <span class='ident'>file</span> <span class='op'>=</span> <span class='ident'>CString</span>::<span class='ident'>new</span>(<span class='ident'>file</span>.<span class='ident'>as_ref</span>().<span class='ident'>as_os_str</span>().<span class='ident'>to_str</span>().<span class='ident'>expect</span>(<span class='string'>&quot;invalid utf8&quot;</span>)).<span class='ident'>unwrap</span>();
+        <span class='ident'>wrap_ssl_result</span>(
+            <span class='kw'>unsafe</span> {
+                <span class='ident'>ffi</span>::<span class='ident'>SSL_CTX_use_certificate_chain_file</span>(<span class='self'>self</span>.<span class='ident'>ctx</span>, <span class='ident'>file</span>.<span class='ident'>as_ptr</span>(), <span class='ident'>file_type</span> <span class='kw'>as</span> <span class='ident'>c_int</span>)
             })
     }
 
@@ -2961,12 +2981,10 @@
 
     <section class="footer"></section>
 
-    <aside id="help" class="hidden">
+    <div id="help" class="hidden">
         <div>
-            <h1 class="hidden">Help</h1>
-
             <div class="shortcuts">
-                <h2>Keyboard Shortcuts</h2>
+                <h1>Keyboard Shortcuts</h1>
 
                 <dl>
                     <dt>?</dt>
@@ -2983,7 +3001,7 @@
             </div>
 
             <div class="infos">
-                <h2>Search Tricks</h2>
+                <h1>Search Tricks</h1>
 
                 <p>
                     Prefix searches with a type followed by a colon (e.g.
@@ -2993,8 +3011,8 @@
                 <p>
                     Accepted types are: <code>fn</code>, <code>mod</code>,
                     <code>struct</code>, <code>enum</code>,
-                    <code>trait</code>, <code>type</code>, <code>macro</code>,
-                    and <code>const</code>.
+                    <code>trait</code>, <code>typedef</code> (or
+                    <code>tdef</code>).
                 </p>
 
                 <p>
@@ -3003,7 +3021,7 @@
                 </p>
             </div>
         </div>
-    </aside>
+    </div>
 
     
 

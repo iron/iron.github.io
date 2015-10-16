@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-0a35038f75765ae4/pkg-config-0.3.5/src/lib.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-0a35038f75765ae4/pkg-config-0.3.6/src/lib.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>lib.rs.html -- source</title>
@@ -34,7 +34,7 @@
             <div class="search-container">
                 <input class="search-input" name="search"
                        autocomplete="off"
-                       placeholder="Click or press 'S' to search, '?' for more options..."
+                       placeholder="Click or press ‘S’ to search, ‘?’ for more options…"
                        type="search">
             </div>
         </form>
@@ -331,6 +331,13 @@
 <span id="289">289</span>
 <span id="290">290</span>
 <span id="291">291</span>
+<span id="292">292</span>
+<span id="293">293</span>
+<span id="294">294</span>
+<span id="295">295</span>
+<span id="296">296</span>
+<span id="297">297</span>
+<span id="298">298</span>
 </pre><pre class='rust '>
 <span class='doccomment'>//! A build dependency for Cargo libraries to find system artifacts through the</span>
 <span class='doccomment'>//! `pkg-config` utility.</span>
@@ -396,8 +403,15 @@
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>str</span>;
 
 <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>target_supported</span>() <span class='op'>-&gt;</span> <span class='ident'>bool</span> {
-    <span class='ident'>env</span>::<span class='ident'>var</span>(<span class='string'>&quot;HOST&quot;</span>) <span class='op'>==</span> <span class='ident'>env</span>::<span class='ident'>var</span>(<span class='string'>&quot;TARGET&quot;</span>) <span class='op'>||</span>
-        <span class='ident'>env</span>::<span class='ident'>var_os</span>(<span class='string'>&quot;PKG_CONFIG_ALLOW_CROSS&quot;</span>).<span class='ident'>is_some</span>()
+    <span class='kw'>let</span> <span class='ident'>target</span> <span class='op'>=</span> <span class='ident'>env</span>::<span class='ident'>var</span>(<span class='string'>&quot;TARGET&quot;</span>).<span class='ident'>unwrap_or</span>(<span class='ident'>String</span>::<span class='ident'>new</span>());
+    <span class='kw'>let</span> <span class='ident'>host</span> <span class='op'>=</span> <span class='ident'>env</span>::<span class='ident'>var</span>(<span class='string'>&quot;HOST&quot;</span>).<span class='ident'>unwrap_or</span>(<span class='ident'>String</span>::<span class='ident'>new</span>());
+
+    <span class='comment'>// Only use pkg-config in host == target situations by default (allowing an</span>
+    <span class='comment'>// override) and then also don&#39;t use pkg-config on MSVC as it&#39;s really not</span>
+    <span class='comment'>// meant to work there but when building MSVC code in a MSYS shell we may be</span>
+    <span class='comment'>// able to run pkg-config anyway.</span>
+    (<span class='ident'>host</span> <span class='op'>==</span> <span class='ident'>target</span> <span class='op'>||</span> <span class='ident'>env</span>::<span class='ident'>var_os</span>(<span class='string'>&quot;PKG_CONFIG_ALLOW_CROSS&quot;</span>).<span class='ident'>is_some</span>()) <span class='op'>&amp;&amp;</span>
+    <span class='op'>!</span><span class='ident'>target</span>.<span class='ident'>contains</span>(<span class='string'>&quot;msvc&quot;</span>)
 }
 
 <span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Clone</span>)]</span>
@@ -630,37 +644,44 @@
     <section class="footer"></section>
 
     <div id="help" class="hidden">
-        <div class="shortcuts">
-            <h1>Keyboard shortcuts</h1>
-            <dl>
-                <dt>?</dt>
-                <dd>Show this help dialog</dd>
-                <dt>S</dt>
-                <dd>Focus the search field</dd>
-                <dt>&larrb;</dt>
-                <dd>Move up in search results</dd>
-                <dt>&rarrb;</dt>
-                <dd>Move down in search results</dd>
-                <dt>&#9166;</dt>
-                <dd>Go to active search result</dd>
-            </dl>
-        </div>
-        <div class="infos">
-            <h1>Search tricks</h1>
-            <p>
-                Prefix searches with a type followed by a colon (e.g.
-                <code>fn:</code>) to restrict the search to a given type.
-            </p>
-            <p>
-                Accepted types are: <code>fn</code>, <code>mod</code>,
-                <code>struct</code>, <code>enum</code>,
-                <code>trait</code>, <code>typedef</code> (or
-                <code>tdef</code>).
-            </p>
-            <p>
-                Search functions by type signature (e.g.
-                <code>vec -> usize</code>)
-            </p>
+        <div>
+            <div class="shortcuts">
+                <h1>Keyboard Shortcuts</h1>
+
+                <dl>
+                    <dt>?</dt>
+                    <dd>Show this help dialog</dd>
+                    <dt>S</dt>
+                    <dd>Focus the search field</dd>
+                    <dt>&larrb;</dt>
+                    <dd>Move up in search results</dd>
+                    <dt>&rarrb;</dt>
+                    <dd>Move down in search results</dd>
+                    <dt>&#9166;</dt>
+                    <dd>Go to active search result</dd>
+                </dl>
+            </div>
+
+            <div class="infos">
+                <h1>Search Tricks</h1>
+
+                <p>
+                    Prefix searches with a type followed by a colon (e.g.
+                    <code>fn:</code>) to restrict the search to a given type.
+                </p>
+
+                <p>
+                    Accepted types are: <code>fn</code>, <code>mod</code>,
+                    <code>struct</code>, <code>enum</code>,
+                    <code>trait</code>, <code>typedef</code> (or
+                    <code>tdef</code>).
+                </p>
+
+                <p>
+                    Search functions by type signature (e.g.
+                    <code>vec -> usize</code>)
+                </p>
+            </div>
         </div>
     </div>
 
