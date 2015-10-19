@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-0a35038f75765ae4/gcc-0.3.18/src/lib.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-0a35038f75765ae4/gcc-0.3.19/src/lib.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>lib.rs.html -- source</title>
@@ -809,6 +809,9 @@
 <span id="767">767</span>
 <span id="768">768</span>
 <span id="769">769</span>
+<span id="770">770</span>
+<span id="771">771</span>
+<span id="772">772</span>
 </pre><pre class='rust '>
 <span class='doccomment'>//! A library for build scripts to compile custom C code</span>
 <span class='doccomment'>//!</span>
@@ -1229,6 +1232,9 @@
 
             <span class='kw'>if</span> <span class='op'>!</span><span class='ident'>target</span>.<span class='ident'>contains</span>(<span class='string'>&quot;i686&quot;</span>) <span class='op'>&amp;&amp;</span> <span class='op'>!</span><span class='ident'>target</span>.<span class='ident'>contains</span>(<span class='string'>&quot;windows-gnu&quot;</span>) {
                 <span class='ident'>cmd</span>.<span class='ident'>args</span>.<span class='ident'>push</span>(<span class='string'>&quot;-fPIC&quot;</span>.<span class='ident'>into</span>());
+            }
+            <span class='kw'>if</span> <span class='ident'>target</span>.<span class='ident'>contains</span>(<span class='string'>&quot;musl&quot;</span>) {
+                <span class='ident'>cmd</span>.<span class='ident'>args</span>.<span class='ident'>push</span>(<span class='string'>&quot;-static&quot;</span>.<span class='ident'>into</span>());
             }
         }
 
