@@ -48,7 +48,8 @@
         </span><a id='src-0' class='srclink' href='../src/iron/lib.rs.html#1-165' title='goto source code'>[src]</a></span></h1>
 <div class='docblock'><p>The main crate for Iron.</p>
 
-<h2 id='overview' class='section-header'><a href='#overview'>Overview</a></h2>
+<h2 id="overview" class='section-header'><a
+                           href="#overview">Overview</a></h2>
 <p>Iron is a high level web framework built in and for Rust, built on
 <a href="https://github.com/hyperium/hyper">hyper</a>. Iron is designed to take advantage
 of Rust&#39;s greatest features - it&#39;s excellent type system and its principled
@@ -59,7 +60,8 @@ load balancer or by running more threads on a more powerful machine. Iron
 avoids the bottlenecks encountered in highly concurrent code by avoiding shared
 writes and locking in the core framework.</p>
 
-<h2 id='hello-world' class='section-header'><a href='#hello-world'>Hello World</a></h2><pre class='rust rust-example-rendered'>
+<h2 id="hello-world" class='section-header'><a
+                           href="#hello-world">Hello World</a></h2><pre class='rust rust-example-rendered'>
 <span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>iron</span>;
 
 <span class='kw'>use</span> <span class='ident'>iron</span>::<span class='ident'>prelude</span>::<span class='op'>*</span>;
@@ -71,7 +73,8 @@ writes and locking in the core framework.</p>
     }).<span class='ident'>http</span>(<span class='string'>&quot;localhost:3000&quot;</span>).<span class='ident'>unwrap</span>();
 }</pre>
 
-<h2 id='design-philosophy' class='section-header'><a href='#design-philosophy'>Design Philosophy</a></h2>
+<h2 id="design-philosophy" class='section-header'><a
+                           href="#design-philosophy">Design Philosophy</a></h2>
 <p>Iron is meant to be as extensible and pluggable as possible; Iron&#39;s core is
 concentrated and avoids unnecessary features by leaving them to middleware,
 plugins, and modifiers.</p>
