@@ -248,10 +248,15 @@
 <span id="206">206</span>
 <span id="207">207</span>
 <span id="208">208</span>
+<span id="209">209</span>
+<span id="210">210</span>
+<span id="211">211</span>
+<span id="212">212</span>
+<span id="213">213</span>
+<span id="214">214</span>
+<span id="215">215</span>
+<span id="216">216</span>
 </pre><pre class='rust '>
-<span class='comment'>// FIXME(reem): When join makes it into stable, remove this and replace connect with join.</span>
-<span class='attribute'>#<span class='op'>!</span>[<span class='ident'>allow</span>(<span class='ident'>deprecated</span>)]</span>
-
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>collections</span>::<span class='ident'>HashMap</span>;
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>error</span>::<span class='ident'>Error</span>;
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>fmt</span>;
@@ -268,7 +273,9 @@
 <span class='doccomment'>/// for the Iron framework.</span>
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>Router</span> {
     <span class='comment'>// The routers, specialized by method.</span>
-    <span class='ident'>routers</span>: <span class='ident'>HashMap</span><span class='op'>&lt;</span><span class='ident'>method</span>::<span class='ident'>Method</span>, <span class='ident'>Recognizer</span><span class='op'>&lt;</span><span class='ident'>Box</span><span class='op'>&lt;</span><span class='ident'>Handler</span><span class='op'>&gt;&gt;</span><span class='op'>&gt;</span>
+    <span class='ident'>routers</span>: <span class='ident'>HashMap</span><span class='op'>&lt;</span><span class='ident'>method</span>::<span class='ident'>Method</span>, <span class='ident'>Recognizer</span><span class='op'>&lt;</span><span class='ident'>Box</span><span class='op'>&lt;</span><span class='ident'>Handler</span><span class='op'>&gt;&gt;</span><span class='op'>&gt;</span>,
+    <span class='comment'>// Routes that accept any method.</span>
+    <span class='ident'>wildcard</span>: <span class='ident'>Recognizer</span><span class='op'>&lt;</span><span class='ident'>Box</span><span class='op'>&lt;</span><span class='ident'>Handler</span><span class='op'>&gt;&gt;</span>
 }
 
 <span class='kw'>impl</span> <span class='ident'>Router</span> {
@@ -280,7 +287,8 @@
     <span class='doccomment'>/// ```</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>new</span>() <span class='op'>-&gt;</span> <span class='ident'>Router</span> {
         <span class='ident'>Router</span> {
-            <span class='ident'>routers</span>: <span class='ident'>HashMap</span>::<span class='ident'>new</span>()
+            <span class='ident'>routers</span>: <span class='ident'>HashMap</span>::<span class='ident'>new</span>(),
+            <span class='ident'>wildcard</span>: <span class='ident'>Recognizer</span>::<span class='ident'>new</span>()
         }
     }
 
@@ -347,9 +355,17 @@
         <span class='self'>self</span>.<span class='ident'>route</span>(<span class='ident'>method</span>::<span class='ident'>Options</span>, <span class='ident'>glob</span>, <span class='ident'>handler</span>)
     }
 
+    <span class='doccomment'>/// Route will match any method, including gibberish.</span>
+    <span class='doccomment'>/// In case of ambiguity, handlers specific to methods will be preferred.</span>
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>any</span><span class='op'>&lt;</span><span class='ident'>H</span>: <span class='ident'>Handler</span>, <span class='ident'>S</span>: <span class='ident'>AsRef</span><span class='op'>&lt;</span><span class='ident'>str</span><span class='op'>&gt;&gt;</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>glob</span>: <span class='ident'>S</span>, <span class='ident'>handler</span>: <span class='ident'>H</span>) <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>Router</span> {
+        <span class='self'>self</span>.<span class='ident'>wildcard</span>.<span class='ident'>add</span>(<span class='ident'>glob</span>.<span class='ident'>as_ref</span>(), <span class='ident'>Box</span>::<span class='ident'>new</span>(<span class='ident'>handler</span>));
+        <span class='self'>self</span>
+    }
+
     <span class='kw'>fn</span> <span class='ident'>recognize</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>method</span>: <span class='kw-2'>&amp;</span><span class='ident'>method</span>::<span class='ident'>Method</span>, <span class='ident'>path</span>: <span class='kw-2'>&amp;</span><span class='ident'>str</span>)
                      <span class='op'>-&gt;</span> <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>Match</span><span class='op'>&lt;</span><span class='kw-2'>&amp;</span><span class='ident'>Box</span><span class='op'>&lt;</span><span class='ident'>Handler</span><span class='op'>&gt;&gt;</span><span class='op'>&gt;</span> {
         <span class='self'>self</span>.<span class='ident'>routers</span>.<span class='ident'>get</span>(<span class='ident'>method</span>).<span class='ident'>and_then</span>(<span class='op'>|</span><span class='ident'>router</span><span class='op'>|</span> <span class='ident'>router</span>.<span class='ident'>recognize</span>(<span class='ident'>path</span>).<span class='ident'>ok</span>())
+            .<span class='ident'>or</span>(<span class='self'>self</span>.<span class='ident'>wildcard</span>.<span class='ident'>recognize</span>(<span class='ident'>path</span>).<span class='ident'>ok</span>())
     }
 
     <span class='kw'>fn</span> <span class='ident'>handle_options</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>path</span>: <span class='kw-2'>&amp;</span><span class='ident'>str</span>) <span class='op'>-&gt;</span> <span class='ident'>Response</span> {
@@ -380,7 +396,7 @@
     <span class='comment'>// Tests for a match by adding or removing a trailing slash.</span>
     <span class='kw'>fn</span> <span class='ident'>redirect_slash</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>req</span> : <span class='kw-2'>&amp;</span><span class='ident'>Request</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>IronError</span><span class='op'>&gt;</span> {
         <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>url</span> <span class='op'>=</span> <span class='ident'>req</span>.<span class='ident'>url</span>.<span class='ident'>clone</span>();
-        <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>path</span> <span class='op'>=</span> <span class='ident'>url</span>.<span class='ident'>path</span>.<span class='ident'>connect</span>(<span class='string'>&quot;/&quot;</span>);
+        <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>path</span> <span class='op'>=</span> <span class='ident'>url</span>.<span class='ident'>path</span>.<span class='ident'>join</span>(<span class='string'>&quot;/&quot;</span>);
 
         <span class='kw'>if</span> <span class='kw'>let</span> <span class='prelude-val'>Some</span>(<span class='ident'>last_char</span>) <span class='op'>=</span> <span class='ident'>path</span>.<span class='ident'>chars</span>().<span class='ident'>last</span>() {
             <span class='kw'>if</span> <span class='ident'>last_char</span> <span class='op'>==</span> <span class='string'>&#39;/&#39;</span> {
@@ -388,7 +404,7 @@
                 <span class='ident'>url</span>.<span class='ident'>path</span>.<span class='ident'>pop</span>();
             } <span class='kw'>else</span> {
                 <span class='ident'>path</span>.<span class='ident'>push</span>(<span class='string'>&#39;/&#39;</span>);
-                <span class='ident'>url</span>.<span class='ident'>path</span>.<span class='ident'>push</span>(<span class='string'>&quot;&quot;</span>.<span class='ident'>to_string</span>());
+                <span class='ident'>url</span>.<span class='ident'>path</span>.<span class='ident'>push</span>(<span class='ident'>String</span>::<span class='ident'>new</span>());
             }
         }
 
@@ -410,7 +426,7 @@
 
 <span class='kw'>impl</span> <span class='ident'>Handler</span> <span class='kw'>for</span> <span class='ident'>Router</span> {
     <span class='kw'>fn</span> <span class='ident'>handle</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>req</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>Request</span>) <span class='op'>-&gt;</span> <span class='ident'>IronResult</span><span class='op'>&lt;</span><span class='ident'>Response</span><span class='op'>&gt;</span> {
-        <span class='kw'>let</span> <span class='ident'>path</span> <span class='op'>=</span> <span class='ident'>req</span>.<span class='ident'>url</span>.<span class='ident'>path</span>.<span class='ident'>connect</span>(<span class='string'>&quot;/&quot;</span>);
+        <span class='kw'>let</span> <span class='ident'>path</span> <span class='op'>=</span> <span class='ident'>req</span>.<span class='ident'>url</span>.<span class='ident'>path</span>.<span class='ident'>join</span>(<span class='string'>&quot;/&quot;</span>);
 
         <span class='self'>self</span>.<span class='ident'>handle_method</span>(<span class='ident'>req</span>, <span class='kw-2'>&amp;</span><span class='ident'>path</span>).<span class='ident'>unwrap_or_else</span>(<span class='op'>||</span>
             <span class='kw'>match</span> <span class='ident'>req</span>.<span class='ident'>method</span> {
