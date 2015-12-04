@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-0a35038f75765ae4/iron-0.2.5/src/middleware/mod.rs`.">
+    <meta name="description" content="Source to the Rust file `src/middleware/mod.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>mod.rs.html -- source</title>
@@ -416,6 +416,15 @@
 <span id="374">374</span>
 <span id="375">375</span>
 <span id="376">376</span>
+<span id="377">377</span>
+<span id="378">378</span>
+<span id="379">379</span>
+<span id="380">380</span>
+<span id="381">381</span>
+<span id="382">382</span>
+<span id="383">383</span>
+<span id="384">384</span>
+<span id="385">385</span>
 </pre><pre class='rust '>
 <span class='doccomment'>//! Iron&#39;s Middleware and Handler System</span>
 <span class='doccomment'>//!</span>
@@ -595,7 +604,16 @@
     }
 
     <span class='doccomment'>/// Apply an `AroundMiddleware` to the `Handler` in this `Chain`.</span>
+    <span class='doccomment'>///</span>
+    <span class='doccomment'>/// Note: This function is being renamed `link_around()`, and will</span>
+    <span class='doccomment'>/// eventually be removed.</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>around</span><span class='op'>&lt;</span><span class='ident'>A</span><span class='op'>&gt;</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>around</span>: <span class='ident'>A</span>) <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>Chain</span>
+    <span class='kw'>where</span> <span class='ident'>A</span>: <span class='ident'>AroundMiddleware</span> {
+        <span class='self'>self</span>.<span class='ident'>link_around</span>(<span class='ident'>around</span>)
+    }
+
+    <span class='doccomment'>/// Apply an `AroundMiddleware` to the `Handler` in this `Chain`.</span>
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>link_around</span><span class='op'>&lt;</span><span class='ident'>A</span><span class='op'>&gt;</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>around</span>: <span class='ident'>A</span>) <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>Chain</span>
     <span class='kw'>where</span> <span class='ident'>A</span>: <span class='ident'>AroundMiddleware</span> {
         <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>handler</span> <span class='op'>=</span> <span class='self'>self</span>.<span class='ident'>handler</span>.<span class='ident'>take</span>().<span class='ident'>unwrap</span>();
         <span class='ident'>handler</span> <span class='op'>=</span> <span class='ident'>around</span>.<span class='ident'>around</span>(<span class='ident'>handler</span>);
@@ -853,6 +871,6 @@
     <script src="../../../jquery.js"></script>
     <script src="../../../main.js"></script>
     
-    <script async src="../../../search-index.js"></script>
+    <script defer src="../../../search-index.js"></script>
 </body>
 </html>

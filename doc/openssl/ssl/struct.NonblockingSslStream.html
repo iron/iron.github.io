@@ -45,7 +45,7 @@
             <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                 [<span class='inner'>&#x2212;</span>]
             </a>
-        </span><a id='src-19604' class='srclink' href='../../src/openssl/ssl/mod.rs.html#1431-1434' title='goto source code'>[src]</a></span></h1>
+        </span><a id='src-2605' class='srclink' href='../../src/openssl/ssl/mod.rs.html#1431-1434' title='goto source code'>[src]</a></span></h1>
 <pre class='rust struct'>pub struct NonblockingSslStream&lt;S&gt; {
     // some fields omitted
 }</pre><div class='docblock'><p>An SSL stream wrapping a nonblocking socket.</p>
@@ -55,8 +55,7 @@
 </div><h4 id='method.get_mut' class='method'><code>fn <a href='#method.get_mut' class='fnname'>get_mut</a>(&amp;mut self) -&gt; &amp;mut S</code></h4>
 <div class='docblock'><p>Returns a mutable reference to the underlying stream.</p>
 
-<h2 id="warning" class='section-header'><a
-                           href="#warning">Warning</a></h2>
+<h2 id='warning' class='section-header'><a href='#warning'>Warning</a></h2>
 <p>It is inadvisable to read from or write to the underlying stream as it
 will most likely corrupt the SSL session.</p>
 </div><h4 id='method.ssl' class='method'><code>fn <a href='#method.ssl' class='fnname'>ssl</a>(&amp;self) -&gt; &amp;<a class='struct' href='../../openssl/ssl/struct.Ssl.html' title='openssl::ssl::Ssl'>Ssl</a></code></h4>
@@ -73,7 +72,7 @@ be completed in subsequent read/write calls managed by your event loop.</p>
 <p>Note that this method will most likely not actually complete the SSL
 handshake because doing so requires several round trips; the handshake will
 be completed in subsequent read/write calls managed by your event loop.</p>
-</div></div><h3 class='impl'><code>impl&lt;S: <a class='trait' href='https://doc.rust-lang.org/nightly/std/io/trait.Read.html' title='std::io::Read'>Read</a> + <a class='trait' href='https://doc.rust-lang.org/nightly/std/io/trait.Write.html' title='std::io::Write'>Write</a>&gt; <a class='struct' href='../../openssl/ssl/struct.NonblockingSslStream.html' title='openssl::ssl::NonblockingSslStream'>NonblockingSslStream</a>&lt;S&gt;</code></h3><div class='impl-items'><h4 id='method.read' class='method'><code>fn <a href='#method.read' class='fnname'>read</a>(&amp;mut self, buf: <a href='https://doc.rust-lang.org/nightly/std/primitive.slice.html'>&amp;mut [</a><a href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a><a href='https://doc.rust-lang.org/nightly/std/primitive.slice.html'>]</a>) -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a href='https://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>, <a class='enum' href='../../openssl/ssl/error/enum.NonblockingSslError.html' title='openssl::ssl::error::NonblockingSslError'>NonblockingSslError</a>&gt;</code></h4>
+</div></div><h3 class='impl'><code>impl&lt;S: <a class='trait' href='https://doc.rust-lang.org/nightly/std/io/trait.Read.html' title='std::io::Read'>Read</a> + <a class='trait' href='https://doc.rust-lang.org/nightly/std/io/trait.Write.html' title='std::io::Write'>Write</a>&gt; <a class='struct' href='../../openssl/ssl/struct.NonblockingSslStream.html' title='openssl::ssl::NonblockingSslStream'>NonblockingSslStream</a>&lt;S&gt;</code></h3><div class='impl-items'><h4 id='method.read' class='method'><code>fn <a href='#method.read' class='fnname'>read</a>(&amp;mut self, buf: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.slice.html'>&amp;mut [</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.slice.html'>]</a>) -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>, <a class='enum' href='../../openssl/ssl/error/enum.NonblockingSslError.html' title='openssl::ssl::error::NonblockingSslError'>NonblockingSslError</a>&gt;</code></h4>
 <div class='docblock'><p>Read bytes from the SSL stream into <code>buf</code>.</p>
 
 <p>Given the SSL state machine, this method may return either <code>WantWrite</code>
@@ -89,7 +88,7 @@ thread on I/O.</p>
 
 <p>On a return value of <code>Ok(count)</code>, count is the number of decrypted
 plaintext bytes copied into the <code>buf</code> slice.</p>
-</div><h4 id='method.write' class='method'><code>fn <a href='#method.write' class='fnname'>write</a>(&amp;mut self, buf: <a href='https://doc.rust-lang.org/nightly/std/primitive.slice.html'>&amp;[</a><a href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a><a href='https://doc.rust-lang.org/nightly/std/primitive.slice.html'>]</a>) -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a href='https://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>, <a class='enum' href='../../openssl/ssl/error/enum.NonblockingSslError.html' title='openssl::ssl::error::NonblockingSslError'>NonblockingSslError</a>&gt;</code></h4>
+</div><h4 id='method.write' class='method'><code>fn <a href='#method.write' class='fnname'>write</a>(&amp;mut self, buf: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.slice.html'>&amp;[</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.slice.html'>]</a>) -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>, <a class='enum' href='../../openssl/ssl/error/enum.NonblockingSslError.html' title='openssl::ssl::error::NonblockingSslError'>NonblockingSslError</a>&gt;</code></h4>
 <div class='docblock'><p>Write bytes from <code>buf</code> to the SSL stream.</p>
 
 <p>Given the SSL state machine, this method may return either <code>WantWrite</code>
@@ -167,6 +166,6 @@ from the <code>buf</code> slice that were encrypted and written onto the stream.
     <script src="../../jquery.js"></script>
     <script src="../../main.js"></script>
     
-    <script async src="../../search-index.js"></script>
+    <script defer src="../../search-index.js"></script>
 </body>
 </html>
