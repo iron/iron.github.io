@@ -45,7 +45,7 @@
             <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                 [<span class='inner'>&#x2212;</span>]
             </a>
-        </span><a id='src-4170' class='srclink' href='../src/iron/iron.rs.html#24-34' title='goto source code'>[src]</a></span></h1>
+        </span><a id='src-4171' class='srclink' href='../src/iron/iron.rs.html#24-34' title='goto source code'>[src]</a></span></h1>
 <pre class='rust struct'>pub struct Iron&lt;H&gt; {
     pub handler: H,
     // some fields omitted
@@ -59,6 +59,22 @@
 requests.</p>
 </div></td></tr></table><h2 id='methods'>Methods</h2><h3 class='impl'><code>impl&lt;H: <a class='trait' href='../iron/middleware/trait.Handler.html' title='iron::middleware::Handler'>Handler</a>&gt; <a class='struct' href='../iron/struct.Iron.html' title='iron::Iron'>Iron</a>&lt;H&gt;</code></h3><div class='impl-items'><h4 id='method.http' class='method'><code>fn <a href='#method.http' class='fnname'>http</a>&lt;A: <a class='trait' href='https://doc.rust-lang.org/nightly/std/net/addr/trait.ToSocketAddrs.html' title='std::net::addr::ToSocketAddrs'>ToSocketAddrs</a>&gt;(self, addr: A) -&gt; <a class='type' href='../iron/error/type.HttpResult.html' title='iron::error::HttpResult'>HttpResult</a>&lt;<a class='struct' href='../hyper/server/struct.Listening.html' title='hyper::server::Listening'>Listening</a>&gt;</code></h4>
 <div class='docblock'><p>Kick off the server process using the HTTP protocol.</p>
+
+<p>Call this once to begin listening for requests on the server.
+This consumes the Iron instance, but does the listening on
+another task, so is not blocking.</p>
+
+<p>The thread returns a guard that will automatically join with the parent
+once it is dropped, blocking until this happens.</p>
+
+<p>Defaults to a threadpool of size <code>2 * num_cpus</code>.</p>
+
+<h2 id="panics" class='section-header'><a
+                           href="#panics">Panics</a></h2>
+<p>Panics if the provided address does not parse. To avoid this
+call <code>to_socket_addrs</code> yourself and pass a parsed <code>SocketAddr</code>.</p>
+</div><h4 id='method.https' class='method'><code>fn <a href='#method.https' class='fnname'>https</a>&lt;A: <a class='trait' href='https://doc.rust-lang.org/nightly/std/net/addr/trait.ToSocketAddrs.html' title='std::net::addr::ToSocketAddrs'>ToSocketAddrs</a>&gt;(self, addr: A, certificate: <a class='struct' href='https://doc.rust-lang.org/nightly/std/path/struct.PathBuf.html' title='std::path::PathBuf'>PathBuf</a>, key: <a class='struct' href='https://doc.rust-lang.org/nightly/std/path/struct.PathBuf.html' title='std::path::PathBuf'>PathBuf</a>) -&gt; <a class='type' href='../iron/error/type.HttpResult.html' title='iron::error::HttpResult'>HttpResult</a>&lt;<a class='struct' href='../hyper/server/struct.Listening.html' title='hyper::server::Listening'>Listening</a>&gt;</code></h4>
+<div class='docblock'><p>Kick off the server process using the HTTPS protocol.</p>
 
 <p>Call this once to begin listening for requests on the server.
 This consumes the Iron instance, but does the listening on
