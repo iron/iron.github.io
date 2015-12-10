@@ -93,6 +93,10 @@ where enums or generics are better suited.</p>
 <div class='docblock'><p>Is this <code>Error</code> object of type <code>E</code>?</p>
 </div><h4 id='method.downcast' class='method'><code>fn <a href='#method.downcast' class='fnname'>downcast</a>&lt;E: <a class='trait' href='../error/trait.Error.html' title='error::Error'>Error</a>&gt;(&amp;self) -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;&amp;E&gt;</code></h4>
 <div class='docblock'><p>If this error is <code>E</code>, downcast this error to <code>E</code>, by reference.</p>
+</div></div><h3 class='impl'><code>impl <a class='trait' href='../error/trait.Error.html' title='error::Error'>Error</a> + <a class='trait' href='https://doc.rust-lang.org/nightly/core/marker/trait.Send.html' title='core::marker::Send'>Send</a></code></h3><div class='impl-items'><h4 id='method.is' class='method'><code>fn <a href='#method.is' class='fnname'>is</a>&lt;E: <a class='trait' href='../error/trait.Error.html' title='error::Error'>Error</a> + <a class='trait' href='https://doc.rust-lang.org/nightly/core/marker/trait.Send.html' title='core::marker::Send'>Send</a>&gt;(&amp;self) -&gt; <a href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></code></h4>
+<div class='docblock'><p>Is this <code>Error + Send</code> object of type <code>E</code>?</p>
+</div><h4 id='method.downcast' class='method'><code>fn <a href='#method.downcast' class='fnname'>downcast</a>&lt;E: <a class='trait' href='../error/trait.Error.html' title='error::Error'>Error</a> + <a class='trait' href='https://doc.rust-lang.org/nightly/core/marker/trait.Send.html' title='core::marker::Send'>Send</a>&gt;(&amp;self) -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;&amp;E&gt;</code></h4>
+<div class='docblock'><p>If this error is <code>E</code>, downcast this error to <code>E</code>, by reference.</p>
 </div></div>
         <h2 id='implementors'>Implementors</h2>
         <ul class='item-list' id='implementors-list'>
