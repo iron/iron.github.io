@@ -45,7 +45,7 @@
             <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                 [<span class='inner'>&#x2212;</span>]
             </a>
-        </span><a id='src-14243' class='srclink' href='../../src/hyper/header/common/content_disposition.rs.html#84-89' title='goto source code'>[src]</a></span></h1>
+        </span><a id='src-2264' class='srclink' href='../../src/hyper/header/common/content_disposition.rs.html#84-89' title='goto source code'>[src]</a></span></h1>
 <pre class='rust struct'>pub struct ContentDisposition {
     pub disposition: <a class='enum' href='../../hyper/header/enum.DispositionType.html' title='hyper::header::DispositionType'>DispositionType</a>,
     pub parameters: <a class='struct' href='https://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;<a class='enum' href='../../hyper/header/enum.DispositionParam.html' title='hyper::header::DispositionParam'>DispositionParam</a>&gt;,
@@ -56,8 +56,7 @@ additional information about how to process the response payload, and
 also can be used to attach additional metadata, such as the filename
 to use when saving the response payload locally.</p>
 
-<h1 id="abnf" class='section-header'><a
-                           href="#abnf">ABNF</a></h1>
+<h1 id='abnf' class='section-header'><a href='#abnf'>ABNF</a></h1>
 <pre><code class="language-plain">content-disposition = &quot;Content-Disposition&quot; &quot;:&quot;
                       disposition-type *( &quot;;&quot; disposition-parm )
 
@@ -77,8 +76,7 @@ disp-ext-parm       = token &quot;=&quot; value
 ext-token           = &lt;the characters in token, followed by &quot;*&quot;&gt;
 </code></pre>
 
-<h1 id="example" class='section-header'><a
-                           href="#example">Example</a></h1><pre class='rust rust-example-rendered'>
+<h1 id='example' class='section-header'><a href='#example'>Example</a></h1><pre class='rust rust-example-rendered'>
 <span class='kw'>use</span> <span class='ident'>hyper</span>::<span class='ident'>header</span>::{<span class='ident'>Headers</span>, <span class='ident'>ContentDisposition</span>, <span class='ident'>DispositionType</span>, <span class='ident'>DispositionParam</span>, <span class='ident'>Charset</span>};
 
 <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>headers</span> <span class='op'>=</span> <span class='ident'>Headers</span>::<span class='ident'>new</span>();
