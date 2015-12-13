@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `src/modifiers.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-0a35038f75765ae4/iron-0.2.6/src/modifiers.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>modifiers.rs.html -- source</title>
@@ -202,6 +202,7 @@
 <span id="160">160</span>
 <span id="161">161</span>
 <span id="162">162</span>
+<span id="163">163</span>
 </pre><pre class='rust '>
 <span class='doccomment'>//! Defines a series of convenience modifiers for editing Responses</span>
 <span class='doccomment'>//!</span>
@@ -282,7 +283,7 @@
 <span class='kw'>impl</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span> <span class='ident'>Modifier</span><span class='op'>&lt;</span><span class='ident'>Response</span><span class='op'>&gt;</span> <span class='kw'>for</span> <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='ident'>str</span> {
     <span class='attribute'>#[<span class='ident'>inline</span>]</span>
     <span class='kw'>fn</span> <span class='ident'>modify</span>(<span class='self'>self</span>, <span class='ident'>res</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>Response</span>) {
-        <span class='self'>self</span>.<span class='ident'>to_owned</span>().<span class='ident'>modify</span>(<span class='ident'>res</span>);
+        <span class='self'>self</span>.<span class='ident'>to_string</span>().<span class='ident'>modify</span>(<span class='ident'>res</span>);
     }
 }
 
@@ -312,7 +313,7 @@
     <span class='doccomment'>/// Panics if there is no file at the passed-in Path.</span>
     <span class='kw'>fn</span> <span class='ident'>modify</span>(<span class='self'>self</span>, <span class='ident'>res</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>Response</span>) {
         <span class='ident'>File</span>::<span class='ident'>open</span>(<span class='self'>self</span>)
-            .<span class='ident'>expect</span>(<span class='kw-2'>&amp;</span><span class='macro'>format</span><span class='macro'>!</span>(<span class='string'>&quot;No such file: {}&quot;</span>, <span class='self'>self</span>.<span class='ident'>display</span>()))
+            .<span class='ident'>ok</span>().<span class='ident'>expect</span>(<span class='kw-2'>&amp;</span><span class='macro'>format</span><span class='macro'>!</span>(<span class='string'>&quot;No such file: {}&quot;</span>, <span class='self'>self</span>.<span class='ident'>display</span>()))
             .<span class='ident'>modify</span>(<span class='ident'>res</span>);
 
         <span class='kw'>let</span> <span class='ident'>mime_str</span> <span class='op'>=</span> <span class='ident'>MIME_TYPES</span>.<span class='ident'>mime_for_path</span>(<span class='self'>self</span>);
@@ -328,7 +329,7 @@
     <span class='doccomment'>/// Panics if there is no file at the passed-in Path.</span>
     <span class='kw'>fn</span> <span class='ident'>modify</span>(<span class='self'>self</span>, <span class='ident'>res</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>Response</span>) {
         <span class='ident'>File</span>::<span class='ident'>open</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>)
-            .<span class='ident'>expect</span>(<span class='kw-2'>&amp;</span><span class='macro'>format</span><span class='macro'>!</span>(<span class='string'>&quot;No such file: {}&quot;</span>, <span class='self'>self</span>.<span class='ident'>display</span>()))
+            .<span class='ident'>ok</span>().<span class='ident'>expect</span>(<span class='kw-2'>&amp;</span><span class='macro'>format</span><span class='macro'>!</span>(<span class='string'>&quot;No such file: {}&quot;</span>, <span class='self'>self</span>.<span class='ident'>display</span>()))
             .<span class='ident'>modify</span>(<span class='ident'>res</span>);
     }
 }
@@ -365,6 +366,7 @@
         <span class='ident'>res</span>.<span class='ident'>headers</span>.<span class='ident'>set</span>(<span class='ident'>headers</span>::<span class='ident'>Location</span>(<span class='ident'>url</span>.<span class='ident'>to_string</span>()));
     }
 }
+
 </pre>
 </section>
     <section id='search' class="content hidden"></section>

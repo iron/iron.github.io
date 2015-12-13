@@ -24,17 +24,17 @@
 
     
 
-    <section class="sidebar">
+    <nav class="sidebar">
         
         <p class='location'><a href='index.html'>mount</a></p><script>window.sidebarCurrent = {name: 'Mount', ty: 'struct', relpath: ''};</script><script defer src="sidebar-items.js"></script>
-    </section>
+    </nav>
 
     <nav class="sub">
         <form class="search-form js-only">
             <div class="search-container">
                 <input class="search-input" name="search"
                        autocomplete="off"
-                       placeholder="Click or press 'S' to search, '?' for more options..."
+                       placeholder="Click or press ‘S’ to search, ‘?’ for more options…"
                        type="search">
             </div>
         </form>
@@ -45,7 +45,7 @@
             <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                 [<span class='inner'>&#x2212;</span>]
             </a>
-        </span><a id='src-56' class='srclink' href='../src/mount/mount.rs.html#24-26' title='goto source code'>[src]</a></span></h1>
+        </span><a id='src-24' class='srclink' href='../src/mount/mount.rs.html#24-26' title='goto source code'>[src]</a></span></h1>
 <pre class='rust struct'>pub struct Mount {
     // some fields omitted
 }</pre><div class='docblock'><p><code>Mount</code> is a simple mounting middleware.</p>
@@ -61,7 +61,7 @@ path. <code>Request::url</code> is modified so that requests appear to be relati
 from <code>Request::extensions</code>.</p>
 </div><h2 id='methods'>Methods</h2><h3 class='impl'><code>impl <a class='struct' href='../mount/struct.Mount.html' title='mount::Mount'>Mount</a></code></h3><div class='impl-items'><h4 id='method.new' class='method'><code>fn <a href='#method.new' class='fnname'>new</a>() -&gt; <a class='struct' href='../mount/struct.Mount.html' title='mount::Mount'>Mount</a></code></h4>
 <div class='docblock'><p>Creates a new instance of <code>Mount</code>.</p>
-</div><h4 id='method.mount' class='method'><code>fn <a href='#method.mount' class='fnname'>mount</a>&lt;H: <a class='trait' href='../iron/middleware/trait.Handler.html' title='iron::middleware::Handler'>Handler</a>&gt;(&amp;mut self, route: &amp;<a href='http://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>, handler: H) -&gt; &amp;mut <a class='struct' href='../mount/struct.Mount.html' title='mount::Mount'>Mount</a></code></h4>
+</div><h4 id='method.mount' class='method'><code>fn <a href='#method.mount' class='fnname'>mount</a>&lt;H: <a class='trait' href='../iron/middleware/trait.Handler.html' title='iron::middleware::Handler'>Handler</a>&gt;(&amp;mut self, route: &amp;<a href='https://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>, handler: H) -&gt; &amp;mut <a class='struct' href='../mount/struct.Mount.html' title='mount::Mount'>Mount</a></code></h4>
 <div class='docblock'><p>Mounts a given <code>Handler</code> onto a route.</p>
 
 <p>This method may be called multiple times with different routes.
@@ -74,40 +74,49 @@ For a given request, the <em>most specific</em> handler will be selected.</p>
 
     <section class="footer"></section>
 
-    <div id="help" class="hidden">
-        <div class="shortcuts">
-            <h1>Keyboard shortcuts</h1>
-            <dl>
-                <dt>?</dt>
-                <dd>Show this help dialog</dd>
-                <dt>S</dt>
-                <dd>Focus the search field</dd>
-                <dt>&larrb;</dt>
-                <dd>Move up in search results</dd>
-                <dt>&rarrb;</dt>
-                <dd>Move down in search results</dd>
-                <dt>&#9166;</dt>
-                <dd>Go to active search result</dd>
-            </dl>
+    <aside id="help" class="hidden">
+        <div>
+            <h1 class="hidden">Help</h1>
+
+            <div class="shortcuts">
+                <h2>Keyboard Shortcuts</h2>
+
+                <dl>
+                    <dt>?</dt>
+                    <dd>Show this help dialog</dd>
+                    <dt>S</dt>
+                    <dd>Focus the search field</dd>
+                    <dt>&larrb;</dt>
+                    <dd>Move up in search results</dd>
+                    <dt>&rarrb;</dt>
+                    <dd>Move down in search results</dd>
+                    <dt>&#9166;</dt>
+                    <dd>Go to active search result</dd>
+                </dl>
+            </div>
+
+            <div class="infos">
+                <h2>Search Tricks</h2>
+
+                <p>
+                    Prefix searches with a type followed by a colon (e.g.
+                    <code>fn:</code>) to restrict the search to a given type.
+                </p>
+
+                <p>
+                    Accepted types are: <code>fn</code>, <code>mod</code>,
+                    <code>struct</code>, <code>enum</code>,
+                    <code>trait</code>, <code>type</code>, <code>macro</code>,
+                    and <code>const</code>.
+                </p>
+
+                <p>
+                    Search functions by type signature (e.g.
+                    <code>vec -> usize</code>)
+                </p>
+            </div>
         </div>
-        <div class="infos">
-            <h1>Search tricks</h1>
-            <p>
-                Prefix searches with a type followed by a colon (e.g.
-                <code>fn:</code>) to restrict the search to a given type.
-            </p>
-            <p>
-                Accepted types are: <code>fn</code>, <code>mod</code>,
-                <code>struct</code>, <code>enum</code>,
-                <code>trait</code>, <code>typedef</code> (or
-                <code>tdef</code>).
-            </p>
-            <p>
-                Search functions by type signature (e.g.
-                <code>vec -> usize</code>)
-            </p>
-        </div>
-    </div>
+    </aside>
 
     
 
