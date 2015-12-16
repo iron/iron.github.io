@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-0a35038f75765ae4/openssl-0.7.1/src/x509/mod.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-0a35038f75765ae4/openssl-0.7.2/src/x509/mod.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>mod.rs.html -- source</title>
@@ -749,7 +749,7 @@
 <span class='kw'>impl</span> <span class='ident'>SslString</span> {
     <span class='kw'>unsafe</span> <span class='kw'>fn</span> <span class='ident'>new</span>(<span class='ident'>buf</span>: <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>c_char</span>) <span class='op'>-&gt;</span> <span class='ident'>SslString</span> {
         <span class='ident'>SslString</span> {
-            <span class='ident'>s</span>: <span class='ident'>str</span>::<span class='ident'>from_utf8</span>(<span class='ident'>CStr</span>::<span class='ident'>from_ptr</span>(<span class='ident'>buf</span>).<span class='ident'>to_bytes</span>()).<span class='ident'>unwrap</span>()
+            <span class='ident'>s</span>: <span class='ident'>str</span>::<span class='ident'>from_utf8</span>(<span class='ident'>CStr</span>::<span class='ident'>from_ptr</span>(<span class='ident'>buf</span> <span class='kw'>as</span> <span class='op'>*</span><span class='kw'>const</span> _).<span class='ident'>to_bytes</span>()).<span class='ident'>unwrap</span>()
         }
     }
 }
@@ -974,8 +974,8 @@
         <span class='macro'>lift_ssl</span><span class='macro'>!</span>(<span class='kw'>unsafe</span> {
             <span class='kw'>let</span> <span class='ident'>key</span> <span class='op'>=</span> <span class='ident'>CString</span>::<span class='ident'>new</span>(<span class='ident'>key</span>.<span class='ident'>as_bytes</span>()).<span class='ident'>unwrap</span>();
             <span class='kw'>let</span> <span class='ident'>value</span> <span class='op'>=</span> <span class='ident'>CString</span>::<span class='ident'>new</span>(<span class='ident'>value</span>.<span class='ident'>as_bytes</span>()).<span class='ident'>unwrap</span>();
-            <span class='ident'>ffi</span>::<span class='ident'>X509_NAME_add_entry_by_txt</span>(<span class='ident'>name</span>, <span class='ident'>key</span>.<span class='ident'>as_ptr</span>(), <span class='ident'>ffi</span>::<span class='ident'>MBSTRING_UTF8</span>,
-                                            <span class='ident'>value</span>.<span class='ident'>as_ptr</span>(), <span class='ident'>value_len</span>, <span class='op'>-</span><span class='number'>1</span>, <span class='number'>0</span>)
+            <span class='ident'>ffi</span>::<span class='ident'>X509_NAME_add_entry_by_txt</span>(<span class='ident'>name</span>, <span class='ident'>key</span>.<span class='ident'>as_ptr</span>() <span class='kw'>as</span> <span class='op'>*</span><span class='kw'>const</span> _, <span class='ident'>ffi</span>::<span class='ident'>MBSTRING_UTF8</span>,
+                                            <span class='ident'>value</span>.<span class='ident'>as_ptr</span>() <span class='kw'>as</span> <span class='op'>*</span><span class='kw'>const</span> _, <span class='ident'>value_len</span>, <span class='op'>-</span><span class='number'>1</span>, <span class='number'>0</span>)
         })
     }
 

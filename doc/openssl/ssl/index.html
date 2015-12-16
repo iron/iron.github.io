@@ -45,7 +45,7 @@
             <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                 [<span class='inner'>&#x2212;</span>]
             </a>
-        </span><a id='src-1199' class='srclink' href='../../src/openssl/ssl/mod.rs.html#1-1656' title='goto source code'>[src]</a></span></h1>
+        </span><a id='src-1199' class='srclink' href='../../src/openssl/ssl/mod.rs.html#1-1502' title='goto source code'>[src]</a></span></h1>
 <h2 id='modules' class='section-header'><a href="#modules">Modules</a></h2>
 <table>
                     <tr class=' module-item'>
@@ -61,8 +61,8 @@
                         <td><a class='struct' href='struct.NonblockingSslStream.html'
                                title='openssl::ssl::NonblockingSslStream'>NonblockingSslStream</a></td>
                         <td class='docblock short'>
-                             <p>An SSL stream wrapping a nonblocking socket.</p>
-
+                             
+<h1 id='deprecated' class='section-header'><a href='#deprecated'>Deprecated</a></h1>
                         </td>
                     </tr>
                 
@@ -109,6 +109,15 @@
                     </tr>
                 </table><h2 id='enums' class='section-header'><a href="#enums">Enums</a></h2>
 <table>
+                    <tr class=' module-item'>
+                        <td><a class='enum' href='enum.Error.html'
+                               title='openssl::ssl::Error'>Error</a></td>
+                        <td class='docblock short'>
+                             <p>An SSL error.</p>
+
+                        </td>
+                    </tr>
+                
                     <tr class=' module-item'>
                         <td><a class='enum' href='enum.MaybeSslStream.html'
                                title='openssl::ssl::MaybeSslStream'>MaybeSslStream</a></td>
@@ -489,6 +498,23 @@ It is optional to call this function and safe to do so more than once.</p>
                     </tr>
                 </table><h2 id='types' class='section-header'><a href="#types">Type Definitions</a></h2>
 <table>
+                    <tr class=' module-item'>
+                        <td><a class='type' href='type.ServerNameCallback.html'
+                               title='openssl::ssl::ServerNameCallback'>ServerNameCallback</a></td>
+                        <td class='docblock short'>
+                             <p>The signature of functions that can be used to choose the context depending on the server name</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='type' href='type.ServerNameCallbackData.html'
+                               title='openssl::ssl::ServerNameCallbackData'>ServerNameCallbackData</a></td>
+                        <td class='docblock short'>
+                             
+                        </td>
+                    </tr>
+                
                     <tr class=' module-item'>
                         <td><a class='type' href='type.VerifyCallback.html'
                                title='openssl::ssl::VerifyCallback'>VerifyCallback</a></td>
