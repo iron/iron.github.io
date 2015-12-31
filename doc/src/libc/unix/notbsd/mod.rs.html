@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-0a35038f75765ae4/libc-0.2.3/src/unix/notbsd/mod.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-0a35038f75765ae4/libc-0.2.4/src/unix/notbsd/mod.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>mod.rs.html -- source</title>
@@ -661,6 +661,7 @@
 <span id="619">619</span>
 <span id="620">620</span>
 <span id="621">621</span>
+<span id="622">622</span>
 </pre><pre class='rust '>
 <span class='kw'>use</span> <span class='ident'>dox</span>::<span class='ident'>mem</span>;
 
@@ -1270,6 +1271,7 @@
                  <span class='ident'>arg</span>: <span class='op'>*</span><span class='kw-2'>mut</span> ::<span class='ident'>c_void</span>, ...) <span class='op'>-&gt;</span> ::<span class='ident'>c_int</span>;
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>statfs</span>(<span class='ident'>path</span>: <span class='op'>*</span><span class='kw'>const</span> ::<span class='ident'>c_char</span>, <span class='ident'>buf</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>statfs</span>) <span class='op'>-&gt;</span> ::<span class='ident'>c_int</span>;
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>fstatfs</span>(<span class='ident'>fd</span>: ::<span class='ident'>c_int</span>, <span class='ident'>buf</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>statfs</span>) <span class='op'>-&gt;</span> ::<span class='ident'>c_int</span>;
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>memrchr</span>(<span class='ident'>cx</span>: <span class='op'>*</span><span class='kw'>const</span> ::<span class='ident'>c_void</span>, <span class='ident'>c</span>: ::<span class='ident'>c_int</span>, <span class='ident'>n</span>: ::<span class='ident'>size_t</span>) <span class='op'>-&gt;</span> <span class='op'>*</span><span class='kw-2'>mut</span> ::<span class='ident'>c_void</span>;
 }
 
 <span class='macro'>cfg_if</span><span class='macro'>!</span> {
