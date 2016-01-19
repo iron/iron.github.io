@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-0a35038f75765ae4/hyper-0.7.1/src/header/parsing.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-0a35038f75765ae4/hyper-0.7.2/src/header/parsing.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>parsing.rs.html -- source</title>
@@ -223,6 +223,45 @@
 <span id="181">181</span>
 <span id="182">182</span>
 <span id="183">183</span>
+<span id="184">184</span>
+<span id="185">185</span>
+<span id="186">186</span>
+<span id="187">187</span>
+<span id="188">188</span>
+<span id="189">189</span>
+<span id="190">190</span>
+<span id="191">191</span>
+<span id="192">192</span>
+<span id="193">193</span>
+<span id="194">194</span>
+<span id="195">195</span>
+<span id="196">196</span>
+<span id="197">197</span>
+<span id="198">198</span>
+<span id="199">199</span>
+<span id="200">200</span>
+<span id="201">201</span>
+<span id="202">202</span>
+<span id="203">203</span>
+<span id="204">204</span>
+<span id="205">205</span>
+<span id="206">206</span>
+<span id="207">207</span>
+<span id="208">208</span>
+<span id="209">209</span>
+<span id="210">210</span>
+<span id="211">211</span>
+<span id="212">212</span>
+<span id="213">213</span>
+<span id="214">214</span>
+<span id="215">215</span>
+<span id="216">216</span>
+<span id="217">217</span>
+<span id="218">218</span>
+<span id="219">219</span>
+<span id="220">220</span>
+<span id="221">221</span>
+<span id="222">222</span>
 </pre><pre class='rust '>
 <span class='doccomment'>//! Utility functions for Header implementations.</span>
 
@@ -282,9 +321,13 @@
 
 <span class='doccomment'>/// An extended header parameter value (i.e., tagged with a character set and optionally,</span>
 <span class='doccomment'>/// a language), as defined in [RFC 5987](https://tools.ietf.org/html/rfc5987#section-3.2).</span>
+<span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Clone</span>, <span class='ident'>Debug</span>, <span class='ident'>PartialEq</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>ExtendedValue</span> {
+    <span class='doccomment'>/// The character set that is used to encode the `value` to a string.</span>
     <span class='kw'>pub</span> <span class='ident'>charset</span>: <span class='ident'>Charset</span>,
+    <span class='doccomment'>/// The human language details of the `value`, if available.</span>
     <span class='kw'>pub</span> <span class='ident'>language_tag</span>: <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>LanguageTag</span><span class='op'>&gt;</span>,
+    <span class='doccomment'>/// The parameter value, as expressed in octets.</span>
     <span class='kw'>pub</span> <span class='ident'>value</span>: <span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>u8</span><span class='op'>&gt;</span>,
 }
 
@@ -356,10 +399,23 @@
     })
 }
 
+<span class='kw'>impl</span> <span class='ident'>Display</span> <span class='kw'>for</span> <span class='ident'>ExtendedValue</span> {
+    <span class='kw'>fn</span> <span class='ident'>fmt</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>f</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>fmt</span>::<span class='ident'>Formatter</span>) <span class='op'>-&gt;</span> <span class='ident'>fmt</span>::<span class='prelude-ty'>Result</span> {
+        <span class='kw'>let</span> <span class='ident'>encoded_value</span> <span class='op'>=</span>
+            <span class='ident'>percent_encoding</span>::<span class='ident'>percent_encode</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>.<span class='ident'>value</span>[..],
+                                             <span class='ident'>percent_encoding</span>::<span class='ident'>HTTP_VALUE_ENCODE_SET</span>);
+        <span class='kw'>if</span> <span class='kw'>let</span> <span class='prelude-val'>Some</span>(<span class='kw-2'>ref</span> <span class='ident'>lang</span>) <span class='op'>=</span> <span class='self'>self</span>.<span class='ident'>language_tag</span> {
+            <span class='macro'>write</span><span class='macro'>!</span>(<span class='ident'>f</span>, <span class='string'>&quot;{}&#39;{}&#39;{}&quot;</span>, <span class='self'>self</span>.<span class='ident'>charset</span>, <span class='ident'>lang</span>, <span class='ident'>encoded_value</span>)
+        } <span class='kw'>else</span> {
+            <span class='macro'>write</span><span class='macro'>!</span>(<span class='ident'>f</span>, <span class='string'>&quot;{}&#39;&#39;{}&quot;</span>, <span class='self'>self</span>.<span class='ident'>charset</span>, <span class='ident'>encoded_value</span>)
+        }
+    }
+}
+
 <span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>test</span>)]</span>
 <span class='kw'>mod</span> <span class='ident'>tests</span> {
     <span class='kw'>use</span> <span class='ident'>header</span>::<span class='ident'>shared</span>::<span class='ident'>Charset</span>;
-    <span class='kw'>use</span> <span class='ident'>super</span>::<span class='ident'>parse_extended_value</span>;
+    <span class='kw'>use</span> <span class='ident'>super</span>::{<span class='ident'>ExtendedValue</span>, <span class='ident'>parse_extended_value</span>};
 
     <span class='attribute'>#[<span class='ident'>test</span>]</span>
     <span class='kw'>fn</span> <span class='ident'>test_parse_extended_value_with_encoding_and_language_tag</span>() {
@@ -405,6 +461,28 @@
     <span class='kw'>fn</span> <span class='ident'>test_parse_extended_value_partially_formatted_blank</span>() {
         <span class='kw'>let</span> <span class='ident'>result</span> <span class='op'>=</span> <span class='ident'>parse_extended_value</span>(<span class='string'>&quot;blank second part&#39;&quot;</span>);
         <span class='macro'>assert</span><span class='macro'>!</span>(<span class='ident'>result</span>.<span class='ident'>is_err</span>());
+    }
+
+    <span class='attribute'>#[<span class='ident'>test</span>]</span>
+    <span class='kw'>fn</span> <span class='ident'>test_fmt_extended_value_with_encoding_and_language_tag</span>() {
+        <span class='kw'>let</span> <span class='ident'>extended_value</span> <span class='op'>=</span> <span class='ident'>ExtendedValue</span> {
+            <span class='ident'>charset</span>: <span class='ident'>Charset</span>::<span class='ident'>Iso_8859_1</span>,
+            <span class='ident'>language_tag</span>: <span class='prelude-val'>Some</span>(<span class='string'>&quot;en&quot;</span>.<span class='ident'>parse</span>().<span class='ident'>expect</span>(<span class='string'>&quot;Could not parse language tag&quot;</span>)),
+            <span class='ident'>value</span>: <span class='macro'>vec</span><span class='macro'>!</span>[<span class='number'>163</span>, <span class='string'>b&#39; &#39;</span>, <span class='string'>b&#39;r&#39;</span>, <span class='string'>b&#39;a&#39;</span>, <span class='string'>b&#39;t&#39;</span>, <span class='string'>b&#39;e&#39;</span>, <span class='string'>b&#39;s&#39;</span>],
+        };
+        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='string'>&quot;ISO-8859-1&#39;en&#39;%A3%20rates&quot;</span>, <span class='macro'>format</span><span class='macro'>!</span>(<span class='string'>&quot;{}&quot;</span>, <span class='ident'>extended_value</span>));
+    }
+
+    <span class='attribute'>#[<span class='ident'>test</span>]</span>
+    <span class='kw'>fn</span> <span class='ident'>test_fmt_extended_value_with_encoding</span>() {
+        <span class='kw'>let</span> <span class='ident'>extended_value</span> <span class='op'>=</span> <span class='ident'>ExtendedValue</span> {
+            <span class='ident'>charset</span>: <span class='ident'>Charset</span>::<span class='ident'>Ext</span>(<span class='string'>&quot;UTF-8&quot;</span>.<span class='ident'>to_string</span>()),
+            <span class='ident'>language_tag</span>: <span class='prelude-val'>None</span>,
+            <span class='ident'>value</span>: <span class='macro'>vec</span><span class='macro'>!</span>[<span class='number'>194</span>, <span class='number'>163</span>, <span class='string'>b&#39; &#39;</span>, <span class='string'>b&#39;a&#39;</span>, <span class='string'>b&#39;n&#39;</span>, <span class='string'>b&#39;d&#39;</span>, <span class='string'>b&#39; &#39;</span>, <span class='number'>226</span>, <span class='number'>130</span>, <span class='number'>172</span>, <span class='string'>b&#39; &#39;</span>, <span class='string'>b&#39;r&#39;</span>, <span class='string'>b&#39;a&#39;</span>,
+                        <span class='string'>b&#39;t&#39;</span>, <span class='string'>b&#39;e&#39;</span>, <span class='string'>b&#39;s&#39;</span>],
+        };
+        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='string'>&quot;UTF-8&#39;&#39;%C2%A3%20and%20%E2%82%AC%20rates&quot;</span>,
+                   <span class='macro'>format</span><span class='macro'>!</span>(<span class='string'>&quot;{}&quot;</span>, <span class='ident'>extended_value</span>));
     }
 }
 </pre>

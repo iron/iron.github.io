@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-0a35038f75765ae4/httparse-1.1.0/src/lib.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-0a35038f75765ae4/httparse-1.1.1/src/lib.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>lib.rs.html -- source</title>
@@ -864,6 +864,13 @@
 <span id="822">822</span>
 <span id="823">823</span>
 <span id="824">824</span>
+<span id="825">825</span>
+<span id="826">826</span>
+<span id="827">827</span>
+<span id="828">828</span>
+<span id="829">829</span>
+<span id="830">830</span>
+<span id="831">831</span>
 </pre><pre class='rust '>
 <span class='attribute'>#<span class='op'>!</span>[<span class='ident'>cfg_attr</span>(<span class='ident'>test</span>, <span class='ident'>deny</span>(<span class='ident'>warnings</span>))]</span>
 <span class='attribute'>#<span class='op'>!</span>[<span class='ident'>deny</span>(<span class='ident'>missing_docs</span>)]</span>
@@ -1243,7 +1250,7 @@
 <span class='kw'>fn</span> <span class='ident'>parse_token</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span>(<span class='ident'>bytes</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>Bytes</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='ident'>str</span><span class='op'>&gt;</span> {
     <span class='kw'>loop</span> {
         <span class='kw'>let</span> <span class='ident'>b</span> <span class='op'>=</span> <span class='macro'>next</span><span class='macro'>!</span>(<span class='ident'>bytes</span>);
-        <span class='kw'>if</span> <span class='ident'>b</span> <span class='op'>==</span> <span class='string'>b&#39; &#39;</span> <span class='op'>||</span> <span class='ident'>b</span> <span class='op'>==</span> <span class='string'>b&#39;\r&#39;</span> <span class='op'>||</span> <span class='ident'>b</span> <span class='op'>==</span> <span class='string'>b&#39;\n&#39;</span> {
+        <span class='kw'>if</span> <span class='ident'>b</span> <span class='op'>==</span> <span class='string'>b&#39; &#39;</span> {
             <span class='kw'>return</span> <span class='prelude-val'>Ok</span>(<span class='ident'>Status</span>::<span class='ident'>Complete</span>(<span class='kw'>unsafe</span> {
                 <span class='comment'>// all bytes up till `i` must have been `is_token`.</span>
                 <span class='ident'>str</span>::<span class='ident'>from_utf8_unchecked</span>(<span class='ident'>bytes</span>.<span class='ident'>slice_skip</span>(<span class='number'>1</span>))
@@ -1591,6 +1598,13 @@
             <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>req</span>.<span class='ident'>version</span>.<span class='ident'>unwrap</span>(), <span class='number'>1</span>);
             <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>req</span>.<span class='ident'>headers</span>.<span class='ident'>len</span>(), <span class='number'>0</span>);
         }
+    }
+
+    <span class='macro'>req</span><span class='macro'>!</span> {
+        <span class='ident'>test_request_with_invalid_token_delimiter</span>,
+        <span class='string'>b&quot;GET\n/ HTTP/1.1\r\nHost: foo.bar\r\n\r\n&quot;</span>,
+        <span class='prelude-val'>Err</span>(::<span class='ident'>Error</span>::<span class='ident'>Token</span>),
+        <span class='op'>|</span>_<span class='op'>|</span> {}
     }
 
     <span class='macro'>macro_rules</span><span class='macro'>!</span> <span class='ident'>res</span> {

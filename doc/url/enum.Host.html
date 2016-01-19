@@ -45,7 +45,7 @@
             <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                 [<span class='inner'>&#x2212;</span>]
             </a>
-        </span><a id='src-49' class='srclink' href='../src/url/host.rs.html#20-29' title='goto source code'>[src]</a></span></h1>
+        </span><a id='src-52' class='srclink' href='../src/url/host.rs.html#21-30' title='goto source code'>[src]</a></span></h1>
 <pre class='rust enum'>pub enum Host {
     Domain(<a class='struct' href='https://doc.rust-lang.org/nightly/collections/string/struct.String.html' title='collections::string::String'>String</a>),
     Ipv4(<a class='struct' href='https://doc.rust-lang.org/nightly/std/net/ip/struct.Ipv4Addr.html' title='std::net::ip::Ipv4Addr'>Ipv4Addr</a>),
@@ -62,8 +62,6 @@ with the port number delimiter.</p>
 
 <p>Returns <code>Err</code> for an empty host, an invalid IPv6 address,
 or a or invalid non-ASCII domain.</p>
-
-<p>FIXME: Add IDNA support for non-ASCII domains.</p>
 </div><h4 id='method.serialize' class='method'><code>fn <a href='#method.serialize' class='fnname'>serialize</a>(&amp;self) -&gt; <a class='struct' href='https://doc.rust-lang.org/nightly/collections/string/struct.String.html' title='collections::string::String'>String</a></code></h4>
 <div class='docblock'><p>Serialize the host as a string.</p>
 
