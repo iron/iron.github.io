@@ -9,6 +9,7 @@
 
     <title>iron::itry! - Rust</title>
 
+    <link rel="stylesheet" type="text/css" href="../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../main.css">
 
     <link rel="shortcut icon" href="https://avatars0.githubusercontent.com/u/7853871?s=256">
@@ -45,16 +46,11 @@
             <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                 [<span class='inner'>&#x2212;</span>]
             </a>
-        </span><a id='src-874' class='srclink' href='../src/iron/macros.rs.html#15-23' title='goto source code'>[src]</a></span></h1>
+        </span><a id='src-847' class='srclink' href='../src/iron/macros.rs.html#15-23' title='goto source code'>[src]</a></span></h1>
 <pre class='rust macro'>
 <span class='macro'>macro_rules</span><span class='macro'>!</span> <span class='ident'>itry</span> {
-    (<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>result</span>:<span class='ident'>expr</span>) <span class='op'>=&gt;</span> (<span class='macro'>itry</span><span class='macro'>!</span>(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>result</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>crate</span>::<span class='ident'>status</span>::<span class='ident'>InternalServerError</span>));
-
-    (<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>result</span>:<span class='ident'>expr</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>modifier</span>:<span class='ident'>expr</span>) <span class='op'>=&gt;</span> (<span class='kw'>match</span> <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>result</span> {
-        ::<span class='ident'>std</span>::<span class='ident'>result</span>::<span class='prelude-ty'>Result</span>::<span class='prelude-val'>Ok</span>(<span class='ident'>val</span>) <span class='op'>=&gt;</span> <span class='ident'>val</span>,
-        ::<span class='ident'>std</span>::<span class='ident'>result</span>::<span class='prelude-ty'>Result</span>::<span class='prelude-val'>Err</span>(<span class='ident'>err</span>) <span class='op'>=&gt;</span> <span class='kw'>return</span> ::<span class='ident'>std</span>::<span class='ident'>result</span>::<span class='prelude-ty'>Result</span>::<span class='prelude-val'>Err</span>(
-            <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>crate</span>::<span class='ident'>IronError</span>::<span class='ident'>new</span>(<span class='ident'>err</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>modifier</span>))
-    })
+    (<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>result</span>:<span class='ident'>expr</span>) <span class='op'>=&gt;</span> { ... };
+    (<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>result</span>:<span class='ident'>expr</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>modifier</span>:<span class='ident'>expr</span>) <span class='op'>=&gt;</span> { ... };
 }</pre>
 <div class='docblock'><p>Like try!(), but wrapping the error value in <code>IronError</code>. To be used in request handlers.</p>
 <pre class='rust rust-example-rendered'>
@@ -119,6 +115,6 @@
     <script src="../jquery.js"></script>
     <script src="../main.js"></script>
     
-    <script async src="../search-index.js"></script>
+    <script defer src="../search-index.js"></script>
 </body>
 </html>
