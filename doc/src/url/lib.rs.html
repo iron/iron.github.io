@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-88ac128001ac3a9a/url-0.5.3/src/lib.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-88ac128001ac3a9a/url-0.5.4/src/lib.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>lib.rs.html -- source</title>
@@ -1206,11 +1206,6 @@
 <span id="1163">1163</span>
 <span id="1164">1164</span>
 <span id="1165">1165</span>
-<span id="1166">1166</span>
-<span id="1167">1167</span>
-<span id="1168">1168</span>
-<span id="1169">1169</span>
-<span id="1170">1170</span>
 </pre><pre class='rust '>
 <span class='comment'>// Copyright 2013-2015 Simon Sapin.</span>
 <span class='comment'>//</span>
@@ -1619,7 +1614,8 @@ assert!(&amp;*css_url.serialize() == &quot;http://servo.github.io/rust-url/main.
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// The default scheme type mapper is as follows:</span>
     <span class='doccomment'>///</span>
-    <span class='doccomment'>/// ```ignore</span>
+    <span class='doccomment'>/// ```</span>
+    <span class='doccomment'>/// # use url::SchemeType;</span>
     <span class='doccomment'>/// fn whatwg_scheme_type_mapper(scheme: &amp;str) -&gt; SchemeType {</span>
     <span class='doccomment'>///     match scheme {</span>
     <span class='doccomment'>///         &quot;file&quot; =&gt; SchemeType::FileLike,</span>
@@ -1629,7 +1625,7 @@ assert!(&amp;*css_url.serialize() == &quot;http://servo.github.io/rust-url/main.
     <span class='doccomment'>///         &quot;https&quot; =&gt; SchemeType::Relative(443),</span>
     <span class='doccomment'>///         &quot;ws&quot; =&gt; SchemeType::Relative(80),</span>
     <span class='doccomment'>///         &quot;wss&quot; =&gt; SchemeType::Relative(443),</span>
-    <span class='doccomment'>///         _ =&gt; NonRelative,</span>
+    <span class='doccomment'>///         _ =&gt; SchemeType::NonRelative,</span>
     <span class='doccomment'>///     }</span>
     <span class='doccomment'>/// }</span>
     <span class='doccomment'>/// ```</span>
@@ -1836,13 +1832,10 @@ assert!(&amp;*css_url.serialize() == &quot;http://servo.github.io/rust-url/main.
     <span class='doccomment'>/// and may give nonsensical results for other schemes.</span>
     <span class='doccomment'>/// It is the user’s responsibility to check the URL’s scheme before calling this.</span>
     <span class='doccomment'>///</span>
-    <span class='doccomment'>/// The return type (when `Ok()`) is generic and can be either `std::path::posix::Path`</span>
-    <span class='doccomment'>/// or `std::path::windows::Path`.</span>
-    <span class='doccomment'>/// (Use `std::path::Path` to pick one of them depending on the local system.)</span>
-    <span class='doccomment'>/// If the compiler can not infer the desired type from context, you may have to specify it:</span>
-    <span class='doccomment'>///</span>
-    <span class='doccomment'>/// ```ignore</span>
-    <span class='doccomment'>/// let path = url.to_file_path::&lt;std::path::posix::Path&gt;();</span>
+    <span class='doccomment'>/// ```</span>
+    <span class='doccomment'>/// # use url::Url;</span>
+    <span class='doccomment'>/// # let url = Url::parse(&quot;file:///etc/passwd&quot;).unwrap();</span>
+    <span class='doccomment'>/// let path = url.to_file_path();</span>
     <span class='doccomment'>/// ```</span>
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// Returns `Err` if the host is neither empty nor `&quot;localhost&quot;`,</span>
@@ -2177,13 +2170,10 @@ assert!(&amp;*css_url.serialize() == &quot;http://servo.github.io/rust-url/main.
     <span class='doccomment'>/// and may give nonsensical results for other schemes.</span>
     <span class='doccomment'>/// It is the user’s responsibility to check the URL’s scheme before calling this.</span>
     <span class='doccomment'>///</span>
-    <span class='doccomment'>/// The return type (when `Ok()`) is generic and can be either `std::path::posix::Path`</span>
-    <span class='doccomment'>/// or `std::path::windows::Path`.</span>
-    <span class='doccomment'>/// (Use `std::path::Path` to pick one of them depending on the local system.)</span>
-    <span class='doccomment'>/// If the compiler can not infer the desired type from context, you may have to specifiy it:</span>
-    <span class='doccomment'>///</span>
-    <span class='doccomment'>/// ```ignore</span>
-    <span class='doccomment'>/// let path = url.to_file_path::&lt;std::path::posix::Path&gt;();</span>
+    <span class='doccomment'>/// ```</span>
+    <span class='doccomment'>/// # use url::Url;</span>
+    <span class='doccomment'>/// # let url = Url::parse(&quot;file:///etc/passwd&quot;).unwrap();</span>
+    <span class='doccomment'>/// let path = url.to_file_path();</span>
     <span class='doccomment'>/// ```</span>
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// Returns `Err` if the host is neither empty nor `&quot;localhost&quot;`,</span>

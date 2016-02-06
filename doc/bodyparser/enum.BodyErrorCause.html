@@ -9,6 +9,7 @@
 
     <title>bodyparser::BodyErrorCause - Rust</title>
 
+    <link rel="stylesheet" type="text/css" href="../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../main.css">
 
     
@@ -45,14 +46,13 @@
             <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                 [<span class='inner'>&#x2212;</span>]
             </a>
-        </span><a id='src-31' class='srclink' href='../src/bodyparser/errors.rs.html#8-13' title='goto source code'>[src]</a></span></h1>
+        </span><a id='src-27' class='srclink' href='../src/bodyparser/errors.rs.html#9-13' title='goto source code'>[src]</a></span></h1>
 <pre class='rust enum'>pub enum BodyErrorCause {
     Utf8Error(<a class='struct' href='https://doc.rust-lang.org/nightly/core/str/struct.Utf8Error.html' title='core::str::Utf8Error'>Utf8Error</a>),
     IoError(<a class='struct' href='https://doc.rust-lang.org/nightly/std/io/error/struct.Error.html' title='std::io::error::Error'>Error</a>),
-    ParserError(<a class='enum' href='../rustc_serialize/json/enum.ParserError.html' title='rustc_serialize::json::ParserError'>ParserError</a>),
-    DecoderError(<a class='enum' href='../rustc_serialize/json/enum.DecoderError.html' title='rustc_serialize::json::DecoderError'>DecoderError</a>),
+    JsonError(<a class='enum' href='../serde_json/error/enum.Error.html' title='serde_json::error::Error'>Error</a>),
 }</pre><h2 class='variants'>Variants</h2>
-<table><tr><td id='variant.Utf8Error'><code>Utf8Error</code></td><td></td></tr><tr><td id='variant.IoError'><code>IoError</code></td><td></td></tr><tr><td id='variant.ParserError'><code>ParserError</code></td><td></td></tr><tr><td id='variant.DecoderError'><code>DecoderError</code></td><td></td></tr></table><h2 id='implementations'>Trait Implementations</h2><h3 id='derived_implementations'>Derived Implementations </h3><h3 class='impl'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html' title='core::fmt::Debug'>Debug</a> for <a class='enum' href='../bodyparser/enum.BodyErrorCause.html' title='bodyparser::BodyErrorCause'>BodyErrorCause</a></code></h3><div class='impl-items'><h4 id='method.fmt' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html#method.fmt' class='fnname'>fmt</a>(&amp;self, __arg_0: &amp;mut <a class='struct' href='https://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html' title='core::fmt::Formatter'>Formatter</a>) -&gt; <a class='type' href='https://doc.rust-lang.org/nightly/core/fmt/type.Result.html' title='core::fmt::Result'>Result</a></code></h4>
+<table><tr><td id='variant.Utf8Error'><code>Utf8Error</code></td><td></td></tr><tr><td id='variant.IoError'><code>IoError</code></td><td></td></tr><tr><td id='variant.JsonError'><code>JsonError</code></td><td></td></tr></table><h2 id='implementations'>Trait Implementations</h2><h3 id='derived_implementations'>Derived Implementations </h3><h3 class='impl'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html' title='core::fmt::Debug'>Debug</a> for <a class='enum' href='../bodyparser/enum.BodyErrorCause.html' title='bodyparser::BodyErrorCause'>BodyErrorCause</a></code></h3><div class='impl-items'><h4 id='method.fmt' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html#method.fmt' class='fnname'>fmt</a>(&amp;self, __arg_0: &amp;mut <a class='struct' href='https://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html' title='core::fmt::Formatter'>Formatter</a>) -&gt; <a class='type' href='https://doc.rust-lang.org/nightly/core/fmt/type.Result.html' title='core::fmt::Result'>Result</a></code></h4>
 </div></section>
     <section id='search' class="content hidden"></section>
 
@@ -112,6 +112,6 @@
     <script src="../jquery.js"></script>
     <script src="../main.js"></script>
     
-    <script async src="../search-index.js"></script>
+    <script defer src="../search-index.js"></script>
 </body>
 </html>

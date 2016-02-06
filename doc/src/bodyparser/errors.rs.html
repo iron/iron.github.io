@@ -9,6 +9,7 @@
 
     <title>errors.rs.html -- source</title>
 
+    <link rel="stylesheet" type="text/css" href="../../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../../main.css">
 
     
@@ -76,14 +77,14 @@
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>fmt</span>;
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>io</span>;
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>str</span>;
-<span class='kw'>use</span> <span class='ident'>rustc_serialize</span>::<span class='ident'>json</span>;
+
+<span class='kw'>use</span> <span class='ident'>serde_json</span>;
 
 <span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Debug</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>enum</span> <span class='ident'>BodyErrorCause</span> {
     <span class='ident'>Utf8Error</span>(<span class='ident'>str</span>::<span class='ident'>Utf8Error</span>),
     <span class='ident'>IoError</span>(<span class='ident'>io</span>::<span class='ident'>Error</span>),
-    <span class='ident'>ParserError</span>(<span class='ident'>json</span>::<span class='ident'>ParserError</span>),
-    <span class='ident'>DecoderError</span>(<span class='ident'>json</span>::<span class='ident'>DecoderError</span>)
+    <span class='ident'>JsonError</span>(<span class='ident'>serde_json</span>::<span class='ident'>Error</span>),
 }
 
 <span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Debug</span>)]</span>
@@ -102,7 +103,8 @@
     <span class='kw'>fn</span> <span class='ident'>fmt</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>formatter</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>fmt</span>::<span class='ident'>Formatter</span>) <span class='op'>-&gt;</span> <span class='ident'>fmt</span>::<span class='prelude-ty'>Result</span> {
         <span class='self'>self</span>.<span class='ident'>description</span>().<span class='ident'>fmt</span>(<span class='ident'>formatter</span>)
     }
-}</pre>
+}
+</pre>
 </section>
     <section id='search' class="content hidden"></section>
 
@@ -162,6 +164,6 @@
     <script src="../../jquery.js"></script>
     <script src="../../main.js"></script>
     
-    <script async src="../../search-index.js"></script>
+    <script defer src="../../search-index.js"></script>
 </body>
 </html>
