@@ -4,11 +4,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-0a35038f75765ae4/openssl-0.7.4/src/x509/mod.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-88ac128001ac3a9a/openssl-0.7.5/src/x509/mod.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>mod.rs.html -- source</title>
 
+    <link rel="stylesheet" type="text/css" href="../../../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../../../main.css">
 
     
@@ -732,6 +733,20 @@
 <span id="690">690</span>
 <span id="691">691</span>
 <span id="692">692</span>
+<span id="693">693</span>
+<span id="694">694</span>
+<span id="695">695</span>
+<span id="696">696</span>
+<span id="697">697</span>
+<span id="698">698</span>
+<span id="699">699</span>
+<span id="700">700</span>
+<span id="701">701</span>
+<span id="702">702</span>
+<span id="703">703</span>
+<span id="704">704</span>
+<span id="705">705</span>
+<span id="706">706</span>
 </pre><pre class='rust '>
 <span class='kw'>use</span> <span class='ident'>libc</span>::{<span class='ident'>c_char</span>, <span class='ident'>c_int</span>, <span class='ident'>c_long</span>, <span class='ident'>c_ulong</span>, <span class='ident'>c_uint</span>, <span class='ident'>c_void</span>};
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>io</span>;
@@ -1242,6 +1257,20 @@
     }
 }
 
+<span class='kw'>extern</span> <span class='string'>&quot;C&quot;</span> {
+    <span class='kw'>fn</span> <span class='ident'>rust_X509_clone</span>(<span class='ident'>x509</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>ffi</span>::<span class='ident'>X509</span>);
+}
+
+<span class='kw'>impl</span><span class='op'>&lt;</span><span class='lifetime'>&#39;ctx</span><span class='op'>&gt;</span> <span class='ident'>Clone</span> <span class='kw'>for</span> <span class='ident'>X509</span><span class='op'>&lt;</span><span class='lifetime'>&#39;ctx</span><span class='op'>&gt;</span> {
+    <span class='kw'>fn</span> <span class='ident'>clone</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>X509</span><span class='op'>&lt;</span><span class='lifetime'>&#39;ctx</span><span class='op'>&gt;</span> {
+        <span class='kw'>unsafe</span> { <span class='ident'>rust_X509_clone</span>(<span class='self'>self</span>.<span class='ident'>handle</span>) }
+        <span class='comment'>/* FIXME: given that we now have refcounting control, &#39;owned&#39; should be uneeded, the &#39;ctx
+         * is probably also uneeded. We can remove both to condense the x509 api quite a bit
+         */</span>
+        <span class='ident'>X509</span>::<span class='ident'>new</span>(<span class='self'>self</span>.<span class='ident'>handle</span>, <span class='boolval'>true</span>)
+    }
+}
+
 <span class='kw'>impl</span><span class='op'>&lt;</span><span class='lifetime'>&#39;ctx</span><span class='op'>&gt;</span> <span class='ident'>Drop</span> <span class='kw'>for</span> <span class='ident'>X509</span><span class='op'>&lt;</span><span class='lifetime'>&#39;ctx</span><span class='op'>&gt;</span> {
     <span class='kw'>fn</span> <span class='ident'>drop</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) {
         <span class='kw'>if</span> <span class='self'>self</span>.<span class='ident'>owned</span> {
@@ -1485,6 +1514,6 @@
     <script src="../../../jquery.js"></script>
     <script src="../../../main.js"></script>
     
-    <script async src="../../../search-index.js"></script>
+    <script defer src="../../../search-index.js"></script>
 </body>
 </html>
