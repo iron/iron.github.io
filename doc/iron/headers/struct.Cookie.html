@@ -181,7 +181,7 @@ it with the last element.</p>
 <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>v</span>, [<span class='string'>&quot;baz&quot;</span>, <span class='string'>&quot;qux&quot;</span>]);</pre>
 </div><h4 id='method.insert' class='method'><span class="since">1.0.0</span><code>fn <a href='#method.insert' class='fnname'>insert</a>(&amp;mut self, index: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>, element: T)</code></h4>
 <div class='docblock'><p>Inserts an element at position <code>index</code> within the vector, shifting all
-elements after position <code>i</code> one position to the right.</p>
+elements after it to the right.</p>
 
 <h1 id='panics-3' class='section-header'><a href='#panics-3'>Panics</a></h1>
 <p>Panics if <code>index</code> is greater than the vector&#39;s length.</p>
@@ -194,7 +194,7 @@ elements after position <code>i</code> one position to the right.</p>
 <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>vec</span>, [<span class='number'>1</span>, <span class='number'>4</span>, <span class='number'>2</span>, <span class='number'>3</span>, <span class='number'>5</span>]);</pre>
 </div><h4 id='method.remove' class='method'><span class="since">1.0.0</span><code>fn <a href='#method.remove' class='fnname'>remove</a>(&amp;mut self, index: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>) -&gt; T</code></h4>
 <div class='docblock'><p>Removes and returns the element at position <code>index</code> within the vector,
-shifting all elements after position <code>index</code> one position to the left.</p>
+shifting all elements after it to the left.</p>
 
 <h1 id='panics-4' class='section-header'><a href='#panics-4'>Panics</a></h1>
 <p>Panics if <code>index</code> is out of bounds.</p>
@@ -350,7 +350,7 @@ available).</p>
 <span class='ident'>vec</span>.<span class='ident'>dedup</span>();
 
 <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>vec</span>, [<span class='number'>1</span>, <span class='number'>2</span>, <span class='number'>3</span>, <span class='number'>2</span>]);</pre>
-</div></div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/ops/trait.Deref.html' title='core::ops::Deref'>Deref</a> for <a class='struct' href='../../iron/headers/struct.Cookie.html' title='iron::headers::Cookie'>Cookie</a></code></h3><div class='impl-items'><h4 id='assoc_type.Target' class='type'><code>type Target = <a class='struct' href='https://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;<a class='struct' href='../../iron/headers/struct.Cookie.html' title='iron::headers::Cookie'>Cookie</a>&gt;</code></h4>
+</div></div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/ops/trait.Deref.html' title='core::ops::Deref'>Deref</a> for <a class='struct' href='../../iron/headers/struct.Cookie.html' title='iron::headers::Cookie'>Cookie</a></code></h3><div class='impl-items'><h4 id='associatedtype.Target' class='type'><code>type Target = <a class='struct' href='https://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;<a class='struct' href='../../iron/headers/struct.Cookie.html' title='iron::headers::Cookie'>Cookie</a>&gt;</code></h4>
 <h4 id='method.deref' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/ops/trait.Deref.html#method.deref' class='fnname'>deref</a>(&amp;self) -&gt; &amp;<a class='struct' href='https://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;<a class='struct' href='../../iron/headers/struct.Cookie.html' title='iron::headers::Cookie'>Cookie</a>&gt;</code></h4>
 </div><h3 class='impl'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/ops/trait.DerefMut.html' title='core::ops::DerefMut'>DerefMut</a> for <a class='struct' href='../../iron/headers/struct.Cookie.html' title='iron::headers::Cookie'>Cookie</a></code></h3><div class='impl-items'><h4 id='method.deref_mut' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/ops/trait.DerefMut.html#method.deref_mut' class='fnname'>deref_mut</a>(&amp;mut self) -&gt; &amp;mut <a class='struct' href='https://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;<a class='struct' href='../../iron/headers/struct.Cookie.html' title='iron::headers::Cookie'>Cookie</a>&gt;</code></h4>
 </div><h3 class='impl'><code>impl <a class='trait' href='../../iron/headers/trait.Header.html' title='iron::headers::Header'>Header</a> for <a class='struct' href='../../iron/headers/struct.Cookie.html' title='iron::headers::Cookie'>Cookie</a></code></h3><div class='impl-items'><h4 id='method.header_name' class='method'><code>fn <a href='../../iron/headers/trait.Header.html#method.header_name' class='fnname'>header_name</a>() -&gt; &amp;'static <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a></code></h4>

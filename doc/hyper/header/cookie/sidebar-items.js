@@ -1,1 +1,1 @@
-initSidebarItems({"struct":[["Cookie","`Cookie` header, defined in RFC6265"]]});
+initSidebarItems({"struct":[["Cookie","`Cookie` header, defined in RFC6265If the user agent does attach a Cookie header field to an HTTP request, the user agent must send the cookie-string as the value of the header field.When the user agent generates an HTTP request, the user agent MUST NOT attach more than one Cookie header field.Example values`SID=31d4d96e407aad42` `SID=31d4d96e407aad42; lang=en-US` Example"]]});

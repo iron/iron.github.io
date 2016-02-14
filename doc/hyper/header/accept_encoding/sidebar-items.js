@@ -1,1 +1,1 @@
-initSidebarItems({"struct":[["AcceptEncoding","`Accept-Encoding` header, defined in RFC7231"]]});
+initSidebarItems({"struct":[["AcceptEncoding","`Accept-Encoding` header, defined in RFC7231The `Accept-Encoding` header field can be used by user agents to indicate what response content-codings are acceptable in the response.  An  `identity` token is used as a synonym for \"no encoding\" in order to communicate when no encoding is preferred.ABNFExample values`compress, gzip` `` `*` `compress;q=0.5, gzip;q=1` `gzip;q=1.0, identity; q=0.5, *;q=0` Examples"]]});

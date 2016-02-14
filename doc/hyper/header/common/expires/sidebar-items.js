@@ -1,1 +1,1 @@
-initSidebarItems({"struct":[["Expires","`Expires` header, defined in RFC7234"]]});
+initSidebarItems({"struct":[["Expires","`Expires` header, defined in RFC7234The `Expires` header field gives the date/time after which the response is considered stale.The presence of an Expires field does not imply that the original resource will change or cease to exist at, before, or after that time.ABNFExample values`Thu, 01 Dec 1994 16:00:00 GMT` Example"]]});

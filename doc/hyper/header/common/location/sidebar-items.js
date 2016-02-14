@@ -1,1 +1,1 @@
-initSidebarItems({"struct":[["Location","`Location` header, defined in RFC7231"]]});
+initSidebarItems({"struct":[["Location","`Location` header, defined in RFC7231The `Location` header field is used in some responses to refer to a specific resource in relation to the response.  The type of relationship is defined by the combination of request method and status code semantics.ABNFExample values`/People.html#tim` `http://www.example.net/index.html` Examples"]]});

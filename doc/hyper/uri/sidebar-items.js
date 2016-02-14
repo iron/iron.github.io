@@ -1,1 +1,1 @@
-initSidebarItems({"enum":[["RequestUri","The Request-URI of a Request's StartLine."]]});
+initSidebarItems({"enum":[["RequestUri","The Request-URI of a Request's StartLine.From Section 5.3, Request Target:Once an inbound connection is obtained, the client sends an HTTP request message (Section 3) with a request-target derived from the target URI.  There are four distinct formats for the request-target, depending on both the method being requested and whether the request is to a proxy."]]});

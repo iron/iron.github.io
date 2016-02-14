@@ -1,1 +1,1 @@
-initSidebarItems({"struct":[["Openssl","An implementation of `Ssl` for OpenSSL."]]});
+initSidebarItems({"struct":[["Openssl","An implementation of `Ssl` for OpenSSL.ExampleFor complete control, create a `SslContext` with the options you desire and then create `Openssl { context: ctx }"]]});

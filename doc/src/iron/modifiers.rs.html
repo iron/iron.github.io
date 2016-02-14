@@ -213,6 +213,14 @@
 <span id="170">170</span>
 <span id="171">171</span>
 <span id="172">172</span>
+<span id="173">173</span>
+<span id="174">174</span>
+<span id="175">175</span>
+<span id="176">176</span>
+<span id="177">177</span>
+<span id="178">178</span>
+<span id="179">179</span>
+<span id="180">180</span>
 </pre><pre class='rust '>
 <span class='doccomment'>//! Defines a series of convenience modifiers for editing Responses</span>
 <span class='doccomment'>//!</span>
@@ -246,6 +254,7 @@
 <span class='doccomment'>//! [rust-modifier](https://github.com/reem/rust-modifier).</span>
 
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>fs</span>::<span class='ident'>File</span>;
+<span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>io</span>;
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>path</span>::{<span class='ident'>Path</span>, <span class='ident'>PathBuf</span>};
 
 <span class='kw'>use</span> <span class='ident'>modifier</span>::<span class='ident'>Modifier</span>;
@@ -255,7 +264,7 @@
 <span class='kw'>use</span> {<span class='ident'>status</span>, <span class='ident'>headers</span>, <span class='ident'>Request</span>, <span class='ident'>Response</span>, <span class='ident'>Set</span>, <span class='ident'>Url</span>};
 
 <span class='kw'>use</span> <span class='ident'>mime_types</span>;
-<span class='kw'>use</span> <span class='ident'>response</span>::<span class='ident'>WriteBody</span>;
+<span class='kw'>use</span> <span class='ident'>response</span>::{<span class='ident'>WriteBody</span>, <span class='ident'>BodyReader</span>};
 
 <span class='macro'>lazy_static</span><span class='macro'>!</span> {
     <span class='kw'>static</span> <span class='kw-2'>ref</span> <span class='ident'>MIME_TYPES</span>: <span class='ident'>mime_types</span>::<span class='ident'>Types</span> <span class='op'>=</span> <span class='ident'>mime_types</span>::<span class='ident'>Types</span>::<span class='ident'>new</span>().<span class='ident'>unwrap</span>();
@@ -272,6 +281,13 @@
     <span class='attribute'>#[<span class='ident'>inline</span>]</span>
     <span class='kw'>fn</span> <span class='ident'>modify</span>(<span class='self'>self</span>, <span class='ident'>res</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>Response</span>) {
         <span class='ident'>res</span>.<span class='ident'>body</span> <span class='op'>=</span> <span class='prelude-val'>Some</span>(<span class='self'>self</span>);
+    }
+}
+
+<span class='kw'>impl</span> <span class='op'>&lt;</span><span class='ident'>R</span>: <span class='ident'>io</span>::<span class='ident'>Read</span> <span class='op'>+</span> <span class='ident'>Send</span> <span class='op'>+</span> <span class='lifetime'>&#39;static</span><span class='op'>&gt;</span> <span class='ident'>Modifier</span><span class='op'>&lt;</span><span class='ident'>Response</span><span class='op'>&gt;</span> <span class='kw'>for</span> <span class='ident'>BodyReader</span><span class='op'>&lt;</span><span class='ident'>R</span><span class='op'>&gt;</span> {
+    <span class='attribute'>#[<span class='ident'>inline</span>]</span>
+    <span class='kw'>fn</span> <span class='ident'>modify</span>(<span class='self'>self</span>, <span class='ident'>res</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>Response</span>) {
+        <span class='ident'>res</span>.<span class='ident'>body</span> <span class='op'>=</span> <span class='prelude-val'>Some</span>(<span class='ident'>Box</span>::<span class='ident'>new</span>(<span class='self'>self</span>));
     }
 }
 

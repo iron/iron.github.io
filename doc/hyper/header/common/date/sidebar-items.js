@@ -1,1 +1,1 @@
-initSidebarItems({"struct":[["Date","`Date` header, defined in RFC7231"]]});
+initSidebarItems({"struct":[["Date","`Date` header, defined in RFC7231The `Date` header field represents the date and time at which the message was originated.ABNFExample values`Tue, 15 Nov 1994 08:12:31 GMT` Example"]]});

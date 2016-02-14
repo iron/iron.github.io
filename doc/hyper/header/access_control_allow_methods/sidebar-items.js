@@ -1,1 +1,1 @@
-initSidebarItems({"struct":[["AccessControlAllowMethods","`Access-Control-Allow-Methods` header, part of CORS"]]});
+initSidebarItems({"struct":[["AccessControlAllowMethods","`Access-Control-Allow-Methods` header, part of CORSThe `Access-Control-Allow-Methods` header indicates, as part of the response to a preflight request, which methods can be used during the actual request.ABNFExample values`PUT, DELETE, XMODIFY` Examples"]]});

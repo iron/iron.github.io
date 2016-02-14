@@ -1,1 +1,1 @@
-initSidebarItems({"fn":[["eq","Returns `true` iff `a` and `b` contain the same bytes."]]});
+initSidebarItems({"fn":[["eq","Returns `true` iff `a` and `b` contain the same bytes.This operation takes an amount of time dependent on the length of the two arrays given, but is independent of the contents of a and b.FailureThis function will panic the current task if `a` and `b` do not have the same length."]]});

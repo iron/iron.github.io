@@ -1,1 +1,1 @@
-initSidebarItems({"struct":[["TransferEncoding","`Transfer-Encoding` header, defined in RFC7230"]]});
+initSidebarItems({"struct":[["TransferEncoding","`Transfer-Encoding` header, defined in RFC7230The `Transfer-Encoding` header field lists the transfer coding names corresponding to the sequence of transfer codings that have been (or will be) applied to the payload body in order to form the message body.ABNFExample values`gzip, chunked` Example"]]});

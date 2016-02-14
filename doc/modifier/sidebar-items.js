@@ -1,1 +1,1 @@
-initSidebarItems({"trait":[["Modifier","Allows use of the implemented type as an argument to Set::set."],["Set","A trait providing the set and set_mut methods for all types."]]});
+initSidebarItems({"trait":[["Modifier","Allows use of the implemented type as an argument to Set::set.This allows types to be used for ad-hoc overloading of Set::set to perform complex updates to the parameter of Modifier."],["Set","A trait providing the set and set_mut methods for all types.Simply implement this for your types and they can be used with modifiers."]]});

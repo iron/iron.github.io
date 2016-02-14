@@ -1,1 +1,1 @@
-initSidebarItems({"struct":[["ContentLanguage","`Content-Language` header, defined in RFC7231"]]});
+initSidebarItems({"struct":[["ContentLanguage","`Content-Language` header, defined in RFC7231The `Content-Language` header field describes the natural language(s) of the intended audience for the representation.  Note that this might not be equivalent to all the languages used within the representation.ABNFExample values`da` `mi, en` Examples"]]});

@@ -1,1 +1,1 @@
-initSidebarItems({"struct":[["AcceptLanguage","`Accept-Language` header, defined in RFC7231"]]});
+initSidebarItems({"struct":[["AcceptLanguage","`Accept-Language` header, defined in RFC7231The `Accept-Language` header field can be used by user agents to indicate the set of natural languages that are preferred in the response.ABNFExample values`da, en-gb;q=0.8, en;q=0.7` `en-us;q=1.0, en;q=0.5, fr` Examples"]]});
