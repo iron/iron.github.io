@@ -266,7 +266,7 @@
 }
 
 <span class='doccomment'>/// A trait which writes the body of an HTTP response.</span>
-<span class='kw'>pub</span> <span class='kw'>trait</span> <span class='ident'>WriteBody</span> {
+<span class='kw'>pub</span> <span class='kw'>trait</span> <span class='ident'>WriteBody</span>: <span class='ident'>Send</span> {
     <span class='doccomment'>/// Writes the body to the provided `ResponseBody`.</span>
     <span class='kw'>fn</span> <span class='ident'>write_body</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>res</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>ResponseBody</span>) <span class='op'>-&gt;</span> <span class='ident'>io</span>::<span class='prelude-ty'>Result</span><span class='op'>&lt;</span>()<span class='op'>&gt;</span>;
 }
@@ -301,14 +301,14 @@
     }
 }
 
-<span class='kw'>impl</span> <span class='ident'>WriteBody</span> <span class='kw'>for</span> <span class='ident'>Box</span><span class='op'>&lt;</span><span class='ident'>io</span>::<span class='ident'>Read</span><span class='op'>&gt;</span> {
+<span class='kw'>impl</span> <span class='ident'>WriteBody</span> <span class='kw'>for</span> <span class='ident'>Box</span><span class='op'>&lt;</span><span class='ident'>io</span>::<span class='ident'>Read</span> <span class='op'>+</span> <span class='ident'>Send</span><span class='op'>&gt;</span> {
     <span class='kw'>fn</span> <span class='ident'>write_body</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>res</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>ResponseBody</span>) <span class='op'>-&gt;</span> <span class='ident'>io</span>::<span class='prelude-ty'>Result</span><span class='op'>&lt;</span>()<span class='op'>&gt;</span> {
         <span class='ident'>io</span>::<span class='ident'>copy</span>(<span class='self'>self</span>, <span class='ident'>res</span>).<span class='ident'>map</span>(<span class='op'>|</span>_<span class='op'>|</span> ())
     }
 }
 
 <span class='comment'>/* Needs specialization :(
-impl&lt;R: Read&gt; WriteBody for R {
+impl&lt;R: Read + Send&gt; WriteBody for R {
     fn write_body(&amp;mut self, res: &amp;mut ResponseBody) -&gt; io::Result&lt;()&gt; {
         io::copy(self, res)
     }
@@ -328,7 +328,7 @@ impl&lt;R: Read&gt; WriteBody for R {
     <span class='kw'>pub</span> <span class='ident'>extensions</span>: <span class='ident'>TypeMap</span>,
 
     <span class='doccomment'>/// The body of the response.</span>
-    <span class='kw'>pub</span> <span class='ident'>body</span>: <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>Box</span><span class='op'>&lt;</span><span class='ident'>WriteBody</span> <span class='op'>+</span> <span class='ident'>Send</span><span class='op'>&gt;&gt;</span>
+    <span class='kw'>pub</span> <span class='ident'>body</span>: <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>Box</span><span class='op'>&lt;</span><span class='ident'>WriteBody</span><span class='op'>&gt;&gt;</span>
 }
 
 <span class='kw'>impl</span> <span class='ident'>Response</span> {
@@ -373,7 +373,7 @@ impl&lt;R: Read&gt; WriteBody for R {
     }
 }
 
-<span class='kw'>fn</span> <span class='ident'>write_with_body</span>(<span class='kw-2'>mut</span> <span class='ident'>res</span>: <span class='ident'>HttpResponse</span><span class='op'>&lt;</span><span class='ident'>Fresh</span><span class='op'>&gt;</span>, <span class='kw-2'>mut</span> <span class='ident'>body</span>: <span class='ident'>Box</span><span class='op'>&lt;</span><span class='ident'>WriteBody</span> <span class='op'>+</span> <span class='ident'>Send</span><span class='op'>&gt;</span>)
+<span class='kw'>fn</span> <span class='ident'>write_with_body</span>(<span class='kw-2'>mut</span> <span class='ident'>res</span>: <span class='ident'>HttpResponse</span><span class='op'>&lt;</span><span class='ident'>Fresh</span><span class='op'>&gt;</span>, <span class='kw-2'>mut</span> <span class='ident'>body</span>: <span class='ident'>Box</span><span class='op'>&lt;</span><span class='ident'>WriteBody</span><span class='op'>&gt;</span>)
                    <span class='op'>-&gt;</span> <span class='ident'>io</span>::<span class='prelude-ty'>Result</span><span class='op'>&lt;</span>()<span class='op'>&gt;</span> {
     <span class='kw'>let</span> <span class='ident'>content_type</span> <span class='op'>=</span> <span class='ident'>res</span>.<span class='ident'>headers</span>().<span class='ident'>get</span>::<span class='op'>&lt;</span><span class='ident'>headers</span>::<span class='ident'>ContentType</span><span class='op'>&gt;</span>()
                            .<span class='ident'>map_or_else</span>(<span class='op'>||</span> <span class='ident'>headers</span>::<span class='ident'>ContentType</span>(<span class='string'>&quot;text/plain&quot;</span>.<span class='ident'>parse</span>().<span class='ident'>unwrap</span>()),

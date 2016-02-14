@@ -366,7 +366,7 @@
     <span class='doccomment'>/// The thread returns a guard that will automatically join with the parent</span>
     <span class='doccomment'>/// once it is dropped, blocking until this happens.</span>
     <span class='doccomment'>///</span>
-    <span class='doccomment'>/// Defaults to a threadpool of size `2 * num_cpus`.</span>
+    <span class='doccomment'>/// Defaults to a threadpool of size `8 * num_cpus`.</span>
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// ## Panics</span>
     <span class='doccomment'>///</span>
@@ -385,7 +385,7 @@
     <span class='doccomment'>/// The thread returns a guard that will automatically join with the parent</span>
     <span class='doccomment'>/// once it is dropped, blocking until this happens.</span>
     <span class='doccomment'>///</span>
-    <span class='doccomment'>/// Defaults to a threadpool of size `2 * num_cpus`.</span>
+    <span class='doccomment'>/// Defaults to a threadpool of size `8 * num_cpus`.</span>
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// ## Panics</span>
     <span class='doccomment'>///</span>

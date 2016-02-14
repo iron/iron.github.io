@@ -68,7 +68,7 @@ another task, so is not blocking.</p>
 <p>The thread returns a guard that will automatically join with the parent
 once it is dropped, blocking until this happens.</p>
 
-<p>Defaults to a threadpool of size <code>2 * num_cpus</code>.</p>
+<p>Defaults to a threadpool of size <code>8 * num_cpus</code>.</p>
 
 <h2 id='panics' class='section-header'><a href='#panics'>Panics</a></h2>
 <p>Panics if the provided address does not parse. To avoid this
@@ -83,7 +83,7 @@ another task, so is not blocking.</p>
 <p>The thread returns a guard that will automatically join with the parent
 once it is dropped, blocking until this happens.</p>
 
-<p>Defaults to a threadpool of size <code>2 * num_cpus</code>.</p>
+<p>Defaults to a threadpool of size <code>8 * num_cpus</code>.</p>
 
 <h2 id='panics-1' class='section-header'><a href='#panics-1'>Panics</a></h2>
 <p>Panics if the provided address does not parse. To avoid this
