@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-88ac128001ac3a9a/openssl-0.7.5/src/crypto/pkey.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-88ac128001ac3a9a/openssl-0.7.6/src/crypto/pkey.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>pkey.rs.html -- source</title>
@@ -865,21 +865,6 @@
 <span id="822">822</span>
 <span id="823">823</span>
 <span id="824">824</span>
-<span id="825">825</span>
-<span id="826">826</span>
-<span id="827">827</span>
-<span id="828">828</span>
-<span id="829">829</span>
-<span id="830">830</span>
-<span id="831">831</span>
-<span id="832">832</span>
-<span id="833">833</span>
-<span id="834">834</span>
-<span id="835">835</span>
-<span id="836">836</span>
-<span id="837">837</span>
-<span id="838">838</span>
-<span id="839">839</span>
 </pre><pre class='rust '>
 <span class='kw'>use</span> <span class='ident'>libc</span>::{<span class='ident'>c_int</span>, <span class='ident'>c_uint</span>, <span class='ident'>c_ulong</span>};
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>io</span>;
@@ -892,6 +877,7 @@
 <span class='kw'>use</span> <span class='ident'>crypto</span>::<span class='ident'>hash</span>::<span class='ident'>Type</span> <span class='kw'>as</span> <span class='ident'>HashType</span>;
 <span class='kw'>use</span> <span class='ident'>ffi</span>;
 <span class='kw'>use</span> <span class='ident'>ssl</span>::<span class='ident'>error</span>::{<span class='ident'>SslError</span>, <span class='ident'>StreamError</span>};
+<span class='kw'>use</span> <span class='ident'>crypto</span>::<span class='ident'>rsa</span>::<span class='ident'>RSA</span>;
 
 <span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Copy</span>, <span class='ident'>Clone</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>enum</span> <span class='ident'>Parts</span> {
@@ -983,7 +969,7 @@
                                                                  <span class='prelude-val'>None</span>,
                                                                  <span class='ident'>ptr</span>::<span class='ident'>null_mut</span>()));
             <span class='prelude-val'>Ok</span>(<span class='ident'>PKey</span> {
-                <span class='ident'>evp</span>: <span class='ident'>evp</span>,
+                <span class='ident'>evp</span>: <span class='ident'>evp</span> <span class='kw'>as</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>ffi</span>::<span class='ident'>EVP_PKEY</span>,
                 <span class='ident'>parts</span>: <span class='ident'>Parts</span>::<span class='ident'>Both</span>,
             })
         }
@@ -1002,7 +988,7 @@
                                                              <span class='prelude-val'>None</span>,
                                                              <span class='ident'>ptr</span>::<span class='ident'>null_mut</span>()));
             <span class='prelude-val'>Ok</span>(<span class='ident'>PKey</span> {
-                <span class='ident'>evp</span>: <span class='ident'>evp</span>,
+                <span class='ident'>evp</span>: <span class='ident'>evp</span> <span class='kw'>as</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>ffi</span>::<span class='ident'>EVP_PKEY</span>,
                 <span class='ident'>parts</span>: <span class='ident'>Parts</span>::<span class='ident'>Public</span>,
             })
         }
@@ -1012,18 +998,10 @@
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>private_rsa_key_from_pem</span><span class='op'>&lt;</span><span class='ident'>R</span><span class='op'>&gt;</span>(<span class='ident'>reader</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>R</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>PKey</span>, <span class='ident'>SslError</span><span class='op'>&gt;</span>
     <span class='kw'>where</span> <span class='ident'>R</span>: <span class='ident'>Read</span>
     {
-        <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>mem_bio</span> <span class='op'>=</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>MemBio</span>::<span class='ident'>new</span>());
-        <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>io</span>::<span class='ident'>copy</span>(<span class='ident'>reader</span>, <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>mem_bio</span>).<span class='ident'>map_err</span>(<span class='ident'>StreamError</span>));
-
+        <span class='kw'>let</span> <span class='ident'>rsa</span> <span class='op'>=</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>RSA</span>::<span class='ident'>private_key_from_pem</span>(<span class='ident'>reader</span>));
         <span class='kw'>unsafe</span> {
-            <span class='kw'>let</span> <span class='ident'>rsa</span> <span class='op'>=</span> <span class='macro'>try_ssl_null</span><span class='macro'>!</span>(<span class='ident'>ffi</span>::<span class='ident'>PEM_read_bio_RSAPrivateKey</span>(<span class='ident'>mem_bio</span>.<span class='ident'>get_handle</span>(),
-                                                                 <span class='ident'>ptr</span>::<span class='ident'>null_mut</span>(),
-                                                                 <span class='prelude-val'>None</span>,
-                                                                 <span class='ident'>ptr</span>::<span class='ident'>null_mut</span>()));
-            <span class='kw'>let</span> <span class='ident'>evp</span> <span class='op'>=</span> <span class='ident'>ffi</span>::<span class='ident'>EVP_PKEY_new</span>();
-            <span class='kw'>if</span> <span class='ident'>ffi</span>::<span class='ident'>EVP_PKEY_set1_RSA</span>(<span class='ident'>evp</span>, <span class='ident'>rsa</span>) <span class='op'>==</span> <span class='number'>0</span> {
-                <span class='kw'>return</span> <span class='prelude-val'>Err</span>(<span class='ident'>SslError</span>::<span class='ident'>get</span>());
-            }
+            <span class='kw'>let</span> <span class='ident'>evp</span> <span class='op'>=</span> <span class='macro'>try_ssl_null</span><span class='macro'>!</span>(<span class='ident'>ffi</span>::<span class='ident'>EVP_PKEY_new</span>());
+            <span class='macro'>try_ssl</span><span class='macro'>!</span>(<span class='ident'>ffi</span>::<span class='ident'>EVP_PKEY_set1_RSA</span>(<span class='ident'>evp</span>, <span class='ident'>rsa</span>.<span class='ident'>as_ptr</span>()));
 
             <span class='prelude-val'>Ok</span>(<span class='ident'>PKey</span> {
                 <span class='ident'>evp</span>: <span class='ident'>evp</span>,
@@ -1036,18 +1014,10 @@
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>public_rsa_key_from_pem</span><span class='op'>&lt;</span><span class='ident'>R</span><span class='op'>&gt;</span>(<span class='ident'>reader</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>R</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>PKey</span>, <span class='ident'>SslError</span><span class='op'>&gt;</span>
     <span class='kw'>where</span> <span class='ident'>R</span>: <span class='ident'>Read</span>
     {
-        <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>mem_bio</span> <span class='op'>=</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>MemBio</span>::<span class='ident'>new</span>());
-        <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>io</span>::<span class='ident'>copy</span>(<span class='ident'>reader</span>, <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>mem_bio</span>).<span class='ident'>map_err</span>(<span class='ident'>StreamError</span>));
-
+        <span class='kw'>let</span> <span class='ident'>rsa</span> <span class='op'>=</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>RSA</span>::<span class='ident'>public_key_from_pem</span>(<span class='ident'>reader</span>));
         <span class='kw'>unsafe</span> {
-            <span class='kw'>let</span> <span class='ident'>rsa</span> <span class='op'>=</span> <span class='macro'>try_ssl_null</span><span class='macro'>!</span>(<span class='ident'>ffi</span>::<span class='ident'>PEM_read_bio_RSA_PUBKEY</span>(<span class='ident'>mem_bio</span>.<span class='ident'>get_handle</span>(),
-                                                                 <span class='ident'>ptr</span>::<span class='ident'>null_mut</span>(),
-                                                                 <span class='prelude-val'>None</span>,
-                                                                 <span class='ident'>ptr</span>::<span class='ident'>null_mut</span>()));
-            <span class='kw'>let</span> <span class='ident'>evp</span> <span class='op'>=</span> <span class='ident'>ffi</span>::<span class='ident'>EVP_PKEY_new</span>();
-            <span class='kw'>if</span> <span class='ident'>ffi</span>::<span class='ident'>EVP_PKEY_set1_RSA</span>(<span class='ident'>evp</span>, <span class='ident'>rsa</span>) <span class='op'>==</span> <span class='number'>0</span> {
-                <span class='kw'>return</span> <span class='prelude-val'>Err</span>(<span class='ident'>SslError</span>::<span class='ident'>get</span>());
-            }
+            <span class='kw'>let</span> <span class='ident'>evp</span> <span class='op'>=</span> <span class='macro'>try_ssl_null</span><span class='macro'>!</span>(<span class='ident'>ffi</span>::<span class='ident'>EVP_PKEY_new</span>());
+            <span class='macro'>try_ssl</span><span class='macro'>!</span>(<span class='ident'>ffi</span>::<span class='ident'>EVP_PKEY_set1_RSA</span>(<span class='ident'>evp</span>, <span class='ident'>rsa</span>.<span class='ident'>as_ptr</span>()));
 
             <span class='prelude-val'>Ok</span>(<span class='ident'>PKey</span> {
                 <span class='ident'>evp</span>: <span class='ident'>evp</span>,
