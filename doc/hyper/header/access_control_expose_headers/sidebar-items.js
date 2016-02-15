@@ -1,1 +1,1 @@
-initSidebarItems({"struct":[["AccessControlExposeHeaders","`Access-Control-Expose-Headers` header, part of CORSThe Access-Control-Expose-Headers header indicates which headers are safe to expose to the API of a CORS API specification.ABNFExample values`ETag, Content-Length` Examples"]]});
+initSidebarItems({"struct":[["AccessControlExposeHeaders","`Access-Control-Expose-Headers` header, part of CORS"]]});

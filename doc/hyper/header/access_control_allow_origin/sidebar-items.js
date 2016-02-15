@@ -1,1 +1,1 @@
-initSidebarItems({"enum":[["AccessControlAllowOrigin","The `Access-Control-Allow-Origin` response header, part of CORSThe `Access-Control-Allow-Origin` header indicates whether a resource can be shared based by returning the value of the Origin request header, \"*\", or \"null\" in the response.ABNFExample values`null` `*` `http://google.com/` Examples"]]});
+initSidebarItems({"enum":[["AccessControlAllowOrigin","The `Access-Control-Allow-Origin` response header, part of CORS"]]});

@@ -1,1 +1,1 @@
-initSidebarItems({"struct":[["AccessControlMaxAge","`Access-Control-Max-Age` header, part of CORSThe `Access-Control-Max-Age` header indicates how long the results of a preflight request can be cached in a preflight result cache.ABNFExample values`531` Examples"]]});
+initSidebarItems({"struct":[["AccessControlMaxAge","`Access-Control-Max-Age` header, part of CORS"]]});

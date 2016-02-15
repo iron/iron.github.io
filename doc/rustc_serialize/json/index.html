@@ -26,7 +26,7 @@
     
 
     <nav class="sidebar">
-        <a href='../../rustc_serialize/index.html'><img src='https://www.rust-lang.org/logos/rust-logo-128x128-blk-v2.png' alt='logo' width='100'></a>
+        <a href='../../rustc_serialize/index.html'><img src='https://www.rust-lang.org/logos/rust-logo-128x128-blk-v2.png' alt='' width='100'></a>
         <p class='location'><a href='../index.html'>rustc_serialize</a></p><script>window.sidebarCurrent = {name: 'json', ty: 'mod', relpath: '../'};</script><script defer src="../sidebar-items.js"></script>
     </nav>
 
@@ -278,6 +278,7 @@ evaluating Rust JSON performance.</p>
                                title='rustc_serialize::json::Builder'>Builder</a></td>
                         <td class='docblock short'>
                              <p>A Builder consumes a json::Parser to create a generic Json structure.</p>
+
                         </td>
                     </tr>
                 
@@ -286,6 +287,7 @@ evaluating Rust JSON performance.</p>
                                title='rustc_serialize::json::Decoder'>Decoder</a></td>
                         <td class='docblock short'>
                              <p>A structure to decode JSON to values in rust.</p>
+
                         </td>
                     </tr>
                 
@@ -294,6 +296,7 @@ evaluating Rust JSON performance.</p>
                                title='rustc_serialize::json::Encoder'>Encoder</a></td>
                         <td class='docblock short'>
                              <p>A structure for implementing serialization to JSON.</p>
+
                         </td>
                     </tr>
                 
@@ -303,6 +306,7 @@ evaluating Rust JSON performance.</p>
                         <td class='docblock short'>
                              <p>A streaming JSON parser implemented as an iterator of JsonEvent, consuming
 an iterator of char.</p>
+
                         </td>
                     </tr>
                 
@@ -321,6 +325,7 @@ an iterator of char.</p>
                              <p>A Stack represents the current position of the parser in the logical
 structure of the JSON stream.
 For example foo.bar[3].x</p>
+
                         </td>
                     </tr>
                 </table><h2 id='enums' class='section-header'><a href="#enums">Enums</a></h2>
@@ -346,6 +351,7 @@ For example foo.bar[3].x</p>
                                title='rustc_serialize::json::ErrorCode'>ErrorCode</a></td>
                         <td class='docblock short'>
                              <p>The errors that can arise while parsing a JSON stream.</p>
+
                         </td>
                     </tr>
                 
@@ -354,6 +360,7 @@ For example foo.bar[3].x</p>
                                title='rustc_serialize::json::Json'>Json</a></td>
                         <td class='docblock short'>
                              <p>Represents a json value</p>
+
                         </td>
                     </tr>
                 
@@ -362,6 +369,7 @@ For example foo.bar[3].x</p>
                                title='rustc_serialize::json::JsonEvent'>JsonEvent</a></td>
                         <td class='docblock short'>
                              <p>The output of the streaming parser.</p>
+
                         </td>
                     </tr>
                 
@@ -380,6 +388,7 @@ For example foo.bar[3].x</p>
                              <p>StackElements compose a Stack.
 For example, Key(&quot;foo&quot;), Key(&quot;bar&quot;), Index(3) and Key(&quot;x&quot;) are the
 StackElements compositing the stack that represents foo.bar[3].x</p>
+
                         </td>
                     </tr>
                 </table><h2 id='traits' class='section-header'><a href="#traits">Traits</a></h2>
@@ -389,6 +398,7 @@ StackElements compositing the stack that represents foo.bar[3].x</p>
                                title='rustc_serialize::json::ToJson'>ToJson</a></td>
                         <td class='docblock short'>
                              <p>A trait for converting values to JSON</p>
+
                         </td>
                     </tr>
                 </table><h2 id='functions' class='section-header'><a href="#functions">Functions</a></h2>
@@ -399,6 +409,7 @@ StackElements compositing the stack that represents foo.bar[3].x</p>
                         <td class='docblock short'>
                              <p>Create an <code>AsJson</code> wrapper which can be used to print a value as JSON
 on-the-fly via <code>write!</code></p>
+
                         </td>
                     </tr>
                 
@@ -408,6 +419,7 @@ on-the-fly via <code>write!</code></p>
                         <td class='docblock short'>
                              <p>Create an <code>AsPrettyJson</code> wrapper which can be used to print a value as JSON
 on-the-fly via <code>write!</code></p>
+
                         </td>
                     </tr>
                 
@@ -416,6 +428,7 @@ on-the-fly via <code>write!</code></p>
                                title='rustc_serialize::json::decode'>decode</a></td>
                         <td class='docblock short'>
                              <p>Shortcut function to decode a JSON <code>&amp;str</code> into an object</p>
+
                         </td>
                     </tr>
                 
@@ -424,6 +437,7 @@ on-the-fly via <code>write!</code></p>
                                title='rustc_serialize::json::encode'>encode</a></td>
                         <td class='docblock short'>
                              <p>Shortcut function to encode a <code>T</code> into a JSON <code>String</code></p>
+
                         </td>
                     </tr>
                 
@@ -432,6 +446,7 @@ on-the-fly via <code>write!</code></p>
                                title='rustc_serialize::json::error_str'>error_str</a></td>
                         <td class='docblock short'>
                              <p>Returns a readable error string for a given error code.</p>
+
                         </td>
                     </tr>
                 </table><h2 id='types' class='section-header'><a href="#types">Type Definitions</a></h2>

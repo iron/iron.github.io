@@ -1,1 +1,1 @@
-initSidebarItems({"struct":[["Response","The outgoing half for a Tcp connection, created by a `Server` and given to a `Handler`.The default `StatusCode` for a `Response` is `200 OK`.There is a `Drop` implementation for `Response` that will automatically write the head and flush the body, if the handler has not already done so, so that the server doesn't accidentally leave dangling requests."]]});
+initSidebarItems({"struct":[["Response","The outgoing half for a Tcp connection, created by a `Server` and given to a `Handler`."]]});

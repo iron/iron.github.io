@@ -1,1 +1,1 @@
-initSidebarItems({"enum":[["Vary","`Vary` header, defined in RFC7231The \"Vary\" header field in a response describes what parts of a request message, aside from the method, Host header field, and request target, might influence the origin server's process for selecting and representing this response.  The value consists of either a single asterisk (\"*\") or a list of header field names (case-insensitive).ABNFExample values`accept-encoding, accept-language` ExampleExample"]]});
+initSidebarItems({"enum":[["Vary","`Vary` header, defined in RFC7231"]]});

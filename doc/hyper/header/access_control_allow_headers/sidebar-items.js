@@ -1,1 +1,1 @@
-initSidebarItems({"struct":[["AccessControlAllowHeaders","`Access-Control-Allow-Headers` header, part of CORSThe `Access-Control-Allow-Headers` header indicates, as part of the response to a preflight request, which header field names can be used during the actual request.ABNFExample values`accept-language, date` Examples"]]});
+initSidebarItems({"struct":[["AccessControlAllowHeaders","`Access-Control-Allow-Headers` header, part of CORS"]]});

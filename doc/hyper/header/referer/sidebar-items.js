@@ -1,1 +1,1 @@
-initSidebarItems({"struct":[["Referer","`Referer` header, defined in RFC7231The `Referer` [sic] header field allows the user agent to specify a URI reference for the resource from which the target URI was obtained (i.e., the \"referrer\", though the field name is misspelled).  A user agent MUST NOT include the fragment and userinfo components of the URI reference, if any, when generating the Referer field value.ABNFExample values`http://www.example.org/hypertext/Overview.html` Examples"]]});
+initSidebarItems({"struct":[["Referer","`Referer` header, defined in RFC7231"]]});

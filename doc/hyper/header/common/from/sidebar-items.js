@@ -1,1 +1,1 @@
-initSidebarItems({"struct":[["From","`From` header, defined in RFC7231The `From` header field contains an Internet email address for a human user who controls the requesting user agent.  The address ought to be machine-usable.ABNFExample"]]});
+initSidebarItems({"struct":[["From","`From` header, defined in RFC7231"]]});
