@@ -46,7 +46,7 @@
             <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                 [<span class='inner'>&#x2212;</span>]
             </a>
-        </span><a id='src-61' class='srclink' href='../../src/serde_json/de.rs.html#1-829' title='goto source code'>[src]</a></span></h1>
+        </span><a id='src-62' class='srclink' href='../../src/serde_json/de.rs.html#1-898' title='goto source code'>[src]</a></span></h1>
 <div class='docblock'><p>JSON Deserialization</p>
 
 <p>This module provides for JSON deserialization with the type <code>Deserializer</code>.</p>
@@ -60,13 +60,23 @@
 
                         </td>
                     </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='struct' href='struct.StreamDeserializer.html'
+                               title='serde_json::de::StreamDeserializer'>StreamDeserializer</a></td>
+                        <td class='docblock short'>
+                             <p>Iterator that deserializes a stream into multiple JSON values.</p>
+
+                        </td>
+                    </tr>
                 </table><h2 id='functions' class='section-header'><a href="#functions">Functions</a></h2>
 <table>
                     <tr class=' module-item'>
                         <td><a class='fn' href='fn.from_iter.html'
                                title='serde_json::de::from_iter'>from_iter</a></td>
                         <td class='docblock short'>
-                             <p>Decodes a json value from a <code>std::io::Read</code>.</p>
+                             <p>Decodes a json value from an iterator over an iterator
+<code>Iterator&lt;Item=io::Result&lt;u8&gt;&gt;</code>.</p>
 
                         </td>
                     </tr>
@@ -84,7 +94,7 @@
                         <td><a class='fn' href='fn.from_slice.html'
                                title='serde_json::de::from_slice'>from_slice</a></td>
                         <td class='docblock short'>
-                             <p>Decodes a json value from a <code>&amp;str</code>.</p>
+                             <p>Decodes a json value from a byte slice <code>&amp;[u8]</code>.</p>
 
                         </td>
                     </tr>
