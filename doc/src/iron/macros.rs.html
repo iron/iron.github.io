@@ -114,7 +114,7 @@
 }
 
 <span class='doccomment'>/// Unwrap the given `Option` or return a `Ok(Response::new())` with the given</span>
-<span class='doccomment'>/// modifier. The default modifier is `status::BadRequest.</span>
+<span class='doccomment'>/// modifier. The default modifier is `status::BadRequest`.</span>
 <span class='attribute'>#[<span class='ident'>macro_export</span>]</span>
 <span class='macro'>macro_rules</span><span class='macro'>!</span> <span class='ident'>iexpect</span> {
     (<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>option</span>:<span class='ident'>expr</span>) <span class='op'>=&gt;</span> (<span class='macro'>iexpect</span><span class='macro'>!</span>(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>option</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>crate</span>::<span class='ident'>status</span>::<span class='ident'>BadRequest</span>));
