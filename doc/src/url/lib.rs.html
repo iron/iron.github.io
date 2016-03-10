@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-88ac128001ac3a9a/url-0.5.5/src/lib.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-88ac128001ac3a9a/url-0.5.7/src/lib.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>lib.rs.html -- source</title>
@@ -1205,7 +1205,6 @@
 <span id="1162">1162</span>
 <span id="1163">1163</span>
 <span id="1164">1164</span>
-<span id="1165">1165</span>
 </pre><pre class='rust '>
 <span class='comment'>// Copyright 2013-2015 Simon Sapin.</span>
 <span class='comment'>//</span>
@@ -1382,7 +1381,6 @@ assert!(&amp;*css_url.serialize() == &quot;http://servo.github.io/rust-url/main.
 <span class='kw'>pub</span> <span class='kw'>mod</span> <span class='ident'>punycode</span>;
 <span class='kw'>pub</span> <span class='kw'>mod</span> <span class='ident'>format</span>;
 <span class='kw'>pub</span> <span class='kw'>mod</span> <span class='ident'>idna</span>;
-<span class='kw'>mod</span> <span class='ident'>idna_mapping</span>;
 
 <span class='doccomment'>/// The parsed representation of an absolute URL.</span>
 <span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>PartialEq</span>, <span class='ident'>Eq</span>, <span class='ident'>Clone</span>, <span class='ident'>Debug</span>, <span class='ident'>Hash</span>, <span class='ident'>PartialOrd</span>, <span class='ident'>Ord</span>)]</span>
@@ -1751,7 +1749,7 @@ assert!(&amp;*css_url.serialize() == &quot;http://servo.github.io/rust-url/main.
     }
 }
 
-<span class='doccomment'>/// http://url.spec.whatwg.org/#relative-scheme</span>
+<span class='doccomment'>/// http://url.spec.whatwg.org/#special-scheme</span>
 <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>whatwg_scheme_type_mapper</span>(<span class='ident'>scheme</span>: <span class='kw-2'>&amp;</span><span class='ident'>str</span>) <span class='op'>-&gt;</span> <span class='ident'>SchemeType</span> {
     <span class='kw'>match</span> <span class='ident'>scheme</span> {
         <span class='string'>&quot;file&quot;</span> <span class='op'>=&gt;</span> <span class='ident'>SchemeType</span>::<span class='ident'>FileLike</span>,

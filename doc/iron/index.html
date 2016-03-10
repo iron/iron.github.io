@@ -52,7 +52,7 @@
 <h2 id='overview' class='section-header'><a href='#overview'>Overview</a></h2>
 <p>Iron is a high level web framework built in and for Rust, built on
 <a href="https://github.com/hyperium/hyper">hyper</a>. Iron is designed to take advantage
-of Rust&#39;s greatest features - it&#39;s excellent type system and its principled
+of Rust&#39;s greatest features - its excellent type system and principled
 approach to ownership in both single threaded and multi threaded contexts.</p>
 
 <p>Iron is highly concurrent and can scale horizontally on more machines behind a
@@ -213,8 +213,8 @@ middleware. No plugins or middleware are bundled with Iron.</p>
                         <td><a class='macro' href='macro.iexpect!.html'
                                title='iron::iexpect!'>iexpect!</a></td>
                         <td class='docblock short'>
-                             <p>Unwrap the given Option or return a Ok(Response::new()) with the given modifier. The default
-modifier is status::BadRequest.</p>
+                             <p>Unwrap the given <code>Option</code> or return a <code>Ok(Response::new())</code> with the given
+modifier. The default modifier is `status::BadRequest.</p>
 
                         </td>
                     </tr>
@@ -223,7 +223,8 @@ modifier is status::BadRequest.</p>
                         <td><a class='macro' href='macro.itry!.html'
                                title='iron::itry!'>itry!</a></td>
                         <td class='docblock short'>
-                             <p>Like try!(), but wrapping the error value in <code>IronError</code>. To be used in request handlers.</p>
+                             <p>Like <code>try!()</code>, but wraps the error value in <code>IronError</code>. To be used in
+request handlers.</p>
 
                         </td>
                     </tr>
@@ -243,6 +244,24 @@ modifier is status::BadRequest.</p>
                                title='iron::Iron'>Iron</a></td>
                         <td class='docblock short'>
                              <p>The primary entrance point to <code>Iron</code>, a <code>struct</code> to instantiate a new server.</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='struct' href='struct.Listening.html'
+                               title='iron::Listening'>Listening</a></td>
+                        <td class='docblock short'>
+                             <p>A listening server, which can later be closed.</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='struct' href='struct.Timeouts.html'
+                               title='iron::Timeouts'>Timeouts</a></td>
+                        <td class='docblock short'>
+                             <p>A settings struct containing a set of timeouts which can be applied to a server.</p>
 
                         </td>
                     </tr>
@@ -314,7 +333,8 @@ errors for use in highly generic contexts.</p>
 
                         </td>
                     </tr>
-                </table></section>
+                </table><h2 id='impls' class='section-header'><a href="#impls">Implementations</a></h2>
+<table></table></section>
     <section id='search' class="content hidden"></section>
 
     <section class="footer"></section>
