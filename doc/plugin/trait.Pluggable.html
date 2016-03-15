@@ -46,7 +46,7 @@
             <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                 [<span class='inner'>&#x2212;</span>]
             </a>
-        </span><a id='src-17' class='srclink' href='../src/plugin/lib.rs.html.html#41-90' title='goto source code'>[src]</a></span></h1>
+        </span><a id='src-17' class='srclink' href='../src/plugin/lib.rs.html#41-90' title='goto source code'>[src]</a></span></h1>
 <pre class='rust trait'>pub trait Pluggable {
     fn <a href='#method.get' class='fnname'>get</a>&lt;P: <a class='trait' href='../plugin/trait.Plugin.html' title='plugin::Plugin'>Plugin</a>&lt;Self&gt;&gt;(&amp;mut self) -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;P::Value, P::Error&gt; <span class='where'>where P::Value: <a class='trait' href='https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html' title='core::clone::Clone'>Clone</a> + <a class='trait' href='https://doc.rust-lang.org/nightly/core/any/trait.Any.html' title='core::any::Any'>Any</a>, Self: <a class='trait' href='../plugin/trait.Extensible.html' title='plugin::Extensible'>Extensible</a></span> { ... }
     fn <a href='#method.get_ref' class='fnname'>get_ref</a>&lt;P: <a class='trait' href='../plugin/trait.Plugin.html' title='plugin::Plugin'>Plugin</a>&lt;Self&gt;&gt;(&amp;mut self) -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;&amp;P::Value, P::Error&gt; <span class='where'>where P::Value: <a class='trait' href='https://doc.rust-lang.org/nightly/core/any/trait.Any.html' title='core::any::Any'>Any</a>, Self: <a class='trait' href='../plugin/trait.Extensible.html' title='plugin::Extensible'>Extensible</a></span> { ... }
@@ -125,7 +125,7 @@ If plugin creation fail an error is returned.</p>
 
                 <p>
                     Search functions by type signature (e.g.
-                    <code>vec -> usize</code> or <code>* -> vec</code>)
+                    <code>vec -> usize</code>)
                 </p>
             </div>
         </div>
