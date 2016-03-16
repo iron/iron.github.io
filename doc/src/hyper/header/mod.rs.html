@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-88ac128001ac3a9a/hyper-0.7.2/src/header/mod.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-88ac128001ac3a9a/hyper-0.8.0/src/header/mod.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>mod.rs.html -- source</title>
@@ -1200,7 +1200,7 @@
 <span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;serde-serialization&quot;</span>)]</span>
 <span class='kw'>impl</span> <span class='ident'>Serialize</span> <span class='kw'>for</span> <span class='ident'>Headers</span> {
     <span class='kw'>fn</span> <span class='ident'>serialize</span><span class='op'>&lt;</span><span class='ident'>S</span><span class='op'>&gt;</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>serializer</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>S</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>(), <span class='ident'>S</span>::<span class='ident'>Error</span><span class='op'>&gt;</span> <span class='kw'>where</span> <span class='ident'>S</span>: <span class='ident'>Serializer</span> {
-        <span class='ident'>serializer</span>.<span class='ident'>visit_map</span>(<span class='ident'>ser</span>::<span class='ident'>impls</span>::<span class='ident'>MapIteratorVisitor</span>::<span class='ident'>new</span>(
+        <span class='ident'>serializer</span>.<span class='ident'>serialize_map</span>(<span class='ident'>ser</span>::<span class='ident'>impls</span>::<span class='ident'>MapIteratorVisitor</span>::<span class='ident'>new</span>(
             <span class='self'>self</span>.<span class='ident'>iter</span>().<span class='ident'>map</span>(<span class='op'>|</span><span class='ident'>header</span><span class='op'>|</span> (<span class='ident'>header</span>.<span class='ident'>name</span>(), <span class='ident'>header</span>.<span class='ident'>value_string</span>())),
             <span class='prelude-val'>Some</span>(<span class='self'>self</span>.<span class='ident'>len</span>()),
         ))
@@ -1227,7 +1227,7 @@
             }
         }
 
-        <span class='ident'>deserializer</span>.<span class='ident'>visit_map</span>(<span class='ident'>HeadersVisitor</span>)
+        <span class='ident'>deserializer</span>.<span class='ident'>deserialize_map</span>(<span class='ident'>HeadersVisitor</span>)
     }
 }
 

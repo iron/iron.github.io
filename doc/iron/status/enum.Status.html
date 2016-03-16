@@ -46,7 +46,7 @@
             <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                 [<span class='inner'>&#x2212;</span>]
             </a>
-        </span><a id='src-7197' class='srclink' href='../../hyper/status/enum.Status.html?gotosrc=7197' title='goto source code'>[src]</a></span></h1>
+        </span><a id='src-7206' class='srclink' href='../../hyper/status/enum.Status.html?gotosrc=7206' title='goto source code'>[src]</a></span></h1>
 <pre class='rust enum'>pub enum Status {
     Continue,
     SwitchingProtocols,
@@ -88,6 +88,7 @@
     RangeNotSatisfiable,
     ExpectationFailed,
     ImATeapot,
+    MisdirectedRequest,
     UnprocessableEntity,
     Locked,
     FailedDependency,
@@ -95,6 +96,7 @@
     PreconditionRequired,
     TooManyRequests,
     RequestHeaderFieldsTooLarge,
+    UnavailableForLegalReasons,
     InternalServerError,
     NotImplemented,
     BadGateway,
@@ -209,6 +211,8 @@ inexplicably not in the register).</p>
 [<a href="https://tools.ietf.org/html/rfc7231#section-6.5.14">RFC7231, Section 6.5.14</a>]</p>
 </div></td><td></td></tr><tr><td id='variant.ImATeapot'><code>ImATeapot</code></td><td><div class='docblock'><p>418 I&#39;m a teapot
 [curiously, not registered by IANA, but <a href="https://tools.ietf.org/html/rfc2324">RFC2324</a>]</p>
+</div></td><td></td></tr><tr><td id='variant.MisdirectedRequest'><code>MisdirectedRequest</code></td><td><div class='docblock'><p>421 Misdirected Request
+<a href="http://tools.ietf.org/html/rfc7540#section-9.1.2">RFC7540, Section 9.1.2</a></p>
 </div></td><td></td></tr><tr><td id='variant.UnprocessableEntity'><code>UnprocessableEntity</code></td><td><div class='docblock'><p>422 Unprocessable Entity
 [<a href="https://tools.ietf.org/html/rfc4918">RFC4918</a>]</p>
 </div></td><td></td></tr><tr><td id='variant.Locked'><code>Locked</code></td><td><div class='docblock'><p>423 Locked
@@ -223,6 +227,8 @@ inexplicably not in the register).</p>
 [<a href="https://tools.ietf.org/html/rfc6585">RFC6585</a>]</p>
 </div></td><td></td></tr><tr><td id='variant.RequestHeaderFieldsTooLarge'><code>RequestHeaderFieldsTooLarge</code></td><td><div class='docblock'><p>431 Request Header Fields Too Large
 [<a href="https://tools.ietf.org/html/rfc6585">RFC6585</a>]</p>
+</div></td><td></td></tr><tr><td id='variant.UnavailableForLegalReasons'><code>UnavailableForLegalReasons</code></td><td><div class='docblock'><p>451 Unavailable For Legal Reasons
+[<a href="http://tools.ietf.org/html/rfc7725">RFC7725</a>]</p>
 </div></td><td></td></tr><tr><td id='variant.InternalServerError'><code>InternalServerError</code></td><td><div class='docblock'><p>500 Internal Server Error
 [<a href="https://tools.ietf.org/html/rfc7231#section-6.6.1">RFC7231, Section 6.6.1</a>]</p>
 </div></td><td></td></tr><tr><td id='variant.NotImplemented'><code>NotImplemented</code></td><td><div class='docblock'><p>501 Not Implemented
