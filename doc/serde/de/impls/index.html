@@ -46,7 +46,7 @@
             <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                 [<span class='inner'>&#x2212;</span>]
             </a>
-        </span><a id='src-256' class='srclink' href='../../../src/serde/de/impls.rs.html#1-990' title='goto source code'>[src]</a></span></h1>
+        </span><a id='src-256' class='srclink' href='../../../src/serde/de/impls.rs.html#1-1114' title='goto source code'>[src]</a></span></h1>
 <div class='docblock'><p>This module contains <code>Deserialize</code> and <code>Visitor</code> implementations.</p>
 </div><h2 id='structs' class='section-header'><a href="#structs">Structs</a></h2>
 <table>
@@ -55,6 +55,7 @@
                                title='serde::de::impls::BTreeMapVisitor'>BTreeMapVisitor</a></td>
                         <td class='docblock short'>
                              <p>A visitor that produces a map.</p>
+
                         </td>
                     </tr>
                 
@@ -63,6 +64,7 @@
                                title='serde::de::impls::BTreeSetVisitor'>BTreeSetVisitor</a></td>
                         <td class='docblock short'>
                              <p>A visitor that produces a sequence.</p>
+
                         </td>
                     </tr>
                 
@@ -71,6 +73,7 @@
                                title='serde::de::impls::BinaryHeapVisitor'>BinaryHeapVisitor</a></td>
                         <td class='docblock short'>
                              <p>A visitor that produces a sequence.</p>
+
                         </td>
                     </tr>
                 
@@ -79,6 +82,7 @@
                                title='serde::de::impls::BoolVisitor'>BoolVisitor</a></td>
                         <td class='docblock short'>
                              <p>A visitor that produces a <code>bool</code>.</p>
+
                         </td>
                     </tr>
                 
@@ -87,6 +91,7 @@
                                title='serde::de::impls::HashMapVisitor'>HashMapVisitor</a></td>
                         <td class='docblock short'>
                              <p>A visitor that produces a map.</p>
+
                         </td>
                     </tr>
                 
@@ -95,6 +100,17 @@
                                title='serde::de::impls::HashSetVisitor'>HashSetVisitor</a></td>
                         <td class='docblock short'>
                              <p>A visitor that produces a sequence.</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='struct' href='struct.IgnoredAny.html'
+                               title='serde::de::impls::IgnoredAny'>IgnoredAny</a></td>
+                        <td class='docblock short'>
+                             <p>A target for deserializers that want to ignore data. Implements
+Deserialize and silently eats data given to it.</p>
+
                         </td>
                     </tr>
                 
@@ -103,14 +119,16 @@
                                title='serde::de::impls::LinkedListVisitor'>LinkedListVisitor</a></td>
                         <td class='docblock short'>
                              <p>A visitor that produces a sequence.</p>
+
                         </td>
                     </tr>
                 
                     <tr class=' module-item'>
-                        <td><a class='struct' href='struct.PrimitiveVisitor.html'
-                               title='serde::de::impls::PrimitiveVisitor'>PrimitiveVisitor</a></td>
+                        <td><a class='struct' href='struct.PhantomDataVisitor.html'
+                               title='serde::de::impls::PhantomDataVisitor'>PhantomDataVisitor</a></td>
                         <td class='docblock short'>
-                             <p>A visitor that produces a primitive type.</p>
+                             <p>A visitor that produces a <code>PhantomData</code>.</p>
+
                         </td>
                     </tr>
                 
@@ -119,6 +137,7 @@
                                title='serde::de::impls::TupleVisitor1'>TupleVisitor1</a></td>
                         <td class='docblock short'>
                              <p>Construct a tuple visitor.</p>
+
                         </td>
                     </tr>
                 
@@ -127,6 +146,7 @@
                                title='serde::de::impls::TupleVisitor10'>TupleVisitor10</a></td>
                         <td class='docblock short'>
                              <p>Construct a tuple visitor.</p>
+
                         </td>
                     </tr>
                 
@@ -135,6 +155,7 @@
                                title='serde::de::impls::TupleVisitor11'>TupleVisitor11</a></td>
                         <td class='docblock short'>
                              <p>Construct a tuple visitor.</p>
+
                         </td>
                     </tr>
                 
@@ -143,6 +164,7 @@
                                title='serde::de::impls::TupleVisitor12'>TupleVisitor12</a></td>
                         <td class='docblock short'>
                              <p>Construct a tuple visitor.</p>
+
                         </td>
                     </tr>
                 
@@ -151,6 +173,7 @@
                                title='serde::de::impls::TupleVisitor2'>TupleVisitor2</a></td>
                         <td class='docblock short'>
                              <p>Construct a tuple visitor.</p>
+
                         </td>
                     </tr>
                 
@@ -159,6 +182,7 @@
                                title='serde::de::impls::TupleVisitor3'>TupleVisitor3</a></td>
                         <td class='docblock short'>
                              <p>Construct a tuple visitor.</p>
+
                         </td>
                     </tr>
                 
@@ -167,6 +191,7 @@
                                title='serde::de::impls::TupleVisitor4'>TupleVisitor4</a></td>
                         <td class='docblock short'>
                              <p>Construct a tuple visitor.</p>
+
                         </td>
                     </tr>
                 
@@ -175,6 +200,7 @@
                                title='serde::de::impls::TupleVisitor5'>TupleVisitor5</a></td>
                         <td class='docblock short'>
                              <p>Construct a tuple visitor.</p>
+
                         </td>
                     </tr>
                 
@@ -183,6 +209,7 @@
                                title='serde::de::impls::TupleVisitor6'>TupleVisitor6</a></td>
                         <td class='docblock short'>
                              <p>Construct a tuple visitor.</p>
+
                         </td>
                     </tr>
                 
@@ -191,6 +218,7 @@
                                title='serde::de::impls::TupleVisitor7'>TupleVisitor7</a></td>
                         <td class='docblock short'>
                              <p>Construct a tuple visitor.</p>
+
                         </td>
                     </tr>
                 
@@ -199,6 +227,7 @@
                                title='serde::de::impls::TupleVisitor8'>TupleVisitor8</a></td>
                         <td class='docblock short'>
                              <p>Construct a tuple visitor.</p>
+
                         </td>
                     </tr>
                 
@@ -207,6 +236,7 @@
                                title='serde::de::impls::TupleVisitor9'>TupleVisitor9</a></td>
                         <td class='docblock short'>
                              <p>Construct a tuple visitor.</p>
+
                         </td>
                     </tr>
                 
@@ -215,6 +245,7 @@
                                title='serde::de::impls::UnitVisitor'>UnitVisitor</a></td>
                         <td class='docblock short'>
                              <p>A visitor that produces a <code>()</code>.</p>
+
                         </td>
                     </tr>
                 
@@ -223,6 +254,7 @@
                                title='serde::de::impls::VecDequeVisitor'>VecDequeVisitor</a></td>
                         <td class='docblock short'>
                              <p>A visitor that produces a sequence.</p>
+
                         </td>
                     </tr>
                 
@@ -231,6 +263,7 @@
                                title='serde::de::impls::VecVisitor'>VecVisitor</a></td>
                         <td class='docblock short'>
                              <p>A visitor that produces a sequence.</p>
+
                         </td>
                     </tr>
                 </table></section>
@@ -276,7 +309,7 @@
 
                 <p>
                     Search functions by type signature (e.g.
-                    <code>vec -> usize</code> or <code>* -> vec</code>)
+                    <code>vec -> usize</code>)
                 </p>
             </div>
         </div>
