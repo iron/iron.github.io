@@ -289,6 +289,21 @@
 <span id="246">246</span>
 <span id="247">247</span>
 <span id="248">248</span>
+<span id="249">249</span>
+<span id="250">250</span>
+<span id="251">251</span>
+<span id="252">252</span>
+<span id="253">253</span>
+<span id="254">254</span>
+<span id="255">255</span>
+<span id="256">256</span>
+<span id="257">257</span>
+<span id="258">258</span>
+<span id="259">259</span>
+<span id="260">260</span>
+<span id="261">261</span>
+<span id="262">262</span>
+<span id="263">263</span>
 </pre><pre class='rust '>
 <span class='doccomment'>//! HTTP/HTTPS URL type for Iron.</span>
 
@@ -444,9 +459,12 @@
         <span class='comment'>// Write the host.</span>
         <span class='macro'>try</span><span class='macro'>!</span>(<span class='self'>self</span>.<span class='ident'>host</span>.<span class='ident'>fmt</span>(<span class='ident'>formatter</span>));
 
-        <span class='comment'>// Write the port.</span>
-        <span class='macro'>try</span><span class='macro'>!</span>(<span class='string'>&quot;:&quot;</span>.<span class='ident'>fmt</span>(<span class='ident'>formatter</span>));
-        <span class='macro'>try</span><span class='macro'>!</span>(<span class='self'>self</span>.<span class='ident'>port</span>.<span class='ident'>fmt</span>(<span class='ident'>formatter</span>));
+        <span class='comment'>// Write the port if they are not the default ports of 80 for HTTP and 443 for HTTPS.</span>
+        <span class='kw'>if</span> <span class='op'>!</span>((<span class='kw-2'>&amp;</span><span class='self'>self</span>.<span class='ident'>scheme</span> <span class='op'>==</span> <span class='string'>&quot;http&quot;</span> <span class='op'>&amp;&amp;</span> <span class='self'>self</span>.<span class='ident'>port</span> <span class='op'>==</span> <span class='number'>80</span>) <span class='op'>||</span>
+            (<span class='kw-2'>&amp;</span><span class='self'>self</span>.<span class='ident'>scheme</span> <span class='op'>==</span> <span class='string'>&quot;https&quot;</span> <span class='op'>&amp;&amp;</span> <span class='self'>self</span>.<span class='ident'>port</span> <span class='op'>==</span> <span class='number'>443</span>)) {
+                <span class='macro'>try</span><span class='macro'>!</span>(<span class='string'>&quot;:&quot;</span>.<span class='ident'>fmt</span>(<span class='ident'>formatter</span>));
+                <span class='macro'>try</span><span class='macro'>!</span>(<span class='self'>self</span>.<span class='ident'>port</span>.<span class='ident'>fmt</span>(<span class='ident'>formatter</span>));
+        }
 
         <span class='comment'>// Write the path.</span>
         <span class='macro'>try</span><span class='macro'>!</span>(<span class='macro'>write</span><span class='macro'>!</span>(<span class='ident'>formatter</span>, <span class='string'>&quot;{}&quot;</span>, <span class='ident'>PathFormatter</span> { <span class='ident'>path</span>: <span class='kw-2'>&amp;</span><span class='self'>self</span>.<span class='ident'>path</span> }));
@@ -521,7 +539,7 @@
     <span class='attribute'>#[<span class='ident'>test</span>]</span>
     <span class='kw'>fn</span> <span class='ident'>test_formatting</span>() {
         <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>Url</span>::<span class='ident'>parse</span>(<span class='string'>&quot;http://michael@example.com/path/?q=wow&quot;</span>).<span class='ident'>unwrap</span>().<span class='ident'>to_string</span>(),
-                    <span class='string'>&quot;http://michael@example.com:80/path/?q=wow&quot;</span>.<span class='ident'>to_string</span>());
+                    <span class='string'>&quot;http://michael@example.com/path/?q=wow&quot;</span>.<span class='ident'>to_string</span>());
     }
 
     <span class='attribute'>#[<span class='ident'>test</span>]</span>
@@ -536,6 +554,18 @@
         <span class='comment'>// Convert back to an Iron URL and check fidelity.</span>
         <span class='kw'>let</span> <span class='ident'>new_url</span> <span class='op'>=</span> <span class='ident'>Url</span>::<span class='ident'>from_generic_url</span>(<span class='ident'>raw_url</span>).<span class='ident'>unwrap</span>();
         <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>url</span>, <span class='ident'>new_url</span>);
+    }
+
+    <span class='attribute'>#[<span class='ident'>test</span>]</span>
+    <span class='kw'>fn</span> <span class='ident'>test_https_non_default_port</span>() {
+        <span class='kw'>let</span> <span class='ident'>parsed</span> <span class='op'>=</span> <span class='ident'>Url</span>::<span class='ident'>parse</span>(<span class='string'>&quot;https://example.com:8080&quot;</span>).<span class='ident'>unwrap</span>().<span class='ident'>to_string</span>();
+        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>parsed</span>, <span class='string'>&quot;https://example.com:8080/&quot;</span>);
+    }
+
+    <span class='attribute'>#[<span class='ident'>test</span>]</span>
+    <span class='kw'>fn</span> <span class='ident'>test_https_default_port</span>() {
+        <span class='kw'>let</span> <span class='ident'>parsed</span> <span class='op'>=</span> <span class='ident'>Url</span>::<span class='ident'>parse</span>(<span class='string'>&quot;https://example.com:443&quot;</span>).<span class='ident'>unwrap</span>().<span class='ident'>to_string</span>();
+        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>parsed</span>, <span class='string'>&quot;https://example.com/&quot;</span>);
     }
 }
 </pre>
