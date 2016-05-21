@@ -4,13 +4,14 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-88ac128001ac3a9a/uuid-0.2.2/src/lib.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/uuid-0.2.2/src/lib.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>lib.rs.html -- source</title>
 
     <link rel="stylesheet" type="text/css" href="../../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../../main.css">
+    
 
     <link rel="shortcut icon" href="https://www.rust-lang.org/favicon.ico">
     
@@ -1595,7 +1596,7 @@
 
     <span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>std</span>::<span class='ident'>prelude</span>::<span class='ident'>v1</span>::<span class='op'>*</span>;
 
-    <span class='kw'>use</span> <span class='ident'>super</span>::{<span class='ident'>Uuid</span>, <span class='ident'>UuidVariant</span>, <span class='ident'>UuidVersion</span>};
+    <span class='kw'>use</span> <span class='kw'>super</span>::{<span class='ident'>Uuid</span>, <span class='ident'>UuidVariant</span>, <span class='ident'>UuidVersion</span>};
 
     <span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;v4&quot;</span>)]</span>
     <span class='kw'>use</span> <span class='ident'>rand</span>;
@@ -1673,7 +1674,7 @@
 
     <span class='attribute'>#[<span class='ident'>test</span>]</span>
     <span class='kw'>fn</span> <span class='ident'>test_parse_uuid_v4</span>() {
-        <span class='kw'>use</span> <span class='ident'>super</span>::<span class='ident'>ParseError</span>::<span class='op'>*</span>;
+        <span class='kw'>use</span> <span class='kw'>super</span>::<span class='ident'>ParseError</span>::<span class='op'>*</span>;
 
         <span class='comment'>// Invalid</span>
         <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>Uuid</span>::<span class='ident'>parse_str</span>(<span class='string'>&quot;&quot;</span>), <span class='prelude-val'>Err</span>(<span class='ident'>InvalidLength</span>(<span class='number'>0</span>)));

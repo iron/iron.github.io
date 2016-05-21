@@ -1,5 +1,5 @@
 (function() {var implementors = {};
-implementors['error'] = [];
+implementors["error"] = [];
 
             if (window.register_implementors) {
                 window.register_implementors(implementors);
