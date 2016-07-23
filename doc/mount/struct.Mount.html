@@ -11,6 +11,7 @@
 
     <link rel="stylesheet" type="text/css" href="../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../main.css">
+    
 
     
     
@@ -43,10 +44,10 @@
 
     <section id='main' class="content struct">
 <h1 class='fqn'><span class='in-band'>Struct <a href='index.html'>mount</a>::<wbr><a class='struct' href=''>Mount</a></span><span class='out-of-band'><span id='render-detail'>
-            <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
-                [<span class='inner'>&#x2212;</span>]
-            </a>
-        </span><a id='src-23' class='srclink' href='../src/mount/mount.rs.html#24-26' title='goto source code'>[src]</a></span></h1>
+                   <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
+                       [<span class='inner'>&#x2212;</span>]
+                   </a>
+               </span><a id='src-25' class='srclink' href='../src/mount/src/mount.rs.html#26-28' title='goto source code'>[src]</a></span></h1>
 <pre class='rust struct'>pub struct Mount {
     // some fields omitted
 }</pre><div class='docblock'><p><code>Mount</code> is a simple mounting middleware.</p>
@@ -60,7 +61,8 @@ path. <code>Request::url</code> is modified so that requests appear to be relati
 
 <p>Mounted handlers may also access the <em>original</em> URL by requesting the <code>OriginalUrl</code> key
 from <code>Request::extensions</code>.</p>
-</div><h2 id='methods'>Methods</h2><h3 class='impl'><code>impl <a class='struct' href='../mount/struct.Mount.html' title='mount::Mount'>Mount</a></code></h3><div class='impl-items'><h4 id='method.new' class='method'><code>fn <a href='#method.new' class='fnname'>new</a>() -&gt; <a class='struct' href='../mount/struct.Mount.html' title='mount::Mount'>Mount</a></code></h4>
+</div><h2 id='methods'>Methods</h2><h3 class='impl'><span class='in-band'><code>impl <a class='struct' href='../mount/struct.Mount.html' title='mount::Mount'>Mount</a></code></span><span class='out-of-band'><div class='ghost'></div><a id='src-44' class='srclink' href='../src/mount/src/mount.rs.html#49-79' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.new' class='method'><code>fn <a href='#method.new' class='fnname'>new</a>() -&gt; <a class='struct' href='../mount/struct.Mount.html' title='mount::Mount'>Mount</a></code></h4>
 <div class='docblock'><p>Creates a new instance of <code>Mount</code>.</p>
 </div><h4 id='method.mount' class='method'><code>fn <a href='#method.mount' class='fnname'>mount</a>&lt;H: <a class='trait' href='../iron/middleware/trait.Handler.html' title='iron::middleware::Handler'>Handler</a>&gt;(&amp;mut self, route: &amp;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>, handler: H) -&gt; &amp;mut <a class='struct' href='../mount/struct.Mount.html' title='mount::Mount'>Mount</a></code></h4>
 <div class='docblock'><p>Mounts a given <code>Handler</code> onto a route.</p>
@@ -69,8 +71,10 @@ from <code>Request::extensions</code>.</p>
 For a given request, the <em>most specific</em> handler will be selected.</p>
 
 <p>Existing handlers on the same route will be overwritten.</p>
-</div></div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><code>impl <a class='trait' href='../iron/middleware/trait.Handler.html' title='iron::middleware::Handler'>Handler</a> for <a class='struct' href='../mount/struct.Mount.html' title='mount::Mount'>Mount</a></code></h3><div class='impl-items'><h4 id='method.handle' class='method'><code>fn <a href='../iron/middleware/trait.Handler.html#method.handle' class='fnname'>handle</a>(&amp;self, req: &amp;mut <a class='struct' href='../iron/request/struct.Request.html' title='iron::request::Request'>Request</a>) -&gt; <a class='type' href='../iron/type.IronResult.html' title='iron::IronResult'>IronResult</a>&lt;<a class='struct' href='../iron/response/struct.Response.html' title='iron::response::Response'>Response</a>&gt;</code></h4>
-</div></section>
+</div></div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><span class='in-band'><code>impl <a class='trait' href='../iron/middleware/trait.Handler.html' title='iron::middleware::Handler'>Handler</a> for <a class='struct' href='../mount/struct.Mount.html' title='mount::Mount'>Mount</a></code></span><span class='out-of-band'><div class='ghost'></div><a id='src-55' class='srclink' href='../src/mount/src/mount.rs.html#81-135' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.handle' class='method'><code>fn <a href='../iron/middleware/trait.Handler.html#tymethod.handle' class='fnname'>handle</a>(&amp;self, req: &amp;mut <a class='struct' href='../iron/request/struct.Request.html' title='iron::request::Request'>Request</a>) -&gt; <a class='type' href='../iron/type.IronResult.html' title='iron::IronResult'>IronResult</a>&lt;<a class='struct' href='../iron/response/struct.Response.html' title='iron::response::Response'>Response</a>&gt;</code></h4>
+<div class='docblock'><p>Produce a <code>Response</code> from a Request, with the possibility of error.</p>
+</div></div></section>
     <section id='search' class="content hidden"></section>
 
     <section class="footer"></section>
@@ -93,6 +97,8 @@ For a given request, the <em>most specific</em> handler will be selected.</p>
                     <dd>Move down in search results</dd>
                     <dt>&#9166;</dt>
                     <dd>Go to active search result</dd>
+                    <dt>+</dt>
+                    <dd>Collapse/expand all sections</dd>
                 </dl>
             </div>
 
@@ -113,7 +119,7 @@ For a given request, the <em>most specific</em> handler will be selected.</p>
 
                 <p>
                     Search functions by type signature (e.g.
-                    <code>vec -> usize</code>)
+                    <code>vec -> usize</code> or <code>* -> vec</code>)
                 </p>
             </div>
         </div>
