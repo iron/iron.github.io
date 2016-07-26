@@ -11,6 +11,7 @@
 
     <link rel="stylesheet" type="text/css" href="../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../main.css">
+    
 
     
     
@@ -43,21 +44,23 @@
 
     <section id='main' class="content macro">
 <h1 class='fqn'><span class='in-band'><a href='index.html'>router</a>::<wbr><a class='macro' href=''>router!</a></span><span class='out-of-band'><span id='render-detail'>
-            <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
-                [<span class='inner'>&#x2212;</span>]
-            </a>
-        </span><a id='src-147' class='srclink' href='../src/router/macros.rs.html#22-28' title='goto source code'>[src]</a></span></h1>
+                   <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
+                       [<span class='inner'>&#x2212;</span>]
+                   </a>
+               </span><a id='src-148' class='srclink' href='../src/router/src/macros.rs.html#22-28' title='goto source code'>[src]</a></span></h1>
 <pre class='rust macro'>
 <span class='macro'>macro_rules</span><span class='macro'>!</span> <span class='ident'>router</span> {
     ($(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>method</span>:<span class='ident'>ident</span> <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>glob</span>:<span class='ident'>expr</span> <span class='op'>=&gt;</span> <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>handler</span>:<span class='ident'>expr</span>),<span class='op'>+</span> $(,)<span class='op'>*</span>) <span class='op'>=&gt;</span> { ... };
 }</pre>
 <div class='docblock'><p>Create and populate a router.</p>
+
 <pre class='rust rust-example-rendered'>
 <span class='kw'>let</span> <span class='ident'>router</span> <span class='op'>=</span> <span class='macro'>router</span><span class='macro'>!</span>(<span class='ident'>get</span>  <span class='string'>&quot;/&quot;</span>       <span class='op'>=&gt;</span> <span class='ident'>index</span>,
                      <span class='ident'>get</span>  <span class='string'>&quot;/:query&quot;</span> <span class='op'>=&gt;</span> <span class='ident'>queryHandler</span>,
                      <span class='ident'>post</span> <span class='string'>&quot;/&quot;</span>       <span class='op'>=&gt;</span> <span class='ident'>postHandler</span>);</pre>
 
 <p>Is equivalent to:</p>
+
 <pre class='rust rust-example-rendered'>
    <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>router</span> <span class='op'>=</span> <span class='ident'>Router</span>::<span class='ident'>new</span>();
    <span class='ident'>router</span>.<span class='ident'>get</span>(<span class='string'>&quot;/&quot;</span>, <span class='ident'>index</span>);
@@ -90,6 +93,8 @@
                     <dd>Move down in search results</dd>
                     <dt>&#9166;</dt>
                     <dd>Go to active search result</dd>
+                    <dt>+</dt>
+                    <dd>Collapse/expand all sections</dd>
                 </dl>
             </div>
 
@@ -110,7 +115,7 @@
 
                 <p>
                     Search functions by type signature (e.g.
-                    <code>vec -> usize</code>)
+                    <code>vec -> usize</code> or <code>* -> vec</code>)
                 </p>
             </div>
         </div>

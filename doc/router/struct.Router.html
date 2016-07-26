@@ -11,6 +11,7 @@
 
     <link rel="stylesheet" type="text/css" href="../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../main.css">
+    
 
     
     
@@ -43,16 +44,18 @@
 
     <section id='main' class="content struct">
 <h1 class='fqn'><span class='in-band'>Struct <a href='index.html'>router</a>::<wbr><a class='struct' href=''>Router</a></span><span class='out-of-band'><span id='render-detail'>
-            <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
-                [<span class='inner'>&#x2212;</span>]
-            </a>
-        </span><a id='src-19' class='srclink' href='../src/router/router.rs.html#15-20' title='goto source code'>[src]</a></span></h1>
+                   <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
+                       [<span class='inner'>&#x2212;</span>]
+                   </a>
+               </span><a id='src-20' class='srclink' href='../src/router/src/router.rs.html#16-21' title='goto source code'>[src]</a></span></h1>
 <pre class='rust struct'>pub struct Router {
     // some fields omitted
 }</pre><div class='docblock'><p><code>Router</code> provides an interface for creating complex routes as middleware
 for the Iron framework.</p>
-</div><h2 id='methods'>Methods</h2><h3 class='impl'><code>impl <a class='struct' href='../router/struct.Router.html' title='router::Router'>Router</a></code></h3><div class='impl-items'><h4 id='method.new' class='method'><code>fn <a href='#method.new' class='fnname'>new</a>() -&gt; <a class='struct' href='../router/struct.Router.html' title='router::Router'>Router</a></code></h4>
+</div><h2 id='methods'>Methods</h2><h3 class='impl'><span class='in-band'><code>impl <a class='struct' href='../router/struct.Router.html' title='router::Router'>Router</a></code></span><span class='out-of-band'><div class='ghost'></div><a id='src-23' class='srclink' href='../src/router/src/router.rs.html#23-173' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.new' class='method'><code>fn <a href='#method.new' class='fnname'>new</a>() -&gt; <a class='struct' href='../router/struct.Router.html' title='router::Router'>Router</a></code></h4>
 <div class='docblock'><p>Construct a new, empty <code>Router</code>.</p>
+
 <pre class='rust rust-example-rendered'>
 <span class='kw'>let</span> <span class='ident'>router</span> <span class='op'>=</span> <span class='ident'>Router</span>::<span class='ident'>new</span>();</pre>
 </div><h4 id='method.route' class='method'><code>fn <a href='#method.route' class='fnname'>route</a>&lt;H, S&gt;(&amp;mut self, method: <a class='enum' href='../hyper/method/enum.Method.html' title='hyper::method::Method'>Method</a>, glob: S, handler: H) -&gt; &amp;mut <a class='struct' href='../router/struct.Router.html' title='router::Router'>Router</a> <span class='where'>where H: <a class='trait' href='../iron/middleware/trait.Handler.html' title='iron::middleware::Handler'>Handler</a>, S: <a class='trait' href='https://doc.rust-lang.org/nightly/core/convert/trait.AsRef.html' title='core::convert::AsRef'>AsRef</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>&gt;</span></code></h4>
@@ -65,6 +68,7 @@ object, which is stored in the request <code>extensions</code>.</p>
 <p>For instance, to route <code>Get</code> requests on any route matching
 <code>/users/:userid/:friend</code> and store <code>userid</code> and <code>friend</code> in
 the exposed Params object:</p>
+
 <pre class='rust rust-example-rendered'>
 <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>router</span> <span class='op'>=</span> <span class='ident'>Router</span>::<span class='ident'>new</span>();
 <span class='ident'>router</span>.<span class='ident'>route</span>(<span class='ident'>method</span>::<span class='ident'>Get</span>, <span class='string'>&quot;/users/:userid/:friendid&quot;</span>, <span class='ident'>controller</span>);</pre>
@@ -91,9 +95,13 @@ authorized for this route before handling it.</p>
 </div><h4 id='method.any' class='method'><code>fn <a href='#method.any' class='fnname'>any</a>&lt;H: <a class='trait' href='../iron/middleware/trait.Handler.html' title='iron::middleware::Handler'>Handler</a>, S: <a class='trait' href='https://doc.rust-lang.org/nightly/core/convert/trait.AsRef.html' title='core::convert::AsRef'>AsRef</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>&gt;&gt;(&amp;mut self, glob: S, handler: H) -&gt; &amp;mut <a class='struct' href='../router/struct.Router.html' title='router::Router'>Router</a></code></h4>
 <div class='docblock'><p>Route will match any method, including gibberish.
 In case of ambiguity, handlers specific to methods will be preferred.</p>
-</div></div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><code>impl <a class='trait' href='../typemap/trait.Key.html' title='typemap::Key'>Key</a> for <a class='struct' href='../router/struct.Router.html' title='router::Router'>Router</a></code></h3><div class='impl-items'><h4 id='assoc_type.Value' class='type'><code>type Value = <a class='struct' href='../router/struct.Params.html' title='router::Params'>Params</a></code></h4>
-</div><h3 class='impl'><code>impl <a class='trait' href='../iron/middleware/trait.Handler.html' title='iron::middleware::Handler'>Handler</a> for <a class='struct' href='../router/struct.Router.html' title='router::Router'>Router</a></code></h3><div class='impl-items'><h4 id='method.handle' class='method'><code>fn <a href='../iron/middleware/trait.Handler.html#method.handle' class='fnname'>handle</a>(&amp;self, req: &amp;mut <a class='struct' href='../iron/request/struct.Request.html' title='iron::request::Request'>Request</a>) -&gt; <a class='type' href='../iron/type.IronResult.html' title='iron::IronResult'>IronResult</a>&lt;<a class='struct' href='../iron/response/struct.Response.html' title='iron::response::Response'>Response</a>&gt;</code></h4>
-</div></section>
+</div></div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><span class='in-band'><code>impl <a class='trait' href='../typemap/trait.Key.html' title='typemap::Key'>Key</a> for <a class='struct' href='../router/struct.Router.html' title='router::Router'>Router</a></code></span><span class='out-of-band'><div class='ghost'></div><a id='src-110' class='srclink' href='../src/router/src/router.rs.html#175' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='associatedtype.Value' class='type'><code>type <a href='../typemap/trait.Key.html#associatedtype.Value' class='type'>Value</a> = <a class='struct' href='../router/struct.Params.html' title='router::Params'>Params</a></code></h4>
+<div class='docblock'><p>The value type associated with this key type.</p>
+</div></div><h3 class='impl'><span class='in-band'><code>impl <a class='trait' href='../iron/middleware/trait.Handler.html' title='iron::middleware::Handler'>Handler</a> for <a class='struct' href='../router/struct.Router.html' title='router::Router'>Router</a></code></span><span class='out-of-band'><div class='ghost'></div><a id='src-112' class='srclink' href='../src/router/src/router.rs.html#177-195' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.handle' class='method'><code>fn <a href='../iron/middleware/trait.Handler.html#tymethod.handle' class='fnname'>handle</a>(&amp;self, req: &amp;mut <a class='struct' href='../iron/request/struct.Request.html' title='iron::request::Request'>Request</a>) -&gt; <a class='type' href='../iron/type.IronResult.html' title='iron::IronResult'>IronResult</a>&lt;<a class='struct' href='../iron/response/struct.Response.html' title='iron::response::Response'>Response</a>&gt;</code></h4>
+<div class='docblock'><p>Produce a <code>Response</code> from a Request, with the possibility of error.</p>
+</div></div></section>
     <section id='search' class="content hidden"></section>
 
     <section class="footer"></section>
@@ -116,6 +124,8 @@ In case of ambiguity, handlers specific to methods will be preferred.</p>
                     <dd>Move down in search results</dd>
                     <dt>&#9166;</dt>
                     <dd>Go to active search result</dd>
+                    <dt>+</dt>
+                    <dd>Collapse/expand all sections</dd>
                 </dl>
             </div>
 
@@ -136,7 +146,7 @@ In case of ambiguity, handlers specific to methods will be preferred.</p>
 
                 <p>
                     Search functions by type signature (e.g.
-                    <code>vec -> usize</code>)
+                    <code>vec -> usize</code> or <code>* -> vec</code>)
                 </p>
             </div>
         </div>

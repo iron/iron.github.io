@@ -11,6 +11,7 @@
 
     <link rel="stylesheet" type="text/css" href="../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../main.css">
+    
 
     
     
@@ -43,61 +44,52 @@
 
     <section id='main' class="content mod">
 <h1 class='fqn'><span class='in-band'>Crate <a class='mod' href=''>router</a></span><span class='out-of-band'><span id='render-detail'>
-            <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
-                [<span class='inner'>&#x2212;</span>]
-            </a>
-        </span><a id='src-0' class='srclink' href='../src/router/lib.rs.html#1-13' title='goto source code'>[src]</a></span></h1>
+                   <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
+                       [<span class='inner'>&#x2212;</span>]
+                   </a>
+               </span><a id='src-0' class='srclink' href='../src/router/src/lib.rs.html#1-13' title='goto source code'>[src]</a></span></h1>
 <div class='docblock'><p><code>Router</code> provides fast and flexible routing for Iron.</p>
 </div><h2 id='macros' class='section-header'><a href="#macros">Macros</a></h2>
 <table>
-                    <tr class=' module-item'>
-                        <td><a class='macro' href='macro.router!.html'
-                               title='router::router!'>router!</a></td>
-                        <td class='docblock short'>
-                             <p>Create and populate a router.</p>
-
-                        </td>
-                    </tr>
-                </table><h2 id='structs' class='section-header'><a href="#structs">Structs</a></h2>
+                       <tr class=' module-item'>
+                           <td><a class='macro' href='macro.router!.html'
+                                  title='router::router!'>router!</a></td>
+                           <td class='docblock short'>
+                                <p>Create and populate a router.</p>
+                           </td>
+                       </tr></table><h2 id='structs' class='section-header'><a href="#structs">Structs</a></h2>
 <table>
-                    <tr class=' module-item'>
-                        <td><a class='struct' href='struct.NoRoute.html'
-                               title='router::NoRoute'>NoRoute</a></td>
-                        <td class='docblock short'>
-                             <p>The error thrown by router if there is no matching route,
+                       <tr class=' module-item'>
+                           <td><a class='struct' href='struct.NoRoute.html'
+                                  title='router::NoRoute'>NoRoute</a></td>
+                           <td class='docblock short'>
+                                <p>The error thrown by router if there is no matching route,
 it is always accompanied by a NotFound response.</p>
-
-                        </td>
-                    </tr>
-                
-                    <tr class=' module-item'>
-                        <td><a class='struct' href='struct.Params.html'
-                               title='router::Params'>Params</a></td>
-                        <td class='docblock short'>
-                             
-                        </td>
-                    </tr>
-                
-                    <tr class=' module-item'>
-                        <td><a class='struct' href='struct.Router.html'
-                               title='router::Router'>Router</a></td>
-                        <td class='docblock short'>
-                             <p><code>Router</code> provides an interface for creating complex routes as middleware
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='struct' href='struct.Params.html'
+                                  title='router::Params'>Params</a></td>
+                           <td class='docblock short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='struct' href='struct.Router.html'
+                                  title='router::Router'>Router</a></td>
+                           <td class='docblock short'>
+                                <p><code>Router</code> provides an interface for creating complex routes as middleware
 for the Iron framework.</p>
-
-                        </td>
-                    </tr>
-                
-                    <tr class=' module-item'>
-                        <td><a class='struct' href='struct.TrailingSlash.html'
-                               title='router::TrailingSlash'>TrailingSlash</a></td>
-                        <td class='docblock short'>
-                             <p>The error thrown by router if a request was redirected
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='struct' href='struct.TrailingSlash.html'
+                                  title='router::TrailingSlash'>TrailingSlash</a></td>
+                           <td class='docblock short'>
+                                <p>The error thrown by router if a request was redirected
 by adding or removing a trailing slash.</p>
-
-                        </td>
-                    </tr>
-                </table></section>
+                           </td>
+                       </tr></table></section>
     <section id='search' class="content hidden"></section>
 
     <section class="footer"></section>
@@ -120,6 +112,8 @@ by adding or removing a trailing slash.</p>
                     <dd>Move down in search results</dd>
                     <dt>&#9166;</dt>
                     <dd>Go to active search result</dd>
+                    <dt>+</dt>
+                    <dd>Collapse/expand all sections</dd>
                 </dl>
             </div>
 
@@ -140,7 +134,7 @@ by adding or removing a trailing slash.</p>
 
                 <p>
                     Search functions by type signature (e.g.
-                    <code>vec -> usize</code>)
+                    <code>vec -> usize</code> or <code>* -> vec</code>)
                 </p>
             </div>
         </div>
