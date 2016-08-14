@@ -627,7 +627,7 @@
             <span class='ident'>object_buffer</span>: <span class='ident'>String</span>::<span class='ident'>with_capacity</span>(<span class='number'>14</span>),
 
             <span class='ident'>waitqueue</span>: <span class='macro'>vec</span><span class='macro'>!</span>[],
-            <span class='ident'>finished</span>: <span class='bool-val'>false</span>
+            <span class='ident'>finished</span>: <span class='boolvalue'>false</span>
         }
     }
 }
@@ -676,7 +676,7 @@
                     <span class='string'>&quot;ip-addr&quot;</span> <span class='op'>=&gt;</span> <span class='ident'>RemoteAddr</span>,
                     _ <span class='op'>=&gt;</span> {
                         <span class='comment'>// Error, so mark as finished.</span>
-                        <span class='self'>self</span>.<span class='ident'>finished</span> <span class='op'>=</span> <span class='bool-val'>true</span>;
+                        <span class='self'>self</span>.<span class='ident'>finished</span> <span class='op'>=</span> <span class='boolvalue'>true</span>;
                         <span class='kw'>return</span> <span class='prelude-val'>Some</span>(<span class='prelude-val'>None</span>);
                     }
                 };
@@ -705,7 +705,7 @@
                                 <span class='prelude-val'>Some</span>(<span class='ident'>c</span>) <span class='op'>=&gt;</span> <span class='ident'>buffer</span>.<span class='ident'>push</span>(<span class='ident'>c</span>),
                                 <span class='comment'>// Error, so mark as finished.</span>
                                 <span class='prelude-val'>None</span> <span class='op'>=&gt;</span> {
-                                    <span class='self'>self</span>.<span class='ident'>finished</span> <span class='op'>=</span> <span class='bool-val'>true</span>;
+                                    <span class='self'>self</span>.<span class='ident'>finished</span> <span class='op'>=</span> <span class='boolvalue'>true</span>;
                                     <span class='kw'>return</span> <span class='prelude-val'>Some</span>(<span class='prelude-val'>None</span>);
                                 }
                             }
@@ -740,7 +740,7 @@
 
                         <span class='comment'>// Nested attributes are not supported.</span>
                         <span class='kw'>if</span> <span class='self'>self</span>.<span class='ident'>chars</span>.<span class='ident'>peek</span>() <span class='op'>==</span> <span class='prelude-val'>Some</span>(<span class='kw-2'>&amp;</span><span class='string'>&#39;@&#39;</span>) {
-                            <span class='self'>self</span>.<span class='ident'>finished</span> <span class='op'>=</span> <span class='bool-val'>true</span>;
+                            <span class='self'>self</span>.<span class='ident'>finished</span> <span class='op'>=</span> <span class='boolvalue'>true</span>;
                             <span class='kw'>return</span> <span class='prelude-val'>Some</span>(<span class='prelude-val'>None</span>);
                         }
 
@@ -751,7 +751,7 @@
                             <span class='kw'>match</span> <span class='self'>self</span>.<span class='ident'>next</span>() {
                                 <span class='prelude-val'>Some</span>(<span class='prelude-val'>Some</span>(<span class='ident'>unit</span>)) <span class='op'>=&gt;</span> <span class='ident'>apply_to</span>.<span class='ident'>push</span>(<span class='ident'>unit</span>),
                                 _ <span class='op'>=&gt;</span> {
-                                    <span class='self'>self</span>.<span class='ident'>finished</span> <span class='op'>=</span> <span class='bool-val'>true</span>;
+                                    <span class='self'>self</span>.<span class='ident'>finished</span> <span class='op'>=</span> <span class='boolvalue'>true</span>;
                                     <span class='kw'>return</span> <span class='prelude-val'>Some</span>(<span class='prelude-val'>None</span>);
                                 }
                             };
@@ -776,7 +776,7 @@
 
                     _ <span class='op'>=&gt;</span> {
                         <span class='comment'>// Error, so mark as finished.</span>
-                        <span class='self'>self</span>.<span class='ident'>finished</span> <span class='op'>=</span> <span class='bool-val'>true</span>;
+                        <span class='self'>self</span>.<span class='ident'>finished</span> <span class='op'>=</span> <span class='boolvalue'>true</span>;
                         <span class='kw'>return</span> <span class='prelude-val'>Some</span>(<span class='prelude-val'>None</span>);
                     }
                 }
@@ -835,10 +835,10 @@
 
             <span class='string'>&quot;bold&quot;</span> <span class='op'>=&gt;</span> <span class='prelude-val'>Ok</span>(<span class='ident'>Attr</span>(<span class='ident'>term</span>::<span class='ident'>Attr</span>::<span class='ident'>Bold</span>)),
             <span class='string'>&quot;dim&quot;</span> <span class='op'>=&gt;</span> <span class='prelude-val'>Ok</span>(<span class='ident'>Attr</span>(<span class='ident'>term</span>::<span class='ident'>Attr</span>::<span class='ident'>Dim</span>)),
-            <span class='string'>&quot;italic&quot;</span> <span class='op'>=&gt;</span> <span class='prelude-val'>Ok</span>(<span class='ident'>Attr</span>(<span class='ident'>term</span>::<span class='ident'>Attr</span>::<span class='ident'>Italic</span>(<span class='bool-val'>true</span>))),
-            <span class='string'>&quot;underline&quot;</span> <span class='op'>=&gt;</span> <span class='prelude-val'>Ok</span>(<span class='ident'>Attr</span>(<span class='ident'>term</span>::<span class='ident'>Attr</span>::<span class='ident'>Underline</span>(<span class='bool-val'>true</span>))),
+            <span class='string'>&quot;italic&quot;</span> <span class='op'>=&gt;</span> <span class='prelude-val'>Ok</span>(<span class='ident'>Attr</span>(<span class='ident'>term</span>::<span class='ident'>Attr</span>::<span class='ident'>Italic</span>(<span class='boolvalue'>true</span>))),
+            <span class='string'>&quot;underline&quot;</span> <span class='op'>=&gt;</span> <span class='prelude-val'>Ok</span>(<span class='ident'>Attr</span>(<span class='ident'>term</span>::<span class='ident'>Attr</span>::<span class='ident'>Underline</span>(<span class='boolvalue'>true</span>))),
             <span class='string'>&quot;blink&quot;</span> <span class='op'>=&gt;</span> <span class='prelude-val'>Ok</span>(<span class='ident'>Attr</span>(<span class='ident'>term</span>::<span class='ident'>Attr</span>::<span class='ident'>Blink</span>)),
-            <span class='string'>&quot;standout&quot;</span> <span class='op'>=&gt;</span> <span class='prelude-val'>Ok</span>(<span class='ident'>Attr</span>(<span class='ident'>term</span>::<span class='ident'>Attr</span>::<span class='ident'>Standout</span>(<span class='bool-val'>true</span>))),
+            <span class='string'>&quot;standout&quot;</span> <span class='op'>=&gt;</span> <span class='prelude-val'>Ok</span>(<span class='ident'>Attr</span>(<span class='ident'>term</span>::<span class='ident'>Attr</span>::<span class='ident'>Standout</span>(<span class='boolvalue'>true</span>))),
             <span class='string'>&quot;reverse&quot;</span> <span class='op'>=&gt;</span> <span class='prelude-val'>Ok</span>(<span class='ident'>Attr</span>(<span class='ident'>term</span>::<span class='ident'>Attr</span>::<span class='ident'>Reverse</span>)),
             <span class='string'>&quot;secure&quot;</span> <span class='op'>=&gt;</span> <span class='prelude-val'>Ok</span>(<span class='ident'>Attr</span>(<span class='ident'>term</span>::<span class='ident'>Attr</span>::<span class='ident'>Secure</span>)),
 
