@@ -1,0 +1,1 @@
+initSidebarItems({"mod":[["format","Formatting helpers for the logger middleware."]],"struct":[["Logger","`Middleware` for logging request and response info to the terminal."]]});
