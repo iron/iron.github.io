@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/serde_json-0.8.0/src/read.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/serde_json-0.8.1/src/read.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>read.rs.html -- source</title>
@@ -867,10 +867,10 @@
 
 <span class='comment'>//////////////////////////////////////////////////////////////////////////////</span>
 
-<span class='kw'>const</span> <span class='ident'>CT</span>: <span class='ident'>bool</span> <span class='op'>=</span> <span class='boolvalue'>true</span>; <span class='comment'>// control character \x00...\x1F</span>
-<span class='kw'>const</span> <span class='ident'>QU</span>: <span class='ident'>bool</span> <span class='op'>=</span> <span class='boolvalue'>true</span>; <span class='comment'>// quote \x22</span>
-<span class='kw'>const</span> <span class='ident'>BS</span>: <span class='ident'>bool</span> <span class='op'>=</span> <span class='boolvalue'>true</span>; <span class='comment'>// backslash \x5C</span>
-<span class='kw'>const</span> <span class='ident'>O</span>: <span class='ident'>bool</span> <span class='op'>=</span> <span class='boolvalue'>false</span>; <span class='comment'>// allow unescaped</span>
+<span class='kw'>const</span> <span class='ident'>CT</span>: <span class='ident'>bool</span> <span class='op'>=</span> <span class='bool-val'>true</span>; <span class='comment'>// control character \x00...\x1F</span>
+<span class='kw'>const</span> <span class='ident'>QU</span>: <span class='ident'>bool</span> <span class='op'>=</span> <span class='bool-val'>true</span>; <span class='comment'>// quote \x22</span>
+<span class='kw'>const</span> <span class='ident'>BS</span>: <span class='ident'>bool</span> <span class='op'>=</span> <span class='bool-val'>true</span>; <span class='comment'>// backslash \x5C</span>
+<span class='kw'>const</span> <span class='ident'>O</span>: <span class='ident'>bool</span> <span class='op'>=</span> <span class='bool-val'>false</span>; <span class='comment'>// allow unescaped</span>
 
 <span class='comment'>// Lookup table of bytes that must be escaped. A value of true at index i means</span>
 <span class='comment'>// that byte i requires an escape sequence in the input.</span>

@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/serde-0.8.0/src/de/value.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/serde-0.8.3/src/de/value.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>value.rs.html -- source</title>
@@ -1101,7 +1101,7 @@
                 <span class='macro'>write</span><span class='macro'>!</span>(<span class='ident'>formatter</span>, <span class='string'>&quot;Unknown variant: {}&quot;</span>, <span class='ident'>variant</span>)
             }
             <span class='ident'>Error</span>::<span class='ident'>UnknownField</span>(<span class='kw-2'>ref</span> <span class='ident'>field</span>) <span class='op'>=&gt;</span> <span class='macro'>write</span><span class='macro'>!</span>(<span class='ident'>formatter</span>, <span class='string'>&quot;Unknown field: {}&quot;</span>, <span class='ident'>field</span>),
-            <span class='ident'>Error</span>::<span class='ident'>MissingField</span>(<span class='kw-2'>ref</span> <span class='ident'>field</span>) <span class='op'>=&gt;</span> <span class='macro'>write</span><span class='macro'>!</span>(<span class='ident'>formatter</span>, <span class='string'>&quot;Missing field: {}&quot;</span>, <span class='ident'>field</span>),
+            <span class='ident'>Error</span>::<span class='ident'>MissingField</span>(<span class='ident'>field</span>) <span class='op'>=&gt;</span> <span class='macro'>write</span><span class='macro'>!</span>(<span class='ident'>formatter</span>, <span class='string'>&quot;Missing field: {}&quot;</span>, <span class='ident'>field</span>),
         }
     }
 }

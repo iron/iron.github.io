@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/serde_json-0.8.0/src/value.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/serde_json-0.8.1/src/value.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>value.rs.html -- source</title>
@@ -1761,32 +1761,32 @@
     <span class='doccomment'>/// Returns true if the `Value` is a Number. Returns false otherwise.</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>is_number</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>bool</span> {
         <span class='kw'>match</span> <span class='op'>*</span><span class='self'>self</span> {
-            <span class='ident'>Value</span>::<span class='ident'>I64</span>(_) <span class='op'>|</span> <span class='ident'>Value</span>::<span class='ident'>U64</span>(_) <span class='op'>|</span> <span class='ident'>Value</span>::<span class='ident'>F64</span>(_) <span class='op'>=&gt;</span> <span class='boolvalue'>true</span>,
-            _ <span class='op'>=&gt;</span> <span class='boolvalue'>false</span>,
+            <span class='ident'>Value</span>::<span class='ident'>I64</span>(_) <span class='op'>|</span> <span class='ident'>Value</span>::<span class='ident'>U64</span>(_) <span class='op'>|</span> <span class='ident'>Value</span>::<span class='ident'>F64</span>(_) <span class='op'>=&gt;</span> <span class='bool-val'>true</span>,
+            _ <span class='op'>=&gt;</span> <span class='bool-val'>false</span>,
         }
     }
 
     <span class='doccomment'>/// Returns true if the `Value` is a i64. Returns false otherwise.</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>is_i64</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>bool</span> {
         <span class='kw'>match</span> <span class='op'>*</span><span class='self'>self</span> {
-            <span class='ident'>Value</span>::<span class='ident'>I64</span>(_) <span class='op'>=&gt;</span> <span class='boolvalue'>true</span>,
-            _ <span class='op'>=&gt;</span> <span class='boolvalue'>false</span>,
+            <span class='ident'>Value</span>::<span class='ident'>I64</span>(_) <span class='op'>=&gt;</span> <span class='bool-val'>true</span>,
+            _ <span class='op'>=&gt;</span> <span class='bool-val'>false</span>,
         }
     }
 
     <span class='doccomment'>/// Returns true if the `Value` is a u64. Returns false otherwise.</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>is_u64</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>bool</span> {
         <span class='kw'>match</span> <span class='op'>*</span><span class='self'>self</span> {
-            <span class='ident'>Value</span>::<span class='ident'>U64</span>(_) <span class='op'>=&gt;</span> <span class='boolvalue'>true</span>,
-            _ <span class='op'>=&gt;</span> <span class='boolvalue'>false</span>,
+            <span class='ident'>Value</span>::<span class='ident'>U64</span>(_) <span class='op'>=&gt;</span> <span class='bool-val'>true</span>,
+            _ <span class='op'>=&gt;</span> <span class='bool-val'>false</span>,
         }
     }
 
     <span class='doccomment'>/// Returns true if the `Value` is a f64. Returns false otherwise.</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>is_f64</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>bool</span> {
         <span class='kw'>match</span> <span class='op'>*</span><span class='self'>self</span> {
-            <span class='ident'>Value</span>::<span class='ident'>F64</span>(_) <span class='op'>=&gt;</span> <span class='boolvalue'>true</span>,
-            _ <span class='op'>=&gt;</span> <span class='boolvalue'>false</span>,
+            <span class='ident'>Value</span>::<span class='ident'>F64</span>(_) <span class='op'>=&gt;</span> <span class='bool-val'>true</span>,
+            _ <span class='op'>=&gt;</span> <span class='bool-val'>false</span>,
         }
     }
 

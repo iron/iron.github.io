@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/serde_json-0.8.0/src/de.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/serde_json-0.8.1/src/de.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>de.rs.html -- source</title>
@@ -1115,8 +1115,6 @@
 <span id="1071">1071</span>
 <span id="1072">1072</span>
 <span id="1073">1073</span>
-<span id="1074">1074</span>
-<span id="1075">1075</span>
 </pre><pre class='rust '>
 <span class='doccomment'>//! JSON Deserialization</span>
 <span class='doccomment'>//!</span>
@@ -1330,18 +1328,18 @@
             <span class='string'>b&#39;t&#39;</span> <span class='op'>=&gt;</span> {
                 <span class='self'>self</span>.<span class='ident'>eat_char</span>();
                 <span class='macro'>try</span><span class='macro'>!</span>(<span class='self'>self</span>.<span class='ident'>parse_ident</span>(<span class='string'>b&quot;rue&quot;</span>));
-                <span class='ident'>visitor</span>.<span class='ident'>visit_bool</span>(<span class='boolvalue'>true</span>)
+                <span class='ident'>visitor</span>.<span class='ident'>visit_bool</span>(<span class='bool-val'>true</span>)
             }
             <span class='string'>b&#39;f&#39;</span> <span class='op'>=&gt;</span> {
                 <span class='self'>self</span>.<span class='ident'>eat_char</span>();
                 <span class='macro'>try</span><span class='macro'>!</span>(<span class='self'>self</span>.<span class='ident'>parse_ident</span>(<span class='string'>b&quot;alse&quot;</span>));
-                <span class='ident'>visitor</span>.<span class='ident'>visit_bool</span>(<span class='boolvalue'>false</span>)
+                <span class='ident'>visitor</span>.<span class='ident'>visit_bool</span>(<span class='bool-val'>false</span>)
             }
             <span class='string'>b&#39;-&#39;</span> <span class='op'>=&gt;</span> {
                 <span class='self'>self</span>.<span class='ident'>eat_char</span>();
-                <span class='self'>self</span>.<span class='ident'>parse_integer</span>(<span class='boolvalue'>false</span>, <span class='ident'>visitor</span>)
+                <span class='self'>self</span>.<span class='ident'>parse_integer</span>(<span class='bool-val'>false</span>, <span class='ident'>visitor</span>)
             }
-            <span class='string'>b&#39;0&#39;</span>...<span class='string'>b&#39;9&#39;</span> <span class='op'>=&gt;</span> <span class='self'>self</span>.<span class='ident'>parse_integer</span>(<span class='boolvalue'>true</span>, <span class='ident'>visitor</span>),
+            <span class='string'>b&#39;0&#39;</span>...<span class='string'>b&#39;9&#39;</span> <span class='op'>=&gt;</span> <span class='self'>self</span>.<span class='ident'>parse_integer</span>(<span class='bool-val'>true</span>, <span class='ident'>visitor</span>),
             <span class='string'>b&#39;&quot;&#39;</span> <span class='op'>=&gt;</span> {
                 <span class='self'>self</span>.<span class='ident'>eat_char</span>();
                 <span class='self'>self</span>.<span class='ident'>str_buf</span>.<span class='ident'>clear</span>();
@@ -1498,11 +1496,11 @@
     {
         <span class='self'>self</span>.<span class='ident'>eat_char</span>();
 
-        <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>at_least_one_digit</span> <span class='op'>=</span> <span class='boolvalue'>false</span>;
+        <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>at_least_one_digit</span> <span class='op'>=</span> <span class='bool-val'>false</span>;
         <span class='kw'>while</span> <span class='kw'>let</span> <span class='ident'>c</span> @ <span class='string'>b&#39;0&#39;</span>...<span class='string'>b&#39;9&#39;</span> <span class='op'>=</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='self'>self</span>.<span class='ident'>peek_or_null</span>()) {
             <span class='self'>self</span>.<span class='ident'>eat_char</span>();
             <span class='kw'>let</span> <span class='ident'>digit</span> <span class='op'>=</span> (<span class='ident'>c</span> <span class='op'>-</span> <span class='string'>b&#39;0&#39;</span>) <span class='kw'>as</span> <span class='ident'>u64</span>;
-            <span class='ident'>at_least_one_digit</span> <span class='op'>=</span> <span class='boolvalue'>true</span>;
+            <span class='ident'>at_least_one_digit</span> <span class='op'>=</span> <span class='bool-val'>true</span>;
 
             <span class='kw'>if</span> <span class='macro'>overflow</span><span class='macro'>!</span>(<span class='ident'>significand</span> <span class='op'>*</span> <span class='number'>10</span> <span class='op'>+</span> <span class='ident'>digit</span>, <span class='ident'>u64</span>::<span class='ident'>MAX</span>) {
                 <span class='comment'>// The next multiply/add would overflow, so just ignore all</span>
@@ -1543,13 +1541,13 @@
         <span class='kw'>let</span> <span class='ident'>pos_exp</span> <span class='op'>=</span> <span class='kw'>match</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='self'>self</span>.<span class='ident'>peek_or_null</span>()) {
             <span class='string'>b&#39;+&#39;</span> <span class='op'>=&gt;</span> {
                 <span class='self'>self</span>.<span class='ident'>eat_char</span>();
-                <span class='boolvalue'>true</span>
+                <span class='bool-val'>true</span>
             }
             <span class='string'>b&#39;-&#39;</span> <span class='op'>=&gt;</span> {
                 <span class='self'>self</span>.<span class='ident'>eat_char</span>();
-                <span class='boolvalue'>false</span>
+                <span class='bool-val'>false</span>
             }
-            _ <span class='op'>=&gt;</span> <span class='boolvalue'>true</span>,
+            _ <span class='op'>=&gt;</span> <span class='bool-val'>true</span>,
         };
 
         <span class='comment'>// Make sure a digit follows the exponent place.</span>
@@ -1587,8 +1585,6 @@
     <span class='comment'>// exponent-parsing loop above.</span>
     <span class='attribute'>#[<span class='ident'>cold</span>]</span>
     <span class='attribute'>#[<span class='ident'>inline</span>(<span class='ident'>never</span>)]</span>
-    <span class='comment'>// https://github.com/Manishearth/rust-clippy/issues/1086</span>
-    <span class='attribute'>#[<span class='ident'>cfg_attr</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;clippy&quot;</span>, <span class='ident'>allow</span>(<span class='ident'>if_same_then_else</span>))]</span>
     <span class='kw'>fn</span> <span class='ident'>parse_exponent_overflow</span><span class='op'>&lt;</span><span class='ident'>V</span><span class='op'>&gt;</span>(
         <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>,
         <span class='ident'>pos</span>: <span class='ident'>bool</span>,
@@ -1815,7 +1811,7 @@
     <span class='kw'>fn</span> <span class='ident'>new</span>(<span class='ident'>de</span>: <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='kw-2'>mut</span> <span class='ident'>DeserializerImpl</span><span class='op'>&lt;</span><span class='ident'>R</span><span class='op'>&gt;</span>) <span class='op'>-&gt;</span> <span class='self'>Self</span> {
         <span class='ident'>SeqVisitor</span> {
             <span class='ident'>de</span>: <span class='ident'>de</span>,
-            <span class='ident'>first</span>: <span class='boolvalue'>true</span>,
+            <span class='ident'>first</span>: <span class='bool-val'>true</span>,
         }
     }
 }
@@ -1837,7 +1833,7 @@
             }
             <span class='prelude-val'>Some</span>(_) <span class='op'>=&gt;</span> {
                 <span class='kw'>if</span> <span class='self'>self</span>.<span class='ident'>first</span> {
-                    <span class='self'>self</span>.<span class='ident'>first</span> <span class='op'>=</span> <span class='boolvalue'>false</span>;
+                    <span class='self'>self</span>.<span class='ident'>first</span> <span class='op'>=</span> <span class='bool-val'>false</span>;
                 } <span class='kw'>else</span> {
                     <span class='kw'>return</span> <span class='prelude-val'>Err</span>(<span class='self'>self</span>.<span class='ident'>de</span>
                         .<span class='ident'>peek_error</span>(<span class='ident'>ErrorCode</span>::<span class='ident'>ExpectedListCommaOrEnd</span>));
@@ -1872,7 +1868,7 @@
     <span class='kw'>fn</span> <span class='ident'>new</span>(<span class='ident'>de</span>: <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='kw-2'>mut</span> <span class='ident'>DeserializerImpl</span><span class='op'>&lt;</span><span class='ident'>R</span><span class='op'>&gt;</span>) <span class='op'>-&gt;</span> <span class='self'>Self</span> {
         <span class='ident'>MapVisitor</span> {
             <span class='ident'>de</span>: <span class='ident'>de</span>,
-            <span class='ident'>first</span>: <span class='boolvalue'>true</span>,
+            <span class='ident'>first</span>: <span class='bool-val'>true</span>,
         }
     }
 }
@@ -1895,7 +1891,7 @@
             }
             <span class='prelude-val'>Some</span>(_) <span class='op'>=&gt;</span> {
                 <span class='kw'>if</span> <span class='self'>self</span>.<span class='ident'>first</span> {
-                    <span class='self'>self</span>.<span class='ident'>first</span> <span class='op'>=</span> <span class='boolvalue'>false</span>;
+                    <span class='self'>self</span>.<span class='ident'>first</span> <span class='op'>=</span> <span class='bool-val'>false</span>;
                 } <span class='kw'>else</span> {
                     <span class='kw'>return</span> <span class='prelude-val'>Err</span>(<span class='self'>self</span>.<span class='ident'>de</span>
                         .<span class='ident'>peek_error</span>(<span class='ident'>ErrorCode</span>::<span class='ident'>ExpectedObjectCommaOrEnd</span>));
@@ -2137,8 +2133,8 @@
         };
 
         <span class='kw'>match</span> <span class='self'>self</span>.<span class='ident'>deser</span>.<span class='ident'>eof</span>() {
-            <span class='prelude-val'>Ok</span>(<span class='boolvalue'>true</span>) <span class='op'>=&gt;</span> <span class='prelude-val'>None</span>,
-            <span class='prelude-val'>Ok</span>(<span class='boolvalue'>false</span>) <span class='op'>=&gt;</span> {
+            <span class='prelude-val'>Ok</span>(<span class='bool-val'>true</span>) <span class='op'>=&gt;</span> <span class='prelude-val'>None</span>,
+            <span class='prelude-val'>Ok</span>(<span class='bool-val'>false</span>) <span class='op'>=&gt;</span> {
                 <span class='kw'>match</span> <span class='ident'>de</span>::<span class='ident'>Deserialize</span>::<span class='ident'>deserialize</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>.<span class='ident'>deser</span>) {
                     <span class='prelude-val'>Ok</span>(<span class='ident'>v</span>) <span class='op'>=&gt;</span> <span class='prelude-val'>Some</span>(<span class='prelude-val'>Ok</span>(<span class='ident'>v</span>)),
                     <span class='prelude-val'>Err</span>(<span class='ident'>e</span>) <span class='op'>=&gt;</span> <span class='prelude-val'>Some</span>(<span class='prelude-val'>Err</span>(<span class='ident'>e</span>)),
