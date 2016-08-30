@@ -55,6 +55,9 @@
 <span id="11">11</span>
 <span id="12">12</span>
 <span id="13">13</span>
+<span id="14">14</span>
+<span id="15">15</span>
+<span id="16">16</span>
 </pre><pre class='rust '>
 <span class='attribute'>#<span class='op'>!</span>[<span class='ident'>deny</span>(<span class='ident'>missing_docs</span>)]</span>
 <span class='attribute'>#<span class='op'>!</span>[<span class='ident'>cfg_attr</span>(<span class='ident'>test</span>, <span class='ident'>deny</span>(<span class='ident'>warnings</span>))]</span>
@@ -63,12 +66,15 @@
 
 <span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>iron</span>;
 <span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>route_recognizer</span> <span class='kw'>as</span> <span class='ident'>recognizer</span>;
+<span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>url</span>;
 
 <span class='kw'>pub</span> <span class='kw'>use</span> <span class='ident'>router</span>::{<span class='ident'>Router</span>, <span class='ident'>NoRoute</span>, <span class='ident'>TrailingSlash</span>};
 <span class='kw'>pub</span> <span class='kw'>use</span> <span class='ident'>recognizer</span>::<span class='ident'>Params</span>;
+<span class='kw'>pub</span> <span class='kw'>use</span> <span class='ident'>url_for</span>::<span class='ident'>url_for</span>;
 
 <span class='kw'>mod</span> <span class='ident'>router</span>;
 <span class='kw'>mod</span> <span class='ident'>macros</span>;
+<span class='kw'>mod</span> <span class='ident'>url_for</span>;
 </pre>
 </section>
     <section id='search' class="content hidden"></section>

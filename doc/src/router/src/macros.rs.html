@@ -89,22 +89,51 @@
 <span id="45">45</span>
 <span id="46">46</span>
 <span id="47">47</span>
+<span id="48">48</span>
+<span id="49">49</span>
+<span id="50">50</span>
+<span id="51">51</span>
+<span id="52">52</span>
+<span id="53">53</span>
+<span id="54">54</span>
+<span id="55">55</span>
+<span id="56">56</span>
+<span id="57">57</span>
+<span id="58">58</span>
+<span id="59">59</span>
+<span id="60">60</span>
+<span id="61">61</span>
+<span id="62">62</span>
+<span id="63">63</span>
+<span id="64">64</span>
+<span id="65">65</span>
+<span id="66">66</span>
+<span id="67">67</span>
+<span id="68">68</span>
+<span id="69">69</span>
+<span id="70">70</span>
+<span id="71">71</span>
+<span id="72">72</span>
+<span id="73">73</span>
+<span id="74">74</span>
+<span id="75">75</span>
+<span id="76">76</span>
 </pre><pre class='rust '>
 <span class='doccomment'>/// Create and populate a router.</span>
 <span class='doccomment'>///</span>
 <span class='doccomment'>/// ```ignore</span>
-<span class='doccomment'>/// let router = router!(get  &quot;/&quot;       =&gt; index,</span>
-<span class='doccomment'>///                      get  &quot;/:query&quot; =&gt; queryHandler,</span>
-<span class='doccomment'>///                      post &quot;/&quot;       =&gt; postHandler);</span>
+<span class='doccomment'>/// let router = router!(index: get  &quot;/&quot;       =&gt; index,</span>
+<span class='doccomment'>///                      query: get  &quot;/:query&quot; =&gt; queryHandler,</span>
+<span class='doccomment'>///                      post:  post &quot;/&quot;       =&gt; postHandler);</span>
 <span class='doccomment'>/// ```</span>
 <span class='doccomment'>///</span>
 <span class='doccomment'>/// Is equivalent to:</span>
 <span class='doccomment'>///</span>
 <span class='doccomment'>/// ```ignore</span>
-<span class='doccomment'>///    let mut router = Router::new();</span>
-<span class='doccomment'>///    router.get(&quot;/&quot;, index);</span>
-<span class='doccomment'>///    router.get(&quot;/:query&quot;, queryHandler);</span>
-<span class='doccomment'>///    router.post(&quot;/&quot;, postHandler);</span>
+<span class='doccomment'>/// let mut router = Router::new();</span>
+<span class='doccomment'>/// router.get(&quot;/&quot;, index, &quot;index&quot;);</span>
+<span class='doccomment'>/// router.get(&quot;/:query&quot;, queryHandler, &quot;query&quot;);</span>
+<span class='doccomment'>/// router.post(&quot;/&quot;, postHandler, &quot;post&quot;);</span>
 <span class='doccomment'>/// ```</span>
 <span class='doccomment'>///</span>
 <span class='doccomment'>/// The method name must be lowercase, supported methods:</span>
@@ -112,11 +141,40 @@
 <span class='doccomment'>/// `get`, `post`, `put`, `delete`, `head`, `patch`, `options` and `any`.</span>
 <span class='attribute'>#[<span class='ident'>macro_export</span>]</span>
 <span class='macro'>macro_rules</span><span class='macro'>!</span> <span class='ident'>router</span> {
-    ($(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>method</span>:<span class='ident'>ident</span> <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>glob</span>:<span class='ident'>expr</span> <span class='op'>=&gt;</span> <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>handler</span>:<span class='ident'>expr</span>),<span class='op'>+</span> $(,)<span class='op'>*</span>) <span class='op'>=&gt;</span> ({
+    ($(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>route_id</span>:<span class='ident'>ident</span>: <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>method</span>:<span class='ident'>ident</span> <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>glob</span>:<span class='ident'>expr</span> <span class='op'>=&gt;</span> <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>handler</span>:<span class='ident'>expr</span>),<span class='op'>+</span> $(,)<span class='op'>*</span>) <span class='op'>=&gt;</span> ({
         <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>router</span> <span class='op'>=</span> <span class='macro-nonterminal'>$</span><span class='kw'>crate</span>::<span class='macro-nonterminal'>Router</span>::<span class='ident'>new</span>();
-        $(<span class='ident'>router</span>.<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>method</span>(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>glob</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>handler</span>);)<span class='op'>*</span>
+        $(<span class='ident'>router</span>.<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>method</span>(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>glob</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>handler</span>, <span class='macro'>stringify</span><span class='macro'>!</span>(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>route_id</span>));)<span class='op'>*</span>
         <span class='ident'>router</span>
     });
+}
+
+<span class='doccomment'>/// Generate a URL based off of the requested one.</span>
+<span class='doccomment'>///</span>
+<span class='doccomment'>/// ```ignore</span>
+<span class='doccomment'>/// url_for!(request, &quot;foo&quot;,</span>
+<span class='doccomment'>///          &quot;query&quot; =&gt; &quot;test&quot;,</span>
+<span class='doccomment'>///          &quot;extraparam&quot; =&gt; &quot;foo&quot;)</span>
+<span class='doccomment'>/// ```</span>
+<span class='doccomment'>///</span>
+<span class='doccomment'>/// Is equivalent to:</span>
+<span class='doccomment'>///</span>
+<span class='doccomment'>/// ```ignore</span>
+<span class='doccomment'>/// router::url_for(request, &quot;foo&quot;, {</span>
+<span class='doccomment'>///     let mut rv = ::std::collections::HashMap::new();</span>
+<span class='doccomment'>///     rv.insert(&quot;query&quot;.to_owned(), &quot;test&quot;.to_owned());</span>
+<span class='doccomment'>///     rv.insert(&quot;extraparam&quot;.to_owned(), &quot;foo&quot;.to_owned());</span>
+<span class='doccomment'>///     rv</span>
+<span class='doccomment'>/// })</span>
+<span class='doccomment'>/// ```</span>
+<span class='attribute'>#[<span class='ident'>macro_export</span>]</span>
+<span class='macro'>macro_rules</span><span class='macro'>!</span> <span class='ident'>url_for</span> {
+    (<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>request</span>:<span class='ident'>expr</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>route_id</span>:<span class='ident'>expr</span>, $(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>key</span>:<span class='ident'>expr</span> <span class='op'>=&gt;</span> <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>value</span>:<span class='ident'>expr</span>),<span class='op'>*</span> $(,)<span class='op'>*</span>) <span class='op'>=&gt;</span> (
+        <span class='macro-nonterminal'>$</span><span class='kw'>crate</span>::<span class='macro-nonterminal'>url_for</span>(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>request</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>route_id</span>, {
+            <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>params</span> <span class='op'>=</span> ::<span class='ident'>std</span>::<span class='ident'>collections</span>::<span class='ident'>HashMap</span>::<span class='op'>&lt;</span><span class='ident'>String</span>, <span class='ident'>String</span><span class='op'>&gt;</span>::<span class='ident'>new</span>();
+            $(<span class='ident'>params</span>.<span class='ident'>insert</span>(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>key</span>.<span class='ident'>into</span>(), <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>value</span>.<span class='ident'>into</span>());)<span class='op'>*</span>
+            <span class='ident'>params</span>
+        })
+    )
 }
 
 <span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>test</span>)]</span>
@@ -127,14 +185,14 @@
     <span class='attribute'>#[<span class='ident'>test</span>]</span>
     <span class='kw'>fn</span> <span class='ident'>methods</span>() {
         <span class='kw'>fn</span> <span class='ident'>handler</span>(_: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>Request</span>) <span class='op'>-&gt;</span> <span class='ident'>IronResult</span><span class='op'>&lt;</span><span class='ident'>Response</span><span class='op'>&gt;</span> {<span class='prelude-val'>Ok</span>(<span class='ident'>Response</span>::<span class='ident'>new</span>())}
-        <span class='kw'>let</span> _ <span class='op'>=</span> <span class='macro'>router</span><span class='macro'>!</span>(<span class='ident'>get</span>     <span class='string'>&quot;/foo&quot;</span> <span class='op'>=&gt;</span> <span class='ident'>handler</span>,
-                        <span class='ident'>post</span>    <span class='string'>&quot;/bar/&quot;</span> <span class='op'>=&gt;</span> <span class='ident'>handler</span>,
-                        <span class='ident'>put</span>     <span class='string'>&quot;/bar/baz&quot;</span> <span class='op'>=&gt;</span> <span class='ident'>handler</span>,
-                        <span class='ident'>delete</span>  <span class='string'>&quot;/bar/baz&quot;</span> <span class='op'>=&gt;</span> <span class='ident'>handler</span>,
-                        <span class='ident'>head</span>    <span class='string'>&quot;/foo&quot;</span> <span class='op'>=&gt;</span> <span class='ident'>handler</span>,
-                        <span class='ident'>patch</span>   <span class='string'>&quot;/bar/baz&quot;</span> <span class='op'>=&gt;</span> <span class='ident'>handler</span>,
-                        <span class='ident'>options</span> <span class='string'>&quot;/foo&quot;</span> <span class='op'>=&gt;</span> <span class='ident'>handler</span>,
-                        <span class='ident'>any</span>     <span class='string'>&quot;/&quot;</span> <span class='op'>=&gt;</span> <span class='ident'>handler</span>);
+        <span class='kw'>let</span> _ <span class='op'>=</span> <span class='macro'>router</span><span class='macro'>!</span>(<span class='ident'>a</span>: <span class='ident'>get</span>     <span class='string'>&quot;/foo&quot;</span> <span class='op'>=&gt;</span> <span class='ident'>handler</span>,
+                        <span class='ident'>b</span>: <span class='ident'>post</span>    <span class='string'>&quot;/bar/&quot;</span> <span class='op'>=&gt;</span> <span class='ident'>handler</span>,
+                        <span class='ident'>c</span>: <span class='ident'>put</span>     <span class='string'>&quot;/bar/baz&quot;</span> <span class='op'>=&gt;</span> <span class='ident'>handler</span>,
+                        <span class='ident'>d</span>: <span class='ident'>delete</span>  <span class='string'>&quot;/bar/baz&quot;</span> <span class='op'>=&gt;</span> <span class='ident'>handler</span>,
+                        <span class='ident'>e</span>: <span class='ident'>head</span>    <span class='string'>&quot;/foo&quot;</span> <span class='op'>=&gt;</span> <span class='ident'>handler</span>,
+                        <span class='ident'>f</span>: <span class='ident'>patch</span>   <span class='string'>&quot;/bar/baz&quot;</span> <span class='op'>=&gt;</span> <span class='ident'>handler</span>,
+                        <span class='ident'>g</span>: <span class='ident'>options</span> <span class='string'>&quot;/foo&quot;</span> <span class='op'>=&gt;</span> <span class='ident'>handler</span>,
+                        <span class='ident'>h</span>: <span class='ident'>any</span>     <span class='string'>&quot;/&quot;</span> <span class='op'>=&gt;</span> <span class='ident'>handler</span>);
     }
 }
 </pre>
