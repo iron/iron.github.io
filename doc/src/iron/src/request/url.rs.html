@@ -245,6 +245,20 @@
 <span id="201">201</span>
 <span id="202">202</span>
 <span id="203">203</span>
+<span id="204">204</span>
+<span id="205">205</span>
+<span id="206">206</span>
+<span id="207">207</span>
+<span id="208">208</span>
+<span id="209">209</span>
+<span id="210">210</span>
+<span id="211">211</span>
+<span id="212">212</span>
+<span id="213">213</span>
+<span id="214">214</span>
+<span id="215">215</span>
+<span id="216">216</span>
+<span id="217">217</span>
 </pre><pre class='rust '>
 <span class='doccomment'>//! HTTP/HTTPS URL type for Iron.</span>
 
@@ -290,6 +304,7 @@
     }
 
     <span class='doccomment'>/// Create a `rust-url` `Url` from a `Url`.</span>
+    <span class='attribute'>#[<span class='ident'>deprecated</span>(<span class='ident'>since</span><span class='op'>=</span><span class='string'>&quot;0.5.0&quot;</span>, <span class='ident'>note</span><span class='op'>=</span><span class='string'>&quot;use `into` from the `Into` trait instead&quot;</span>)]</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>into_generic_url</span>(<span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>url</span>::<span class='ident'>Url</span> {
         <span class='self'>self</span>.<span class='ident'>generic_url</span>
     }
@@ -372,6 +387,19 @@
     }
 }
 
+<span class='kw'>impl</span> <span class='ident'>Into</span><span class='op'>&lt;</span><span class='ident'>url</span>::<span class='ident'>Url</span><span class='op'>&gt;</span> <span class='kw'>for</span> <span class='ident'>Url</span> {
+    <span class='kw'>fn</span> <span class='ident'>into</span>(<span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>url</span>::<span class='ident'>Url</span> { <span class='self'>self</span>.<span class='ident'>generic_url</span> }
+}
+
+<span class='kw'>impl</span> <span class='ident'>AsRef</span><span class='op'>&lt;</span><span class='ident'>url</span>::<span class='ident'>Url</span><span class='op'>&gt;</span> <span class='kw'>for</span> <span class='ident'>Url</span> {
+    <span class='kw'>fn</span> <span class='ident'>as_ref</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span><span class='ident'>url</span>::<span class='ident'>Url</span> { <span class='kw-2'>&amp;</span><span class='self'>self</span>.<span class='ident'>generic_url</span> }
+}
+
+<span class='kw'>impl</span> <span class='ident'>AsMut</span><span class='op'>&lt;</span><span class='ident'>url</span>::<span class='ident'>Url</span><span class='op'>&gt;</span> <span class='kw'>for</span> <span class='ident'>Url</span> {
+    <span class='kw'>fn</span> <span class='ident'>as_mut</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>url</span>::<span class='ident'>Url</span> { <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>.<span class='ident'>generic_url</span> }
+}
+
+
 <span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>test</span>)]</span>
 <span class='kw'>mod</span> <span class='ident'>test</span> {
     <span class='kw'>use</span> <span class='kw'>super</span>::<span class='ident'>Url</span>;
@@ -429,7 +457,7 @@
         <span class='kw'>let</span> <span class='ident'>url</span> <span class='op'>=</span> <span class='ident'>Url</span>::<span class='ident'>parse</span>(<span class='ident'>url_str</span>).<span class='ident'>unwrap</span>();
 
         <span class='comment'>// Convert to a generic URL and check fidelity.</span>
-        <span class='kw'>let</span> <span class='ident'>raw_url</span> <span class='op'>=</span> <span class='ident'>url</span>.<span class='ident'>clone</span>().<span class='ident'>into_generic_url</span>();
+        <span class='kw'>let</span> <span class='ident'>raw_url</span>: ::<span class='ident'>url</span>::<span class='ident'>Url</span> <span class='op'>=</span> <span class='ident'>url</span>.<span class='ident'>clone</span>().<span class='ident'>into</span>();
         <span class='macro'>assert_eq</span><span class='macro'>!</span>(::<span class='ident'>url</span>::<span class='ident'>Url</span>::<span class='ident'>parse</span>(<span class='ident'>url_str</span>).<span class='ident'>unwrap</span>(), <span class='ident'>raw_url</span>);
 
         <span class='comment'>// Convert back to an Iron URL and check fidelity.</span>
