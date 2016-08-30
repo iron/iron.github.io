@@ -536,7 +536,7 @@
 
 <span class='doccomment'>/// The error thrown by router if there is no matching route,</span>
 <span class='doccomment'>/// it is always accompanied by a NotFound response.</span>
-<span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Debug</span>)]</span>
+<span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Debug</span>, <span class='ident'>PartialEq</span>, <span class='ident'>Eq</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>NoRoute</span>;
 
 <span class='kw'>impl</span> <span class='ident'>fmt</span>::<span class='ident'>Display</span> <span class='kw'>for</span> <span class='ident'>NoRoute</span> {
@@ -551,7 +551,7 @@
 
 <span class='doccomment'>/// The error thrown by router if a request was redirected</span>
 <span class='doccomment'>/// by adding or removing a trailing slash.</span>
-<span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Debug</span>)]</span>
+<span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Debug</span>, <span class='ident'>PartialEq</span>, <span class='ident'>Eq</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>TrailingSlash</span>;
 
 <span class='kw'>impl</span> <span class='ident'>fmt</span>::<span class='ident'>Display</span> <span class='kw'>for</span> <span class='ident'>TrailingSlash</span> {
