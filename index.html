@@ -74,8 +74,11 @@ fn main() {
         Ok(Response::with((status::Ok, "Hello World!")))
     }
 
-    Iron::new(hello_world).http("localhost:3000").unwrap();
-    println!("On 3000");
+    let result = Iron::new(hello_world).http("localhost:3000");
+    if result.is_ok() {
+        println!("Listening on http://localhost:3000/");
+    }
+    result.unwrap();
 }
 
 </code></pre>
