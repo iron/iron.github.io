@@ -74,7 +74,7 @@ fn main() {
         Ok(Response::with((status::Ok, "Hello World!")))
     }
 
-    Iron::new(hello_world).http("localhost:3000").unwrap();
+    let _server = Iron::new(hello_world).http("localhost:3000").unwrap();
     println!("On 3000");
 }
 
