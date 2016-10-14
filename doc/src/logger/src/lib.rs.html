@@ -234,6 +234,8 @@
 <span id="190">190</span>
 <span id="191">191</span>
 <span id="192">192</span>
+<span id="193">193</span>
+<span id="194">194</span>
 </pre><pre class='rust '>
 <span class='attribute'>#<span class='op'>!</span>[<span class='ident'>deny</span>(<span class='ident'>missing_docs</span>, <span class='ident'>warnings</span>)]</span>
 
@@ -314,7 +316,9 @@
                     <span class='ident'>Str</span>(<span class='kw-2'>ref</span> <span class='ident'>string</span>) <span class='op'>=&gt;</span> <span class='ident'>string</span>.<span class='ident'>clone</span>(),
                     <span class='ident'>Method</span> <span class='op'>=&gt;</span> <span class='macro'>format</span><span class='macro'>!</span>(<span class='string'>&quot;{}&quot;</span>, <span class='ident'>req</span>.<span class='ident'>method</span>),
                     <span class='ident'>URI</span> <span class='op'>=&gt;</span> <span class='macro'>format</span><span class='macro'>!</span>(<span class='string'>&quot;{}&quot;</span>, <span class='ident'>req</span>.<span class='ident'>url</span>),
-                    <span class='ident'>Status</span> <span class='op'>=&gt;</span> <span class='macro'>format</span><span class='macro'>!</span>(<span class='string'>&quot;{}&quot;</span>, <span class='ident'>res</span>.<span class='ident'>status</span>.<span class='ident'>unwrap</span>()),
+                    <span class='ident'>Status</span> <span class='op'>=&gt;</span> <span class='ident'>res</span>.<span class='ident'>status</span>
+                        .<span class='ident'>map</span>(<span class='op'>|</span><span class='ident'>status</span><span class='op'>|</span> <span class='macro'>format</span><span class='macro'>!</span>(<span class='string'>&quot;{}&quot;</span>, <span class='ident'>status</span>))
+                        .<span class='ident'>unwrap_or</span>(<span class='string'>&quot;&lt;missing status code&gt;&quot;</span>.<span class='ident'>to_owned</span>()),
                     <span class='ident'>ResponseTime</span> <span class='op'>=&gt;</span> <span class='macro'>format</span><span class='macro'>!</span>(<span class='string'>&quot;{} ms&quot;</span>, <span class='ident'>response_time_ms</span>),
                     <span class='ident'>RemoteAddr</span> <span class='op'>=&gt;</span> <span class='macro'>format</span><span class='macro'>!</span>(<span class='string'>&quot;{}&quot;</span>, <span class='ident'>req</span>.<span class='ident'>remote_addr</span>),
                     <span class='ident'>RequestTime</span> <span class='op'>=&gt;</span> <span class='macro'>format</span><span class='macro'>!</span>(<span class='string'>&quot;{}&quot;</span>, <span class='ident'>entry_time</span>.<span class='ident'>strftime</span>(<span class='string'>&quot;%Y-%m-%dT%H:%M:%S.%fZ%z&quot;</span>).<span class='ident'>unwrap</span>()),
