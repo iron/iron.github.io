@@ -474,6 +474,10 @@
 <span id="430">430</span>
 <span id="431">431</span>
 <span id="432">432</span>
+<span id="433">433</span>
+<span id="434">434</span>
+<span id="435">435</span>
+<span id="436">436</span>
 </pre><pre class='rust '>
 <span class='doccomment'>//! Formatting helpers for the logger middleware.</span>
 
@@ -488,7 +492,7 @@
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>iter</span>::<span class='ident'>Peekable</span>;
 
 <span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>ColorOrAttr</span>::{<span class='ident'>Color</span>, <span class='ident'>Attr</span>};
-<span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>FormatText</span>::{<span class='ident'>Method</span>, <span class='ident'>URI</span>, <span class='ident'>Status</span>, <span class='ident'>ResponseTime</span>, <span class='ident'>RemoteAddr</span>};
+<span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>FormatText</span>::{<span class='ident'>Method</span>, <span class='ident'>URI</span>, <span class='ident'>Status</span>, <span class='ident'>ResponseTime</span>, <span class='ident'>RemoteAddr</span>, <span class='ident'>RequestTime</span>};
 <span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>FormatColor</span>::{<span class='ident'>ConstantColor</span>, <span class='ident'>FunctionColor</span>};
 <span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>FormatAttr</span>::{<span class='ident'>ConstantAttrs</span>, <span class='ident'>FunctionAttrs</span>};
 
@@ -530,7 +534,8 @@
 <span class='kw'>impl</span> <span class='ident'>Format</span> {
     <span class='comment'>// TODO: Document the color/attribute tags.</span>
     <span class='doccomment'>/// Create a `Format` from a format string, which can contain the fields</span>
-    <span class='doccomment'>/// `{method}`, `{uri}`, `{status}`, `{response-time}`, and `{ip-addr}`.</span>
+    <span class='doccomment'>/// `{method}`, `{uri}`, `{status}`, `{response-time}`, `{ip-addr}` and</span>
+    <span class='doccomment'>/// `{request-time}`.</span>
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// Returns `None` if the format string syntax is incorrect.</span>
     <span class='doccomment'>///</span>
@@ -654,6 +659,7 @@
             <span class='comment'>//   - {status}</span>
             <span class='comment'>//   - {response-time}</span>
             <span class='comment'>//   - {ip-addr}</span>
+            <span class='comment'>//   - {request-time}</span>
             <span class='prelude-val'>Some</span>(<span class='string'>&#39;{&#39;</span>) <span class='op'>=&gt;</span> {
                 <span class='self'>self</span>.<span class='ident'>object_buffer</span>.<span class='ident'>clear</span>();
 
@@ -673,6 +679,7 @@
                     <span class='string'>&quot;uri&quot;</span> <span class='op'>=&gt;</span> <span class='ident'>URI</span>,
                     <span class='string'>&quot;status&quot;</span> <span class='op'>=&gt;</span> <span class='ident'>Status</span>,
                     <span class='string'>&quot;response-time&quot;</span> <span class='op'>=&gt;</span> <span class='ident'>ResponseTime</span>,
+                    <span class='string'>&quot;request-time&quot;</span> <span class='op'>=&gt;</span> <span class='ident'>RequestTime</span>,
                     <span class='string'>&quot;ip-addr&quot;</span> <span class='op'>=&gt;</span> <span class='ident'>RemoteAddr</span>,
                     _ <span class='op'>=&gt;</span> {
                         <span class='comment'>// Error, so mark as finished.</span>
@@ -896,7 +903,8 @@
     <span class='ident'>URI</span>,
     <span class='ident'>Status</span>,
     <span class='ident'>ResponseTime</span>,
-    <span class='ident'>RemoteAddr</span>
+    <span class='ident'>RemoteAddr</span>,
+    <span class='ident'>RequestTime</span>
 }
 
 <span class='doccomment'>/// A `FormatText` with associated style information.</span>

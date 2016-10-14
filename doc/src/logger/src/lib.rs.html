@@ -233,6 +233,7 @@
 <span id="189">189</span>
 <span id="190">190</span>
 <span id="191">191</span>
+<span id="192">192</span>
 </pre><pre class='rust '>
 <span class='attribute'>#<span class='op'>!</span>[<span class='ident'>deny</span>(<span class='ident'>missing_docs</span>, <span class='ident'>warnings</span>)]</span>
 
@@ -240,6 +241,7 @@
 
 <span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>iron</span>;
 <span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>term</span>;
+<span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>time</span>;
 
 <span class='kw'>use</span> <span class='ident'>iron</span>::{<span class='ident'>AfterMiddleware</span>, <span class='ident'>BeforeMiddleware</span>, <span class='ident'>IronResult</span>, <span class='ident'>IronError</span>, <span class='ident'>Request</span>, <span class='ident'>Response</span>, <span class='ident'>status</span>};
 <span class='kw'>use</span> <span class='ident'>iron</span>::<span class='ident'>typemap</span>::<span class='ident'>Key</span>;
@@ -247,9 +249,8 @@
 
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>io</span>;
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>io</span>::<span class='ident'>Write</span>;
-<span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>time</span>;
 
-<span class='kw'>use</span> <span class='ident'>format</span>::<span class='ident'>FormatText</span>::{<span class='ident'>Str</span>, <span class='ident'>Method</span>, <span class='ident'>URI</span>, <span class='ident'>Status</span>, <span class='ident'>ResponseTime</span>, <span class='ident'>RemoteAddr</span>};
+<span class='kw'>use</span> <span class='ident'>format</span>::<span class='ident'>FormatText</span>::{<span class='ident'>Str</span>, <span class='ident'>Method</span>, <span class='ident'>URI</span>, <span class='ident'>Status</span>, <span class='ident'>ResponseTime</span>, <span class='ident'>RemoteAddr</span>, <span class='ident'>RequestTime</span>};
 <span class='kw'>use</span> <span class='ident'>format</span>::<span class='ident'>FormatColor</span>::{<span class='ident'>ConstantColor</span>, <span class='ident'>FunctionColor</span>};
 <span class='kw'>use</span> <span class='ident'>format</span>::<span class='ident'>FormatAttr</span>::{<span class='ident'>ConstantAttrs</span>, <span class='ident'>FunctionAttrs</span>};
 <span class='kw'>use</span> <span class='ident'>format</span>::{<span class='ident'>Format</span>, <span class='ident'>FormatText</span>};
@@ -265,7 +266,7 @@
     <span class='doccomment'>/// Create a pair of `Logger` middlewares with the specified `format`. If a `None` is passed in, uses the default format:</span>
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// ```ignore</span>
-    <span class='doccomment'>/// {method} {uri} -&gt; {status} ({response_time} ms)</span>
+    <span class='doccomment'>/// {method} {uri} -&gt; {status} ({response-time} ms)</span>
     <span class='doccomment'>/// ```</span>
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// While the returned value can be passed straight to `Chain::link`, consider making the logger `BeforeMiddleware`</span>
@@ -284,18 +285,18 @@
 }
 
 <span class='kw'>struct</span> <span class='ident'>StartTime</span>;
-<span class='kw'>impl</span> <span class='ident'>Key</span> <span class='kw'>for</span> <span class='ident'>StartTime</span> { <span class='kw'>type</span> <span class='ident'>Value</span> <span class='op'>=</span> <span class='ident'>time</span>::<span class='ident'>Instant</span>; }
+<span class='kw'>impl</span> <span class='ident'>Key</span> <span class='kw'>for</span> <span class='ident'>StartTime</span> { <span class='kw'>type</span> <span class='ident'>Value</span> <span class='op'>=</span> <span class='ident'>time</span>::<span class='ident'>Tm</span>; }
 
 <span class='kw'>impl</span> <span class='ident'>Logger</span> {
     <span class='kw'>fn</span> <span class='ident'>initialise</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>req</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>Request</span>) {
-        <span class='ident'>req</span>.<span class='ident'>extensions</span>.<span class='ident'>insert</span>::<span class='op'>&lt;</span><span class='ident'>StartTime</span><span class='op'>&gt;</span>(<span class='ident'>time</span>::<span class='ident'>Instant</span>::<span class='ident'>now</span>());
+        <span class='ident'>req</span>.<span class='ident'>extensions</span>.<span class='ident'>insert</span>::<span class='op'>&lt;</span><span class='ident'>StartTime</span><span class='op'>&gt;</span>(<span class='ident'>time</span>::<span class='ident'>now</span>());
     }
 
     <span class='kw'>fn</span> <span class='ident'>log</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>req</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>Request</span>, <span class='ident'>res</span>: <span class='kw-2'>&amp;</span><span class='ident'>Response</span>) <span class='op'>-&gt;</span> <span class='ident'>IronResult</span><span class='op'>&lt;</span>()<span class='op'>&gt;</span> {
         <span class='kw'>let</span> <span class='ident'>entry_time</span> <span class='op'>=</span> <span class='op'>*</span><span class='ident'>req</span>.<span class='ident'>extensions</span>.<span class='ident'>get</span>::<span class='op'>&lt;</span><span class='ident'>StartTime</span><span class='op'>&gt;</span>().<span class='ident'>unwrap</span>();
 
-        <span class='kw'>let</span> <span class='ident'>response_time</span> <span class='op'>=</span> <span class='ident'>entry_time</span>.<span class='ident'>elapsed</span>();
-        <span class='kw'>let</span> <span class='ident'>response_time_ms</span> <span class='op'>=</span> (<span class='ident'>response_time</span>.<span class='ident'>as_secs</span>() <span class='op'>*</span> <span class='number'>1000</span>) <span class='kw'>as</span> <span class='ident'>f64</span> <span class='op'>+</span> (<span class='ident'>response_time</span>.<span class='ident'>subsec_nanos</span>() <span class='kw'>as</span> <span class='ident'>f64</span>) <span class='op'>/</span> <span class='number'>1000000.0</span>;
+        <span class='kw'>let</span> <span class='ident'>response_time</span> <span class='op'>=</span> <span class='ident'>time</span>::<span class='ident'>now</span>() <span class='op'>-</span> <span class='ident'>entry_time</span>;
+        <span class='kw'>let</span> <span class='ident'>response_time_ms</span> <span class='op'>=</span> (<span class='ident'>response_time</span>.<span class='ident'>num_seconds</span>() <span class='op'>*</span> <span class='number'>1000</span>) <span class='kw'>as</span> <span class='ident'>f64</span> <span class='op'>+</span> (<span class='ident'>response_time</span>.<span class='ident'>num_nanoseconds</span>().<span class='ident'>unwrap_or</span>(<span class='number'>0</span>) <span class='kw'>as</span> <span class='ident'>f64</span>) <span class='op'>/</span> <span class='number'>1000000.0</span>;
         <span class='kw'>let</span> <span class='ident'>Format</span>(<span class='ident'>format</span>) <span class='op'>=</span> <span class='self'>self</span>.<span class='ident'>format</span>.<span class='ident'>clone</span>().<span class='ident'>unwrap_or_default</span>();
 
         {
@@ -315,7 +316,8 @@
                     <span class='ident'>URI</span> <span class='op'>=&gt;</span> <span class='macro'>format</span><span class='macro'>!</span>(<span class='string'>&quot;{}&quot;</span>, <span class='ident'>req</span>.<span class='ident'>url</span>),
                     <span class='ident'>Status</span> <span class='op'>=&gt;</span> <span class='macro'>format</span><span class='macro'>!</span>(<span class='string'>&quot;{}&quot;</span>, <span class='ident'>res</span>.<span class='ident'>status</span>.<span class='ident'>unwrap</span>()),
                     <span class='ident'>ResponseTime</span> <span class='op'>=&gt;</span> <span class='macro'>format</span><span class='macro'>!</span>(<span class='string'>&quot;{} ms&quot;</span>, <span class='ident'>response_time_ms</span>),
-                    <span class='ident'>RemoteAddr</span> <span class='op'>=&gt;</span> <span class='macro'>format</span><span class='macro'>!</span>(<span class='string'>&quot;{}&quot;</span>, <span class='ident'>req</span>.<span class='ident'>remote_addr</span>)
+                    <span class='ident'>RemoteAddr</span> <span class='op'>=&gt;</span> <span class='macro'>format</span><span class='macro'>!</span>(<span class='string'>&quot;{}&quot;</span>, <span class='ident'>req</span>.<span class='ident'>remote_addr</span>),
+                    <span class='ident'>RequestTime</span> <span class='op'>=&gt;</span> <span class='macro'>format</span><span class='macro'>!</span>(<span class='string'>&quot;{}&quot;</span>, <span class='ident'>entry_time</span>.<span class='ident'>strftime</span>(<span class='string'>&quot;%Y-%m-%dT%H:%M:%S.%fZ%z&quot;</span>).<span class='ident'>unwrap</span>()),
                 }
             };
 
