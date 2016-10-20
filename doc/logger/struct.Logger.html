@@ -47,14 +47,14 @@
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
-               </span><a id='src-74' class='srclink' href='../src/logger/src/lib.rs.html#18-20' title='goto source code'>[src]</a></span></h1>
+               </span><a id='src-48' class='srclink' href='../src/logger/src/lib.rs.html#18-20' title='goto source code'>[src]</a></span></h1>
 <pre class='rust struct'>pub struct Logger { /* fields omitted */ }</pre><div class='docblock'><p><code>Middleware</code> for logging request and response info to the terminal.</p>
-</div><h2 id='methods'>Methods</h2><h3 class='impl'><span class='in-band'><code>impl <a class='struct' href='../logger/struct.Logger.html' title='logger::Logger'>Logger</a></code></span><span class='out-of-band'><div class='ghost'></div><a id='src-76' class='srclink' href='../src/logger/src/lib.rs.html#22-42' title='goto source code'>[src]</a></span></h3>
+</div><h2 id='methods'>Methods</h2><h3 class='impl'><span class='in-band'><code>impl <a class='struct' href='../logger/struct.Logger.html' title='logger::Logger'>Logger</a></code></span><span class='out-of-band'><div class='ghost'></div><a id='src-50' class='srclink' href='../src/logger/src/lib.rs.html#22-42' title='goto source code'>[src]</a></span></h3>
 <div class='impl-items'><h4 id='method.new' class='method'><span id='new.v' class='invisible'><code>fn <a href='#method.new' class='fnname'>new</a>(format: <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='struct' href='../logger/format/struct.Format.html' title='logger::format::Format'>Format</a>&gt;) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.tuple.html'>(</a><a class='struct' href='../logger/struct.Logger.html' title='logger::Logger'>Logger</a>, <a class='struct' href='../logger/struct.Logger.html' title='logger::Logger'>Logger</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.tuple.html'>)</a></code></span></h4>
 <div class='docblock'><p>Create a pair of <code>Logger</code> middlewares with the specified <code>format</code>. If a <code>None</code> is passed in, uses the default format:</p>
 
 <pre class='rust rust-example-rendered'>
-{<span class='ident'>method</span>} {<span class='ident'>uri</span>} <span class='op'>-&gt;</span> {<span class='ident'>status</span>} ({<span class='ident'>response</span><span class='op'>-</span><span class='ident'>time</span>} <span class='ident'>ms</span>)<a class='test-arrow' target='_blank' href=''>Run</a></pre>
+{<span class='ident'>method</span>} {<span class='ident'>uri</span>} <span class='op'>-&gt;</span> {<span class='ident'>status</span>} ({<span class='ident'>response</span><span class='op'>-</span><span class='ident'>time</span>} <span class='ident'>ms</span>)</pre>
 
 <p>While the returned value can be passed straight to <code>Chain::link</code>, consider making the logger <code>BeforeMiddleware</code>
 the first in your chain and the logger <code>AfterMiddleware</code> the last by doing something like this:</p>
@@ -64,13 +64,13 @@ the first in your chain and the logger <code>AfterMiddleware</code> the last by 
 <span class='kw'>let</span> (<span class='ident'>logger_before</span>, <span class='ident'>logger_after</span>) <span class='op'>=</span> <span class='ident'>Logger</span>::<span class='ident'>new</span>(<span class='prelude-val'>None</span>);
 <span class='ident'>chain</span>.<span class='ident'>link_before</span>(<span class='ident'>logger_before</span>);
 <span class='comment'>// link other middlewares here...</span>
-<span class='ident'>chain</span>.<span class='ident'>link_after</span>(<span class='ident'>logger_after</span>);<a class='test-arrow' target='_blank' href=''>Run</a></pre>
-</div></div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><span class='in-band'><code>impl <a class='trait' href='../iron/middleware/trait.BeforeMiddleware.html' title='iron::middleware::BeforeMiddleware'>BeforeMiddleware</a> for <a class='struct' href='../logger/struct.Logger.html' title='logger::Logger'>Logger</a></code></span><span class='out-of-band'><div class='ghost'></div><a id='src-126' class='srclink' href='../src/logger/src/lib.rs.html#82-92' title='goto source code'>[src]</a></span></h3>
+<span class='ident'>chain</span>.<span class='ident'>link_after</span>(<span class='ident'>logger_after</span>);</pre>
+</div></div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><span class='in-band'><code>impl <a class='trait' href='../iron/middleware/trait.BeforeMiddleware.html' title='iron::middleware::BeforeMiddleware'>BeforeMiddleware</a> for <a class='struct' href='../logger/struct.Logger.html' title='logger::Logger'>Logger</a></code></span><span class='out-of-band'><div class='ghost'></div><a id='src-84' class='srclink' href='../src/logger/src/lib.rs.html#82-92' title='goto source code'>[src]</a></span></h3>
 <div class='impl-items'><h4 id='method.before' class='method'><span id='before.v' class='invisible'><code>fn <a href='../iron/middleware/trait.BeforeMiddleware.html#method.before' class='fnname'>before</a>(&amp;self, req: &amp;mut <a class='struct' href='../iron/request/struct.Request.html' title='iron::request::Request'>Request</a>) -&gt; <a class='type' href='../iron/type.IronResult.html' title='iron::IronResult'>IronResult</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.tuple.html'>()</a>&gt;</code></span></h4>
 <div class='docblock'><p>Do whatever work this middleware should do with a <code>Request</code> object.</p>
 </div><h4 id='method.catch' class='method'><span id='catch.v' class='invisible'><code>fn <a href='../iron/middleware/trait.BeforeMiddleware.html#method.catch' class='fnname'>catch</a>(&amp;self, req: &amp;mut <a class='struct' href='../iron/request/struct.Request.html' title='iron::request::Request'>Request</a>, err: <a class='struct' href='../iron/error/struct.IronError.html' title='iron::error::IronError'>IronError</a>) -&gt; <a class='type' href='../iron/type.IronResult.html' title='iron::IronResult'>IronResult</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.tuple.html'>()</a>&gt;</code></span></h4>
 <div class='docblock'><p>Respond to an error thrown by a previous <code>BeforeMiddleware</code>. <a href="../iron/middleware/trait.BeforeMiddleware.html#method.catch">Read more</a></p>
-</div></div><h3 class='impl'><span class='in-band'><code>impl <a class='trait' href='../iron/middleware/trait.AfterMiddleware.html' title='iron::middleware::AfterMiddleware'>AfterMiddleware</a> for <a class='struct' href='../logger/struct.Logger.html' title='logger::Logger'>Logger</a></code></span><span class='out-of-band'><div class='ghost'></div><a id='src-134' class='srclink' href='../src/logger/src/lib.rs.html#94-104' title='goto source code'>[src]</a></span></h3>
+</div></div><h3 class='impl'><span class='in-band'><code>impl <a class='trait' href='../iron/middleware/trait.AfterMiddleware.html' title='iron::middleware::AfterMiddleware'>AfterMiddleware</a> for <a class='struct' href='../logger/struct.Logger.html' title='logger::Logger'>Logger</a></code></span><span class='out-of-band'><div class='ghost'></div><a id='src-92' class='srclink' href='../src/logger/src/lib.rs.html#94-104' title='goto source code'>[src]</a></span></h3>
 <div class='impl-items'><h4 id='method.after' class='method'><span id='after.v' class='invisible'><code>fn <a href='../iron/middleware/trait.AfterMiddleware.html#method.after' class='fnname'>after</a>(&amp;self, req: &amp;mut <a class='struct' href='../iron/request/struct.Request.html' title='iron::request::Request'>Request</a>, res: <a class='struct' href='../iron/response/struct.Response.html' title='iron::response::Response'>Response</a>) -&gt; <a class='type' href='../iron/type.IronResult.html' title='iron::IronResult'>IronResult</a>&lt;<a class='struct' href='../iron/response/struct.Response.html' title='iron::response::Response'>Response</a>&gt;</code></span></h4>
 <div class='docblock'><p>Do whatever post-processing this middleware should do.</p>
 </div><h4 id='method.catch-1' class='method'><span id='catch.v-1' class='invisible'><code>fn <a href='../iron/middleware/trait.AfterMiddleware.html#method.catch' class='fnname'>catch</a>(&amp;self, req: &amp;mut <a class='struct' href='../iron/request/struct.Request.html' title='iron::request::Request'>Request</a>, err: <a class='struct' href='../iron/error/struct.IronError.html' title='iron::error::IronError'>IronError</a>) -&gt; <a class='type' href='../iron/type.IronResult.html' title='iron::IronResult'>IronResult</a>&lt;<a class='struct' href='../iron/response/struct.Response.html' title='iron::response::Response'>Response</a>&gt;</code></span></h4>
@@ -131,11 +131,9 @@ the first in your chain and the logger <code>AfterMiddleware</code> the last by 
     <script>
         window.rootPath = "../";
         window.currentCrate = "logger";
-        window.playgroundUrl = "";
     </script>
     <script src="../jquery.js"></script>
     <script src="../main.js"></script>
-    
     <script defer src="../search-index.js"></script>
 </body>
 </html>

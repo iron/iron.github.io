@@ -244,7 +244,7 @@
 <span class='doccomment'>///</span>
 <span class='doccomment'>/// To create a plugin, implement this trait and provide an empty implementation</span>
 <span class='doccomment'>/// of `Key` to associate the plugin with its return type, `Key::Value`.</span>
-<span class='kw'>pub</span> <span class='kw'>trait</span> <span class='ident'>Plugin</span><span class='op'>&lt;</span><span class='ident'>E</span>: ?<span class='ident'>Sized</span><span class='op'>&gt;</span>: <span class='ident'>Key</span> {
+<span class='kw'>pub</span> <span class='kw'>trait</span> <span class='ident'>Plugin</span><span class='op'>&lt;</span><span class='ident'>E</span>: <span class='question-mark'>?</span><span class='ident'>Sized</span><span class='op'>&gt;</span>: <span class='ident'>Key</span> {
     <span class='doccomment'>/// The error type associated with this plugin.</span>
     <span class='kw'>type</span> <span class='ident'>Error</span>;
 
@@ -476,11 +476,9 @@
     <script>
         window.rootPath = "../../";
         window.currentCrate = "plugin";
-        window.playgroundUrl = "";
     </script>
     <script src="../../jquery.js"></script>
     <script src="../../main.js"></script>
-    
     <script defer src="../../search-index.js"></script>
 </body>
 </html>
