@@ -47,7 +47,7 @@
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
-               </span><a id='src-2030' class='srclink' href='../src/url/lib.rs.html#157-179' title='goto source code'>[src]</a></span></h1>
+               </span><a id='src-2031' class='srclink' href='../src/url/lib.rs.html#157-179' title='goto source code'>[src]</a></span></h1>
 <pre class='rust struct'>pub struct Url { /* fields omitted */ }</pre><div class='docblock'><p>A parsed URL record.</p>
 </div><h2 id='methods'>Methods</h2><h3 class='impl'><span class='in-band'><code>impl <a class='struct' href='../url/struct.Url.html' title='url::Url'>Url</a></code></span><span class='out-of-band'><div class='ghost'></div><a id='src-1080' class='srclink' href='../src/url/lib.rs.html#229-1192' title='goto source code'>[src]</a></span></h3>
 <div class='impl-items'><h4 id='method.parse' class='method'><span id='parse.v' class='invisible'><code>fn <a href='#method.parse' class='fnname'>parse</a>(input: &amp;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>) -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a class='struct' href='../url/struct.Url.html' title='url::Url'>Url</a>, <a class='enum' href='../url/enum.ParseError.html' title='url::ParseError'>ParseError</a>&gt;</code></span></h4>
@@ -269,7 +269,7 @@ in <code>application/x-www-form-urlencoded</code> syntax.</p>
 <span class='ident'>url</span>.<span class='ident'>query_pairs_mut</span>()
     .<span class='ident'>clear</span>()
     .<span class='ident'>append_pair</span>(<span class='string'>&quot;foo&quot;</span>, <span class='string'>&quot;bar &amp; baz&quot;</span>)
-    .<span class='ident'>append_pair</span>(<span class='string'>&quot;saisons&quot;</span>, <span class='string'>&quot;Été+hiver&quot;</span>);
+    .<span class='ident'>append_pair</span>(<span class='string'>&quot;saisons&quot;</span>, <span class='string'>&quot;\u{00C9}t\u{00E9}+hiver&quot;</span>);
 <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>url</span>.<span class='ident'>query</span>(), <span class='prelude-val'>Some</span>(<span class='string'>&quot;foo=bar+%26+baz&amp;saisons=%C3%89t%C3%A9%2Bhiver&quot;</span>));
 <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>url</span>.<span class='ident'>as_str</span>(),
            <span class='string'>&quot;https://example.net/?foo=bar+%26+baz&amp;saisons=%C3%89t%C3%A9%2Bhiver#nav&quot;</span>);</pre>
@@ -283,7 +283,7 @@ not <code>url.set_query(None)</code>.</p>
 </div><h4 id='method.path_segments_mut' class='method'><span id='path_segments_mut.v' class='invisible'><code>fn <a href='#method.path_segments_mut' class='fnname'>path_segments_mut</a>(&amp;mut self) -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a class='struct' href='../url/struct.PathSegmentsMut.html' title='url::PathSegmentsMut'>PathSegmentsMut</a>, <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.tuple.html'>()</a>&gt;</code></span></h4>
 <div class='docblock'><p>Return an object with methods to manipulate this URL’s path segments.</p>
 
-<p>Return <code>Err(())</code> if this URl is cannot-be-a-base.</p>
+<p>Return <code>Err(())</code> if this URL is cannot-be-a-base.</p>
 </div><h4 id='method.set_port' class='method'><span id='set_port.v' class='invisible'><code>fn <a href='#method.set_port' class='fnname'>set_port</a>(&amp;mut self, port: <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u16.html'>u16</a>&gt;) -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.tuple.html'>()</a>, <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.tuple.html'>()</a>&gt;</code></span></h4>
 <div class='docblock'><p>Change this URL’s port number.</p>
 
@@ -378,7 +378,7 @@ for a Windows path, is not UTF-8.)</p>
 <div class='docblock'><p>The returned type after indexing</p>
 </div><h4 id='method.index-3' class='method'><span id='index.v-3' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/ops/trait.Index.html#tymethod.index' class='fnname'>index</a>(&amp;self, range: <a class='struct' href='https://doc.rust-lang.org/nightly/core/ops/struct.Range.html' title='core::ops::Range'>Range</a>&lt;<a class='enum' href='../url/enum.Position.html' title='url::Position'>Position</a>&gt;) -&gt; &amp;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a></code></span></h4>
 <div class='docblock'><p>The method for the indexing (<code>container[index]</code>) operation</p>
-</div></div><h3 class='impl'><span class='in-band'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html' title='core::clone::Clone'>Clone</a> for <a class='struct' href='../url/struct.Url.html' title='url::Url'>Url</a></code></span><span class='out-of-band'><div class='ghost'></div><a id='src-2041' class='srclink' href='../src/url/lib.rs.html#156' title='goto source code'>[src]</a></span></h3>
+</div></div><h3 class='impl'><span class='in-band'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html' title='core::clone::Clone'>Clone</a> for <a class='struct' href='../url/struct.Url.html' title='url::Url'>Url</a></code></span><span class='out-of-band'><div class='ghost'></div><a id='src-2042' class='srclink' href='../src/url/lib.rs.html#156' title='goto source code'>[src]</a></span></h3>
 <div class='impl-items'><h4 id='method.clone' class='method'><span id='clone.v' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#tymethod.clone' class='fnname'>clone</a>(&amp;self) -&gt; <a class='struct' href='../url/struct.Url.html' title='url::Url'>Url</a></code></span></h4>
 <div class='docblock'><p>Returns a copy of the value. <a href="https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#tymethod.clone">Read more</a></p>
 </div><h4 id='method.clone_from' class='method'><span id='clone_from.v' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#method.clone_from' class='fnname'>clone_from</a>(&amp;mut self, source: &amp;Self)</code><div class='since' title='Stable since Rust version 1.0.0'>1.0.0</div></span></h4>
