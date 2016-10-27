@@ -47,7 +47,7 @@
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
-               </span><a id='src-94' class='srclink' href='../../src/iron/src/middleware/mod.rs.html#115-124' title='goto source code'>[src]</a></span></h1>
+               </span><a id='src-84' class='srclink' href='../../src/iron/middleware/mod.rs.html#115-124' title='goto source code'>[src]</a></span></h1>
 <pre class='rust trait'>pub trait AroundMiddleware {
     fn <a href='#tymethod.around' class='fnname'>around</a>(self, handler: <a class='struct' href='https://doc.rust-lang.org/nightly/alloc/boxed/struct.Box.html' title='alloc::boxed::Box'>Box</a>&lt;<a class='trait' href='../../iron/middleware/trait.Handler.html' title='iron::middleware::Handler'>Handler</a>&gt;) -&gt; <a class='struct' href='https://doc.rust-lang.org/nightly/alloc/boxed/struct.Box.html' title='alloc::boxed::Box'>Box</a>&lt;<a class='trait' href='../../iron/middleware/trait.Handler.html' title='iron::middleware::Handler'>Handler</a>&gt;;
 }</pre><div class='docblock'><p>AroundMiddleware are used to wrap and replace the <code>Handler</code> in a <code>Chain</code>.</p>
@@ -58,7 +58,7 @@ called once on insertion into a Chain or can be called manually outside of a
 </div>
             <h2 id='required-methods'>Required Methods</h2>
             <div class='methods'>
-        <h3 id='tymethod.around' class='method stab '><code>fn <a href='#tymethod.around' class='fnname'>around</a>(self, handler: <a class='struct' href='https://doc.rust-lang.org/nightly/alloc/boxed/struct.Box.html' title='alloc::boxed::Box'>Box</a>&lt;<a class='trait' href='../../iron/middleware/trait.Handler.html' title='iron::middleware::Handler'>Handler</a>&gt;) -&gt; <a class='struct' href='https://doc.rust-lang.org/nightly/alloc/boxed/struct.Box.html' title='alloc::boxed::Box'>Box</a>&lt;<a class='trait' href='../../iron/middleware/trait.Handler.html' title='iron::middleware::Handler'>Handler</a>&gt;</code></h3><div class='docblock'><p>Produce a <code>Handler</code> from this <code>AroundMiddleware</code> given another <code>Handler</code>.</p>
+        <h3 id='tymethod.around' class='method stab '><span id='around.v' class='invisible'><code>fn <a href='#tymethod.around' class='fnname'>around</a>(self, handler: <a class='struct' href='https://doc.rust-lang.org/nightly/alloc/boxed/struct.Box.html' title='alloc::boxed::Box'>Box</a>&lt;<a class='trait' href='../../iron/middleware/trait.Handler.html' title='iron::middleware::Handler'>Handler</a>&gt;) -&gt; <a class='struct' href='https://doc.rust-lang.org/nightly/alloc/boxed/struct.Box.html' title='alloc::boxed::Box'>Box</a>&lt;<a class='trait' href='../../iron/middleware/trait.Handler.html' title='iron::middleware::Handler'>Handler</a>&gt;</code></span></h3><div class='docblock'><p>Produce a <code>Handler</code> from this <code>AroundMiddleware</code> given another <code>Handler</code>.</p>
 
 <p>Usually this means wrapping the handler and editing the <code>Request</code> on the
 way in and the <code>Response</code> on the way out.</p>
@@ -127,11 +127,9 @@ using <code>Chain::around</code>, it is passed the <code>Chain</code>&#39;s curr
     <script>
         window.rootPath = "../../";
         window.currentCrate = "iron";
-        window.playgroundUrl = "";
     </script>
     <script src="../../jquery.js"></script>
     <script src="../../main.js"></script>
-    
     <script defer src="../../search-index.js"></script>
 </body>
 </html>
