@@ -1,5 +1,5 @@
 (function() {var implementors = {};
-implementors["typeable"] = [];
+implementors["typeable"] = [];implementors["hyper"] = [];implementors["iron"] = [];implementors["router"] = [];
 
             if (window.register_implementors) {
                 window.register_implementors(implementors);
