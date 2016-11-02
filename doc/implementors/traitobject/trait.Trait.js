@@ -1,5 +1,5 @@
 (function() {var implementors = {};
-implementors["traitobject"] = [];implementors["iron"] = [];implementors["router"] = [];
+implementors["traitobject"] = [];implementors["iron"] = [];
 
             if (window.register_implementors) {
                 window.register_implementors(implementors);

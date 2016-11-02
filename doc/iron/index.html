@@ -72,7 +72,7 @@ writes and locking in the core framework.</p>
     <span class='ident'>Iron</span>::<span class='ident'>new</span>(<span class='op'>|</span>_: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>Request</span><span class='op'>|</span> {
         <span class='prelude-val'>Ok</span>(<span class='ident'>Response</span>::<span class='ident'>with</span>((<span class='ident'>status</span>::<span class='prelude-val'>Ok</span>, <span class='string'>&quot;Hello World!&quot;</span>)))
     }).<span class='ident'>http</span>(<span class='string'>&quot;localhost:3000&quot;</span>).<span class='ident'>unwrap</span>();
-}<a class='test-arrow' target='_blank' href=''>Run</a></pre>
+}</pre>
 
 <h2 id='design-philosophy' class='section-header'><a href='#design-philosophy'>Design Philosophy</a></h2>
 <p>Iron is meant to be as extensible and pluggable as possible; Iron&#39;s core is
@@ -342,11 +342,9 @@ errors for use in highly generic contexts.</p>
     <script>
         window.rootPath = "../";
         window.currentCrate = "iron";
-        window.playgroundUrl = "";
     </script>
     <script src="../jquery.js"></script>
     <script src="../main.js"></script>
-    
     <script defer src="../search-index.js"></script>
 </body>
 </html>
