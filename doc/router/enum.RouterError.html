@@ -4,10 +4,10 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="API documentation for the Rust `NoRoute` struct in crate `router`.">
-    <meta name="keywords" content="rust, rustlang, rust-lang, NoRoute">
+    <meta name="description" content="API documentation for the Rust `RouterError` enum in crate `router`.">
+    <meta name="keywords" content="rust, rustlang, rust-lang, RouterError">
 
-    <title>router::NoRoute - Rust</title>
+    <title>router::RouterError - Rust</title>
 
     <link rel="stylesheet" type="text/css" href="../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../main.css">
@@ -28,7 +28,7 @@
 
     <nav class="sidebar">
         
-        <p class='location'><a href='index.html'>router</a></p><script>window.sidebarCurrent = {name: 'NoRoute', ty: 'struct', relpath: ''};</script><script defer src="sidebar-items.js"></script>
+        <p class='location'><a href='index.html'>router</a></p><script>window.sidebarCurrent = {name: 'RouterError', ty: 'enum', relpath: ''};</script><script defer src="sidebar-items.js"></script>
     </nav>
 
     <nav class="sub">
@@ -42,27 +42,33 @@
         </form>
     </nav>
 
-    <section id='main' class="content struct">
-<h1 class='fqn'><span class='in-band'>Struct <a href='index.html'>router</a>::<wbr><a class='struct' href=''>NoRoute</a></span><span class='out-of-band'><span id='render-detail'>
+    <section id='main' class="content enum">
+<h1 class='fqn'><span class='in-band'>Enum <a href='index.html'>router</a>::<wbr><a class='enum' href=''>RouterError</a></span><span class='out-of-band'><span id='render-detail'>
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
-               </span><a id='src-187' class='srclink' href='../src/router/src/router.rs.html#285' title='goto source code'>[src]</a></span></h1>
-<pre class='rust struct'>pub struct NoRoute;</pre><div class='docblock'><p>The error thrown by router if there is no matching route,
-it is always accompanied by a NotFound response.</p>
-</div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><span class='in-band'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html' title='core::fmt::Debug'>Debug</a> for <a class='struct' href='../router/struct.NoRoute.html' title='router::NoRoute'>NoRoute</a></code></span><span class='out-of-band'><div class='ghost'></div><a id='src-189' class='srclink' href='../src/router/src/router.rs.html#284' title='goto source code'>[src]</a></span></h3>
+               </span><a id='src-163' class='srclink' href='../src/router/src/router.rs.html#256-263' title='goto source code'>[src]</a></span></h1>
+<pre class='rust enum'>pub enum RouterError {
+    MethodNotAllowed,
+    NotFound,
+    TrailingSlash,
+}</pre><div class='docblock'><p>A set of errors that can occur parsing HTTP streams.</p>
+</div><h2 class='variants'>Variants</h2>
+<span id='variant.MethodNotAllowed' class='variant'><span id='MethodNotAllowed.v' class='invisible'><code>MethodNotAllowed</code></span></span><div class='docblock'><p>The error thrown by router if there is no matching method in existing route.</p>
+</div><span id='variant.NotFound' class='variant'><span id='NotFound.v' class='invisible'><code>NotFound</code></span></span><div class='docblock'><p>The error thrown by router if there is no matching route.</p>
+</div><span id='variant.TrailingSlash' class='variant'><span id='TrailingSlash.v' class='invisible'><code>TrailingSlash</code></span></span><div class='docblock'><p>The error thrown by router if a request was redirected by adding or removing a trailing slash.</p>
+</div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><span class='in-band'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html' title='core::fmt::Debug'>Debug</a> for <a class='enum' href='../router/enum.RouterError.html' title='router::RouterError'>RouterError</a></code></span><span class='out-of-band'><div class='ghost'></div><a id='src-167' class='srclink' href='../src/router/src/router.rs.html#255' title='goto source code'>[src]</a></span></h3>
 <div class='impl-items'><h4 id='method.fmt' class='method'><span id='fmt.v' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html#tymethod.fmt' class='fnname'>fmt</a>(&amp;self, __arg_0: &amp;mut <a class='struct' href='https://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html' title='core::fmt::Formatter'>Formatter</a>) -&gt; <a class='type' href='https://doc.rust-lang.org/nightly/core/fmt/type.Result.html' title='core::fmt::Result'>Result</a></code></span></h4>
 <div class='docblock'><p>Formats the value using the given formatter.</p>
-</div></div><h3 class='impl'><span class='in-band'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/cmp/trait.PartialEq.html' title='core::cmp::PartialEq'>PartialEq</a> for <a class='struct' href='../router/struct.NoRoute.html' title='router::NoRoute'>NoRoute</a></code></span><span class='out-of-band'><div class='ghost'></div><a id='src-194' class='srclink' href='../src/router/src/router.rs.html#284' title='goto source code'>[src]</a></span></h3>
-<div class='impl-items'><h4 id='method.eq' class='method'><span id='eq.v' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/cmp/trait.PartialEq.html#tymethod.eq' class='fnname'>eq</a>(&amp;self, __arg_0: &amp;<a class='struct' href='../router/struct.NoRoute.html' title='router::NoRoute'>NoRoute</a>) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></code></span></h4>
+</div></div><h3 class='impl'><span class='in-band'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/cmp/trait.PartialEq.html' title='core::cmp::PartialEq'>PartialEq</a> for <a class='enum' href='../router/enum.RouterError.html' title='router::RouterError'>RouterError</a></code></span><span class='out-of-band'><div class='ghost'></div><a id='src-174' class='srclink' href='../src/router/src/router.rs.html#255' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.eq' class='method'><span id='eq.v' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/cmp/trait.PartialEq.html#tymethod.eq' class='fnname'>eq</a>(&amp;self, __arg_0: &amp;<a class='enum' href='../router/enum.RouterError.html' title='router::RouterError'>RouterError</a>) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></code></span></h4>
 <div class='docblock'><p>This method tests for <code>self</code> and <code>other</code> values to be equal, and is used by <code>==</code>. <a href="https://doc.rust-lang.org/nightly/core/cmp/trait.PartialEq.html#tymethod.eq">Read more</a></p>
 </div><h4 id='method.ne' class='method'><span id='ne.v' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/cmp/trait.PartialEq.html#method.ne' class='fnname'>ne</a>(&amp;self, other: &amp;Rhs) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></code><div class='since' title='Stable since Rust version 1.0.0'>1.0.0</div></span></h4>
 <div class='docblock'><p>This method tests for <code>!=</code>.</p>
-</div></div><h3 class='impl'><span class='in-band'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/cmp/trait.Eq.html' title='core::cmp::Eq'>Eq</a> for <a class='struct' href='../router/struct.NoRoute.html' title='router::NoRoute'>NoRoute</a></code></span><span class='out-of-band'><div class='ghost'></div><a id='src-198' class='srclink' href='../src/router/src/router.rs.html#284' title='goto source code'>[src]</a></span></h3>
-<div class='impl-items'></div><h3 class='impl'><span class='in-band'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/fmt/trait.Display.html' title='core::fmt::Display'>Display</a> for <a class='struct' href='../router/struct.NoRoute.html' title='router::NoRoute'>NoRoute</a></code></span><span class='out-of-band'><div class='ghost'></div><a id='src-201' class='srclink' href='../src/router/src/router.rs.html#287-291' title='goto source code'>[src]</a></span></h3>
+</div></div><h3 class='impl'><span class='in-band'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/fmt/trait.Display.html' title='core::fmt::Display'>Display</a> for <a class='enum' href='../router/enum.RouterError.html' title='router::RouterError'>RouterError</a></code></span><span class='out-of-band'><div class='ghost'></div><a id='src-180' class='srclink' href='../src/router/src/router.rs.html#266-270' title='goto source code'>[src]</a></span></h3>
 <div class='impl-items'><h4 id='method.fmt-1' class='method'><span id='fmt.v-1' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/fmt/trait.Display.html#tymethod.fmt' class='fnname'>fmt</a>(&amp;self, f: &amp;mut <a class='struct' href='https://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html' title='core::fmt::Formatter'>Formatter</a>) -&gt; <a class='type' href='https://doc.rust-lang.org/nightly/core/fmt/type.Result.html' title='core::fmt::Result'>Result</a></code></span></h4>
 <div class='docblock'><p>Formats the value using the given formatter.</p>
-</div></div><h3 class='impl'><span class='in-band'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/std/error/trait.Error.html' title='std::error::Error'>Error</a> for <a class='struct' href='../router/struct.NoRoute.html' title='router::NoRoute'>NoRoute</a></code></span><span class='out-of-band'><div class='ghost'></div><a id='src-205' class='srclink' href='../src/router/src/router.rs.html#293-295' title='goto source code'>[src]</a></span></h3>
+</div></div><h3 class='impl'><span class='in-band'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/std/error/trait.Error.html' title='std::error::Error'>Error</a> for <a class='enum' href='../router/enum.RouterError.html' title='router::RouterError'>RouterError</a></code></span><span class='out-of-band'><div class='ghost'></div><a id='src-184' class='srclink' href='../src/router/src/router.rs.html#272-280' title='goto source code'>[src]</a></span></h3>
 <div class='impl-items'><h4 id='method.description' class='method'><span id='description.v' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/std/error/trait.Error.html#tymethod.description' class='fnname'>description</a>(&amp;self) -&gt; &amp;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a></code></span></h4>
 <div class='docblock'><p>A short description of the error. <a href="https://doc.rust-lang.org/nightly/std/error/trait.Error.html#tymethod.description">Read more</a></p>
 </div><h4 id='method.cause' class='method'><span id='cause.v' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/std/error/trait.Error.html#method.cause' class='fnname'>cause</a>(&amp;self) -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;&amp;<a class='trait' href='https://doc.rust-lang.org/nightly/std/error/trait.Error.html' title='std::error::Error'>Error</a>&gt;</code><div class='since' title='Stable since Rust version 1.0.0'>1.0.0</div></span></h4>
