@@ -1,1 +1,0 @@
-initSidebarItems({"struct":[["Format","A formatting style for the `Logger`, consisting of multiple `FormatUnit`s concatenated into one line."]]});

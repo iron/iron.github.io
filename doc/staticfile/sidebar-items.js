@@ -1,1 +1,0 @@
-initSidebarItems({"struct":[["Cache","A modifier for `Static` to specify a response's `cache-control`."],["Static","The static file-serving `Handler`."]]});
