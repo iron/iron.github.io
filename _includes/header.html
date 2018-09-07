@@ -1,0 +1,12 @@
+<header class="header">
+  <div class="brand">
+    <a href="/">
+      <img class="logo" src="logo.png" />{{site.title}}
+    </a>
+  </div>
+  <div class="menu">
+    {% for item in site.data.menu %}
+    <a href="{{item.url}}">{{item.title}}</a>
+    {% endfor %}
+  </div>
+</header>
