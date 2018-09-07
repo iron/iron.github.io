@@ -1,0 +1,132 @@
+---
+---
+@import 'syntax';
+
+$text-color: #353535;
+
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    font-family: Roboto;
+    color: $text-color;
+}
+
+h1 {
+    font-weight: 500;
+    font-size: 32px;
+}
+
+h2 {
+    font-size: 20px;
+    line-height: 32px;
+    margin-top: 48px;
+    margin-bottom: 8px;
+}
+
+a {
+    color: #2370CB;
+    text-decoration: none;
+
+    &:hover,
+    &:active {
+        text-decoration: underline;
+    }
+}
+
+p {
+    font-size: 16px;
+    line-height: 24px;
+    margin-bottom: 16px;
+}
+
+.title {
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: 500;
+    font-size: 44px;
+    line-height: 48px;
+    margin-top: 32px;
+}
+
+.subtitle {
+    margin-top: 8px;
+    margin-bottom: 56px;
+    text-align: center;
+    font-size: 18px;
+    line-height: 24px;
+}
+
+.wrapper {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 16px 64px;
+}
+
+code  {
+    line-height: 24px;
+    font-family: 'Source Code Pro';
+    background: #f8f8f8;
+    box-shadow: 0 2px 0 #e8e8e8;
+    padding: 2px 4px;
+    border-radius: 4px;
+}
+
+pre {
+    font-size: 14px;
+    padding: 24px;
+    border-radius: 4px;
+    overflow-y: auto;
+    box-shadow: 0 2px 0 #e8e8e8;
+    margin-bottom: 16px;
+
+    code {
+        padding: 0;
+        border: 0;
+        box-shadow: none;
+    }
+}
+
+.header {
+    display: flex;
+    padding: 32px 24px;
+    justify-content: space-between;
+    flex-wrap: wrap;
+
+    .brand {
+        white-space: nowrap;
+        font-weight: 500;
+        text-transform: uppercase;
+        font-size: 22px;
+        line-height: 16px;
+
+        .logo {
+            height: 24px;
+            margin: -4px 12px -4px 0;
+        }
+
+        a {
+          text-decoration: none;
+          color: $text-color;
+        }
+    }
+
+    .menu {
+        a {
+            padding: 8px;
+        }
+    }
+
+    @media (max-width: 600px) {
+        flex-direction: column;
+        align-items: center;
+
+        .menu {
+            padding-top: 16px;
+        }
+    }
+}
+
